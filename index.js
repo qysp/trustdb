@@ -1,0 +1,1 @@
+exports.Ezstore = require('./src/ezstore');

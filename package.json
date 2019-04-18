@@ -1,0 +1,15 @@
+{
+  "name": "ezstore",
+  "version": "1.0.0",
+  "description": "Lightweight in-memory and persistent NodeJS JSON database.",
+  "main": "index.js",
+  "keywords": [
+    "db",
+    "json",
+    "nosql",
+    "javascript",
+    "lightweight"
+  ],
+  "author": "qysp",
+  "license": "MIT"
+}

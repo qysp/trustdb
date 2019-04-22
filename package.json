@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Lightweight in-memory and persistent NodeJS JSON database.",
   "main": "index.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint ."
+  },
   "keywords": [
     "db",
     "json",
@@ -11,5 +14,8 @@
     "lightweight"
   ],
   "author": "qysp",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
 }

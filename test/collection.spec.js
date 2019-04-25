@@ -1,17 +1,11 @@
 const assert = require('assert');
-const Ezstore = require('../lib/ezstore');
 const Collection = require('../lib/collection');
 
 describe('Collection', function() {
-  const db = new Ezstore('test_db');
-  let collection;
-  before(async function() {
-    collection = await db.createCollection('test_collection')
-      .catch(err => assert.fail(err));
-  });
+  const collection = new Collection('test_collection');
 
   afterEach(function() {
-    collection.documents.length = 0;
+    collection.clear();
   });
 
   it('should insert documents, each given as an individual paramater', async function() {

@@ -23,9 +23,11 @@ describe('Database', function() {
 
   it('should add a previously created collection', async function() {
     let collection = new Collection('test_collection');
+
     collection = await db.addCollection(collection)
       .catch(err => assert.fail(err));
     
+    assert.equal(db.collections.length, 1);
     assert.equal(collection.name, 'test_collection');
   });
   

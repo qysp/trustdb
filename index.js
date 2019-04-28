@@ -1,1 +1,2 @@
-module.exports = require('./lib/ezstore');
+const Ezstore = require('./lib/ezstore');
+module.exports = new Ezstore();

@@ -61,7 +61,7 @@ describe('Collection', function() {
     assert.equal(result.price, 20);
   });
 
-  it('should retrieve the first document matching the query', async function() {
+  it('should remove the matching document', async function() {
     await collection.insert(
       { price: 50 },
       { price: 20 },

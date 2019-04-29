@@ -1,9 +1,11 @@
 const assert = require('assert');
-const Ezstore = require('../lib/ezstore');
+const db = require('../index');
 const Collection = require('../lib/collection');
 
 describe('Database', function() {
-  const db = new Ezstore('test_db');
+  before(async function() {
+    await db.connect('test_db');
+  });
 
   it('should create a collection', async function() {
     const collection = await db.createCollection('test_collection')

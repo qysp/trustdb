@@ -18,10 +18,13 @@
     "javascript",
     "lightweight"
   ],
-  "author": "qysp",
+  "author": "qysp (qysp.yo@gmail.com)",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^5.16.0",
     "mocha": "^6.1.4"
+  },
+  "engines": {
+    "node": ">=9.0.0"
   }
 }

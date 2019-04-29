@@ -34,4 +34,45 @@ describe('Collection', function() {
 
     assert.equal(collection.documents.length, 1);
   });
+
+  it('should retrieve all documents matching the query', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    const results = await collection.find({ lte: ['price', 40] });
+
+    assert.equal(collection.documents.length, 3);
+    assert.equal(results.length, 2);
+  });
+
+  it('should retrieve the first document matching the query', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    const result = await collection.findOne({ lte: ['price', 40] });
+
+    assert.equal(collection.documents.length, 3);
+    assert.equal(result.price, 20);
+  });
+
+  it('should retrieve the first document matching the query', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    assert.equal(collection.documents.length, 3);
+
+    const removed = await collection.remove({ price: 40 });
+
+    assert.equal(collection.documents.length, 2);
+    assert.equal(removed.price, 40);
+  });
 });

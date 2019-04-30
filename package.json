@@ -1,7 +1,7 @@
 {
   "name": "ezstore",
   "version": "1.0.0",
-  "description": "Lightweight in-memory and persistent NodeJS JSON database.",
+  "description": "Lightweight in-memory and persistent JavaScript/JSON database made for NodeJS.",
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",
@@ -10,6 +10,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/qysp/ezstore"
+  },
+  "bugs": {
+    "url": "https://github.com/qysp/ezstore/issues"
   },
   "keywords": [
     "db",

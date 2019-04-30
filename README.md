@@ -7,7 +7,9 @@ Inspired by [LokiJS](https://github.com/techfort/LokiJS).
 ## Getting started
 
 Connect to the database, given a filepath and wanted settings.
-NOTE: Assuming everything happens in asynchronus block.
+
+**NOTE**: Assuming everything happens in asynchronus block.
+
 ```js
 const db = require('ezstore');
 
@@ -22,15 +24,18 @@ Create a collection.
 const repoCollection = await db.createCollection('repoCollection');
 ```
 
-Optional: add an event listener for the `insert` or `remove` event.
+Optional: add an event listener an event, like `insert` or `remove`.
 ```js
-repoCollection.on('insert', documents => {
+// Asynchronous events are allowed too!
+repoCollection.on('insert', async (documents) => {
   console.log(`Number of documents in ${repoCollection.name} after insert: ${documents.length}`);
+  await db.save();
 });
 ```
 
 Insert documents.
 ```js
+// Some example documents.
 const repositories = [{
     url: 'https://github.com/qysp/ezstore',
     title: 'ezstore',
@@ -41,19 +46,37 @@ const repositories = [{
     description: 'Fast document oriented javascript in-memory database'
 }];
 
+// Insert them as an array or each document as an individual parameter.
 await repoCollection.insert(repositories);
 
-await repoCollection.insert({
+// Use insertOne to only insert one document.
+await repoCollection.insertOne({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
   description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
 });
 ```
 
-Query for documents.
+Search for documents.
 ```js
-// Finds all documents where the title ends with 'js' (case insensitive)
+// Find all documents where the title ends with 'js' (case insensitive)
 const results = await repoCollection.find({ re: ['title', /js$/i] });
+
+// or just the first result that matches the pattern
+const result = await repoCollection.findOne({ re: ['title', /js$/i] });
+```
+
+Remove documents.
+```js
+// Remove a single document.
+await repoCollection.remove({
+  url: 'https://github.com/nodejs/node',
+  title: 'Node.js',
+  description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
+});
+
+// Or remove multiple with a query.
+const removedDocuments = await repoCollection.removeWhere({ re: ['title', /js$/i] });
 ```
 
 ## Query functions
@@ -75,9 +98,10 @@ const results = await repoCollection.find({ re: ['title', /js$/i] });
   * regex match: `re`
   * date compare: `date`
 
-Usage examples:
+### Usage examples:
+
+**NOTE**: The same pattern for the queries can be applied to findOne and removeWhere methods!
 ```js
-// NOTE: The same pattern can be applied to `collection.findOne()`!
 // Find all documents, where the value of the property `someProperty`:
 
 // - equals 30, 30.0, '30', etc.
@@ -89,8 +113,8 @@ collection.find({ seq: ['someProperty', 30] });
 // - is the exact same object `{a: 1}`
 collection.find({ dseq: ['someProperty', {a: 1}] });
 
-// - starts with `somethi`
-collection.find({ sw: ['someProperty', 'somethi'] });
+// - ends with 'ing'
+collection.find({ ew: ['someProperty', 'ing'] });
 
 // - is of type 'number'
 collection.find({ type: ['someProperty', 'number'] });
@@ -108,6 +132,7 @@ collection.find({ re: ['someProperty', /something/i] });
 collection.find({ date: ['someProperty', '1/1/1970'] });
 
 // Return all documents of the collection.
-// Does not work with `collection.findOne()`.
+// Does not work with the `findOne` or `removeWhere` methods.
+// In those cases use the `first` or `clear` methods.
 collection.find();
 ```

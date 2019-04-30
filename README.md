@@ -1,6 +1,8 @@
 # EZStore
 
-Lightweight in-memory and persistent JavaScript/JSON database made for NodeJS.
+Promise-based, lightweight in-memory and persistent JavaScript/JSON database.
+
+Inspired by [LokiJS](https://github.com/techfort/LokiJS).
 
 ## Getting started
 
@@ -32,7 +34,7 @@ Insert documents.
 const repositories = [{
     url: 'https://github.com/qysp/ezstore',
     title: 'ezstore',
-    description: 'Lightweight in-memory and persistent JavaScript/JSON database made for NodeJS.'
+    description: 'Promise-based, lightweight in-memory and persistent JavaScript/JSON database.'
   }, {
     url: 'https://github.com/techfort/LokiJS',
     title: 'LokiJS',

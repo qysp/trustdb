@@ -1,7 +1,7 @@
 {
   "name": "ezstore",
   "version": "1.0.0",
-  "description": "Lightweight in-memory and persistent JavaScript/JSON database made for NodeJS.",
+  "description": "Promise-based, lightweight in-memory and persistent JavaScript/JSON database.",
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",

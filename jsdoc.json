@@ -1,0 +1,17 @@
+{
+	"opts": {
+		"readme": "./README.md",
+		"destination": "./jsdoc"
+	},
+	"tags": {
+		"dictionaries": ["jsdoc", "closure"]
+	},
+	"source": {
+		"include": ["./lib/ezstore.js", "./lib/collection.js"]
+	},
+  "plugins": ["plugins/markdown", "plugins/underscore"],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+}

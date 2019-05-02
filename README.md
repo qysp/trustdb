@@ -101,7 +101,9 @@ const removedDocuments = await repoCollection.removeWhere({ re: ['title', /js$/i
 ### Usage examples:
 
 **NOTE**: The same pattern for the queries can be applied to findOne and removeWhere methods!
+
 ```js
+// Make sure to always have the document's property as the first element in the array.
 // Find all documents, where the value of the property `someProperty`:
 
 // - equals 30, 30.0, '30', etc.
@@ -122,7 +124,7 @@ collection.find({ type: ['someProperty', 'number'] });
 // - has the length of 5 (array or string)
 collection.find({ len: ['someProperty', 5] });
 
-// - is between 5 and 10.
+// - is between 5 and 10 (order of the numbers does not matter).
 collection.find({ betw: ['someProperty', 5, 10] });
 
 // - matches the regex pattern 'something', case insensitive

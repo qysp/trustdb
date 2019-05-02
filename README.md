@@ -24,11 +24,26 @@ Create a collection.
 const repoCollection = await db.createCollection('repoCollection');
 ```
 
-Optional: add an event listener an event, like `insert` or `remove`.
+Optional: add an event listeners for events like `insert`, `remove` or `find`.
 ```js
 // Asynchronous events are allowed too!
-repoCollection.on('insert', async (documents) => {
-  console.log(`Number of documents in ${repoCollection.name} after insert: ${documents.length}`);
+repoCollection.on('insert', async (insertedDocs, allDocs) => {
+  console.log(`Number of documents in ${repoCollection.name} after insert: ${allDocs.length}`);
+  await db.save();
+});
+
+// `results` will always be an array, even if `findOne` method was used.
+repoCollection.on('find', (query, results, allDocs) => {
+  // Assuming variable `cache` has been defined as an array somewhere.
+  cache.push({
+    query: query,
+    results: results,
+  });
+});
+
+// `removedDocs` will always be an array, even if `remove` method has been used.
+repoCollection.on('remove', async (removedDocs, allDocs) => {
+  console.log(`Number of removed documents in ${repoCollection.name}: ${removedDocs.length}`);
   await db.save();
 });
 ```

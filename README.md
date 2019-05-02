@@ -24,7 +24,7 @@ Create a collection.
 const repoCollection = await db.createCollection('repoCollection');
 ```
 
-Optional: add an event listeners for events like `insert`, `remove` or `find`.
+Optional: add event listeners for events like `insert`, `remove` or `find`.
 ```js
 // Asynchronous events are allowed too!
 repoCollection.on('insert', async (insertedDocs, allDocs) => {
@@ -32,7 +32,7 @@ repoCollection.on('insert', async (insertedDocs, allDocs) => {
   await db.save();
 });
 
-// `results` will always be an array, even if `findOne` method was used.
+// `results` will always be an array, even if `findOne` method has been used.
 repoCollection.on('find', (query, results, allDocs) => {
   // Assuming variable `cache` has been defined as an array somewhere.
   cache.push({
@@ -139,7 +139,7 @@ collection.find({ type: ['someProperty', 'number'] });
 // - has the length of 5 (array or string)
 collection.find({ len: ['someProperty', 5] });
 
-// - is between 5 and 10 (order of the numbers does not matter).
+// - is between 5 and 10 (order of the numbers does not matter)
 collection.find({ betw: ['someProperty', 5, 10] });
 
 // - matches the regex pattern 'something', case insensitive

@@ -3,16 +3,15 @@ const db = require('../index');
 const Collection = require('../lib/collection');
 
 describe('Database', function() {
-  // TODO:
-  // - test autosave settings
-  // - test save/load methods
-
   it('should create a new database', async function() {
-    await db.connect('/tmp/test_db.json');
+    await db.connect('/tmp/test_db.json', {
+      overwriteExisting: true,
+    });
 
     expect(db.filepath).to.equal('/tmp/test_db.json');
     expect(db.collections).to.have.length(0);
     expect(db.autosave).to.be(false);
+    expect(db.overwriteExisting).to.be(true);
   });
 
   it('should create a collection', async function() {
@@ -53,5 +52,6 @@ describe('Database', function() {
 
     expect(db.autosave).to.be(true);
     expect(db.autosaveHandler).to.not.be(undefined);
+    db.configureSettings({ autosave: false });
   });
 });

@@ -1,4 +1,4 @@
-const assert = require('assert');
+const expect = require('expect.js');
 const Collection = require('../lib/collection');
 
 describe('Collection', function() {
@@ -14,7 +14,8 @@ describe('Collection', function() {
       { doc: 2 },
       { doc: 3 }
     );
-    assert.equal(collection.documents.length, 3);
+
+    expect(collection.documents).to.have.length(3);
   });
 
   it('should insert documents, given as an array of documents', async function() {
@@ -24,7 +25,7 @@ describe('Collection', function() {
       { doc: 3 },
     ]);
 
-    assert.equal(collection.documents.length, 3);
+    expect(collection.documents).to.have.length(3);
   });
 
   it('should insert a single document', async function() {
@@ -32,7 +33,7 @@ describe('Collection', function() {
       { doc: 1 }
     );
 
-    assert.equal(collection.documents.length, 1);
+    expect(collection.documents).to.have.length(1);
   });
 
   it('should retrieve all documents matching the query', async function() {
@@ -44,8 +45,8 @@ describe('Collection', function() {
 
     const results = await collection.find({ lte: ['price', 40] });
 
-    assert.equal(collection.documents.length, 3);
-    assert.equal(results.length, 2);
+    expect(collection.documents).to.have.length(3);
+    expect(results).to.have.length(2);
   });
 
   it('should retrieve the first document matching the query', async function() {
@@ -57,8 +58,8 @@ describe('Collection', function() {
 
     const result = await collection.findOne({ lte: ['price', 40] });
 
-    assert.equal(collection.documents.length, 3);
-    assert.equal(result.price, 20);
+    expect(collection.documents).to.have.length(3);
+    expect(result.price).to.equal(20);
   });
 
   it('should remove the matching document', async function() {
@@ -68,11 +69,50 @@ describe('Collection', function() {
       { price: 40 }
     );
 
-    assert.equal(collection.documents.length, 3);
+    expect(collection.documents).to.have.length(3);
 
     const removed = await collection.remove({ price: 40 });
 
-    assert.equal(collection.documents.length, 2);
-    assert.equal(removed.price, 40);
+    expect(collection.documents).to.have.length(2);
+    expect(removed.price).to.equal(40);
+  });
+
+  it('should remove the all documents matching the query', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    expect(collection.documents).to.have.length(3);
+
+    const removed = await collection.removeWhere({ lte: ['price', 40] });
+
+    expect(collection.documents).to.have.length(1);
+    expect(removed).to.have.length(2);
+  });
+
+  it('should retrieve the first document of the collection', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    const first = await collection.first();
+
+    expect(first.price).to.equal(50);
+  });
+
+  it('should retrieve the last document of the collection', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    const first = await collection.last();
+
+    expect(first.price).to.equal(40);
   });
 });

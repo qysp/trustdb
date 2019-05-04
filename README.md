@@ -115,38 +115,40 @@ const removedDocuments = await repoCollection.removeWhere({ re: ['title', /js$/i
 
 ### Usage examples:
 
-**NOTE**: The same pattern for the queries can be applied to findOne and removeWhere methods!
+**NOTE**: The same pattern for the queries applies to the `findOne` and `removeWhere` methods!
 
 ```js
-// Make sure to always have the document's property as the first element in the array.
-// Find all documents, where the value of the property `someProperty`:
+// Find all documents, where:
 
-// - equals 30, 30.0, '30', etc.
+// - the value of the property `someProperty` equals 30, 30.0, '30', etc.
 collection.find({ eq: ['someProperty', 30] });
 
-// - equals exactly 30
+// - the value of the property `someProperty` equals exactly 30
 collection.find({ seq: ['someProperty', 30] });
 
-// - is the exact same object `{a: 1}`
+// - the value of the property `someProperty` is the exact same object `{a: 1}`
 collection.find({ dseq: ['someProperty', {a: 1}] });
 
-// - ends with 'ing'
+// - the value of the property `someProperty` ends with 'ing'
 collection.find({ ew: ['someProperty', 'ing'] });
 
-// - is of type 'number'
+// - the value of the property `someProperty` is of type 'number'
 collection.find({ type: ['someProperty', 'number'] });
 
-// - has the length of 5 (array or string)
+// - the value of the property `someProperty` has the length of 5 (array or string)
 collection.find({ len: ['someProperty', 5] });
 
-// - is between 5 and 10 (order of the numbers does not matter)
+// - the value of the property `someProperty` is between 5 and 10 (order of the numbers does not matter)
 collection.find({ betw: ['someProperty', 5, 10] });
 
-// - matches the regex pattern 'something', case insensitive
+// - the value of the property `someProperty` matches the regex pattern 'something', case insensitive
 collection.find({ re: ['someProperty', /something/i] });
 
-// - equals the date '1/1/1970' (can also be a Date object)
+// - the value of the property `someProperty` equals the date '1/1/1970' (can also be a Date object)
 collection.find({ date: ['someProperty', '1/1/1970'] });
+
+// - property `someProperty` does not exist
+collection.find({ prop: ['someProperty', false] });
 
 // Return all documents of the collection.
 // Does not work with the `findOne` or `removeWhere` methods.

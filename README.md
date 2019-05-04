@@ -8,7 +8,7 @@ Inspired by [LokiJS](https://github.com/techfort/LokiJS).
 
 Connect to the database, given a filepath and wanted settings.
 
-**NOTE**: Assuming everything happens in asynchronus block.
+**NOTE**: Assuming everything happens in asynchronus block. Furthermore, these are only a few examples of what you could do.
 
 ```js
 const db = require('ezstore');
@@ -24,8 +24,15 @@ Create a collection.
 const repoCollection = await db.createCollection('repoCollection');
 ```
 
-Optional: add event listeners for events like `insert`, `remove` or `find`.
+Optional: add event listeners for events like `autosave`, `insert`, `find` or `remove`.
 ```js
+// Parameter `err` will be undefined on success.
+db.on('autosave', err => {
+  if (err instanceof Error) {
+    console.error(err);
+  }
+});
+
 // Asynchronous events are allowed too!
 repoCollection.on('insert', async (insertedDocs, allDocs) => {
   console.log(`Number of documents in ${repoCollection.name} after insert: ${allDocs.length}`);
@@ -64,7 +71,7 @@ const repositories = [{
 // Insert them as an array or each document as an individual parameter.
 await repoCollection.insert(repositories);
 
-// Use insertOne to only insert one document.
+// You can also use insertOne to only insert one document.
 await repoCollection.insertOne({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
@@ -83,7 +90,7 @@ const result = await repoCollection.findOne({ re: ['title', /js$/i] });
 
 Remove documents.
 ```js
-// Remove a single document.
+// Remove a single document. If that document does not exist it will throw an error, so be sure to catch it.
 await repoCollection.remove({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
@@ -112,6 +119,7 @@ const removedDocuments = await repoCollection.removeWhere({ re: ['title', /js$/i
   * between: `betw`
   * regex match: `re`
   * date compare: `date`
+  * property exists: `prop`
 
 ### Usage examples:
 

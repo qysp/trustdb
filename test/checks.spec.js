@@ -4,191 +4,191 @@ const checks = require('../lib/checks');
 describe('Checks', function() {
   it('equal check', function() {
     const results = [];
-    results.push(checks.eq('30', 30));
-    results.push(checks.eq('30', 30.0));
-    results.push(checks.eq(null, undefined));
+    results.push(checks.equal('30', 30));
+    results.push(checks.equal('30', 30.0));
+    results.push(checks.equal(null, undefined));
 
     expect(results).to.not.contain(false);
   });
 
   it('not equal check', function() {
     const results = [];
-    results.push(checks.neq('30', 'thirty'));
-    results.push(!checks.neq('30', 30.0));
+    results.push(checks.notEqual('30', 'thirty'));
+    results.push(!checks.notEqual('30', 30.0));
 
     expect(results).to.not.contain(false);
   });
 
   it('strict equal check', function() {
     const results = [];
-    results.push(checks.seq(30, 30));
-    results.push(checks.seq(void 0, undefined));
-    results.push(!checks.seq(undefined, null));
+    results.push(checks.strictEqual(30, 30));
+    results.push(checks.strictEqual(void 0, undefined));
+    results.push(!checks.strictEqual(undefined, null));
 
     expect(results).to.not.contain(false);
   });
 
   it('strict not equal check', function() {
     const results = [];
-    results.push(checks.sneq(undefined, null));
-    results.push(checks.sneq('30', 30.0));
+    results.push(checks.strictNotEqual(undefined, null));
+    results.push(checks.strictNotEqual('30', 30.0));
 
     expect(results).to.not.contain(false);
   });
 
   it('deep strict equal check', function() {
     const results = [];
-    results.push(checks.dseq({a: 1}, {a: 1}));
-    results.push(!checks.dseq({a: [undefined]}, {a: [null]}));
+    results.push(checks.deepStrictEqual({ a: 1 },  {a: 1 }));
+    results.push(!checks.deepStrictEqual({ a: [ undefined ] }, { a: [ null ] }));
 
     expect(results).to.not.contain(false);
   });
 
   it('deep strict not equal check', function() {
     const results = [];
-    results.push(checks.dsneq({a: 1}, {a: 1, b: 2}));
-    results.push(checks.dsneq({a: null}, {a: undefined}));
+    results.push(checks.deepStrictNotEqual({ a: 1 }, { a: 1, b: 2 }));
+    results.push(checks.deepStrictNotEqual({ a: null }, { a: undefined }));
 
     expect(results).to.not.contain(false);
   });
 
   it('greater than check', function() {
     const results = [];
-    results.push(checks.gt(30, 5));
-    results.push(!checks.gt(30, 30));
-    results.push(!checks.gt(30, 60));
+    results.push(checks.greaterThan(30, 5));
+    results.push(!checks.greaterThan(30, 30));
+    results.push(!checks.greaterThan(30, 60));
 
     expect(results).to.not.contain(false);
   });
 
   it('less than check', function() {
     const results = [];
-    results.push(checks.lt(5, 30));
-    results.push(!checks.lt(30, 30));
-    results.push(!checks.lt(60, 30));
+    results.push(checks.lessThan(5, 30));
+    results.push(!checks.lessThan(30, 30));
+    results.push(!checks.lessThan(60, 30));
 
     expect(results).to.not.contain(false);
   });
 
   it('greater than or equal check', function() {
     const results = [];
-    results.push(checks.gte(30, 30));
-    results.push(checks.gte(30, 5));
-    results.push(!checks.gte(30, 60));
+    results.push(checks.greaterThanOrEqual(30, 30));
+    results.push(checks.greaterThanOrEqual(30, 5));
+    results.push(!checks.greaterThanOrEqual(30, 60));
 
     expect(results).to.not.contain(false);
   });
 
   it('less than or equal check', function() {
     const results = [];
-    results.push(checks.lte(30, 30));
-    results.push(checks.lte(5, 30));
-    results.push(!checks.lte(60, 30));
+    results.push(checks.lessThanOrEqual(30, 30));
+    results.push(checks.lessThanOrEqual(5, 30));
+    results.push(!checks.lessThanOrEqual(60, 30));
 
     expect(results).to.not.contain(false);
   });
 
   it('starts with check', function() {
     const results = [];
-    results.push(checks.sw('something', 'someth'));
-    results.push(!checks.sw('something', 'ometh'));
+    results.push(checks.startsWith('something', 'someth'));
+    results.push(!checks.startsWith('something', 'ometh'));
 
     expect(results).to.not.contain(false);
   });
 
   it('ends with check', function() {
     const results = [];
-    results.push(checks.ew('something', 'thing'));
-    results.push(!checks.ew('something', 'thin'));
+    results.push(checks.endsWith('something', 'thing'));
+    results.push(!checks.endsWith('something', 'thin'));
 
     expect(results).to.not.contain(false);
   });
 
   it('type check', function() {
     const results = [];
-    results.push(checks.type('something', 'string'));
-    results.push(checks.type(() => {}, 'function'));
-    results.push(checks.type({}, 'object'));
-    results.push(checks.type([], 'array'));
-    results.push(!checks.type('30', 'number'));
+    results.push(checks.typeOf('something', 'string'));
+    results.push(checks.typeOf(() => {}, 'function'));
+    results.push(checks.typeOf({}, 'object'));
+    results.push(checks.typeOf([], 'array'));
+    results.push(!checks.typeOf('30', 'number'));
 
     expect(results).to.not.contain(false);
   });
 
-  it('length check', function() {
+  it('lengreaterThanh check', function() {
     const results = [];
-    results.push(checks.len('something', 9));
-    results.push(checks.len([1, 2, 3], 3));
-    results.push(checks.len(new Set([1, 2, 3]), 3));
+    results.push(checks.lengthOf('something', 9));
+    results.push(checks.lengthOf([1, 2, 3], 3));
+    results.push(checks.lengthOf(new Set([1, 2, 3]), 3));
 
     expect(results).to.not.contain(false);
   });
 
   it('between check', function() {
     const results = [];
-    results.push(checks.betw(7, [5, 10]));
-    results.push(checks.betw(7, [10, 5]));
-    results.push(!checks.betw(7, [0, 5]));
+    results.push(checks.between(7, [5, 10]));
+    results.push(checks.between(7, [10, 5]));
+    results.push(!checks.between(7, [0, 5]));
 
     expect(results).to.not.contain(false);
   });
 
   it('regex check', function() {
     const results = [];
-    results.push(checks.re('something', /ethin/));
-    results.push(checks.re('something123', /123$/));
-    results.push(!checks.re('something123', /12$/));
+    results.push(checks.regExp('something', /ethin/));
+    results.push(checks.regExp('something123', /123$/));
+    results.push(!checks.regExp('something123', /12$/));
 
     expect(results).to.not.contain(false);
   });
 
   it('date check', function() {
     const results = [];
-    results.push(checks.date(new Date('1/1/1990'), new Date('1/1/1990')));
-    results.push(checks.date('1/1/1990', new Date('1/1/1990')));
-    results.push(checks.date(new Date('1/1/1990'), '1/1/1990'));
-    results.push(checks.date('1/1/1990', '1/1/1990'));
-    results.push(!checks.date('1/1/1990', '31/12/2019'));
+    results.push(checks.dateCompare(new Date('1/1/1990'), new Date('1/1/1990')));
+    results.push(checks.dateCompare('1/1/1990', new Date('1/1/1990')));
+    results.push(checks.dateCompare(new Date('1/1/1990'), '1/1/1990'));
+    results.push(checks.dateCompare('1/1/1990', '1/1/1990'));
+    results.push(!checks.dateCompare('1/1/1990', '31/12/2019'));
 
     expect(results).to.not.contain(false);
   });
 
   it('property check', function() {
     const results = [];
-    results.push(checks.prop(null, true, {a: 1}, 'a'));
-    results.push(checks.prop(null, false, {a: 1}, 'b'));
-    results.push(checks.prop(null, true, {a: undefined}, 'a'));
-    results.push(!checks.prop(null, true, {a: undefined}, 'b'));
+    results.push(checks.hasProperty(null, true, {a: 1}, 'a'));
+    results.push(checks.hasProperty(null, false, {a: 1}, 'b'));
+    results.push(checks.hasProperty(null, true, {a: undefined}, 'a'));
+    results.push(!checks.hasProperty(null, true, {a: undefined}, 'b'));
 
     expect(results).to.not.contain(false);
   });
 
   it('includes check', function() {
     const results = [];
-    results.push(checks.incl([1, 2, 3], 1));
-    results.push(checks.incl(new Set([1, 2, 3]), 1));
-    results.push(!checks.incl([1, 2, 3], 4));
-    results.push(!checks.incl(new Set([1, 2, 3]), 4));
+    results.push(checks.includes([1, 2, 3], 1));
+    results.push(checks.includes(new Set([1, 2, 3]), 1));
+    results.push(!checks.includes([1, 2, 3], 4));
+    results.push(!checks.includes(new Set([1, 2, 3]), 4));
 
     expect(results).to.not.contain(false);
   });
 
   it('excludes check', function() {
     const results = [];
-    results.push(checks.excl([1, 2, 3], 4));
-    results.push(checks.excl(new Set([1, 2, 3]), 4));
-    results.push(!checks.excl([1, 2, 3], 1));
-    results.push(!checks.excl(new Set([1, 2, 3]), 1));
+    results.push(checks.notIncludes([1, 2, 3], 4));
+    results.push(checks.notIncludes(new Set([1, 2, 3]), 4));
+    results.push(!checks.notIncludes([1, 2, 3], 1));
+    results.push(!checks.notIncludes(new Set([1, 2, 3]), 1));
 
     expect(results).to.not.contain(false);
   });
 
   it('instance of check', function() {
     const results = [];
-    results.push(checks.iof(new Date(), Date));
-    results.push(checks.iof(new Set(), Set));
-    results.push(checks.iof(/pattern/, RegExp));
-    results.push(!checks.iof(new Map(), Set));
+    results.push(checks.instanceOf(new Date(), Date));
+    results.push(checks.instanceOf(new Set(), Set));
+    results.push(checks.instanceOf(/pattern/, RegExp));
+    results.push(!checks.instanceOf(new Map(), Set));
 
     expect(results).to.not.contain(false);
   });

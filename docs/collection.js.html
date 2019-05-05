@@ -88,7 +88,7 @@ class Collection extends EventEmitter {
   insertOne(doc, emitEvent = true) {
     return new Promise(async (resolve, reject) => {
       if (typeof doc !== 'object' || Array.isArray(doc)) {
-        reject(new TypeError('All documents need to be of type object, excluding arrays'));
+        reject(new TypeError('Documents have to be objects'));
       }
 
       this.documents.push(doc);
@@ -110,7 +110,7 @@ class Collection extends EventEmitter {
    * @example
    * // Find all documents where the value of the
    * // property price is greater than or equal to 50.
-   * const results = await collection.find({ gte: [ 'price', 50 ] });
+   * const results = await collection.find({ price: { greaterThanOrEqual: 50 } });
    */
   find(query, op = 'and') {
     return new Promise(async (resolve, reject) => {
@@ -118,14 +118,11 @@ class Collection extends EventEmitter {
         resolve(this.documents);
       }
 
-      if (typeof query !== 'object') {
-        reject(new TypeError('Query must be of type object'));
+      if (typeof query !== 'object' || Array.isArray(query)) {
+        reject(new TypeError('Query must be an object'));
       }
-      if (!Object.keys(query).every(q => checks.hasOwnProperty(q))) {
-        reject(new Error('At least one of the query properties is unknown'));
-      }
-      if (!Object.values(query).every(v => Array.isArray(v))) {
-        reject(new TypeError('Query property values must be of type array'));
+      if (checks.validateQuery(query)) {
+        reject(new Error('At least one unknown query function'));
       }
 
       const results = this.documents.filter(doc => checks.applyQuery(query, op, doc));
@@ -144,18 +141,15 @@ class Collection extends EventEmitter {
    * @example
    * // Find the first document where the value of the
    * // property price is greater than or equal to 50.
-   * const results = await collection.findOne({ gte: [ 'price', 50 ] });
+   * const results = await collection.findOne({ price: { greaterThanOrEqual: 50 } });
    */
   findOne(query, op = 'and') {
     return new Promise(async (resolve, reject) => {
-      if (typeof query !== 'object') {
-        reject(new TypeError('Query must be of type object'));
+      if (typeof query !== 'object' || Array.isArray(query)) {
+        reject(new TypeError('Query must be an object'));
       }
-      if (!Object.keys(query).every(q => checks.hasOwnProperty(q))) {
-        reject(new Error('At least one of the query properties is unknown'));
-      }
-      if (!Object.values(query).every(v => Array.isArray(v))) {
-        reject(new TypeError('Query property values must be of type array'));
+      if (checks.validateQuery(query)) {
+        reject(new Error('At least one unknown query function'));
       }
 
       const result = this.documents.find(doc => checks.applyQuery(query, op, doc));
@@ -175,10 +169,10 @@ class Collection extends EventEmitter {
   remove(doc) {
     return new Promise(async (resolve, reject) => {
       if (typeof doc !== 'object' || Array.isArray(doc)) {
-        reject(new TypeError('All documents need to be of type object, excluding arrays'));
+        reject(new TypeError('Documents have to be objects'));
       }
 
-      const idx = this.documents.findIndex(d => checks.dseq(d, doc));
+      const idx = this.documents.findIndex(d => checks.deepStrictEqual(d, doc));
 
       if (idx === -1) {
         reject(new Error('No matching document was found'));
@@ -200,18 +194,15 @@ class Collection extends EventEmitter {
    * @example
    * // Remove all documents where the value of the
    * // property price is greater than or equal to 50.
-   * const removedDocuments = await collection.removeWhere({ gte: [ 'price', 50 ] });
+   * const removedDocuments = await collection.removeWhere({ price: { greaterThanOrEqual: 50 } });
    */
   removeWhere(query, op = 'and') {
     return new Promise(async (resolve, reject) => {
-      if (typeof query !== 'object') {
-        reject(new TypeError('Query must be of type object'));
+      if (typeof query !== 'object' || Array.isArray(query)) {
+        reject(new TypeError('Query must be an object'));
       }
-      if (!Object.keys(query).every(q => checks.hasOwnProperty(q))) {
-        reject(new Error('At least one of the query properties is unknown'));
-      }
-      if (!Object.values(query).every(v => Array.isArray(v))) {
-        reject(new TypeError('Query property values must be of type array'));
+      if (checks.validateQuery(query)) {
+        reject(new Error('At least one unknown query function'));
       }
 
       const removed = [];
@@ -219,7 +210,7 @@ class Collection extends EventEmitter {
 
       this.documents.forEach((doc, idx) => {
         const match = checks.applyQuery(query, op, doc);
-        if (match === true) {
+        if (match) {
           indices.push(idx);
         }
       });
@@ -298,7 +289,7 @@ module.exports = Collection;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun May 05 2019 20:10:05 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun May 05 2019 22:51:26 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -98,27 +98,27 @@ const removedDocuments = await repoCollection.removeWhere({ re: ['title', /js$/i
 ```
 
 ## Query functions
-  * equal: `eq`
-  * not equal: `neq`
-  * greater than: `gt`
-  * less than: `lt`
-  * strict equal: `seq`
-  * strict not equal: `sneq`
-  * deep strict equal: `dseq`
-  * deep not strict equal: `dsneq`
-  * greather than or equal: `gte`
-  * less than or equal: `lte`
-  * starts with: `sw`
-  * ends with: `ew`
-  * type of: `type`
-  * length: `len`
-  * between: `betw`
-  * regex match: `re`
-  * date compare: `date`
-  * property exists: `prop`
-  * includes: `incl`
-  * excludes: `excl`
-  * instance of: `iof`
+  * equal
+  * notEqual
+  * strictEqual
+  * strictNotEqual
+  * deepStrictEqual
+  * deepStrictNotEqual
+  * greaterThan
+  * lessThan
+  * greaterThanOrEqual
+  * lessThanOrEqual
+  * startsWith
+  * endsWith
+  * typeOf
+  * lengthOf
+  * between
+  * regExp
+  * dateCompare
+  * hasProperty
+  * includes
+  * notIncludes
+  * instanceOf
 
 ### Usage examples:
 
@@ -127,44 +127,74 @@ const removedDocuments = await repoCollection.removeWhere({ re: ['title', /js$/i
 ```js
 // Find all documents, where:
 
-// - the value of the property `someProperty` equals 30, 30.0, '30', etc.
-collection.find({ eq: ['someProperty', 30] });
+// - the value of the property `propertyA` equals 30, 30.0, '30', etc.
+collection.find({ propertyA: { equal: 30 } });
 
-// - the value of the property `someProperty` equals exactly 30
-collection.find({ seq: ['someProperty', 30] });
+// - the value of the property `propertyA` equals exactly 30
+collection.find({ propertyA: { strictEqual: 30 } });
 
-// - the value of the property `someProperty` is the exact same object `{a: 1}`
-collection.find({ dseq: ['someProperty', {a: 1}] });
+// - the value of the property `propertyA` is the exact same object `{a: 1}`
+collection.find({ propertyA: { deepStrictEqual: { a: 1 } } });
 
-// - the value of the property `someProperty` ends with 'ing'
-collection.find({ ew: ['someProperty', 'ing'] });
+// - the value of the property `propertyA` ends with 'ing'
+collection.find({ propertyA: { endsWith: 'ing' } });
 
-// - the value of the property `someProperty` is of type 'array' (does work with all primitive types and arrays)
-collection.find({ type: ['someProperty', 'array'] });
+// - the value of the property `propertyA` is of type 'number' (only primitive types and array)
+collection.find({ propertyA: { typeOf: 'number' } });
 
-// - the value of the property `someProperty` has the length of 5 (array, string or set)
-collection.find({ len: ['someProperty', 5] });
+// - the value of the property `propertyA` has the length of 5 (array, string or set)
+collection.find({ propertyA: { lengthOf: 5 } });
 
-// - the value of the property `someProperty` is between 5 and 10 (order of the numbers does not matter)
-collection.find({ betw: ['someProperty', 5, 10] });
+// - the value of the property `propertyA` is between 5 and 10 (order of the numbers does not matter)
+collection.find({ propertyA: { between: [ 5, 10 ] } });
 
-// - the value of the property `someProperty` matches the regex pattern 'something', case insensitive
-collection.find({ re: ['someProperty', /something/i] });
+// - the value of the property `propertyA` matches the regex pattern 'something', case insensitive
+collection.find({ propertyA: { regExp: /something/i } });
 
-// - the value of the property `someProperty` equals the date '1/1/1970' (can also be a Date object)
-collection.find({ date: ['someProperty', '1/1/1970'] });
+// - the value of the property `propertyA` equals the date '1/1/1970' (can also be a Date object)
+collection.find({ propertyA: { dateCompare: '1/1/1970' } });
 
-// - property `someProperty` does not exist
-collection.find({ prop: ['someProperty', false] });
+// - property `propertyA` does not exist
+collection.find({ propertyA: { hasProperty: false } });
 
-// - the value of the property `someProperty` includes 10 (array or set)
-collection.find({ incl: ['someProperty', 10] });
+// - the value of the property `propertyA` does not include 10 (array or set)
+collection.find({ propertyA: { notIncludes: 10 } });
 
-// - the value of the property `someProperty` is an instance of Date
-collection.find({ iof: ['someProperty', Date] });
+// - the value of the property `propertyA` is an instance of Date
+collection.find({ propertyA: { instanceOf: Date } });
+```
 
-// Return all documents of the collection.
+### More examples and advanced usage:
+
+```js
 // Does not work with the `findOne` or `removeWhere` methods.
 // In those cases use the `first` or `clear` methods.
 collection.find();
+
+// Strict comparison (i.e. ===)
+collection.find({ propertyA: 30 });
+collection.find({ propertyB: 'something' });
+
+// Using the logical operator 'or' on (or rather between) each query.
+// This will return all documents which have a property named:
+// - `propertyA` with a value that starts with 'duck' **OR**
+// - `propertyB` with a value that ends with 'ing'. 
+collection.find({
+  propertyA: { startsWith: 'duck' },
+  propertyB: { endsWith: 'ing' }
+}, 'or');
+
+// Using the logical operator 'or' for each check of a property
+// **AND** using the logical operator 'not' on each query on a property.
+// This will return all documents which do **NOT** have a property named:
+// - `propertyA` with a value that starts **OR** ends with 'duck' and
+// - `propertyB` with a value that ends with 'ing'.
+collection.find({
+  propertyA: {
+    startsWith: 'duck',
+    endsWith: 'duck',
+    $op: 'or'
+  },
+  propertyB: { endsWith: 'ing' },
+}, 'not');
 ```

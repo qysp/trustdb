@@ -43,7 +43,7 @@ describe('Collection', function() {
       { price: 40 }
     );
 
-    const results = await collection.find({ lte: ['price', 40] });
+    const results = await collection.find({ price: { lessThanOrEqual: 40 } });
 
     expect(collection.documents).to.have.length(3);
     expect(results).to.have.length(2);
@@ -56,7 +56,7 @@ describe('Collection', function() {
       { price: 40 }
     );
 
-    const result = await collection.findOne({ lte: ['price', 40] });
+    const result = await collection.findOne({ price: { lessThanOrEqual: 40 } });
 
     expect(collection.documents).to.have.length(3);
     expect(result.price).to.equal(20);
@@ -86,7 +86,7 @@ describe('Collection', function() {
 
     expect(collection.documents).to.have.length(3);
 
-    const removed = await collection.removeWhere({ lte: ['price', 40] });
+    const removed = await collection.removeWhere({ price: { lessThanOrEqual: 40 } });
 
     expect(collection.documents).to.have.length(1);
     expect(removed).to.have.length(2);
@@ -114,5 +114,17 @@ describe('Collection', function() {
     const first = await collection.last();
 
     expect(first.price).to.equal(40);
+  });
+
+  it('should get the correct size of the collection', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    const size = await collection.size();
+
+    expect(size).to.equal(3);
   });
 });

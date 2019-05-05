@@ -36,6 +36,7 @@ repoCollection.on('insert', async (insertedDocs, allDocs) => {
 });
 
 // `results` will always be an array, even if `findOne` method has been used.
+// `query` could also be a function in case `findWhere` has been used.
 repoCollection.on('find', (query, results, allDocs) => {
   // Assuming variable `cache` has been defined as an array somewhere.
   cache.push({
@@ -67,7 +68,7 @@ const repositories = [{
 // Insert them as an array or each document as an individual parameter.
 await repoCollection.insert(repositories);
 
-// You can also use insertOne to only insert one document.
+// You can also use insertOne to only insert a single document.
 await repoCollection.insertOne({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
@@ -77,24 +78,30 @@ await repoCollection.insertOne({
 
 Search for documents.
 ```js
-// Find all documents where the title ends with 'js' (case insensitive)
-const results = await repoCollection.find({ re: ['title', /js$/i] });
+// Find all documents that match the query.
+const queryResults = await repoCollection.find({ title: { re: /js$/i } });
 
-// or just the first result that matches the pattern
-const result = await repoCollection.findOne({ re: ['title', /js$/i] });
+// Find the first document that matches the query.
+const firstResult = await repoCollection.findOne({ title: { re: /js$/i } });
+
+// Find all documents with your own custom filter function.
+const whereResults = await repoCollection.findWhere(doc => /lightweight/.test(doc.description));
 ```
 
 Remove documents.
 ```js
 // Remove a single document. If that document does not exist it will throw an error, so be sure to catch it.
-await repoCollection.remove({
+await repoCollection.removeExact({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
   description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
 });
 
-// Or remove multiple with a query.
-const removedDocuments = await repoCollection.removeWhere({ re: ['title', /js$/i] });
+// Remove all documents that match the query.
+const removedDocuments = await repoCollection.remove({ title: { re: /js$/i } });
+
+// Remove all documents with your own custom filter function.
+const removedDocs = await repoCollection.removeWhere(doc => doc.title.startsWith('trust'));
 ```
 
 ## Query functions
@@ -122,7 +129,7 @@ const removedDocuments = await repoCollection.removeWhere({ re: ['title', /js$/i
 
 ### Usage examples:
 
-**NOTE**: The same pattern for the queries applies to the `findOne` and `removeWhere` methods!
+**NOTE**: The same pattern for the queries applies to the `findOne` and `remove` methods!
 
 ```js
 // Find all documents, where:
@@ -167,7 +174,7 @@ collection.find({ propertyA: { instanceOf: Date } });
 ### More examples and advanced usage:
 
 ```js
-// Does not work with the `findOne` or `removeWhere` methods.
+// Does not work with the `findOne` or `remove` methods.
 // In those cases use the `first` or `clear` methods.
 collection.find();
 

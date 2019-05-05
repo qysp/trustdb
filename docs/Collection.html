@@ -259,7 +259,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line231">line 231</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line294">line 294</a>
     </li></ul></dd>
     
 
@@ -451,7 +451,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line87">line 87</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line88">line 88</a>
     </li></ul></dd>
     
 
@@ -465,6 +465,11 @@
 
 
 
+
+<h5>Fires:</h5>
+<ul>
+    <li>Collection#event:find after successfully filtering documents</li>
+</ul>
 
 
 
@@ -670,7 +675,7 @@ const results = await collection.find({ price: { greaterThanOrEqual: 50 } });</c
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line118">line 118</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line120">line 120</a>
     </li></ul></dd>
     
 
@@ -684,6 +689,11 @@ const results = await collection.find({ price: { greaterThanOrEqual: 50 } });</c
 
 
 
+
+<h5>Fires:</h5>
+<ul>
+    <li>Collection#event:find after successfully filtering documents</li>
+</ul>
 
 
 
@@ -724,6 +734,175 @@ const results = await collection.find({ price: { greaterThanOrEqual: 50 } });</c
     <pre class="prettyprint"><code>// Find the first document where the value of the
 // property price is greater than or equal to 50.
 const results = await collection.findOne({ price: { greaterThanOrEqual: 50 } });</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="findWhere"><span class="type-signature"></span>findWhere<span class="signature">(filterFn)</span><span class="type-signature"> &rarr; {Promise.&lt;(Array.&lt;object>|Error)>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Find all documents in the collection that pass the custom filter function.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>filterFn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>custom filter function</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line147">line 147</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<h5>Fires:</h5>
+<ul>
+    <li>Collection#event:find after successfully filtering documents</li>
+</ul>
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>a Promise with the matching documents</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Array.&lt;object>|Error)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Find all document where the value of the
+// property price is greater than or equal to 50.
+const results = await collection.findWhere(doc => doc.price >= 50);</code></pre>
 
 
 
@@ -785,7 +964,7 @@ const results = await collection.findOne({ price: { greaterThanOrEqual: 50 } });
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line206">line 206</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line269">line 269</a>
     </li></ul></dd>
     
 
@@ -1284,7 +1463,7 @@ const results = await collection.findOne({ price: { greaterThanOrEqual: 50 } });
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line215">line 215</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line278">line 278</a>
     </li></ul></dd>
     
 
@@ -1340,169 +1519,7 @@ const results = await collection.findOne({ price: { greaterThanOrEqual: 50 } });
     
 
     
-    <h4 class="name" id="remove"><span class="type-signature"></span>remove<span class="signature">(doc)</span><span class="type-signature"> &rarr; {Promise.&lt;(object|Error)>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Remove a document from the collection.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>doc</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>document to remove</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line141">line 141</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<h5>Fires:</h5>
-<ul>
-    <li>Collection#event:remove after successfully removing a document</li>
-</ul>
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>a Promise with the removed document</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;(object|Error)></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="removeWhere"><span class="type-signature"></span>removeWhere<span class="signature">(query, op<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(Array.&lt;object>|Error)>}</span></h4>
+    <h4 class="name" id="remove"><span class="type-signature"></span>remove<span class="signature">(query, op<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(Array.&lt;object>|Error)>}</span></h4>
     
 
     
@@ -1658,7 +1675,7 @@ const results = await collection.findOne({ price: { greaterThanOrEqual: 50 } });
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line171">line 171</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line198">line 198</a>
     </li></ul></dd>
     
 
@@ -1672,6 +1689,11 @@ const results = await collection.findOne({ price: { greaterThanOrEqual: 50 } });
 
 
 
+
+<h5>Fires:</h5>
+<ul>
+    <li>Collection#event:remove after successfully removing the documents</li>
+</ul>
 
 
 
@@ -1711,7 +1733,338 @@ const results = await collection.findOne({ price: { greaterThanOrEqual: 50 } });
     
     <pre class="prettyprint"><code>// Remove all documents where the value of the
 // property price is greater than or equal to 50.
-const removedDocuments = await collection.removeWhere({ price: { greaterThanOrEqual: 50 } });</code></pre>
+const removedDocuments = await collection.remove({ price: { greaterThanOrEqual: 50 } });</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="removeExact"><span class="type-signature"></span>removeExact<span class="signature">(doc)</span><span class="type-signature"> &rarr; {Promise.&lt;(object|Error)>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Remove a document from the collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>doc</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>document to remove</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line167">line 167</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<h5>Fires:</h5>
+<ul>
+    <li>Collection#event:remove after successfully removing a document</li>
+</ul>
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>a Promise with the removed document</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(object|Error)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="removeWhere"><span class="type-signature"></span>removeWhere<span class="signature">(filterFn)</span><span class="type-signature"> &rarr; {Promise.&lt;(Array.&lt;object>|Error)>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Remove all documents in the collection that pass the custom filter function.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>filterFn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>custom filter function</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line239">line 239</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<h5>Fires:</h5>
+<ul>
+    <li>Collection#event:remove after successfully removing the documents</li>
+</ul>
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>a Promise with the removed documents</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Array.&lt;object>|Error)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Rempve all document where the value of the
+// property price is greater than or equal to 50.
+const results = await collection.removeWhere(doc => doc.price >= 50);</code></pre>
 
 
 
@@ -1773,7 +2126,7 @@ const removedDocuments = await collection.removeWhere({ price: { greaterThanOrEq
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line224">line 224</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line287">line 287</a>
     </li></ul></dd>
     
 
@@ -1845,7 +2198,7 @@ const removedDocuments = await collection.removeWhere({ price: { greaterThanOrEq
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun May 05 2019 22:51:26 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun May 05 2019 23:56:56 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

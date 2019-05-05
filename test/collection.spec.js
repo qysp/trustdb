@@ -62,6 +62,19 @@ describe('Collection', function() {
     expect(result.price).to.equal(20);
   });
 
+  it('should retrieve all documents passing the filter function', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    const results = await collection.findWhere(doc => doc.price <= 40);
+
+    expect(collection.documents).to.have.length(3);
+    expect(results).to.have.length(2);
+  });
+
   it('should remove the matching document', async function() {
     await collection.insert(
       { price: 50 },
@@ -71,7 +84,7 @@ describe('Collection', function() {
 
     expect(collection.documents).to.have.length(3);
 
-    const removed = await collection.remove({ price: 40 });
+    const removed = await collection.removeExact({ price: 40 });
 
     expect(collection.documents).to.have.length(2);
     expect(removed.price).to.equal(40);
@@ -86,7 +99,22 @@ describe('Collection', function() {
 
     expect(collection.documents).to.have.length(3);
 
-    const removed = await collection.removeWhere({ price: { lessThanOrEqual: 40 } });
+    const removed = await collection.remove({ price: { lessThanOrEqual: 40 } });
+
+    expect(collection.documents).to.have.length(1);
+    expect(removed).to.have.length(2);
+  });
+
+  it('should remove the all documents passing the filter function', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    expect(collection.documents).to.have.length(3);
+
+    const removed = await collection.removeWhere(doc => doc.price <= 40);
 
     expect(collection.documents).to.have.length(1);
     expect(removed).to.have.length(2);

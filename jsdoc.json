@@ -7,7 +7,7 @@
 		"dictionaries": ["jsdoc", "closure"]
 	},
 	"source": {
-		"include": ["./lib/ezstore.js", "./lib/collection.js"]
+		"include": ["./lib/trustdb.js", "./lib/collection.js"]
 	},
   "plugins": ["plugins/markdown", "plugins/underscore"],
   "templates": {

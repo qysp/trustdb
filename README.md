@@ -120,6 +120,9 @@ const removedDocuments = await repoCollection.removeWhere({ re: ['title', /js$/i
   * regex match: `re`
   * date compare: `date`
   * property exists: `prop`
+  * includes: `incl`
+  * excludes: `excl`
+  * instance of: `iof`
 
 ### Usage examples:
 
@@ -140,10 +143,10 @@ collection.find({ dseq: ['someProperty', {a: 1}] });
 // - the value of the property `someProperty` ends with 'ing'
 collection.find({ ew: ['someProperty', 'ing'] });
 
-// - the value of the property `someProperty` is of type 'number'
-collection.find({ type: ['someProperty', 'number'] });
+// - the value of the property `someProperty` is of type 'array' (does work with all primitive types and arrays)
+collection.find({ type: ['someProperty', 'array'] });
 
-// - the value of the property `someProperty` has the length of 5 (array or string)
+// - the value of the property `someProperty` has the length of 5 (array, string or set)
 collection.find({ len: ['someProperty', 5] });
 
 // - the value of the property `someProperty` is between 5 and 10 (order of the numbers does not matter)
@@ -157,6 +160,12 @@ collection.find({ date: ['someProperty', '1/1/1970'] });
 
 // - property `someProperty` does not exist
 collection.find({ prop: ['someProperty', false] });
+
+// - the value of the property `someProperty` includes 10 (array or set)
+collection.find({ incl: ['someProperty', 10] });
+
+// - the value of the property `someProperty` is an instance of Date
+collection.find({ iof: ['someProperty', Date] });
 
 // Return all documents of the collection.
 // Does not work with the `findOne` or `removeWhere` methods.

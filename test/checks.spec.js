@@ -108,6 +108,8 @@ describe('Checks', function() {
     const results = [];
     results.push(checks.type('something', 'string'));
     results.push(checks.type(() => {}, 'function'));
+    results.push(checks.type({}, 'object'));
+    results.push(checks.type([], 'array'));
     results.push(!checks.type('30', 'number'));
 
     expect(results).to.not.contain(false);
@@ -116,7 +118,8 @@ describe('Checks', function() {
   it('length check', function() {
     const results = [];
     results.push(checks.len('something', 9));
-    results.push(checks.len([1,2,3], 3));
+    results.push(checks.len([1, 2, 3], 3));
+    results.push(checks.len(new Set([1, 2, 3]), 3));
 
     expect(results).to.not.contain(false);
   });
@@ -156,6 +159,36 @@ describe('Checks', function() {
     results.push(checks.prop(null, false, {a: 1}, 'b'));
     results.push(checks.prop(null, true, {a: undefined}, 'a'));
     results.push(!checks.prop(null, true, {a: undefined}, 'b'));
+
+    expect(results).to.not.contain(false);
+  });
+
+  it('includes check', function() {
+    const results = [];
+    results.push(checks.incl([1, 2, 3], 1));
+    results.push(checks.incl(new Set([1, 2, 3]), 1));
+    results.push(!checks.incl([1, 2, 3], 4));
+    results.push(!checks.incl(new Set([1, 2, 3]), 4));
+
+    expect(results).to.not.contain(false);
+  });
+
+  it('excludes check', function() {
+    const results = [];
+    results.push(checks.excl([1, 2, 3], 4));
+    results.push(checks.excl(new Set([1, 2, 3]), 4));
+    results.push(!checks.excl([1, 2, 3], 1));
+    results.push(!checks.excl(new Set([1, 2, 3]), 1));
+
+    expect(results).to.not.contain(false);
+  });
+
+  it('instance of check', function() {
+    const results = [];
+    results.push(checks.iof(new Date(), Date));
+    results.push(checks.iof(new Set(), Set));
+    results.push(checks.iof(/pattern/, RegExp));
+    results.push(!checks.iof(new Map(), Set));
 
     expect(results).to.not.contain(false);
   });

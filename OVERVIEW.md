@@ -1,58 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+# TrustDB
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-</head>
+## Getting started
 
-<body>
+**NOTE**: Assuming everything happens in asynchronus block.
 
-<div id="main">
+Connect to the database, given a filepath and wanted settings.
 
-    <h1 class="page-title">Home</h1>
-
-    
-
-
-
-    
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-    <section>
-        <article><h1>TrustDB</h1><h2>Getting started</h2><p><strong>NOTE</strong>: Assuming everything happens in asynchronus block.</p>
-<p>Connect to the database, given a filepath and wanted settings.</p>
-<pre class="prettyprint source lang-js"><code>const db = require('trustdb');
+```js
+const db = require('trustdb');
 
 await db.connect('/path/to/file.json', {
   autosave: true, // default: false
   autosaveInterval: 10000, // in ms; default: 4000
-});</code></pre><p>Create a collection.</p>
-<pre class="prettyprint source lang-js"><code>const repoCollection = await db.createCollection('repoCollection');</code></pre><p>Optional: add event listeners for events like <code>autosave</code>, <code>insert</code>, <code>find</code> or <code>remove</code>.</p>
-<pre class="prettyprint source lang-js"><code>// Parameter `err` will be undefined on success.
+});
+```
+
+Create a collection.
+```js
+const repoCollection = await db.createCollection('repoCollection');
+```
+
+Optional: add event listeners for events like `autosave`, `insert`, `find` or `remove`.
+```js
+// Parameter `err` will be undefined on success.
 db.on('autosave', err => {
   if (err instanceof Error) {
     console.error(err);
@@ -78,8 +48,12 @@ repoCollection.on('find', (query, results, allDocs) => {
 repoCollection.on('remove', async (removedDocs, allDocs) => {
   console.log(`Number of documents removed from ${repoCollection.name}: ${removedDocs.length}`);
   await db.save();
-});</code></pre><p>Insert documents.</p>
-<pre class="prettyprint source lang-js"><code>// Some example documents.
+});
+```
+
+Insert documents.
+```js
+// Some example documents.
 const repositories = [{
     url: 'https://github.com/qysp/trustdb',
     title: 'trustdb',
@@ -98,13 +72,21 @@ await repoCollection.insertOne({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
   description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
-});</code></pre><p>Search for documents.</p>
-<pre class="prettyprint source lang-js"><code>// Find all documents where the title ends with 'js' (case insensitive)
+});
+```
+
+Search for documents.
+```js
+// Find all documents where the title ends with 'js' (case insensitive)
 const results = await repoCollection.find({ re: ['title', /js$/i] });
 
 // or just the first result that matches the pattern
-const result = await repoCollection.findOne({ re: ['title', /js$/i] });</code></pre><p>Remove documents.</p>
-<pre class="prettyprint source lang-js"><code>// Remove a single document. If that document does not exist it will throw an error, so be sure to catch it.
+const result = await repoCollection.findOne({ re: ['title', /js$/i] });
+```
+
+Remove documents.
+```js
+// Remove a single document. If that document does not exist it will throw an error, so be sure to catch it.
 await repoCollection.remove({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
@@ -112,31 +94,38 @@ await repoCollection.remove({
 });
 
 // Or remove multiple with a query.
-const removedDocuments = await repoCollection.removeWhere({ re: ['title', /js$/i] });</code></pre><h2>Query functions</h2><ul>
-<li>equal: <code>eq</code></li>
-<li>not equal: <code>neq</code></li>
-<li>greater than: <code>gt</code></li>
-<li>less than: <code>lt</code></li>
-<li>strict equal: <code>seq</code></li>
-<li>strict not equal: <code>sneq</code></li>
-<li>deep strict equal: <code>dseq</code></li>
-<li>deep not strict equal: <code>dsneq</code></li>
-<li>greather than or equal: <code>gte</code></li>
-<li>less than or equal: <code>lte</code></li>
-<li>starts with: <code>sw</code></li>
-<li>ends with: <code>ew</code></li>
-<li>type of: <code>type</code></li>
-<li>length: <code>len</code></li>
-<li>between: <code>betw</code></li>
-<li>regex match: <code>re</code></li>
-<li>date compare: <code>date</code></li>
-<li>property exists: <code>prop</code></li>
-<li>includes: <code>incl</code></li>
-<li>excludes: <code>excl</code></li>
-<li>instance of: <code>iof</code></li>
-</ul>
-<h3>Usage examples:</h3><p><strong>NOTE</strong>: The same pattern for the queries applies to the <code>findOne</code> and <code>removeWhere</code> methods!</p>
-<pre class="prettyprint source lang-js"><code>// Find all documents, where:
+const removedDocuments = await repoCollection.removeWhere({ re: ['title', /js$/i] });
+```
+
+## Query functions
+  * equal: `eq`
+  * not equal: `neq`
+  * greater than: `gt`
+  * less than: `lt`
+  * strict equal: `seq`
+  * strict not equal: `sneq`
+  * deep strict equal: `dseq`
+  * deep not strict equal: `dsneq`
+  * greather than or equal: `gte`
+  * less than or equal: `lte`
+  * starts with: `sw`
+  * ends with: `ew`
+  * type of: `type`
+  * length: `len`
+  * between: `betw`
+  * regex match: `re`
+  * date compare: `date`
+  * property exists: `prop`
+  * includes: `incl`
+  * excludes: `excl`
+  * instance of: `iof`
+
+### Usage examples:
+
+**NOTE**: The same pattern for the queries applies to the `findOne` and `removeWhere` methods!
+
+```js
+// Find all documents, where:
 
 // - the value of the property `someProperty` equals 30, 30.0, '30', etc.
 collection.find({ eq: ['someProperty', 30] });
@@ -177,27 +166,5 @@ collection.find({ iof: ['someProperty', Date] });
 // Return all documents of the collection.
 // Does not work with the `findOne` or `removeWhere` methods.
 // In those cases use the `first` or `clear` methods.
-collection.find();</code></pre></article>
-    </section>
-
-
-
-
-
-
-</div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Collection.html">Collection</a></li><li><a href="TrustDB.html">TrustDB</a></li></ul>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun May 05 2019 20:10:05 GMT+0200 (Central European Summer Time)
-</footer>
-
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
-</body>
-</html>
+collection.find();
+```

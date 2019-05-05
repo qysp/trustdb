@@ -1,4 +1,4 @@
-# EZStore
+# TrustDB
 
 Promise-based, lightweight in-memory and persistent JavaScript/JSON database.
 
@@ -11,7 +11,7 @@ Connect to the database, given a filepath and wanted settings.
 **NOTE**: Assuming everything happens in asynchronus block. Furthermore, these are only a few examples of what you could do.
 
 ```js
-const db = require('ezstore');
+const db = require('trustdb');
 
 await db.connect('/path/to/file.json', {
   autosave: true, // default: false
@@ -59,8 +59,8 @@ Insert documents.
 ```js
 // Some example documents.
 const repositories = [{
-    url: 'https://github.com/qysp/ezstore',
-    title: 'ezstore',
+    url: 'https://github.com/qysp/trustdb',
+    title: 'trustdb',
     description: 'Promise-based, lightweight in-memory and persistent JavaScript/JSON database.'
   }, {
     url: 'https://github.com/techfort/LokiJS',

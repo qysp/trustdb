@@ -1,8 +1,8 @@
 const expect = require('expect.js');
-const EzeventEmitter = require('../lib/ezevents');
+const EventEmitter = require('../lib/events');
 
 describe('EventEmitter', function() {
-  const emitter = new EzeventEmitter();
+  const emitter = new EventEmitter();
   let listener;
 
   it('should add a listener and emit it', function(done) {

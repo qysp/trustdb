@@ -1,5 +1,5 @@
 {
-  "name": "ezstore",
+  "name": "trustdb",
   "version": "1.0.0",
   "description": "Promise-based, lightweight in-memory and persistent JavaScript/JSON database.",
   "main": "index.js",
@@ -10,17 +10,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/qysp/ezstore"
+    "url": "https://github.com/qysp/trustdb"
   },
   "bugs": {
-    "url": "https://github.com/qysp/ezstore/issues"
+    "url": "https://github.com/qysp/trustdb/issues"
   },
   "keywords": [
     "db",
     "json",
     "nosql",
     "javascript",
-    "lightweight"
+    "lightweight",
+    "promise-based"
   ],
   "author": "qysp (qysp.yo@gmail.com)",
   "license": "MIT",

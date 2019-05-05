@@ -180,7 +180,7 @@
 
 
     <ul>
-        <li>EzeventEmitter</li>
+        <li>EventEmitter</li>
     </ul>
 
 
@@ -259,7 +259,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line254">line 254</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line240">line 240</a>
     </li></ul></dd>
     
 
@@ -293,7 +293,7 @@
     
 
     
-    <h4 class="name" id="find"><span class="type-signature"></span>find<span class="signature">(query<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(Array.&lt;object>|Error)>}</span></h4>
+    <h4 class="name" id="find"><span class="type-signature"></span>find<span class="signature">(query<span class="signature-attributes">opt</span>, op<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(Array.&lt;object>|Error)>}</span></h4>
     
 
     
@@ -328,6 +328,8 @@
         <th>Attributes</th>
         
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -364,8 +366,51 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>query for the matching documents, if <code>undefined</code> return all documents</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>op</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    'and'
+                
+                </td>
+            
+
+            <td class="description last"><p>optional logical operator: and (default), or, not, nor</p></td>
         </tr>
 
     
@@ -406,7 +451,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line88">line 88</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -457,8 +502,8 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// find all documents where the value of the
-// property price is greater than or equal to 50
+    <pre class="prettyprint"><code>// Find all documents where the value of the
+// property price is greater than or equal to 50.
 const results = await collection.find({ gte: [ 'price', 50 ] });</code></pre>
 
 
@@ -469,7 +514,7 @@ const results = await collection.find({ gte: [ 'price', 50 ] });</code></pre>
     
 
     
-    <h4 class="name" id="findOne"><span class="type-signature"></span>findOne<span class="signature">(query)</span><span class="type-signature"> &rarr; {Promise.&lt;(object|Error)>}</span></h4>
+    <h4 class="name" id="findOne"><span class="type-signature"></span>findOne<span class="signature">(query, op<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(object|Error)>}</span></h4>
     
 
     
@@ -501,7 +546,11 @@ const results = await collection.find({ gte: [ 'price', 50 ] });</code></pre>
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -526,10 +575,61 @@ const results = await collection.find({ gte: [ 'price', 50 ] });</code></pre>
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"><p>query for the first matching document</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>op</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    'and'
+                
+                </td>
+            
+
+            <td class="description last"><p>optional logical operator: and (default), or, not, nor</p></td>
         </tr>
 
     
@@ -570,7 +670,7 @@ const results = await collection.find({ gte: [ 'price', 50 ] });</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line127">line 127</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line121">line 121</a>
     </li></ul></dd>
     
 
@@ -621,8 +721,8 @@ const results = await collection.find({ gte: [ 'price', 50 ] });</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// find the first document where the value of the
-// property price is greater than or equal to 50
+    <pre class="prettyprint"><code>// Find the first document where the value of the
+// property price is greater than or equal to 50.
 const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
 
 
@@ -685,7 +785,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line229">line 229</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line215">line 215</a>
     </li></ul></dd>
     
 
@@ -741,7 +841,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
     
 
     
-    <h4 class="name" id="insert"><span class="type-signature"></span>insert<span class="signature">(&hellip;docs)</span><span class="type-signature"> &rarr; {Promise.&lt;(number|Error)>}</span></h4>
+    <h4 class="name" id="insert"><span class="type-signature"></span>insert<span class="signature">(&hellip;docs)</span><span class="type-signature"> &rarr; {Promise.&lt;(void|Error)>}</span></h4>
     
 
     
@@ -854,7 +954,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line31">line 31</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line32">line 32</a>
     </li></ul></dd>
     
 
@@ -886,7 +986,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
 
         
 <div class="param-desc">
-    <p>number of documents in the collection</p>
+    <p>a Promise which resolves after successful insertion</p>
 </div>
 
 
@@ -897,7 +997,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;(number|Error)></span>
+<span class="param-type">Promise.&lt;(void|Error)></span>
 
 
     </dd>
@@ -915,7 +1015,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
     
 
     
-    <h4 class="name" id="insertOne"><span class="type-signature"></span>insertOne<span class="signature">(doc, emitEvent<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(number|Error)>}</span></h4>
+    <h4 class="name" id="insertOne"><span class="type-signature"></span>insertOne<span class="signature">(doc, emitEvent<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(void|Error)>}</span></h4>
     
 
     
@@ -1030,7 +1130,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
                 </td>
             
 
-            <td class="description last"><p>whether to emit the <em>insert</em> event</p></td>
+            <td class="description last"><p>whether to emit the <em>insert</em> event, default true</p></td>
         </tr>
 
     
@@ -1071,7 +1171,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line62">line 62</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line60">line 60</a>
     </li></ul></dd>
     
 
@@ -1103,7 +1203,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
 
         
 <div class="param-desc">
-    <p>number of documents in the collection</p>
+    <p>a Promise which resolves after successful insertion</p>
 </div>
 
 
@@ -1114,7 +1214,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;(number|Error)></span>
+<span class="param-type">Promise.&lt;(void|Error)></span>
 
 
     </dd>
@@ -1184,7 +1284,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line238">line 238</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line224">line 224</a>
     </li></ul></dd>
     
 
@@ -1341,7 +1441,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line159">line 159</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line147">line 147</a>
     </li></ul></dd>
     
 
@@ -1402,7 +1502,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
     
 
     
-    <h4 class="name" id="removeWhere"><span class="type-signature"></span>removeWhere<span class="signature">(query)</span><span class="type-signature"> &rarr; {Promise.&lt;(Array.&lt;object>|Error)>}</span></h4>
+    <h4 class="name" id="removeWhere"><span class="type-signature"></span>removeWhere<span class="signature">(query, op<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(Array.&lt;object>|Error)>}</span></h4>
     
 
     
@@ -1434,7 +1534,11 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -1459,10 +1563,61 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"><p>query for the matching documents</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>op</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    'and'
+                
+                </td>
+            
+
+            <td class="description last"><p>optional logical operator: and (default), or, not, nor</p></td>
         </tr>
 
     
@@ -1503,7 +1658,7 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line187">line 187</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line177">line 177</a>
     </li></ul></dd>
     
 
@@ -1554,8 +1709,8 @@ const results = await collection.findOne({ gte: [ 'price', 50 ] });</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// remove all documents where the value of the
-// property price is greater than or equal to 50
+    <pre class="prettyprint"><code>// Remove all documents where the value of the
+// property price is greater than or equal to 50.
 const removedDocuments = await collection.removeWhere({ gte: [ 'price', 50 ] });</code></pre>
 
 
@@ -1618,7 +1773,7 @@ const removedDocuments = await collection.removeWhere({ gte: [ 'price', 50 ] });
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line247">line 247</a>
+        <a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line233">line 233</a>
     </li></ul></dd>
     
 
@@ -1684,13 +1839,13 @@ const removedDocuments = await collection.removeWhere({ gte: [ 'price', 50 ] });
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Collection.html">Collection</a></li><li><a href="Ezstore.html">Ezstore</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Collection.html">Collection</a></li><li><a href="TrustDB.html">TrustDB</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed May 01 2019 12:04:36 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun May 05 2019 13:32:51 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

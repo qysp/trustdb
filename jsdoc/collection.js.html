@@ -26,15 +26,15 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const EzeventEmitter = require('./ezevents');
+            <pre class="prettyprint source linenums"><code>const EventEmitter = require('./events');
 const checks = require('./checks');
 
 /**
  * Creates a Collection instance.
  * 
- * @extends EzeventEmitter
+ * @extends EventEmitter
  */
-class Collection extends EzeventEmitter {
+class Collection extends EventEmitter {
   /**
    * @param {string} name name of the collection
    */
@@ -43,6 +43,7 @@ class Collection extends EzeventEmitter {
     this.events = {
       'insert': [],
       'remove': [],
+      'find': [],
     };
 
     this.name = name;
@@ -54,7 +55,7 @@ class Collection extends EzeventEmitter {
    * 
    * @param {...object} docs (one or) multiple documents, each as an individual parameter or an array of documents
    * @fires Collection#insert after successfully inserting a document
-   * @returns {Promise&lt;number | Error>} number of documents in the collection
+   * @returns {Promise&lt;void | Error>} a Promise which resolves after successful insertion
    */
   insert(...docs) {
     return new Promise(async (resolve, reject) => {
@@ -63,19 +64,16 @@ class Collection extends EzeventEmitter {
       }
 
       if (docs.length === 1 &amp;&amp; Array.isArray(docs[0])) {
-        // (QoL feature) in case an array gets passed as the `docs` argument
-        docs = [].concat(...docs); // Node 11+ this could become `docs.flat()`
+        docs = [].concat(...docs);
       }
 
-      let docAmount = 0;
       for (const doc of docs) {
-        docAmount = await this.insertOne(doc, false)
-          .catch(reject);
+        await this.insertOne(doc, false).catch(reject);
       }
 
-      await this.emit('insert', this.documents);
+      await this.emit('insert', docs, this.documents);
 
-      resolve(docAmount);
+      resolve();
     });
   }
 
@@ -83,9 +81,9 @@ class Collection extends EzeventEmitter {
    * Insert a single document into the collection.
    * 
    * @param {object} doc document to insert
-   * @param {boolean} [emitEvent=true] whether to emit the *insert* event
+   * @param {boolean} [emitEvent=true] whether to emit the *insert* event, default true
    * @fires Collection#insert after successfully inserting a document if `emitEvent` is `true`
-   * @returns {Promise&lt;number | Error>} number of documents in the collection
+   * @returns {Promise&lt;void | Error>} a Promise which resolves after successful insertion
    */
   insertOne(doc, emitEvent = true) {
     return new Promise(async (resolve, reject) => {
@@ -93,13 +91,13 @@ class Collection extends EzeventEmitter {
         reject(new TypeError('All documents need to be of type object, excluding arrays'));
       }
 
-      const docAmount = this.documents.push(doc);
+      this.documents.push(doc);
 
       if (emitEvent === true) {
-        await this.emit('insert', this.documents);
+        await this.emit('insert', [doc], this.documents);
       }
 
-      resolve(docAmount);
+      resolve();
     });
   }
 
@@ -107,15 +105,15 @@ class Collection extends EzeventEmitter {
    * Find all documents in the collection that match the query/queries.
    * 
    * @param {object} [query] query for the matching documents, if `undefined` return all documents
+   * @param {string} [op='and'] optional logical operator: and (default), or, not, nor
    * @returns {Promise&lt;object[] | Error>} a Promise with the matching documents
    * @example
-   * // find all documents where the value of the
-   * // property price is greater than or equal to 50
+   * // Find all documents where the value of the
+   * // property price is greater than or equal to 50.
    * const results = await collection.find({ gte: [ 'price', 50 ] });
    */
-  find(query) {
-    // TODO: add and/or parameter
-    return new Promise((resolve, reject) => {
+  find(query, op = 'and') {
+    return new Promise(async (resolve, reject) => {
       if (query === undefined) {
         resolve(this.documents);
       }
@@ -130,14 +128,9 @@ class Collection extends EzeventEmitter {
         reject(new TypeError('Query property values must be of type array'));
       }
 
-      const results = this.documents.filter(doc => {
-        return Object.entries(query).every(([fn, q]) => {
-          const queryKey = q[0];
-          const queryValue = q.length > 2 ? q.slice(1) : q[1];
-          return checks[fn](doc[queryKey], queryValue);
-        });
-      });
+      const results = this.documents.filter(doc => checks.applyQuery(query, op, doc));
 
+      await this.emit('find', query, results, this.documents);
       resolve(results);
     });
   }
@@ -146,14 +139,15 @@ class Collection extends EzeventEmitter {
    * Find the first document in the collection that matches the query/queries.
    * 
    * @param {object} query query for the first matching document
+   * @param {string} [op='and'] optional logical operator: and (default), or, not, nor
    * @returns {Promise&lt;object | Error>} a Promise with the matching document
    * @example
-   * // find the first document where the value of the
-   * // property price is greater than or equal to 50
+   * // Find the first document where the value of the
+   * // property price is greater than or equal to 50.
    * const results = await collection.findOne({ gte: [ 'price', 50 ] });
    */
-  findOne(query) {
-    return new Promise((resolve, reject) => {
+  findOne(query, op = 'and') {
+    return new Promise(async (resolve, reject) => {
       if (typeof query !== 'object') {
         reject(new TypeError('Query must be of type object'));
       }
@@ -164,15 +158,9 @@ class Collection extends EzeventEmitter {
         reject(new TypeError('Query property values must be of type array'));
       }
 
-      // TODO: benchmark performance of using this.find() and only returning the first document
-      const result = this.documents.find(doc => {
-        return Object.entries(query).every(([fn, q]) => {
-          const queryKey = q[0];
-          const queryValue = q.length > 2 ? q.slice(1) : q[1];
-          return checks[fn](doc[queryKey], queryValue);
-        });
-      });
+      const result = this.documents.find(doc => checks.applyQuery(query, op, doc));
 
+      await this.emit('find', query, [result], this.documents);
       resolve(result);
     });
   }
@@ -197,8 +185,9 @@ class Collection extends EzeventEmitter {
       }
 
       const removed = this.documents.splice(idx, 1);
-      await this.emit('remove', this.documents);
-      resolve(removed[0]);
+
+      await this.emit('remove', removed, this.documents);
+      resolve(...removed);
     });
   }
 
@@ -206,14 +195,15 @@ class Collection extends EzeventEmitter {
    * Remove all documents in the collection that match the query/queries.
    * 
    * @param {object} query query for the matching documents
+   * @param {string} [op='and'] optional logical operator: and (default), or, not, nor
    * @returns {Promise&lt;object[] | Error>} a Promise with the removed documents
    * @example
-   * // remove all documents where the value of the
-   * // property price is greater than or equal to 50
+   * // Remove all documents where the value of the
+   * // property price is greater than or equal to 50.
    * const removedDocuments = await collection.removeWhere({ gte: [ 'price', 50 ] });
    */
-  removeWhere(query) {
-    return new Promise((resolve, reject) => {
+  removeWhere(query, op = 'and') {
+    return new Promise(async (resolve, reject) => {
       if (typeof query !== 'object') {
         reject(new TypeError('Query must be of type object'));
       }
@@ -224,28 +214,24 @@ class Collection extends EzeventEmitter {
         reject(new TypeError('Query property values must be of type array'));
       }
 
-      const results = [];
+      const removed = [];
       const indices = [];
 
       this.documents.forEach((doc, idx) => {
-        const match = Object.entries(query).every(([fn, q]) => {
-          const queryKey = q[0];
-          const queryValue = q.length > 2 ? q.slice(1) : q[1];
-          return checks[fn](doc[queryKey], queryValue);
-        });
+        const match = checks.applyQuery(query, op, doc);
         if (match === true) {
           indices.push(idx);
         }
       });
 
-      // reverse so the actual indices of documents
-      // won't change upon removing documents
+      // Reverse the array, so the actual indices of
+      // the documents won't change upon removing documents.
       indices.reverse().forEach(idx => {
-        const removed = this.documents.splice(idx, 1);
-        results.push(removed[0]);
+        removed.push(...this.documents.splice(idx, 1));
       });
 
-      resolve(results);
+      await this.emit('remove', removed, this.documents);
+      resolve(removed);
     });
   }
 
@@ -306,13 +292,13 @@ module.exports = Collection;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Collection.html">Collection</a></li><li><a href="Ezstore.html">Ezstore</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Collection.html">Collection</a></li><li><a href="TrustDB.html">TrustDB</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed May 01 2019 12:04:36 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun May 05 2019 13:32:51 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

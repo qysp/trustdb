@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: ezstore.js</title>
+    <title>JSDoc: Source: trustdb.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: ezstore.js</h1>
+    <h1 class="page-title">Source: trustdb.js</h1>
 
     
 
@@ -31,9 +31,9 @@ const { join } = require('path');
 const { promisify } = require('util');
 
 const Collection = require('./collection');
-const EzeventEmitter = require('./ezevents');
+const EventEmitter = require('./events');
 
-// Promisify async functions
+// Promisify asynchronous functions
 const writeFile = promisify(fs.writeFile);
 const readFile = promisify(fs.readFile);
 const unlink = promisify(fs.unlink);
@@ -41,12 +41,12 @@ const mkdir = promisify(fs.mkdir);
 const stat = promisify(fs.stat);
 
 /**
- * Creates an Ezstore instance.
+ * Creates an TrustDB instance.
  * 
- * @extends EzeventEmitter
- * @borrows Ezstore#saveDatabase as Ezstore#save
+ * @extends EventEmitter
+ * @borrows TrustDB#saveDatabase as TrustDB#save
  */
-class Ezstore extends EzeventEmitter {
+class TrustDB extends EventEmitter {
   constructor() {
     super();
     this.events = {
@@ -56,18 +56,20 @@ class Ezstore extends EzeventEmitter {
 
   /**
    * Create a connection to a new database. If the file in the `filepath` already exists,
-   * it will be loaded and the collections will be applied to this instance.
+   * it will be loaded and the collections (and optionally the settings)
+   * will be applied to this instance, unless the setting `overwriteExisting` is set to true.
    * 
    * @param {string} filepath database filepath
    * @param {object} [settings={}] some database related settings
    * @param {boolean} [settings.autosave] whether the database should be automatically saved
    * @param {number} [settings.autosaveInterval] interval for the autosave to trigger
    * @param {boolean} [settings.restoreSettings] restores settings from the loaded database (new settings will overwrite loaded settings!)
+   * @param {boolean} [settings.overwriteExisting] does not load an existing database with the same name and instead overwrites it
    * @returns {Promise&lt;void | NodeJS.ErrnoException>} a Promise that resolves after everything is configured
    */
   connect(filepath, settings = {}) {
     return new Promise(async (resolve, reject) => {
-      this.filepath = filepath || join(__dirname, 'ezstore.json');
+      this.filepath = filepath || join(__dirname, 'TrustDB.json');
       this.created = new Date().toISOString();
       this.collections = [];
       this.oldSettings = {};
@@ -76,20 +78,24 @@ class Ezstore extends EzeventEmitter {
       this.autosaveInterval = 4000;
       this.autosaveHandler;
       this.restoreSettings = false;
+      this.overwriteExisting = false;
 
-      await this.loadDatabase()
-        .then(db => {
-          this.applyDatabase(db);
-          if (settings.restoreSettings === true) {
-            settings = Object.assign({}, this.oldSettings, settings);
-          }
-        })
-        .catch(err => {
-          // file exists but an error occured
-          if (err.code !== 'ENOENT') {
-            reject(err);
-          }
-        });
+      if (!settings.overwriteExisting) {
+        await this.loadDatabase()
+          .then(db => {
+            this._applyDatabase(db);
+            if (settings.restoreSettings === true) {
+              // Order matters - overwrite oldSettings with new settings.
+              settings = Object.assign({}, this.oldSettings, settings);
+            }
+          })
+          .catch(err => {
+            // File exists but an error occured.
+            if (err.code !== 'ENOENT') {
+              reject(err);
+            }
+          });
+      }
 
       this.configureSettings(settings);
       resolve();
@@ -180,7 +186,7 @@ class Ezstore extends EzeventEmitter {
 
       const removed = this.collections.splice(idx, 1);
 
-      resolve(removed[0]);
+      resolve(...removed);
     });
   }
 
@@ -280,30 +286,6 @@ class Ezstore extends EzeventEmitter {
   }
 
   /**
-   * Apply the collections and other data of a database object.
-   * 
-   * @param {object} db parsed JSON database
-   */
-  applyDatabase(db) {
-    if (db.hasOwnProperty('metadata') &amp;&amp;
-        db.metadata.hasOwnProperty('created')) {
-      this.created = db.metadata.created;
-    }
-
-    if (Array.isArray(db.collections)) {
-      this.collections = db.collections
-        .map(collection => {
-          const c = new Collection(collection.name);
-          c.documents.push(...collection.documents);
-          c.timestamp = collection.timestamp;
-          return c;
-        });
-    }
-
-    Object.assign(this.oldSettings, db.settings);
-  }
-
-  /**
    * Clear the database by deleting all its collections.
    */
   clear() {
@@ -314,31 +296,37 @@ class Ezstore extends EzeventEmitter {
    * (Re-)Configure the settings and overwrite the default values.
    * 
    * @param {object} [settings={}] database settings
-   * @param {boolean} [settings.autosave] 
-   * @param {number} [settings.autosaveInterval] 
-   * @param {boolean} [settings.restoreSettings] 
+   * @param {boolean} [settings.autosave] whether the database should be automatically saved
+   * @param {number} [settings.autosaveInterval] interval for the autosave to trigger
    */
   configureSettings(settings = {}) {
     if (typeof settings !== 'object' || Array.isArray(settings)) {
-      // Keep default configurations
+      // Keep default configurations.
       return;
     }
 
-    if (settings.hasOwnProperty('autosave') &amp;&amp;
-        typeof settings.autosave === 'boolean') {
+    if (settings.hasOwnProperty('autosave') &amp;&amp; typeof settings.autosave === 'boolean') {
+      // Actually turn off autosave.
+      if (this.autosave === true &amp;&amp; settings.autosave === false) {
+        this._disableAutosave();
+      }
       this.autosave = settings.autosave;
     }
 
-    if (settings.hasOwnProperty('autosaveInterval') &amp;&amp;
-        typeof settings.autosaveInterval === 'number') {
+    if (settings.hasOwnProperty('autosaveInterval') &amp;&amp; typeof settings.autosaveInterval === 'number') {
       this.autosaveInterval = settings.autosaveInterval;
     }
 
-    // doesn't serve any purpose at this point except
-    // giving the information that old settings were restored
-    if (settings.hasOwnProperty('restoreSettings') &amp;&amp;
-        typeof settings.restoreSettings === 'boolean') {
+    // Doesn't serve any purpose at this point except
+    // giving the information that old settings were restored.
+    if (settings.hasOwnProperty('restoreSettings') &amp;&amp; typeof settings.restoreSettings === 'boolean') {
       this.restoreSettings = settings.restoreSettings;
+    }
+
+    // Doesn't serve any purpose at this point except giving the information
+    // that an existing database could have possibly been overwritten.
+    if (settings.hasOwnProperty('overwriteExisting') &amp;&amp; typeof settings.overwriteExisting === 'boolean') {
+      this.overwriteExisting = settings.overwriteExisting;
     }
 
     if (this.autosave === true) {
@@ -376,9 +364,35 @@ class Ezstore extends EzeventEmitter {
   /**
    * Internal function.
    * 
+   * Apply the collections and other data of a database object.
+   * 
+   * @param {object} db parsed JSON database
+   */
+  _applyDatabase(db) {
+    if (db.hasOwnProperty('metadata') &amp;&amp;
+        db.metadata.hasOwnProperty('created')) {
+      this.created = db.metadata.created;
+    }
+
+    if (Array.isArray(db.collections)) {
+      this.collections = db.collections
+        .map(collection => {
+          const c = new Collection(collection.name);
+          c.documents.push(...collection.documents);
+          c.timestamp = collection.timestamp;
+          return c;
+        });
+    }
+
+    Object.assign(this.oldSettings, db.settings);
+  }
+
+  /**
+   * Internal function.
+   * 
    * Enables the autosave handler.
    * 
-   * @fires Ezstore#autosave
+   * @fires TrustDB#autosave
    */
   _enableAutosave() {
     if (this.autosaveHandler !== undefined) {
@@ -406,9 +420,9 @@ class Ezstore extends EzeventEmitter {
 }
 
 // Aliases
-Ezstore.prototype.save = Ezstore.prototype.saveDatabase;
+TrustDB.prototype.save = TrustDB.prototype.saveDatabase;
 
-module.exports = Ezstore;</code></pre>
+module.exports = TrustDB;</code></pre>
         </article>
     </section>
 
@@ -418,13 +432,13 @@ module.exports = Ezstore;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Collection.html">Collection</a></li><li><a href="Ezstore.html">Ezstore</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Collection.html">Collection</a></li><li><a href="TrustDB.html">TrustDB</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed May 01 2019 12:04:36 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun May 05 2019 13:32:51 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

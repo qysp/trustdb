@@ -129,6 +129,7 @@ describe('Checks', function() {
     results.push(checks.between(7, [5, 10]));
     results.push(checks.between(7, [10, 5]));
     results.push(!checks.between(7, [0, 5]));
+    results.push(!checks.between(7, 10));
 
     expect(results).to.not.contain(false);
   });
@@ -137,6 +138,8 @@ describe('Checks', function() {
     const results = [];
     results.push(checks.regExp('something', /ethin/));
     results.push(checks.regExp('something123', /123$/));
+    results.push(checks.regExp('something123', '^some'));
+    results.push(checks.regExp('something123', ['^some', 'i']));
     results.push(!checks.regExp('something123', /12$/));
 
     expect(results).to.not.contain(false);

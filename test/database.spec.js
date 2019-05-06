@@ -11,7 +11,6 @@ describe('Database', function() {
     expect(db.filepath).to.equal('/tmp/test_db.json');
     expect(db.collections).to.have.length(0);
     expect(db.autosave).to.be(false);
-    expect(db.overwriteExisting).to.be(true);
   });
 
   it('should create a collection', async function() {
@@ -52,6 +51,7 @@ describe('Database', function() {
 
     expect(db.autosave).to.be(true);
     expect(db.autosaveHandler).to.not.be(undefined);
+    // Disable autosave again.
     db.configureSettings({ autosave: false });
   });
 });

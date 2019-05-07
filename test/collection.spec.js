@@ -103,7 +103,7 @@ describe('Collection', function() {
     expect(removed.price).to.equal(40);
   });
 
-  it('should remove all matching document', async function() {
+  it('should remove all matching documents', async function() {
     await collection.insert(
       { price: 50 },
       { price: 40 },
@@ -148,7 +148,7 @@ describe('Collection', function() {
     expect(removed).to.have.length(2);
   });
 
-  it('should update the all documents passing the filter function', async function() {
+  it('should remove the first document that passes the filter function', async function() {
     await collection.insert(
       { price: 50 },
       { price: 20 },
@@ -157,14 +157,25 @@ describe('Collection', function() {
 
     expect(collection.documents).to.have.length(3);
 
-    const updated = await collection.update(
-      doc => doc.price <= 40,
-      doc => doc.price = 30,
+    const removed = await collection.removeOne({ price: { lessThanOrEqual: 40 } });
+
+    expect(collection.documents).to.have.length(2);
+    expect(removed.price).to.equal(20);
+  });
+
+  it('should remove the first document that passes the filter function', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
     );
 
     expect(collection.documents).to.have.length(3);
-    expect(updated).to.have.length(2);
-    expect(updated.map(u => u.price)).to.only.contain(30);
+
+    const removed = await collection.removeOne(doc => doc.price <= 40);
+
+    expect(collection.documents).to.have.length(2);
+    expect(removed.price).to.equal(20);
   });
 
   it('should update the all documents matching the query', async function() {
@@ -179,6 +190,25 @@ describe('Collection', function() {
     const updated = await collection.update(
       { price: { lessThanOrEqual: 40 } },
       { price: 30 }
+    );
+
+    expect(collection.documents).to.have.length(3);
+    expect(updated).to.have.length(2);
+    expect(updated.map(u => u.price)).to.only.contain(30);
+  });
+
+  it('should update the all documents passing the filter function', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    expect(collection.documents).to.have.length(3);
+
+    const updated = await collection.update(
+      doc => doc.price <= 40,
+      doc => doc.price = 30,
     );
 
     expect(collection.documents).to.have.length(3);

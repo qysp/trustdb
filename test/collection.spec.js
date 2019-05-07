@@ -88,10 +88,25 @@ describe('Collection', function() {
     expect(result.price).to.equal(20);
   });
 
-  it('should remove the matching document', async function() {
+  it('should remove the first matching document', async function() {
     await collection.insert(
       { price: 50 },
-      { price: 20 },
+      { price: 40 },
+      { price: 40 }
+    );
+
+    expect(collection.documents).to.have.length(3);
+
+    const removed = await collection.removeExact({ price: 40 }, true);
+
+    expect(collection.documents).to.have.length(2);
+    expect(removed.price).to.equal(40);
+  });
+
+  it('should remove all matching document', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 40 },
       { price: 40 }
     );
 
@@ -99,8 +114,8 @@ describe('Collection', function() {
 
     const removed = await collection.removeExact({ price: 40 });
 
-    expect(collection.documents).to.have.length(2);
-    expect(removed.price).to.equal(40);
+    expect(collection.documents).to.have.length(1);
+    expect(removed).to.have.length(2);
   });
 
   it('should remove the all documents matching the query', async function() {

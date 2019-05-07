@@ -120,6 +120,25 @@ describe('Collection', function() {
     expect(removed).to.have.length(2);
   });
 
+  it('should update the all documents passing the filter function', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    expect(collection.documents).to.have.length(3);
+
+    const updated = await collection.updateWhere(
+      doc => doc.price <= 40,
+      doc => doc.price = 30,
+    );
+
+    expect(collection.documents).to.have.length(3);
+    expect(updated).to.have.length(2);
+    expect(updated.map(u => u.price)).to.only.contain(30);
+  });
+
   it('should retrieve the first document of the collection', async function() {
     await collection.insert(
       { price: 50 },

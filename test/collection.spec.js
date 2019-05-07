@@ -69,10 +69,23 @@ describe('Collection', function() {
       { price: 40 }
     );
 
-    const results = await collection.findWhere(doc => doc.price <= 40);
+    const results = await collection.find(doc => doc.price <= 40);
 
     expect(collection.documents).to.have.length(3);
     expect(results).to.have.length(2);
+  });
+
+  it('should retrieve the first document passing the filter function', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    const result = await collection.findOne(doc => doc.price <= 40);
+
+    expect(collection.documents).to.have.length(3);
+    expect(result.price).to.equal(20);
   });
 
   it('should remove the matching document', async function() {
@@ -114,7 +127,7 @@ describe('Collection', function() {
 
     expect(collection.documents).to.have.length(3);
 
-    const removed = await collection.removeWhere(doc => doc.price <= 40);
+    const removed = await collection.remove(doc => doc.price <= 40);
 
     expect(collection.documents).to.have.length(1);
     expect(removed).to.have.length(2);
@@ -129,7 +142,7 @@ describe('Collection', function() {
 
     expect(collection.documents).to.have.length(3);
 
-    const updated = await collection.updateWhere(
+    const updated = await collection.update(
       doc => doc.price <= 40,
       doc => doc.price = 30,
     );
@@ -137,6 +150,37 @@ describe('Collection', function() {
     expect(collection.documents).to.have.length(3);
     expect(updated).to.have.length(2);
     expect(updated.map(u => u.price)).to.only.contain(30);
+  });
+
+  it('should update the all documents matching the query', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    expect(collection.documents).to.have.length(3);
+
+    const updated = await collection.update(
+      { price: { lessThanOrEqual: 40 } },
+      { price: 30 }
+    );
+
+    expect(collection.documents).to.have.length(3);
+    expect(updated).to.have.length(2);
+    expect(updated.map(u => u.price)).to.only.contain(30);
+  });
+
+  it('should retrieve all documents of the collection', async function() {
+    await collection.insert(
+      { price: 50 },
+      { price: 20 },
+      { price: 40 }
+    );
+
+    const allDocs = await collection.all();
+
+    expect(allDocs).to.have.length(3);
   });
 
   it('should retrieve the first document of the collection', async function() {

@@ -2,13 +2,16 @@
 
 ## Getting started
 
-**NOTE**: Assuming everything happens in asynchronus block.
-
-Connect to the database, given a filepath and wanted settings.
-
+So far not available on [npm](https://npmjs.org) but soon`.tm` fosure.
 ```js
 const db = require('trustdb');
+```
 
+For all of the upcoming examples I'm gonna assume it happens in an asynchronous block, i.e. function.
+
+Connect to the database, given a filepath and desired settings.
+
+```js
 await db.connect('/path/to/file.json', {
   autosave: true, // default: false
   autosaveInterval: 10000, // in ms; default: 4000
@@ -20,7 +23,7 @@ Create a collection.
 const repoCollection = await db.createCollection('repoCollection');
 ```
 
-Optional: add event listeners for events like `autosave`, `insert`, `find` or `remove`.
+Optional: add event listeners for events like `autosave`, `insert`, `find`, `remove` or `update`.
 ```js
 // Parameter `err` will be undefined on success.
 db.on('autosave', err => {
@@ -35,20 +38,23 @@ repoCollection.on('insert', async (insertedDocs, allDocs) => {
   await db.save();
 });
 
-// `results` will always be an array, even if `findOne` method has been used.
-// `query` could also be a function in case `findWhere` has been used.
-repoCollection.on('find', (query, results, allDocs) => {
+// `matchingDocs` will always be an array, even if `findOne` method has been used.
+// `filter` could be a function or query object.
+repoCollection.on('find', (filter, matchingDocs, allDocs) => {
   // Assuming variable `cache` has been defined as an array somewhere.
   cache.push({
-    query: query,
+    filter: filter,
     results: results,
   });
 });
 
-// `removedDocs` will always be an array, even if `remove` method has been used.
-repoCollection.on('remove', async (removedDocs, allDocs) => {
+// `removedDocs` will always be an array, even if `removeExact` method has been used.
+repoCollection.on('remove', (removedDocs, allDocs) => {
   console.log(`Number of documents removed from ${repoCollection.name}: ${removedDocs.length}`);
-  await db.save();
+});
+
+repoCollection.on('update', (updatedDocs, allDocs) => {
+  console.log(`Number of updated documents in ${repoCollection.name}: ${updatedDocs.length}`);
 });
 ```
 
@@ -68,8 +74,8 @@ const repositories = [{
 // Insert them as an array or each document as an individual parameter.
 await repoCollection.insert(repositories);
 
-// You can also use insertOne to only insert a single document.
-await repoCollection.insertOne({
+// You can also just insert a single document.
+await repoCollection.insert({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
   description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
@@ -78,30 +84,52 @@ await repoCollection.insertOne({
 
 Search for documents.
 ```js
-// Find all documents that match the query.
-const queryResults = await repoCollection.find({ title: { re: /js$/i } });
+// Use query objects or custom filter functions to find matching documents.
+await repoCollection.find({ description: { regExp: /lightweight/ } });
+await repoCollection.find(doc => /lightweight/.test(doc.description));
 
-// Find the first document that matches the query.
-const firstResult = await repoCollection.findOne({ title: { re: /js$/i } });
-
-// Find all documents with your own custom filter function.
-const whereResults = await repoCollection.findWhere(doc => /lightweight/.test(doc.description));
+await repoCollection.findOne({ title: { regExp: /js$/i } });
+await repoCollection.findOne(doc => /js$/i.test(doc.description));
 ```
 
 Remove documents.
 ```js
-// Remove a single document. If that document does not exist it will throw an error, so be sure to catch it.
+// Remove all documents that match the given object.
+// Pass in `true` as the second parameter to only remove the first matching document.
 await repoCollection.removeExact({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
   description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
 });
 
-// Remove all documents that match the query.
-const removedDocuments = await repoCollection.remove({ title: { re: /js$/i } });
+// Remove all documents that match the query or pass the custom filter function.
+await repoCollection.remove({ title: { re: /js$/i } });
+await repoCollection.remove(doc => doc.title.startsWith('trust'));
 
-// Remove all documents with your own custom filter function.
-const removedDocs = await repoCollection.removeWhere(doc => doc.title.startsWith('trust'));
+// Remove the first document that matches the query or passes the custom filter function.
+await repoCollection.removeOne({ title: { re: /js$/i } });
+await repoCollection.removeOne(doc => doc.title.startsWith('trust'));
+```
+
+Update documents.
+```js
+// Update all documents that match the query with another object.
+await repoCollection.update(
+  { description: { regExp: /database/ } },
+  { tags: [ 'database' ] }
+);
+
+// Update all documents with your own custom filter and update functions.
+await repoCollection.update(
+  doc => /runtime/.test(doc.description),
+  doc => doc.tags = [ 'runtime' ]
+);
+
+// But you can obviously also combine the two features.
+await repoCollection.update(
+  doc => /runtime/.test(doc.description),
+  { tags: [ 'runtime' ] }
+);
 ```
 
 ## Query functions
@@ -129,73 +157,76 @@ const removedDocs = await repoCollection.removeWhere(doc => doc.title.startsWith
 
 ### Usage examples:
 
-**NOTE**: The same pattern for the queries applies to the `findOne` and `remove` methods!
+All of these same queries can of course also be applied to the `findOne`, `remove` and `update` methods!
 
+In these examples we will find all documents, where the value of `propertyA` or the property itself:
 ```js
-// Find all documents, where:
-
-// - the value of the property `propertyA` equals 30, 30.0, '30', etc.
+// equals 30, 30.0, '30', etc.
 collection.find({ propertyA: { equal: 30 } });
 
-// - the value of the property `propertyA` equals exactly 30
+// equals exactly 30
 collection.find({ propertyA: { strictEqual: 30 } });
+collection.find({ propertyA: 30 })
 
-// - the value of the property `propertyA` is the exact same object `{a: 1}`
+// is the exact same object { a: 1 }
 collection.find({ propertyA: { deepStrictEqual: { a: 1 } } });
 
-// - the value of the property `propertyA` ends with 'ing'
+// ends with 'ing'
 collection.find({ propertyA: { endsWith: 'ing' } });
 
-// - the value of the property `propertyA` is of type 'number' (only primitive types and array)
+// is of type 'number' (only primitive types and array)
 collection.find({ propertyA: { typeOf: 'number' } });
 
-// - the value of the property `propertyA` has the length of 5 (array, string or set)
+// has the length of 5 (array, string or set)
 collection.find({ propertyA: { lengthOf: 5 } });
 
-// - the value of the property `propertyA` is between 5 and 10 (order of the numbers does not matter)
+// is between 5 and 10 (order of the numbers does not matter)
 collection.find({ propertyA: { between: [ 5, 10 ] } });
 
-// - the value of the property `propertyA` matches the regex pattern 'something', case insensitive
+// matches the regex pattern 'something', case insensitive
 collection.find({ propertyA: { regExp: /something/i } });
 
-// - the value of the property `propertyA` equals the date '1/1/1970' (can also be a Date object)
+// equals the date '1/1/1970' (can also be a Date object)
 collection.find({ propertyA: { dateCompare: '1/1/1970' } });
 
-// - property `propertyA` does not exist
+// does not exist
 collection.find({ propertyA: { hasProperty: false } });
 
-// - the value of the property `propertyA` does not include 10 (array or set)
+// does not include 10 (array or set)
 collection.find({ propertyA: { notIncludes: 10 } });
 
-// - the value of the property `propertyA` is an instance of Date
+// is an instance of Date
 collection.find({ propertyA: { instanceOf: Date } });
 ```
 
-### More examples and advanced usage:
+### Advanced usage examples:
 
+You can use logical operators which will concatenate the result of queries for a specific property.
+For example, `and`, which is the default, makes sure every query result is truthy or the document won't pass.
+On the other hand, `or` will make sure that at least one of the query results is truthy.
+
+The available logical operators are:
+  * and
+  * not
+  * or
+  * nor
+
+To utilize one of these logical operators, assign it to the property `$op` (standing for *operator*).
+
+Furthermore, it is also possible to apply a logical operator to a specific property aka. it's queries.
+
+Usage of the logical operator `or` to concatenate each query result.
 ```js
-// Does not work with the `findOne` or `remove` methods.
-// In those cases use the `first` or `clear` methods.
-collection.find();
-
-// Strict comparison (i.e. ===)
-collection.find({ propertyA: 30 });
-collection.find({ propertyB: 'something' });
-
-// Using the logical operator 'or' on (or rather between) each query.
-// This will return all documents which have a property named:
-// - `propertyA` with a value that starts with 'duck' **OR**
-// - `propertyB` with a value that ends with 'ing'. 
 collection.find({
   propertyA: { startsWith: 'duck' },
-  propertyB: { endsWith: 'ing' }
-}, 'or');
+  propertyB: { endsWith: 'ing' },
+  $op: 'or'
+});
+```
+Explanation: this will return all documents which have a property named `propertyA` with a value that starts with *duck* **or** `propertyB` with a value that ends with *ing*.
 
-// Using the logical operator 'or' for each check of a property
-// **AND** using the logical operator 'not' on each query on a property.
-// This will return all documents which do **NOT** have a property named:
-// - `propertyA` with a value that starts **OR** ends with 'duck' and
-// - `propertyB` with a value that ends with 'ing'.
+Usage of the logical operator `not` to concatenate each query result as well as the operator `or` within the query for the property `propertyA`.
+```js
 collection.find({
   propertyA: {
     startsWith: 'duck',
@@ -203,5 +234,7 @@ collection.find({
     $op: 'or'
   },
   propertyB: { endsWith: 'ing' },
-}, 'not');
+  $op: 'not'
+});
 ```
+Explanation: this will return all documents which do **not** have a property named `propertyA` with a value that starts **or** ends with *duck* and `propertyB` with a value that ends with *ing*.

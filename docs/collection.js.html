@@ -44,6 +44,7 @@ class Collection extends EventEmitter {
       'insert': [],
       'remove': [],
       'find': [],
+      'update': [],
     };
 
     this.name = name;
@@ -87,8 +88,8 @@ class Collection extends EventEmitter {
    */
   insertOne(doc, emitEvent = true) {
     return new Promise(async (resolve, reject) => {
-      if (typeof doc !== 'object' || Array.isArray(doc)) {
-        reject(new TypeError('Documents have to be objects'));
+      if (!checks.isPlainObject(doc)) {
+        reject(new TypeError('Document must be a plain object'));
       }
 
       this.documents.push(doc);
@@ -101,142 +102,139 @@ class Collection extends EventEmitter {
     });
   }
 
-  /**
-   * Find all documents in the collection that match the query/queries.
+   /**
+   * Find all documents in the collection that match the query or passes the filter function.
    * 
-   * @param {object} [query] query for the matching documents, if `undefined` return all documents
-   * @param {string} [op='and'] optional logical operator: and (default), or, not, nor
+   * @param {object | function} [filter] query object or filter function which will be applied on each document
    * @fires Collection#find after successfully filtering documents
    * @returns {Promise&lt;object[] | Error>} a Promise with the matching documents
    * @example
    * // Find all documents where the value of the
    * // property price is greater than or equal to 50.
-   * const results = await collection.find({ price: { greaterThanOrEqual: 50 } });
+   * await collection.find({ price: { greaterThanOrEqual: 50 } });
+   * // or
+   * await collection.find(doc => doc.price >= 50);
    */
-  find(query, op = 'and') {
+  find(filter) {
     return new Promise(async (resolve, reject) => {
-      if (query === undefined) {
-        resolve(this.documents);
+      if (!checks.isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
+        reject(new TypeError('Filter/Query must be a plain object or function'));
+      }
+      if (checks.isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
+        reject(new Error('At least one or more unknown query functions'));
       }
 
-      if (typeof query !== 'object' || Array.isArray(query)) {
-        reject(new TypeError('Query must be an object'));
-      }
-      if (checks.validateQuery(query)) {
-        reject(new Error('At least one unknown query function'));
-      }
+      const results = this.documents.filter(doc => {
+        return typeof filter === 'function'
+          ? filter(doc)
+          : checks.applyQuery(filter, doc);
+      });
 
-      const results = this.documents.filter(doc => checks.applyQuery(query, op, doc));
-
-      await this.emit('find', query, results, this.documents);
+      await this.emit('find', filter, results, this.documents);
       resolve(results);
     });
   }
 
   /**
-   * Find the first document in the collection that matches the query/queries.
+   * Find the first document in the collection that matches the query or passes the filter function.
    * 
-   * @param {object} query query for the first matching document
-   * @param {string} [op='and'] optional logical operator: and (default), or, not, nor
+   * @param {object | function} filter query object or filter function which will be applied on each document
    * @fires Collection#find after successfully filtering documents
    * @returns {Promise&lt;object | Error>} a Promise with the matching document
    * @example
    * // Find the first document where the value of the
    * // property price is greater than or equal to 50.
-   * const results = await collection.findOne({ price: { greaterThanOrEqual: 50 } });
+   * await collection.findOne({ price: { greaterThanOrEqual: 50 } });
+   * // or
+   * await collection.findOne(doc => doc.price >= 50);
    */
-  findOne(query, op = 'and') {
+  findOne(filter) {
     return new Promise(async (resolve, reject) => {
-      if (typeof query !== 'object' || Array.isArray(query)) {
-        reject(new TypeError('Query must be an object'));
+      if (!checks.isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
+        reject(new TypeError('Filter/Query must be a plain object or function'));
       }
-      if (checks.validateQuery(query)) {
-        reject(new Error('At least one unknown query function'));
+      if (checks.isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
+        reject(new Error('At least one or more unknown query functions'));
       }
 
-      const result = this.documents.find(doc => checks.applyQuery(query, op, doc));
+      const result = this.documents.find(doc => {
+        return typeof filter === 'function'
+          ? filter(doc)
+          : checks.applyQuery(filter, doc);
+      });
 
-      await this.emit('find', query, [result], this.documents);
+      await this.emit('find', filter, [result], this.documents);
       resolve(result);
     });
   }
 
   /**
-   * Find all documents in the collection that pass the custom filter function.
+   * Remove all documents matching the given document from the collection.
    * 
-   * @param {function} filterFn custom filter function
-   * @fires Collection#find after successfully filtering documents
-   * @returns {Promise&lt;object[] | Error>} a Promise with the matching documents
-   * @example
-   * // Find all document where the value of the
-   * // property price is greater than or equal to 50.
-   * const results = await collection.findWhere(doc => doc.price >= 50);
+   * @param {object} doc document/-s to remove
+   * @param {boolean} [first=false] whether to remove only the first matching document
+   * @fires Collection#remove after successfully removing the document/-s
+   * @returns {Promise&lt;object | object[] | Error>} a Promise with the removed document/-s
    */
-  findWhere(filterFn) {
+  removeExact(doc, first = false) {
     return new Promise(async (resolve, reject) => {
-      if (typeof filterFn !== 'function') {
-        reject(new TypeError('Filter must be be a function'));
+      if (!checks.isPlainObject(doc)) {
+        reject(new TypeError('Document must be a plain object'));
       }
 
-      const results = this.documents.filter((doc, idx) => filterFn(doc, idx));
+      const removed = [];
+      const indices = [];
 
-      await this.emit('find', filterFn, results, this.documents);
-      resolve(results);
-    });
-  }
+      this.documents.forEach((d, idx) => {
+        const match = checks.deepStrictEqual(d, doc);
+        if (match) {
+          indices.push(idx);
+        }
+      });
 
-  /**
-   * Remove a document from the collection.
-   * 
-   * @param {object} doc document to remove
-   * @fires Collection#remove after successfully removing a document
-   * @returns {Promise&lt;object | Error>} a Promise with the removed document
-   */
-  removeExact(doc) {
-    return new Promise(async (resolve, reject) => {
-      if (typeof doc !== 'object' || Array.isArray(doc)) {
-        reject(new TypeError('Documents have to be objects'));
+      if (first === true) {
+        removed.push(...this.documents.splice(indices[0], 1));
+      } else {
+        indices.reverse().forEach(idx => {
+          removed.push(...this.documents.splice(idx, 1));
+        });
       }
-
-      const idx = this.documents.findIndex(d => checks.deepStrictEqual(d, doc));
-
-      if (idx === -1) {
-        reject(new Error('No matching document was found'));
-      }
-
-      const removed = this.documents.splice(idx, 1);
 
       await this.emit('remove', removed, this.documents);
-      resolve(...removed);
+      resolve(first === true ? removed[0] : removed);
     });
   }
 
   /**
-   * Remove all documents in the collection that match the query/queries.
+   * Remove all documents in the collection that match the query or passes the filter function.
    * 
-   * @param {object} query query for the matching documents
-   * @param {string} [op='and'] optional logical operator: and (default), or, not, nor
+   * @param {object | filter} filter query object or filter function which will be applied on each document
    * @fires Collection#remove after successfully removing the documents
    * @returns {Promise&lt;object[] | Error>} a Promise with the removed documents
    * @example
    * // Remove all documents where the value of the
    * // property price is greater than or equal to 50.
-   * const removedDocuments = await collection.remove({ price: { greaterThanOrEqual: 50 } });
+   * await collection.remove({ price: { greaterThanOrEqual: 50 } });
+   * // or
+   * await collection.remove(doc => doc.price >= 50);
    */
-  remove(query, op = 'and') {
+  remove(filter) {
     return new Promise(async (resolve, reject) => {
-      if (typeof query !== 'object' || Array.isArray(query)) {
-        reject(new TypeError('Query must be an object'));
+      if (!checks.isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
+        reject(new TypeError('Filter/Query must be a plain object or function'));
       }
-      if (checks.validateQuery(query)) {
-        reject(new Error('At least one unknown query function'));
+      if (checks.isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
+        reject(new Error('At least one or more unknown query functions'));
       }
 
       const removed = [];
       const indices = [];
 
       this.documents.forEach((doc, idx) => {
-        const match = checks.applyQuery(query, op, doc);
+        const match = typeof filter === 'function'
+          ? filter(doc)
+          : checks.applyQuery(filter, doc);
+
         if (match) {
           indices.push(idx);
         }
@@ -254,39 +252,108 @@ class Collection extends EventEmitter {
   }
 
   /**
-   * Remove all documents in the collection that pass the custom filter function.
+   * Remove the first document in the collection that matches the query or passes the filter function.
    * 
-   * @param {function} filterFn custom filter function
-   * @fires Collection#remove after successfully removing the documents
-   * @returns {Promise&lt;object[] | Error>} a Promise with the removed documents
+   * @param {object | filter} filter query object or filter function which will be applied on each document
+   * @fires Collection#remove after successfully removing the document
+   * @returns {Promise&lt;object[] | Error>} a Promise with the removed document
    * @example
-   * // Rempve all document where the value of the
+   * // Remove the first document where the value of the
    * // property price is greater than or equal to 50.
-   * const results = await collection.removeWhere(doc => doc.price >= 50);
+   * await collection.removeOne({ price: { greaterThanOrEqual: 50 } });
+   * // or
+   * await collection.removeOne(doc => doc.price >= 50);
    */
-  removeWhere(filterFn) {
+  removeOne(filter) {
     return new Promise(async (resolve, reject) => {
-      if (typeof filterFn !== 'function') {
-        reject(new TypeError('Filter must be be a function'));
+      if (!checks.isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
+        reject(new TypeError('Filter/Query must be a plain object or function'));
+      }
+      if (checks.isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
+        reject(new Error('At least one or more unknown query functions'));
       }
 
-      const removed = [];
-      const indices = [];
-
-      this.documents.forEach((doc, idx) => {
-        const match = filterFn(doc, idx);
-        if (match) {
-          indices.push(idx);
-        }
+      const idx = this.documents.findIndex(doc => {
+        return typeof filter === 'function'
+          ? filter(doc)
+          : checks.applyQuery(filter, doc);
       });
 
-      indices.reverse().forEach(idx => {
-        removed.push(...this.documents.splice(idx, 1));
-      });
+      if (idx === -1) {
+        reject(new Error('No matching document was found'));
+      }
+
+      const removed = this.documents.splice(idx, 1);
 
       await this.emit('remove', removed, this.documents);
-      resolve(removed);
+      resolve(...removed);
     });
+  }
+
+  /**
+   * Update all documents in the collection that match the query or pass the custom filter function.
+   * 
+   * @param {object | function} filter query object or filter function which will be applied on each document
+   * @param {object | function} updater object or update function which will be applied on each filtered document
+   * @fires Collection#update after successfully updating the documents
+   * @returns {Promise&lt;object[] | Error>} a Promise with the updated documents
+   * @example
+   * // Update all documents where the value of the property
+   * // price is greater than or equal to 50 and set it to 49.99.
+   * await collection.update(
+   *   doc => doc.price >= 50,
+   *   { price: 49.99 }
+   * );
+   * // or
+   * await collection.update(
+    *   { price: { greaterThanOrEqual: 50 } },
+    *   doc => doc.price = 49.99
+    * );
+   */
+  update(filter, updater) {
+    return new Promise(async (resolve, reject) => {
+      if (!checks.isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
+        reject(new TypeError('Filter/Query must be a plain object or function'));
+      }
+      // TODO: find better name than "updater"
+      if (!checks.isPlainObject(updater) &amp;&amp; typeof updater !== 'function') {
+        reject(new TypeError('Updater must be a plain object or function'));
+      }
+      if (checks.isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
+        reject(new Error('At least one or more unknown query functions'));
+      }
+
+      const updated = [];
+
+      this.documents.forEach((doc, idx) => {
+        const match = typeof filter === 'function'
+          ? filter(doc)
+          : checks.applyQuery(filter, doc);
+
+        if (!match) {
+          return;
+        }
+
+        typeof updater === 'function'
+          ? updater(doc)
+          : Object.assign(doc, updater);
+
+        this.documents.splice(idx, 1, doc);
+        updated.push(doc);
+      });
+
+      await this.emit('update', updated, this.documents);
+      resolve(updated);
+    });
+  }
+
+  /**
+   * Get all documents of the collection.
+   * 
+   * @returns {object[]} all documents of the collection
+   */
+  all() {
+    return this.documents;
   }
 
   /**
@@ -352,7 +419,7 @@ module.exports = Collection;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun May 05 2019 23:56:56 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue May 07 2019 21:43:06 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

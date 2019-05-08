@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",
     "test": "./node_modules/.bin/mocha ./test",
-    "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json"
+    "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -t ./node_modules/foodoc/template"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
   "devDependencies": {
     "eslint": "^5.16.0",
     "expect.js": "^0.3.1",
+    "foodoc": "0.0.9",
     "jsdoc": "^3.5.5",
     "mocha": "^6.1.4"
   },

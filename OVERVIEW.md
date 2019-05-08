@@ -2,7 +2,7 @@
 
 ## Getting started
 
-So far not available on [npm](https://npmjs.org) but soon`.tm` fosure.
+So far not available on [npm](https://npmjs.org) but soonTM.
 ```js
 const db = require('trustdb');
 ```
@@ -155,7 +155,7 @@ await repoCollection.update(
   * notIncludes
   * instanceOf
 
-### Usage examples:
+### Usage examples
 
 All of these same queries can of course also be applied to the `findOne`, `remove` and `update` methods!
 
@@ -199,7 +199,7 @@ collection.find({ propertyA: { notIncludes: 10 } });
 collection.find({ propertyA: { instanceOf: Date } });
 ```
 
-### Advanced usage examples:
+### Advanced usage examples
 
 You can use logical operators which will concatenate the result of queries for a specific property.
 For example, `and`, which is the default, makes sure every query result is truthy or the document won't pass.

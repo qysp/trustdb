@@ -154,27 +154,27 @@ describe('Collection', function() {
     });
   });
 
-  describe('#all()', function() {
+  describe('#documents', function() {
     it('should retrieve all documents of the collection', function() {
-      expect(collection.all()).to.have.length(4);
+      expect(collection.documents).to.have.length(4);
     });
   });
 
-  describe('#first()', function() {
+  describe('#firstDocument', function() {
     it('should retrieve the first document of the collection', function() {
-      expect(collection.first().price).to.equal(50);
+      expect(collection.firstDocument.price).to.equal(50);
     });
   });
 
-  describe('#last()', function() {
+  describe('#lastDocument', function() {
     it('should retrieve the last document of the collection', function() {
-      expect(collection.last().price).to.equal(40);
+      expect(collection.lastDocument.price).to.equal(40);
     });
   });
 
-  describe('#size()', function() {
+  describe('#size', function() {
     it('should get the correct size of the collection', function() {
-      expect(collection.size()).to.equal(4);
+      expect(collection.size).to.equal(4);
     });
   });
 });

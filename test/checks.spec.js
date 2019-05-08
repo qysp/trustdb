@@ -2,8 +2,13 @@ const expect = require('expect.js');
 const checks = require('../lib/checks');
 
 describe('Checks', function() {
+  const results = [];
+
+  afterEach(function() {
+    results.length = 0;
+  });
+
   it('equal check', function() {
-    const results = [];
     results.push(checks.equal('30', 30));
     results.push(checks.equal('30', 30.0));
     results.push(checks.equal(null, undefined));
@@ -12,7 +17,6 @@ describe('Checks', function() {
   });
 
   it('not equal check', function() {
-    const results = [];
     results.push(checks.notEqual('30', 'thirty'));
     results.push(!checks.notEqual('30', 30.0));
 
@@ -20,7 +24,6 @@ describe('Checks', function() {
   });
 
   it('strict equal check', function() {
-    const results = [];
     results.push(checks.strictEqual(30, 30));
     results.push(checks.strictEqual(void 0, undefined));
     results.push(!checks.strictEqual(undefined, null));
@@ -29,7 +32,6 @@ describe('Checks', function() {
   });
 
   it('strict not equal check', function() {
-    const results = [];
     results.push(checks.strictNotEqual(undefined, null));
     results.push(checks.strictNotEqual('30', 30.0));
 
@@ -37,7 +39,6 @@ describe('Checks', function() {
   });
 
   it('deep strict equal check', function() {
-    const results = [];
     results.push(checks.deepStrictEqual({ a: 1 },  {a: 1 }));
     results.push(!checks.deepStrictEqual({ a: [ undefined ] }, { a: [ null ] }));
 
@@ -45,7 +46,6 @@ describe('Checks', function() {
   });
 
   it('deep strict not equal check', function() {
-    const results = [];
     results.push(checks.deepStrictNotEqual({ a: 1 }, { a: 1, b: 2 }));
     results.push(checks.deepStrictNotEqual({ a: null }, { a: undefined }));
 
@@ -53,7 +53,6 @@ describe('Checks', function() {
   });
 
   it('greater than check', function() {
-    const results = [];
     results.push(checks.greaterThan(30, 5));
     results.push(!checks.greaterThan(30, 30));
     results.push(!checks.greaterThan(30, 60));
@@ -62,7 +61,6 @@ describe('Checks', function() {
   });
 
   it('less than check', function() {
-    const results = [];
     results.push(checks.lessThan(5, 30));
     results.push(!checks.lessThan(30, 30));
     results.push(!checks.lessThan(60, 30));
@@ -71,7 +69,6 @@ describe('Checks', function() {
   });
 
   it('greater than or equal check', function() {
-    const results = [];
     results.push(checks.greaterThanOrEqual(30, 30));
     results.push(checks.greaterThanOrEqual(30, 5));
     results.push(!checks.greaterThanOrEqual(30, 60));
@@ -80,7 +77,6 @@ describe('Checks', function() {
   });
 
   it('less than or equal check', function() {
-    const results = [];
     results.push(checks.lessThanOrEqual(30, 30));
     results.push(checks.lessThanOrEqual(5, 30));
     results.push(!checks.lessThanOrEqual(60, 30));
@@ -89,7 +85,6 @@ describe('Checks', function() {
   });
 
   it('starts with check', function() {
-    const results = [];
     results.push(checks.startsWith('something', 'someth'));
     results.push(!checks.startsWith('something', 'ometh'));
 
@@ -97,7 +92,6 @@ describe('Checks', function() {
   });
 
   it('ends with check', function() {
-    const results = [];
     results.push(checks.endsWith('something', 'thing'));
     results.push(!checks.endsWith('something', 'thin'));
 
@@ -105,7 +99,6 @@ describe('Checks', function() {
   });
 
   it('type check', function() {
-    const results = [];
     results.push(checks.typeOf('something', 'string'));
     results.push(checks.typeOf(() => {}, 'function'));
     results.push(checks.typeOf({}, 'object'));
@@ -116,7 +109,6 @@ describe('Checks', function() {
   });
 
   it('lengreaterThanh check', function() {
-    const results = [];
     results.push(checks.lengthOf('something', 9));
     results.push(checks.lengthOf([1, 2, 3], 3));
     results.push(checks.lengthOf(new Set([1, 2, 3]), 3));
@@ -125,7 +117,6 @@ describe('Checks', function() {
   });
 
   it('between check', function() {
-    const results = [];
     results.push(checks.between(7, [5, 10]));
     results.push(checks.between(7, [10, 5]));
     results.push(!checks.between(7, [0, 5]));
@@ -135,7 +126,6 @@ describe('Checks', function() {
   });
 
   it('regex check', function() {
-    const results = [];
     results.push(checks.regExp('something', /ethin/));
     results.push(checks.regExp('something123', /123$/));
     results.push(checks.regExp('something123', '^some'));
@@ -146,7 +136,6 @@ describe('Checks', function() {
   });
 
   it('date check', function() {
-    const results = [];
     results.push(checks.dateCompare(new Date('1/1/1990'), new Date('1/1/1990')));
     results.push(checks.dateCompare('1/1/1990', new Date('1/1/1990')));
     results.push(checks.dateCompare(new Date('1/1/1990'), '1/1/1990'));
@@ -157,7 +146,6 @@ describe('Checks', function() {
   });
 
   it('property check', function() {
-    const results = [];
     results.push(checks.hasProperty(null, true, {a: 1}, 'a'));
     results.push(checks.hasProperty(null, false, {a: 1}, 'b'));
     results.push(checks.hasProperty(null, true, {a: undefined}, 'a'));
@@ -167,7 +155,6 @@ describe('Checks', function() {
   });
 
   it('includes check', function() {
-    const results = [];
     results.push(checks.includes([1, 2, 3], 1));
     results.push(checks.includes(new Set([1, 2, 3]), 1));
     results.push(!checks.includes([1, 2, 3], 4));
@@ -177,7 +164,6 @@ describe('Checks', function() {
   });
 
   it('excludes check', function() {
-    const results = [];
     results.push(checks.notIncludes([1, 2, 3], 4));
     results.push(checks.notIncludes(new Set([1, 2, 3]), 4));
     results.push(!checks.notIncludes([1, 2, 3], 1));
@@ -187,7 +173,6 @@ describe('Checks', function() {
   });
 
   it('instance of check', function() {
-    const results = [];
     results.push(checks.instanceOf(new Date(), Date));
     results.push(checks.instanceOf(new Set(), Set));
     results.push(checks.instanceOf(/pattern/, RegExp));

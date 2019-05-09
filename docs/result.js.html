@@ -1,9 +1,10 @@
+<!-- start:source.tmpl.hbs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-		<title>Classes</title>
+		<title>result.js</title>
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -13,7 +14,7 @@
 		<link type="text/css" rel="stylesheet" href="css/template.min.css">
 		<script type="text/javascript">
 			window.TEMPLATE_OPTIONS = {"includeDate":true,"dateFormat":"Do MMM YYYY","systemName":"FooDoc","systemSummary":"A Bootstrap and Handlebars based template for JSDoc3.","systemLogo":"","systemColor":"","navMembers":[{"kind":"class","title":"Classes","summary":"All documented classes."},{"kind":"external","title":"Externals","summary":"All documented external members."},{"kind":"global","title":"Globals","summary":"All documented globals."},{"kind":"mixin","title":"Mixins","summary":"All documented mixins."},{"kind":"interface","title":"Interfaces","summary":"All documented interfaces."},{"kind":"module","title":"Modules","summary":"All documented modules."},{"kind":"namespace","title":"Namespaces","summary":"All documented namespaces."},{"kind":"tutorial","title":"Tutorials","summary":"All available tutorials."}],"footer":"","copyright":"FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.","linenums":true,"collapseSymbols":true,"inverseNav":true,"inlineNav":false,"outputSourceFiles":true,"sourceRootPath":null,"disablePackagePath":true,"outputSourcePath":false,"showTableOfContents":true,"showAccessFilter":true,"analytics":null,"methodHeadingReturns":true,"sort":"linenum, longname, version, since","search":true,"favicon":null,"stylesheets":[],"scripts":[],"monospaceLinks":false,"cleverLinks":false};
-			window.DOCLET_TOC_ENABLED = true;
+			window.DOCLET_TOC_ENABLED = false;
 			window.DOCLET_AFILTER_ENABLED = false;
 		</script>
 </head>
@@ -59,52 +60,118 @@
 	</header>
 	<!-- end:navbar.hbs -->		<div class="page-header">
 			<div class="container">
-				<span class="kind">list</span>
-				<h1><span class="name">Classes</span></h1>
-				<div class="summary"><p>All documented classes.</p></div>			</div>
+				<span class="kind">source</span>
+				<h1><span class="name">result.js</span></h1>
+			</div>
 		</div>
 	<div class="container content">
 		<div class="row">
-			<div class="col-md-9 main-content">
-						<ol class="breadcrumb">
-							<li><a href="index.html">Home</a></li>
-							<li class="active">Classes</li>
-						</ol>
-					<section>
-		<h2><span class="name">Classes</span></h2>
-		<article class="secondary">
-				<dl class="symbol">
-						
-						<dt class="symbol-title class public">
-			<h4 id="Collection" class="class public"><a href="Collection.html"><span class="signature-new">new&nbsp;</span><span class="name">Collection</span><span class="signature-params">( <span class="signature-param">name</span>&nbsp;)</span><span class="signature-type"></span></a></h4>
-</dt>
-<dd class="symbol-details class public">
-	<div class="symbol-details-inner">
-	</div>
-</dd>
-						<hr/>
-						<dt class="symbol-title class public">
-			<h4 id="Result" class="class public"><a href="Result.html"><span class="signature-new">new&nbsp;</span><span class="name">Result</span><span class="signature-params">( <span class="signature-param">documents</span>&nbsp;)</span><span class="signature-type"></span></a></h4>
-</dt>
-<dd class="symbol-details class public">
-	<div class="symbol-details-inner">
-	</div>
-</dd>
-						<hr/>
-						<dt class="symbol-title class public">
-			<h4 id="TrustDB" class="class public"><a href="TrustDB.html"><span class="signature-new">new&nbsp;</span><span class="name">TrustDB</span><span class="signature-params">()</span><span class="signature-type"></span></a></h4>
-</dt>
-<dd class="symbol-details class public">
-	<div class="symbol-details-inner">
-	</div>
-</dd>
-				</dl>
-		</article>
-					</section>
+			<div class="col-md-12 main-content">
+		<section class="source-section">
+			<article></article>
+			<pre class="prettyprint source language-javascript line-numbers"><code class="language-javascript">const { simpleSorting } = require('./sorting');
+
+/**
+ * Creates a Result instance.
+ */
+class Result {
+  /**
+   * @param {object[]} documents
+   */
+  constructor(documents) {
+    this._originalDocuments = documents;
+    this._documents = documents;
+  }
+
+  /**
+   * Sort the results JavaScript's default sorting algorithm.
+   * 
+   * @param {boolean} [desc=false] whether to sort the results descending
+   * @returns {this} Result instance
+   */
+  defaultSort(desc = false) {
+    this._documents.sort();
+
+    if (desc === true) {
+      this._documents.reverse();
+    }
+
+    return this;
+  }
+
+  /**
+   * Sort the results given a specific property.
+   * Should work quite reliable when the value to sort by is a
+   * string, number or something similar (e. g. a Date object).
+   * 
+   * @param {string} prop property name within the documents
+   * @param {boolean} [desc=false] whether to sort the results descending
+   * @returns {this} Result instance
+   */
+  simpleSort(prop, desc = false) {
+    if (typeof prop !== 'string') {
+      throw new Error('Parameter `prop` must be a string');
+    }
+
+    this._documents.sort((a, b) => {
+      return simpleSorting(a[prop], b[prop]);
+    });
+
+    if (desc === true) {
+      this._documents.reverse();
+    }
+
+    return this;
+  }
+
+  /**
+   * Sort the results using your own custom sort function.
+   * 
+   * @param {function} sortFn custom sort function which will be applied on each result
+   * @returns {this} Result instance
+   */
+  sort(sortFn) {
+    if (typeof sortFn !== 'function') {
+      throw new Error('Paramter `sortFn` must be a function');
+    }
+
+    this._documents.sort(sortFn);
+    return this;
+  }
+
+  /**
+   * Limit the number of results.
+   * 
+   * @param {number} value limit value for the results
+   * @returns {this} Result instance
+   */
+  limit(value) {
+    this._documents.slice(0, value);
+    return this;
+  }
+
+  /**
+   * Get the results, i.e. filtered and possibly altered documents.
+   * 
+   * @returns {object[]} filtered/altered documents
+   */
+  get documents() {
+    return this._documents;
+  }
+
+  /**
+   * Get the unaltered results, i.e. filtered documents.
+   * 
+   * @returns {object[]} unaltered documents
+   */
+  get originalDocuments() {
+    return this._originalDocuments;
+  }
+}
+
+module.exports = Result;</code></pre>
+		</section>
 			</div>
-				<div class="col-md-3 side-content">
-					<nav class="toc hidden-print hidden-sm hidden-xs"></nav>
-				</div>
 		</div>
 	</div>
 	<footer>
@@ -136,3 +203,4 @@
 	
 </body>
 </html>
+<!-- end:source.tmpl.hbs -->

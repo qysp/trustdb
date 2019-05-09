@@ -38,23 +38,25 @@ repoCollection.on('insert', async (insertedDocs, allDocs) => {
   await db.save();
 });
 
-// `matchingDocs` will always be an array, even if `findOne` method has been used.
-// `filter` could be a function or query object.
-repoCollection.on('find', (filter, matchingDocs, allDocs) => {
-  // Assuming variable `cache` has been defined as an array somewhere.
+// Parameter `filteredDocs` will always be an array, even if the `findOne()` method has been used.
+// Parameter `filter` could be a filter function or a query object.
+repoCollection.on('find', (filter, filteredDocs, allDocs) => {
+  // Assuming the variable `cache` has been defined as an array somewhere.
   cache.push({
     filter: filter,
     results: results,
   });
 });
 
-// `removedDocs` will always be an array, even if `removeExact` method has been used.
-repoCollection.on('remove', (removedDocs, allDocs) => {
+// Parameter `removedDocs` will always be an array, even if the `removeOne()` method has been used.
+repoCollection.on('remove', async (removedDocs, allDocs) => {
   console.log(`Number of documents removed from ${repoCollection.name}: ${removedDocs.length}`);
+  await db.save();
 });
 
-repoCollection.on('update', (updatedDocs, allDocs) => {
+repoCollection.on('update', async (updatedDocs, allDocs) => {
   console.log(`Number of updated documents in ${repoCollection.name}: ${updatedDocs.length}`);
+  await db.save();
 });
 ```
 
@@ -73,8 +75,6 @@ const repositories = [{
 
 // Insert them as an array or each document as an individual parameter.
 await repoCollection.insert(repositories);
-
-// You can also just insert a single document.
 await repoCollection.insert({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
@@ -90,6 +90,19 @@ await repoCollection.find(doc => /lightweight/.test(doc.description));
 
 await repoCollection.findOne({ title: { regExp: /js$/i } });
 await repoCollection.findOne(doc => /js$/i.test(doc.description));
+```
+
+Sort your results.
+```js
+// Note the second parameter is set to `true`.
+// It will return a `Results` instance you can do the orting on.
+await repoCollection.find({ title: { regExp: /js$/i } }, true)
+  .then(result => {
+    return result
+      .limit(10) // limit the amount of documents to sort to 10
+      .simpleSort('title') // Sort by property `title`
+      .documents // get the sorted documents
+  });
 ```
 
 Remove documents.

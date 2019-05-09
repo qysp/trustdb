@@ -39,6 +39,7 @@
 									<a href="list_class.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 									<ul class="dropdown-menu">
 											<li><a href="Collection.html">Collection</a></li>
+											<li><a href="Result.html">Result</a></li>
 											<li><a href="TrustDB.html">TrustDB</a></li>
 									</ul>
 								</li>
@@ -73,14 +74,13 @@ const { promisify } = require('util');
 
 const Collection = require('./collection');
 const EventEmitter = require('./events');
-const { isPlainObject } = require('./checks');
+const { isPlainObject, mkdirp } = require('./helpers');
 
 // Promisify asynchronous functions
 const writeFile = promisify(fs.writeFile);
 const readFile = promisify(fs.readFile);
 const copyFile = promisify(fs.copyFile);
 const unlink = promisify(fs.unlink);
-const mkdir = promisify(fs.mkdir);
 const stat = promisify(fs.stat);
 
 /**
@@ -113,23 +113,23 @@ class TrustDB extends EventEmitter {
   connect(filepath, settings = {}) {
     return new Promise(async (resolve, reject) => {
       if (typeof filepath !== 'string' || filepath === '') {
-        reject(new Error('Filepath must be a string and at least one character long'));
+        reject(new Error('Parameter `filepath` must be a string and at least one character long'));
       }
 
-      this._filepath = filepath;
-      this._created = new Date().toISOString();
+      this.filepath = filepath;
+      this.created = new Date().toISOString();
       this._collections = [];
 
-      this._settings = {};
+      this.settings = {};
       this._autosave = false;
       this._autosaveInterval = 4000;
-      this._autosaveHandler;
+      this.autosaveHandler;
 
       if (settings.overwriteExisting !== true) {
         await this._restoreDatabase(settings).catch(reject);
       }
 
-      this.configureSettings(this._settings);
+      this.configureSettings(this.settings);
       resolve();
     });
   }
@@ -138,18 +138,15 @@ class TrustDB extends EventEmitter {
    * Create a collection with the given name. Returns an existing collection
    * in case a collection with the same name already eixists in this database.
    * 
-   * Use `deleteCollection` before creating or adding a collection with the same name.
+   * Use {@link TrustDB#deleteCollection} before creating or adding a collection with the same name.
    * 
    * @param {string} name name of the collection
    * @returns {Promise&lt;Collection | Error>} a Promise with the created collection or exisiting collection with the same name
    */
   createCollection(name) {
     return new Promise((resolve, reject) => {
-      if (typeof name !== 'string') {
-        reject(new TypeError('Collection name has to be a string'));
-      }
-      if (name === '') {
-        reject(new Error('Collection name must be at least one character long'));
+      if (typeof name !== 'string' || name === '') {
+        reject(new TypeError('Parameter `name` must be a string and at least one character long'));
       }
 
       let collection = this._collections.find(c => c.name === name);
@@ -176,7 +173,7 @@ class TrustDB extends EventEmitter {
   addCollection(collection) {
     return new Promise((resolve, reject) => {
       if (!(collection instanceof Collection)) {
-        reject(new TypeError('Parameter `collection` has to be an instance of Collection'));
+        reject(new TypeError('Parameter `collection` must be an instance of Collection'));
       }
 
       let foundCollection = this._collections.find(c => c.name === collection.name);
@@ -203,11 +200,8 @@ class TrustDB extends EventEmitter {
         ? collection.name
         : collection;
 
-      if (typeof name !== 'string') {
-        reject(new TypeError('Collection name has to be a string'));
-      }
-      if (name === '') {
-        reject(new Error('Collection name must be at least one character long'));
+      if (typeof name !== 'string' || name === '') {
+        reject(new TypeError('Parameter `name` must be a string and at least one character long'));
       }
 
       const idx = this._collections.findIndex(c => c.name === name);
@@ -230,11 +224,8 @@ class TrustDB extends EventEmitter {
    */
   getCollection(name) {
     return new Promise((resolve, reject) => {
-      if (typeof name !== 'string') {
-        reject(new TypeError('Collection name has to be a string'));
-      }
-      if (name === '') {
-        reject(new Error('Collection name must be at least one character long'));
+      if (typeof name !== 'string' || name === '') {
+        reject(new TypeError('Parameter `name` must be a string and at least one character long'));
       }
 
       const collection = this._collections.find(c => c.name === name);
@@ -254,17 +245,11 @@ class TrustDB extends EventEmitter {
    * @returns {Promise&lt;void | Error>} a Promise which resolves after saving the database
    */
   saveDatabase() {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const exportedDb = this._exportDatabase();
-      const filepathParts = this._filepath.split('/');
 
-      if (filepathParts.length > 1) {
-        const path = filepathParts
-          .slice(0, filepathParts.length-1)
-          .join('/');
-        await mkdir(path, { recursive: true });
-      }
-      writeFile(this._filepath, exportedDb)
+      mkdirp(this.filepath)
+        .then(() => writeFile(this.filepath, exportedDb))
         .then(resolve)
         .catch(reject);
     });
@@ -277,22 +262,20 @@ class TrustDB extends EventEmitter {
    */
   deleteDatabase() {
     return new Promise((resolve, reject) => {
-      const isFile = stat(this._filepath)
-        .then(stats => stats.isFile())
+      stat(this.filepath)
+        .then(stats => {
+          if (!stats.isFile()) {
+            reject(new Error('Database requested to delete is not a file'));
+          }
+        })
+        .then(() => unlink(this.filepath))
+        .then(resolve)
         .catch(err => {
           if (err.code !== 'ENOENT') {
             reject(err);
           }
           resolve();
         });
-
-      if (!isFile) {
-        reject(new Error('Database to delete is not a file.'));
-      }
-
-      unlink(this._filepath)
-        .then(resolve)
-        .catch(reject);
     });
   }
 
@@ -305,39 +288,35 @@ class TrustDB extends EventEmitter {
   moveDatabase(filepath) {
     return new Promise((resolve, reject) => {
       if (typeof filepath !== 'string' || filepath === '') {
-        reject(new Error('Filepath has to be a string and must be at least one character long'));
+        reject(new TypeError('Parameter `filepath` must be a string and at least one character long'));
       }
-      if (this._filepath === filepath) {
+      if (this.filepath === filepath) {
         resolve();
       }
 
-      const isFile = stat(this._filepath)
-        .then(stats => stats.isFile())
+      stat(this.filepath)
+        .then(stats => {
+          if (!stats.isFile()) {
+            reject(new Error('Database requested to delete is not a file'));
+          }
+        })
         .catch(err => {
           if (err.code !== 'ENOENT') {
             reject(err);
           }
           // File does not exist so just change the filepath.
-          this._filepath = filepath;
+          this.filepath = filepath;
           resolve();
         });
 
-      if (!isFile) {
-        reject(new Error('Database to move is not a file.'));
-      }
-
-      copyFile(this._filepath, filepath)
+      mkdirp(filepath)
+        .then(() => copyFile(this.filepath, filepath))
+        .then(() => unlink(this.filepath))
         .then(() => {
-          unlink(this._filepath)
-            .then(() => {
-              this._filepath = filepath;
-              resolve();
-            })
-            .catch(reject);
+          this.filepath = filepath;
+          resolve();
         })
-        .catch(err => {
-          reject(err);
-        });
+        .catch(reject);
     });
   }
 
@@ -375,7 +354,7 @@ class TrustDB extends EventEmitter {
 
     if (this._autosave) {
       // In case the settings were reconfigured.
-      if (this._autosaveHandler !== undefined) {
+      if (this.autosaveHandler !== undefined) {
         this._disableAutosave();
       }
       this._enableAutosave();
@@ -394,12 +373,23 @@ class TrustDB extends EventEmitter {
   }
 
   /**
-   * Get the filepath of the database.
+   * Get the amount of collections of the database.
    * 
-   * @returns {string} filepath of the database
+   * @returns {number} amount of collections of the database
    */
-  get filepath() {
-    return this._filepath;
+  get size() {
+    return this._collections.length;
+  }
+
+  /**
+   * Get the amount of documents of all collections.
+   * 
+   * @returns {number} amount of documents of all collections
+   */
+  get totalSize() {
+    return this._collections
+      .map(c => c.size)
+      .reduce((acc, curr) => acc + curr);
   }
 
   /**
@@ -449,14 +439,14 @@ class TrustDB extends EventEmitter {
    */
   _exportDatabase() {
     return JSON.stringify({
-      filepath: this._filepath,
+      filepath: this.filepath,
       collections: this._collections.map(c => c._export()),
       settings: {
         autosave: this._autosave,
         autosaveInterval: this._autosaveInterval,
       },
       metadata: {
-        created: this._created,
+        created: this.created,
         saved: new Date().toISOString(),
       },
     });
@@ -471,15 +461,13 @@ class TrustDB extends EventEmitter {
    */
   _loadDatabase() {
     return new Promise((resolve, reject) => {
-      const isFile = stat(this._filepath)
-        .then(stats => stats.isFile())
-        .catch(reject);
-
-      if (!isFile) {
-        reject(new Error('Database to load is not a file.'));
-      }
-
-      readFile(this._filepath, { encoding: 'utf-8' })
+      stat(this.filepath)
+        .then(stats => {
+          if (!stats.isFile()) {
+            reject(new Error('Database requested to delete is not a file'));
+          }
+        })
+        .then(() => readFile(this.filepath, { encoding: 'utf-8' }))
         .then(content => resolve(JSON.parse(content)))
         .catch(reject);
     });
@@ -496,21 +484,23 @@ class TrustDB extends EventEmitter {
   _applyDatabase(db, restoreSettings) {
     if (db.hasOwnProperty('metadata') &amp;&amp;
         db.metadata.hasOwnProperty('created')) {
-      this._created = db.metadata.created;
+      this.created = db.metadata.created;
     }
 
+    // TODO: type checks
     if (Array.isArray(db.collections)) {
-      this._collections = db.collections
-        .map(collection => {
+      this._collections.concat(
+        db.collections.map(collection => {
           const c = new Collection(collection.name);
           c.documents.concat(collection.documents);
           c.timestamp = collection.timestamp;
           return c;
-        });
+        })
+      );
     }
 
     if (restoreSettings === true) {
-      Object.assign(this._settings, db.settings);
+      Object.assign(this.settings, db.settings);
     }
   }
 
@@ -536,7 +526,7 @@ class TrustDB extends EventEmitter {
           resolve();
         })
         .finally(() => {
-          Object.assign(this._settings, settings);
+          Object.assign(this.settings, settings);
         });
     });
   }
@@ -549,11 +539,11 @@ class TrustDB extends EventEmitter {
    * @fires TrustDB#autosave
    */
   _enableAutosave() {
-    if (this._autosaveHandler !== undefined) {
+    if (this.autosaveHandler !== undefined) {
       return;
     }
 
-    this._autosaveHandler = setInterval(async () => {
+    this.autosaveHandler = setInterval(async () => {
       const result = await this.saveDatabase()
         .catch(err => err);
       await this.emit('autosave', result);
@@ -566,9 +556,9 @@ class TrustDB extends EventEmitter {
    * Disables the autosave handler.
    */
   _disableAutosave() {
-    if (this._autosaveHandler !== undefined) {
-      clearInterval(this._autosaveHandler);
-      this._autosaveHandler = undefined;
+    if (this.autosaveHandler !== undefined) {
+      clearInterval(this.autosaveHandler);
+      this.autosaveHandler = undefined;
     }
   }
 }
@@ -583,7 +573,7 @@ module.exports = TrustDB;</code></pre>
 	</div>
 	<footer>
 				<div class="copyright">FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.</div>
-			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on 8th May 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
+			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on 9th May 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
 	</footer>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

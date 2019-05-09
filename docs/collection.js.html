@@ -39,6 +39,7 @@
 									<a href="list_class.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 									<ul class="dropdown-menu">
 											<li><a href="Collection.html">Collection</a></li>
+											<li><a href="Result.html">Result</a></li>
 											<li><a href="TrustDB.html">TrustDB</a></li>
 									</ul>
 								</li>
@@ -69,7 +70,9 @@
 		<section class="source-section">
 			<article></article>
 			<pre class="prettyprint source language-javascript line-numbers"><code class="language-javascript">const EventEmitter = require('./events');
+const Result = require('./result');
 const checks = require('./checks');
+const { isPlainObject } = require('./helpers');
 
 /**
  * Creates a Collection instance.
@@ -124,13 +127,13 @@ class Collection extends EventEmitter {
    * Insert a single document into the collection.
    * 
    * @param {object} doc document to insert
-   * @param {boolean} [emitEvent=true] whether to emit the *insert* event, default true
+   * @param {boolean} [emitEvent=true] whether to emit the *insert* event
    * @fires Collection#insert after successfully inserting a document if `emitEvent` is `true`
    * @returns {Promise&lt;void | Error>} a Promise which resolves after successful insertion
    */
   insertOne(doc, emitEvent = true) {
     return new Promise(async (resolve, reject) => {
-      if (!checks.isPlainObject(doc)) {
+      if (!isPlainObject(doc)) {
         reject(new TypeError('Document must be a plain object'));
       }
 
@@ -147,9 +150,10 @@ class Collection extends EventEmitter {
    /**
    * Find all documents in the collection that match the query or passes the filter function.
    * 
-   * @param {object | function} [filter] query object or filter function which will be applied on each document
+   * @param {object | function} filter query object or filter function which will be applied on each document
+   * @param {boolean} resultInstance whether the matching documents should be returned as a Result instance (for sorting)
    * @fires Collection#find after successfully filtering documents
-   * @returns {Promise&lt;object[] | Error>} a Promise with the matching documents
+   * @returns {Promise&lt;object[] | Result | Error>} a Promise with the matching documents
    * @example
    * // Find all documents where the value of the
    * // property price is greater than or equal to 50.
@@ -157,23 +161,27 @@ class Collection extends EventEmitter {
    * // or
    * await collection.find(doc => doc.price >= 50);
    */
-  find(filter) {
+  find(filter, resultInstance = false) {
     return new Promise(async (resolve, reject) => {
-      if (!checks.isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
+      if (!isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
         reject(new TypeError('Filter/Query must be a plain object or function'));
       }
-      if (checks.isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
+      if (isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
         reject(new Error('At least one or more unknown query functions'));
       }
 
-      const results = this._documents.filter(doc => {
+      const filteredDocs = this._documents.filter(doc => {
         return typeof filter === 'function'
           ? filter(doc)
           : checks.applyQuery(filter, doc);
       });
 
-      await this.emit('find', filter, results, this._documents);
-      resolve(results);
+      const result = resultInstance === true
+        ? new Result(filteredDocs)
+        : filteredDocs;
+
+      await this.emit('find', filter, filteredDocs, this._documents);
+      resolve(result);
     });
   }
 
@@ -192,10 +200,10 @@ class Collection extends EventEmitter {
    */
   findOne(filter) {
     return new Promise(async (resolve, reject) => {
-      if (!checks.isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
+      if (!isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
         reject(new TypeError('Filter/Query must be a plain object or function'));
       }
-      if (checks.isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
+      if (isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
         reject(new Error('At least one or more unknown query functions'));
       }
 
@@ -220,7 +228,7 @@ class Collection extends EventEmitter {
    */
   removeExact(doc, first = false) {
     return new Promise(async (resolve, reject) => {
-      if (!checks.isPlainObject(doc)) {
+      if (!isPlainObject(doc)) {
         reject(new TypeError('Document must be a plain object'));
       }
 
@@ -262,10 +270,10 @@ class Collection extends EventEmitter {
    */
   remove(filter) {
     return new Promise(async (resolve, reject) => {
-      if (!checks.isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
+      if (!isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
         reject(new TypeError('Filter/Query must be a plain object or function'));
       }
-      if (checks.isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
+      if (isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
         reject(new Error('At least one or more unknown query functions'));
       }
 
@@ -308,10 +316,10 @@ class Collection extends EventEmitter {
    */
   removeOne(filter) {
     return new Promise(async (resolve, reject) => {
-      if (!checks.isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
+      if (!isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
         reject(new TypeError('Filter/Query must be a plain object or function'));
       }
-      if (checks.isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
+      if (isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
         reject(new Error('At least one or more unknown query functions'));
       }
 
@@ -349,14 +357,14 @@ class Collection extends EventEmitter {
    */
   update(filter, updater) {
     return new Promise(async (resolve, reject) => {
-      if (!checks.isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
+      if (!isPlainObject(filter) &amp;&amp; typeof filter !== 'function') {
         reject(new TypeError('Filter/Query must be a plain object or function'));
       }
       // TODO: find better name than "updater"
-      if (!checks.isPlainObject(updater) &amp;&amp; typeof updater !== 'function') {
+      if (!isPlainObject(updater) &amp;&amp; typeof updater !== 'function') {
         reject(new TypeError('Updater must be a plain object or function'));
       }
-      if (checks.isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
+      if (isPlainObject(filter) &amp;&amp; checks.hasUnknownCheck(filter)) {
         reject(new Error('At least one or more unknown query functions'));
       }
 
@@ -382,6 +390,13 @@ class Collection extends EventEmitter {
       await this.emit('update', updated, this._documents);
       resolve(updated);
     });
+  }
+
+  /**
+   * Clear the collection by deleting all its documents.
+   */
+  clear() {
+    this._documents.length = 0;
   }
 
   /**
@@ -430,13 +445,6 @@ class Collection extends EventEmitter {
   }
 
   /**
-   * Clear the collection by deleting all its documents.
-   */
-  clear() {
-    this._documents.length = 0;
-  }
-
-  /**
    * Internal function.
    * 
    * Return the important properties for the export.
@@ -456,7 +464,7 @@ module.exports = Collection;</code></pre>
 	</div>
 	<footer>
 				<div class="copyright">FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.</div>
-			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on 8th May 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
+			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on 9th May 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
 	</footer>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

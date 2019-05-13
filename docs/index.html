@@ -68,14 +68,25 @@
 		<div class="row">
 			<div class="col-md-9 main-content">
 		<section class="readme-section">
-			<article><h1>TrustDB</h1><h2>Getting started</h2><p>So far not available on <a href="https://npmjs.org">npm</a> but soonTM.</p>
-<pre class="prettyprint source lang-js"><code>const db = require('trustdb');</code></pre><p>For all of the upcoming examples I'm gonna assume it happens in an asynchronous block, i.e. function.</p>
+			<article><h1>TrustDB</h1>
+<h2>Getting started</h2>
+<p>Install TrustDB.</p>
+<pre class="prettyprint source"><code>npm install trustdb
+</code></pre>
+<p>Import the package into your app.</p>
+<pre class="prettyprint source lang-js"><code>const db = require('trustdb');
+</code></pre>
+<p>[<em>For all of the upcoming examples I'm gonna assume it happens in an asynchronous block, i.e. function.</em>]</p>
 <p>Connect to the database, given a filepath and desired settings.</p>
 <pre class="prettyprint source lang-js"><code>await db.connect('/path/to/file.json', {
   autosave: true, // default: false
   autosaveInterval: 10000, // in ms; default: 4000
-});</code></pre><p>Create a collection.</p>
-<pre class="prettyprint source lang-js"><code>const repoCollection = await db.createCollection('repoCollection');</code></pre><p>Optional: add event listeners for events like <code>autosave</code>, <code>insert</code>, <code>find</code>, <code>remove</code> or <code>update</code>.</p>
+});
+</code></pre>
+<p>Create a collection.</p>
+<pre class="prettyprint source lang-js"><code>const repoCollection = await db.createCollection('repoCollection');
+</code></pre>
+<p>Optional: add event listeners for events like <code>autosave</code>, <code>insert</code>, <code>find</code>, <code>remove</code> or <code>update</code>.</p>
 <pre class="prettyprint source lang-js"><code>// Parameter `err` will be undefined on success.
 db.on('autosave', err => {
   if (err instanceof Error) {
@@ -108,7 +119,9 @@ repoCollection.on('remove', async (removedDocs, allDocs) => {
 repoCollection.on('update', async (updatedDocs, allDocs) => {
   console.log(`Number of updated documents in ${repoCollection.name}: ${updatedDocs.length}`);
   await db.save();
-});</code></pre><p>Insert documents.</p>
+});
+</code></pre>
+<p>Insert documents.</p>
 <pre class="prettyprint source lang-js"><code>// Some example documents.
 const repositories = [{
     url: 'https://github.com/qysp/trustdb',
@@ -126,13 +139,17 @@ await repoCollection.insert({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
   description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
-});</code></pre><p>Search for documents.</p>
+});
+</code></pre>
+<p>Search for documents.</p>
 <pre class="prettyprint source lang-js"><code>// Use query objects or custom filter functions to find matching documents.
 await repoCollection.find({ description: { regExp: /lightweight/ } });
 await repoCollection.find(doc => /lightweight/.test(doc.description));
 
 await repoCollection.findOne({ title: { regExp: /js$/i } });
-await repoCollection.findOne(doc => /js$/i.test(doc.description));</code></pre><p>Sort your results.</p>
+await repoCollection.findOne(doc => /js$/i.test(doc.description));
+</code></pre>
+<p>Sort your results.</p>
 <pre class="prettyprint source lang-js"><code>// Note the second parameter is set to `true`.
 // It will return a `Results` instance you can do the orting on.
 await repoCollection.find({ title: { regExp: /js$/i } }, true)
@@ -141,7 +158,9 @@ await repoCollection.find({ title: { regExp: /js$/i } }, true)
       .limit(10) // limit the amount of documents to sort to 10
       .simpleSort('title') // Sort by property `title`
       .documents // get the sorted documents
-  });</code></pre><p>Remove documents.</p>
+  });
+</code></pre>
+<p>Remove documents.</p>
 <pre class="prettyprint source lang-js"><code>// Remove all documents that match the given object.
 // Pass in `true` as the second parameter to only remove the first matching document.
 await repoCollection.removeExact({
@@ -156,7 +175,9 @@ await repoCollection.remove(doc => doc.title.startsWith('trust'));
 
 // Remove the first document that matches the query or passes the custom filter function.
 await repoCollection.removeOne({ title: { re: /js$/i } });
-await repoCollection.removeOne(doc => doc.title.startsWith('trust'));</code></pre><p>Update documents.</p>
+await repoCollection.removeOne(doc => doc.title.startsWith('trust'));
+</code></pre>
+<p>Update documents.</p>
 <pre class="prettyprint source lang-js"><code>// Update all documents that match the query with another object.
 await repoCollection.update(
   { description: { regExp: /database/ } },
@@ -173,7 +194,17 @@ await repoCollection.update(
 await repoCollection.update(
   doc => /runtime/.test(doc.description),
   { tags: [ 'runtime' ] }
-);</code></pre><h2>Query functions</h2><ul>
+);
+</code></pre>
+<h2>Settings</h2>
+<ul>
+<li><strong>autosave</strong>: whether the database should be automatically saved.</li>
+<li><strong>autosaveInterval</strong>: interval for the autosave (in milliseconds).</li>
+<li><strong>restoreSettings</strong>: whether TrustDB should restore settings from the loaded database (if it exists). Any additional settings will overwrite the loaded settings.</li>
+<li><strong>overwriteExisting</strong>: whether the existing database with the same filepath (if it exists) should be overwritten.</li>
+</ul>
+<h2>Query functions</h2>
+<ul>
 <li>equal</li>
 <li>notEqual</li>
 <li>strictEqual</li>
@@ -196,7 +227,8 @@ await repoCollection.update(
 <li>notIncludes</li>
 <li>instanceOf</li>
 </ul>
-<h3>Usage examples</h3><p>All of these same queries can of course also be applied to the <code>findOne</code>, <code>remove</code> and <code>update</code> methods!</p>
+<h3>Usage examples</h3>
+<p>All of these same queries can of course also be applied to the <code>findOne</code>, <code>remove</code> and <code>update</code> methods!</p>
 <p>In these examples we will find all documents, where the value of <code>propertyA</code> or the property itself:</p>
 <pre class="prettyprint source lang-js"><code>// equals 30, 30.0, '30', etc.
 collection.find({ propertyA: { equal: 30 } });
@@ -233,7 +265,10 @@ collection.find({ propertyA: { hasProperty: false } });
 collection.find({ propertyA: { notIncludes: 10 } });
 
 // is an instance of Date
-collection.find({ propertyA: { instanceOf: Date } });</code></pre><h3>Advanced usage examples</h3><p>You can use logical operators which will concatenate the result of queries for a specific property.
+collection.find({ propertyA: { instanceOf: Date } });
+</code></pre>
+<h3>Advanced usage examples</h3>
+<p>You can use logical operators which will concatenate the result of queries for a specific property.
 For example, <code>and</code>, which is the default, makes sure every query result is truthy or the document won't pass.
 On the other hand, <code>or</code> will make sure that at least one of the query results is truthy.</p>
 <p>The available logical operators are:</p>
@@ -250,7 +285,9 @@ On the other hand, <code>or</code> will make sure that at least one of the query
   propertyA: { startsWith: 'duck' },
   propertyB: { endsWith: 'ing' },
   $op: 'or'
-});</code></pre><p>Explanation: this will return all documents which have a property named <code>propertyA</code> with a value that starts with <em>duck</em> <strong>or</strong> <code>propertyB</code> with a value that ends with <em>ing</em>.</p>
+});
+</code></pre>
+<p>Explanation: this will return all documents which have a property named <code>propertyA</code> with a value that starts with <em>duck</em> <strong>or</strong> <code>propertyB</code> with a value that ends with <em>ing</em>.</p>
 <p>Usage of the logical operator <code>not</code> to concatenate each query result as well as the operator <code>or</code> within the query for the property <code>propertyA</code>.</p>
 <pre class="prettyprint source lang-js"><code>collection.find({
   propertyA: {
@@ -260,7 +297,9 @@ On the other hand, <code>or</code> will make sure that at least one of the query
   },
   propertyB: { endsWith: 'ing' },
   $op: 'not'
-});</code></pre><p>Explanation: this will return all documents which do <strong>not</strong> have a property named <code>propertyA</code> with a value that starts <strong>or</strong> ends with <em>duck</em> and <code>propertyB</code> with a value that ends with <em>ing</em>.</p></article>
+});
+</code></pre>
+<p>Explanation: this will return all documents which do <strong>not</strong> have a property named <code>propertyA</code> with a value that starts <strong>or</strong> ends with <em>duck</em> and <code>propertyB</code> with a value that ends with <em>ing</em>.</p></article>
 		</section>
 			</div>
 				<div class="col-md-3 side-content">
@@ -270,7 +309,7 @@ On the other hand, <code>or</code> will make sure that at least one of the query
 	</div>
 	<footer>
 				<div class="copyright">FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.</div>
-			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on 9th May 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
+			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on 13th May 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
 	</footer>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

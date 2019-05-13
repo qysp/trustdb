@@ -2,12 +2,17 @@
 
 ## Getting started
 
-So far not available on [npm](https://npmjs.org) but soonTM.
+Install TrustDB.
+```
+npm install trustdb
+```
+
+Import the package into your app.
 ```js
 const db = require('trustdb');
 ```
 
-For all of the upcoming examples I'm gonna assume it happens in an asynchronous block, i.e. function.
+[*For all of the upcoming examples I'm gonna assume it happens in an asynchronous block, i.e. function.*]
 
 Connect to the database, given a filepath and desired settings.
 
@@ -144,6 +149,12 @@ await repoCollection.update(
   { tags: [ 'runtime' ] }
 );
 ```
+
+## Settings
+  * **autosave**: whether the database should be automatically saved.
+  * **autosaveInterval**: interval for the autosave (in milliseconds).
+  * **restoreSettings**: whether TrustDB should restore settings from the loaded database (if it exists). Any additional settings will overwrite the loaded settings.
+  * **overwriteExisting**: whether the existing database with the same filepath (if it exists) should be overwritten.
 
 ## Query functions
   * equal

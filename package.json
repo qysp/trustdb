@@ -1,6 +1,6 @@
 {
   "name": "trustdb",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Promise-based, lightweight in-memory and persistent JavaScript/JSON database.",
   "main": "index.js",
   "scripts": {
@@ -33,6 +33,6 @@
     "mocha": "^6.1.4"
   },
   "engines": {
-    "node": ">=9.0.0"
+    "node": ">=10.0.0"
   }
 }

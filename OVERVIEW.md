@@ -178,6 +178,8 @@ await repoCollection.update(
   * includes
   * notIncludes
   * instanceOf
+  * includedIn
+  * notIncludedIn
 
 ### Usage examples
 
@@ -219,8 +221,11 @@ collection.find({ propertyA: { hasProperty: false } });
 // does not include 10 (array or set)
 collection.find({ propertyA: { notIncludes: 10 } });
 
-// is an instance of Date
+// is an instance of Date (won't work with custom instances after loading a database)
 collection.find({ propertyA: { instanceOf: Date } });
+
+// is included in [5, 10, 20, 40] (array or set)
+collection.find({ propertyA: { includedIn: [5, 10, 20, 40] } });
 ```
 
 ### Advanced usage examples

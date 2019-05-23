@@ -163,7 +163,7 @@ describe('Checks', function() {
     expect(results).to.not.contain(false);
   });
 
-  it('excludes check', function() {
+  it('not includes check', function() {
     results.push(checks.notIncludes([1, 2, 3], 4));
     results.push(checks.notIncludes(new Set([1, 2, 3]), 4));
     results.push(!checks.notIncludes([1, 2, 3], 1));
@@ -177,6 +177,24 @@ describe('Checks', function() {
     results.push(checks.instanceOf(new Set(), Set));
     results.push(checks.instanceOf(/pattern/, RegExp));
     results.push(!checks.instanceOf(new Map(), Set));
+
+    expect(results).to.not.contain(false);
+  });
+
+  it('included in check', function() {
+    results.push(checks.includedIn(1, [1, 2, 3]));
+    results.push(checks.includedIn(1, new Set([1, 2, 3])));
+    results.push(!checks.includedIn(4, [1, 2, 3]));
+    results.push(!checks.includedIn(4, new Set([1, 2, 3])));
+
+    expect(results).to.not.contain(false);
+  });
+
+  it('not included in check', function() {
+    results.push(checks.notIncludedIn(4, [1, 2, 3]));
+    results.push(checks.notIncludedIn(4, new Set([1, 2, 3])));
+    results.push(!checks.notIncludedIn(1, [1, 2, 3]));
+    results.push(!checks.notIncludedIn(1, new Set([1, 2, 3])));
 
     expect(results).to.not.contain(false);
   });

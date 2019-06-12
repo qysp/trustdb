@@ -85,17 +85,6 @@
           "result#originaldocu",
           "unalt"
         ],
-        "Result.html#defaultSort": [
-          "algorithm",
-          "default",
-          "defaultsort",
-          "desc",
-          "function",
-          "javascript'",
-          "result",
-          "result#defaultsort",
-          "sort"
-        ],
         "Result.html#simpleSort": [
           "date",
           "desc",
@@ -228,6 +217,16 @@
           "promise.&lt;(object|error)&gt",
           "queri"
         ],
+        "Collection.html#findById": [
+          "collection#findbyid",
+          "document",
+          "find",
+          "findbyid",
+          "function",
+          "id",
+          "match",
+          "promise.&lt;(object|error)&gt"
+        ],
         "Collection.html#removeExact": [
           "collect",
           "collection#removeexact",
@@ -267,6 +266,16 @@
           "remov",
           "removeon"
         ],
+        "Collection.html#removeById": [
+          "collection#removebyid",
+          "document",
+          "function",
+          "id",
+          "match",
+          "promise.&lt;(object|error)&gt",
+          "remov",
+          "removebyid"
+        ],
         "Collection.html#update": [
           "collect",
           "collection#upd",
@@ -279,6 +288,16 @@
           "promise.&lt;(array.&lt;object&gt;|error)&gt",
           "queri",
           "updat"
+        ],
+        "Collection.html#updateById": [
+          "collection#updatebyid",
+          "document",
+          "function",
+          "id",
+          "match",
+          "promise.&lt;(object|error)&gt",
+          "updat",
+          "updatebyid"
         ],
         "Collection.html#clear": [
           "clear",
@@ -483,7 +502,7 @@
           "trustdb#configureset"
         ]
       },
-      "length": 42
+      "length": 44
     },
     "tokenStore": {
       "root": {
@@ -738,6 +757,10 @@
                   "Collection.html#findOne": {
                     "ref": "Collection.html#findOne",
                     "tf": 5.555555555555555
+                  },
+                  "Collection.html#findById": {
+                    "ref": "Collection.html#findById",
+                    "tf": 12.5
                   }
                 },
                 "o": {
@@ -747,6 +770,23 @@
                       "Collection.html#findOne": {
                         "ref": "Collection.html#findOne",
                         "tf": 683.3333333333334
+                      }
+                    }
+                  }
+                },
+                "b": {
+                  "docs": {},
+                  "y": {
+                    "docs": {},
+                    "i": {
+                      "docs": {},
+                      "d": {
+                        "docs": {
+                          "Collection.html#findById": {
+                            "ref": "Collection.html#findById",
+                            "tf": 683.3333333333334
+                          }
+                        }
                       }
                     }
                   }
@@ -768,10 +808,6 @@
                       "docs": {},
                       "n": {
                         "docs": {
-                          "Result.html#defaultSort": {
-                            "ref": "Result.html#defaultSort",
-                            "tf": 110
-                          },
                           "Result.html#simpleSort": {
                             "ref": "Result.html#simpleSort",
                             "tf": 110
@@ -800,6 +836,10 @@
                             "ref": "Collection.html#findOne",
                             "tf": 115.55555555555556
                           },
+                          "Collection.html#findById": {
+                            "ref": "Collection.html#findById",
+                            "tf": 110
+                          },
                           "Collection.html#removeExact": {
                             "ref": "Collection.html#removeExact",
                             "tf": 110
@@ -812,9 +852,17 @@
                             "ref": "Collection.html#removeOne",
                             "tf": 115.55555555555556
                           },
+                          "Collection.html#removeById": {
+                            "ref": "Collection.html#removeById",
+                            "tf": 110
+                          },
                           "Collection.html#update": {
                             "ref": "Collection.html#update",
                             "tf": 115.55555555555556
+                          },
+                          "Collection.html#updateById": {
+                            "ref": "Collection.html#updateById",
+                            "tf": 110
                           },
                           "Collection.html#clear": {
                             "ref": "Collection.html#clear",
@@ -1018,6 +1066,22 @@
               }
             }
           },
+          "d": {
+            "docs": {
+              "Collection.html#findById": {
+                "ref": "Collection.html#findById",
+                "tf": 45.83333333333333
+              },
+              "Collection.html#removeById": {
+                "ref": "Collection.html#removeById",
+                "tf": 45.83333333333333
+              },
+              "Collection.html#updateById": {
+                "ref": "Collection.html#updateById",
+                "tf": 37.5
+              }
+            }
+          },
           "m": {
             "docs": {},
             "p": {
@@ -1057,41 +1121,6 @@
                     }
                   },
                   "docs": {}
-                }
-              }
-            }
-          },
-          "a": {
-            "docs": {},
-            "v": {
-              "docs": {},
-              "a": {
-                "docs": {},
-                "s": {
-                  "docs": {},
-                  "c": {
-                    "docs": {},
-                    "r": {
-                      "docs": {},
-                      "i": {
-                        "docs": {},
-                        "p": {
-                          "docs": {},
-                          "t": {
-                            "docs": {},
-                            "'": {
-                              "docs": {
-                                "Result.html#defaultSort": {
-                                  "ref": "Result.html#defaultSort",
-                                  "tf": 8.333333333333332
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -1140,10 +1169,6 @@
                         "ref": "Result.html#originalDocuments",
                         "tf": 10
                       },
-                      "Result.html#defaultSort": {
-                        "ref": "Result.html#defaultSort",
-                        "tf": 8.333333333333332
-                      },
                       "Result.html#simpleSort": {
                         "ref": "Result.html#simpleSort",
                         "tf": 2.7777777777777777
@@ -1170,41 +1195,6 @@
                                 "Result.html#documents": {
                                   "ref": "Result.html#documents",
                                   "tf": 1150
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "e": {
-                          "docs": {},
-                          "f": {
-                            "docs": {},
-                            "a": {
-                              "docs": {},
-                              "u": {
-                                "docs": {},
-                                "l": {
-                                  "docs": {},
-                                  "t": {
-                                    "docs": {},
-                                    "s": {
-                                      "docs": {},
-                                      "o": {
-                                        "docs": {},
-                                        "r": {
-                                          "docs": {},
-                                          "t": {
-                                            "docs": {
-                                              "Result.html#defaultSort": {
-                                                "ref": "Result.html#defaultSort",
-                                                "tf": 1150
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
                                 }
                               }
                             }
@@ -1380,6 +1370,10 @@
                     "Collection.html#removeOne": {
                       "ref": "Collection.html#removeOne",
                       "tf": 5.555555555555555
+                    },
+                    "Collection.html#removeById": {
+                      "ref": "Collection.html#removeById",
+                      "tf": 12.5
                     }
                   },
                   "e": {
@@ -1411,6 +1405,23 @@
                           "Collection.html#removeOne": {
                             "ref": "Collection.html#removeOne",
                             "tf": 683.3333333333334
+                          }
+                        }
+                      }
+                    },
+                    "b": {
+                      "docs": {},
+                      "y": {
+                        "docs": {},
+                        "i": {
+                          "docs": {},
+                          "d": {
+                            "docs": {
+                              "Collection.html#removeById": {
+                                "ref": "Collection.html#removeById",
+                                "tf": 683.3333333333334
+                              }
+                            }
                           }
                         }
                       }
@@ -2068,6 +2079,10 @@
                             "ref": "Collection.html#findOne",
                             "tf": 5.555555555555555
                           },
+                          "Collection.html#findById": {
+                            "ref": "Collection.html#findById",
+                            "tf": 12.5
+                          },
                           "Collection.html#removeExact": {
                             "ref": "Collection.html#removeExact",
                             "tf": 16.666666666666664
@@ -2080,9 +2095,17 @@
                             "ref": "Collection.html#removeOne",
                             "tf": 5.555555555555555
                           },
+                          "Collection.html#removeById": {
+                            "ref": "Collection.html#removeById",
+                            "tf": 12.5
+                          },
                           "Collection.html#update": {
                             "ref": "Collection.html#update",
                             "tf": 5.555555555555555
+                          },
+                          "Collection.html#updateById": {
+                            "ref": "Collection.html#updateById",
+                            "tf": 12.5
                           },
                           "Collection.html#clear": {
                             "ref": "Collection.html#clear",
@@ -2100,53 +2123,79 @@
               }
             }
           },
-          "e": {
+          "a": {
             "docs": {},
-            "f": {
+            "t": {
               "docs": {},
+              "e": {
+                "docs": {
+                  "Result.html#simpleSort": {
+                    "ref": "Result.html#simpleSort",
+                    "tf": 2.7777777777777777
+                  }
+                }
+              },
               "a": {
                 "docs": {},
-                "u": {
+                "b": {
                   "docs": {},
-                  "l": {
+                  "a": {
                     "docs": {},
-                    "t": {
+                    "s": {
                       "docs": {
-                        "Result.html#defaultSort": {
-                          "ref": "Result.html#defaultSort",
-                          "tf": 8.333333333333332
-                        }
-                      },
-                      "s": {
-                        "docs": {},
-                        "o": {
-                          "docs": {},
-                          "r": {
-                            "docs": {},
-                            "t": {
-                              "docs": {
-                                "Result.html#defaultSort": {
-                                  "ref": "Result.html#defaultSort",
-                                  "tf": 700
-                                }
-                              }
-                            }
-                          }
+                        "TrustDB.html#collections": {
+                          "ref": "TrustDB.html#collections",
+                          "tf": 25
+                        },
+                        "TrustDB.html#size": {
+                          "ref": "TrustDB.html#size",
+                          "tf": 16.666666666666664
+                        },
+                        "TrustDB.html#connect": {
+                          "ref": "TrustDB.html#connect",
+                          "tf": 2.631578947368421
+                        },
+                        "TrustDB.html#createCollection": {
+                          "ref": "TrustDB.html#createCollection",
+                          "tf": 2.272727272727273
+                        },
+                        "TrustDB.html#addCollection": {
+                          "ref": "TrustDB.html#addCollection",
+                          "tf": 3.225806451612903
+                        },
+                        "TrustDB.html#saveDatabase": {
+                          "ref": "TrustDB.html#saveDatabase",
+                          "tf": 7.142857142857142
+                        },
+                        "TrustDB.html#save": {
+                          "ref": "TrustDB.html#save",
+                          "tf": 7.142857142857142
+                        },
+                        "TrustDB.html#deleteDatabase": {
+                          "ref": "TrustDB.html#deleteDatabase",
+                          "tf": 12.5
+                        },
+                        "TrustDB.html#moveDatabase": {
+                          "ref": "TrustDB.html#moveDatabase",
+                          "tf": 10
+                        },
+                        "TrustDB.html#clear": {
+                          "ref": "TrustDB.html#clear",
+                          "tf": 12.5
                         }
                       }
                     }
                   }
                 }
               }
-            },
+            }
+          },
+          "e": {
+            "docs": {},
             "s": {
               "docs": {},
               "c": {
                 "docs": {
-                  "Result.html#defaultSort": {
-                    "ref": "Result.html#defaultSort",
-                    "tf": 50
-                  },
                   "Result.html#simpleSort": {
                     "ref": "Result.html#simpleSort",
                     "tf": 33.33333333333333
@@ -2228,73 +2277,6 @@
                               }
                             }
                           }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "a": {
-            "docs": {},
-            "t": {
-              "docs": {},
-              "e": {
-                "docs": {
-                  "Result.html#simpleSort": {
-                    "ref": "Result.html#simpleSort",
-                    "tf": 2.7777777777777777
-                  }
-                }
-              },
-              "a": {
-                "docs": {},
-                "b": {
-                  "docs": {},
-                  "a": {
-                    "docs": {},
-                    "s": {
-                      "docs": {
-                        "TrustDB.html#collections": {
-                          "ref": "TrustDB.html#collections",
-                          "tf": 25
-                        },
-                        "TrustDB.html#size": {
-                          "ref": "TrustDB.html#size",
-                          "tf": 16.666666666666664
-                        },
-                        "TrustDB.html#connect": {
-                          "ref": "TrustDB.html#connect",
-                          "tf": 2.631578947368421
-                        },
-                        "TrustDB.html#createCollection": {
-                          "ref": "TrustDB.html#createCollection",
-                          "tf": 2.272727272727273
-                        },
-                        "TrustDB.html#addCollection": {
-                          "ref": "TrustDB.html#addCollection",
-                          "tf": 3.225806451612903
-                        },
-                        "TrustDB.html#saveDatabase": {
-                          "ref": "TrustDB.html#saveDatabase",
-                          "tf": 7.142857142857142
-                        },
-                        "TrustDB.html#save": {
-                          "ref": "TrustDB.html#save",
-                          "tf": 7.142857142857142
-                        },
-                        "TrustDB.html#deleteDatabase": {
-                          "ref": "TrustDB.html#deleteDatabase",
-                          "tf": 12.5
-                        },
-                        "TrustDB.html#moveDatabase": {
-                          "ref": "TrustDB.html#moveDatabase",
-                          "tf": 10
-                        },
-                        "TrustDB.html#clear": {
-                          "ref": "TrustDB.html#clear",
-                          "tf": 12.5
                         }
                       }
                     }
@@ -2781,6 +2763,23 @@
                                             }
                                           }
                                         }
+                                      },
+                                      "b": {
+                                        "docs": {},
+                                        "y": {
+                                          "docs": {},
+                                          "i": {
+                                            "docs": {},
+                                            "d": {
+                                              "docs": {
+                                                "Collection.html#findById": {
+                                                  "ref": "Collection.html#findById",
+                                                  "tf": 1150
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
                                       }
                                     }
                                   }
@@ -2904,6 +2903,23 @@
                                                 }
                                               }
                                             }
+                                          },
+                                          "b": {
+                                            "docs": {},
+                                            "y": {
+                                              "docs": {},
+                                              "i": {
+                                                "docs": {},
+                                                "d": {
+                                                  "docs": {
+                                                    "Collection.html#removeById": {
+                                                      "ref": "Collection.html#removeById",
+                                                      "tf": 1150
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
                                           }
                                         }
                                       }
@@ -2920,6 +2936,32 @@
                                       "Collection.html#update": {
                                         "ref": "Collection.html#update",
                                         "tf": 1150
+                                      }
+                                    },
+                                    "a": {
+                                      "docs": {},
+                                      "t": {
+                                        "docs": {},
+                                        "e": {
+                                          "docs": {},
+                                          "b": {
+                                            "docs": {},
+                                            "y": {
+                                              "docs": {},
+                                              "i": {
+                                                "docs": {},
+                                                "d": {
+                                                  "docs": {
+                                                    "Collection.html#updateById": {
+                                                      "ref": "Collection.html#updateById",
+                                                      "tf": 1150
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
                                       }
                                     }
                                   }
@@ -3143,32 +3185,6 @@
                     "Result.html#documents": {
                       "ref": "Result.html#documents",
                       "tf": 8.333333333333332
-                    }
-                  }
-                }
-              }
-            },
-            "g": {
-              "docs": {},
-              "o": {
-                "docs": {},
-                "r": {
-                  "docs": {},
-                  "i": {
-                    "docs": {},
-                    "t": {
-                      "docs": {},
-                      "h": {
-                        "docs": {},
-                        "m": {
-                          "docs": {
-                            "Result.html#defaultSort": {
-                              "ref": "Result.html#defaultSort",
-                              "tf": 8.333333333333332
-                            }
-                          }
-                        }
-                      }
                     }
                   }
                 }
@@ -3457,6 +3473,10 @@
                       "ref": "Collection.html#findOne",
                       "tf": 5.555555555555555
                     },
+                    "Collection.html#findById": {
+                      "ref": "Collection.html#findById",
+                      "tf": 12.5
+                    },
                     "Collection.html#removeExact": {
                       "ref": "Collection.html#removeExact",
                       "tf": 8.333333333333332
@@ -3469,9 +3489,17 @@
                       "ref": "Collection.html#removeOne",
                       "tf": 5.555555555555555
                     },
+                    "Collection.html#removeById": {
+                      "ref": "Collection.html#removeById",
+                      "tf": 12.5
+                    },
                     "Collection.html#update": {
                       "ref": "Collection.html#update",
                       "tf": 5.555555555555555
+                    },
+                    "Collection.html#updateById": {
+                      "ref": "Collection.html#updateById",
+                      "tf": 12.5
                     }
                   }
                 }
@@ -3855,6 +3883,18 @@
                                                                     "Collection.html#findOne": {
                                                                       "ref": "Collection.html#findOne",
                                                                       "tf": 33.33333333333333
+                                                                    },
+                                                                    "Collection.html#findById": {
+                                                                      "ref": "Collection.html#findById",
+                                                                      "tf": 33.33333333333333
+                                                                    },
+                                                                    "Collection.html#removeById": {
+                                                                      "ref": "Collection.html#removeById",
+                                                                      "tf": 33.33333333333333
+                                                                    },
+                                                                    "Collection.html#updateById": {
+                                                                      "ref": "Collection.html#updateById",
+                                                                      "tf": 25
                                                                     }
                                                                   }
                                                                 }
@@ -4287,284 +4327,25 @@
                     "Collection.html#update": {
                       "ref": "Collection.html#update",
                       "tf": 705.5555555555555
+                    },
+                    "Collection.html#updateById": {
+                      "ref": "Collection.html#updateById",
+                      "tf": 37.5
                     }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "s": {
-          "docs": {},
-          "o": {
-            "docs": {},
-            "r": {
-              "docs": {},
-              "t": {
-                "docs": {
-                  "Result.html#defaultSort": {
-                    "ref": "Result.html#defaultSort",
-                    "tf": 16.666666666666664
                   },
-                  "Result.html#simpleSort": {
-                    "ref": "Result.html#simpleSort",
-                    "tf": 5.555555555555555
-                  },
-                  "Result.html#sort": {
-                    "ref": "Result.html#sort",
-                    "tf": 716.6666666666666
-                  }
-                },
-                "f": {
-                  "docs": {},
-                  "n": {
-                    "docs": {
-                      "Result.html#sort": {
-                        "ref": "Result.html#sort",
-                        "tf": 50
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "m": {
-              "docs": {},
-              "e": {
-                "docs": {},
-                "t": {
-                  "docs": {},
-                  "h": {
-                    "docs": {
-                      "Result.html#simpleSort": {
-                        "ref": "Result.html#simpleSort",
-                        "tf": 2.7777777777777777
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "i": {
-            "docs": {},
-            "m": {
-              "docs": {},
-              "i": {
-                "docs": {},
-                "l": {
-                  "docs": {},
-                  "a": {
-                    "docs": {},
-                    "r": {
-                      "docs": {
-                        "Result.html#simpleSort": {
-                          "ref": "Result.html#simpleSort",
-                          "tf": 2.7777777777777777
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "p": {
-                "docs": {},
-                "l": {
-                  "docs": {},
                   "e": {
                     "docs": {},
-                    "s": {
+                    "b": {
                       "docs": {},
-                      "o": {
+                      "y": {
                         "docs": {},
-                        "r": {
+                        "i": {
                           "docs": {},
-                          "t": {
+                          "d": {
                             "docs": {
-                              "Result.html#simpleSort": {
-                                "ref": "Result.html#simpleSort",
-                                "tf": 683.3333333333334
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "z": {
-              "docs": {},
-              "e": {
-                "docs": {
-                  "Collection.html#size": {
-                    "ref": "Collection.html#size",
-                    "tf": 750
-                  },
-                  "TrustDB.html#size": {
-                    "ref": "TrustDB.html#size",
-                    "tf": 750
-                  }
-                }
-              }
-            },
-            "n": {
-              "docs": {},
-              "g": {
-                "docs": {},
-                "l": {
-                  "docs": {
-                    "Collection.html#insertOne": {
-                      "ref": "Collection.html#insertOne",
-                      "tf": 12.5
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "p": {
-            "docs": {},
-            "e": {
-              "docs": {},
-              "c": {
-                "docs": {},
-                "i": {
-                  "docs": {},
-                  "f": {
-                    "docs": {
-                      "Result.html#simpleSort": {
-                        "ref": "Result.html#simpleSort",
-                        "tf": 2.7777777777777777
-                      }
-                    },
-                    "i": {
-                      "docs": {
-                        "TrustDB.html#saveDatabase": {
-                          "ref": "TrustDB.html#saveDatabase",
-                          "tf": 7.142857142857142
-                        },
-                        "TrustDB.html#save": {
-                          "ref": "TrustDB.html#save",
-                          "tf": 7.142857142857142
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "t": {
-            "docs": {},
-            "r": {
-              "docs": {},
-              "i": {
-                "docs": {},
-                "n": {
-                  "docs": {},
-                  "g": {
-                    "docs": {
-                      "Result.html#simpleSort": {
-                        "ref": "Result.html#simpleSort",
-                        "tf": 2.7777777777777777
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "a": {
-              "docs": {},
-              "t": {
-                "docs": {},
-                "e": {
-                  "docs": {
-                    "TrustDB.html#autosave": {
-                      "ref": "TrustDB.html#autosave",
-                      "tf": 16.666666666666664
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "e": {
-            "docs": {},
-            "t": {
-              "docs": {
-                "TrustDB.html#autosaveInterval": {
-                  "ref": "TrustDB.html#autosaveInterval",
-                  "tf": 12.5
-                },
-                "TrustDB.html#connect": {
-                  "ref": "TrustDB.html#connect",
-                  "tf": 32.89473684210526
-                },
-                "TrustDB.html#saveDatabase": {
-                  "ref": "TrustDB.html#saveDatabase",
-                  "tf": 7.142857142857142
-                },
-                "TrustDB.html#save": {
-                  "ref": "TrustDB.html#save",
-                  "tf": 7.142857142857142
-                },
-                "TrustDB.html#configureSettings": {
-                  "ref": "TrustDB.html#configureSettings",
-                  "tf": 66.66666666666666
-                }
-              }
-            }
-          },
-          "a": {
-            "docs": {},
-            "m": {
-              "docs": {},
-              "e": {
-                "docs": {
-                  "TrustDB.html#createCollection": {
-                    "ref": "TrustDB.html#createCollection",
-                    "tf": 4.545454545454546
-                  },
-                  "TrustDB.html#addCollection": {
-                    "ref": "TrustDB.html#addCollection",
-                    "tf": 3.225806451612903
-                  }
-                }
-              }
-            },
-            "v": {
-              "docs": {},
-              "e": {
-                "docs": {
-                  "TrustDB.html#saveDatabase": {
-                    "ref": "TrustDB.html#saveDatabase",
-                    "tf": 7.142857142857142
-                  },
-                  "TrustDB.html#save": {
-                    "ref": "TrustDB.html#save",
-                    "tf": 707.1428571428571
-                  }
-                },
-                "d": {
-                  "docs": {},
-                  "a": {
-                    "docs": {},
-                    "t": {
-                      "docs": {},
-                      "a": {
-                        "docs": {},
-                        "b": {
-                          "docs": {},
-                          "a": {
-                            "docs": {},
-                            "s": {
-                              "docs": {
-                                "TrustDB.html#saveDatabase": {
-                                  "ref": "TrustDB.html#saveDatabase",
-                                  "tf": 700
-                                }
+                              "Collection.html#updateById": {
+                                "ref": "Collection.html#updateById",
+                                "tf": 675
                               }
                             }
                           }
@@ -4806,6 +4587,285 @@
             }
           }
         },
+        "s": {
+          "docs": {},
+          "i": {
+            "docs": {},
+            "m": {
+              "docs": {},
+              "i": {
+                "docs": {},
+                "l": {
+                  "docs": {},
+                  "a": {
+                    "docs": {},
+                    "r": {
+                      "docs": {
+                        "Result.html#simpleSort": {
+                          "ref": "Result.html#simpleSort",
+                          "tf": 2.7777777777777777
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "p": {
+                "docs": {},
+                "l": {
+                  "docs": {},
+                  "e": {
+                    "docs": {},
+                    "s": {
+                      "docs": {},
+                      "o": {
+                        "docs": {},
+                        "r": {
+                          "docs": {},
+                          "t": {
+                            "docs": {
+                              "Result.html#simpleSort": {
+                                "ref": "Result.html#simpleSort",
+                                "tf": 683.3333333333334
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "z": {
+              "docs": {},
+              "e": {
+                "docs": {
+                  "Collection.html#size": {
+                    "ref": "Collection.html#size",
+                    "tf": 750
+                  },
+                  "TrustDB.html#size": {
+                    "ref": "TrustDB.html#size",
+                    "tf": 750
+                  }
+                }
+              }
+            },
+            "n": {
+              "docs": {},
+              "g": {
+                "docs": {},
+                "l": {
+                  "docs": {
+                    "Collection.html#insertOne": {
+                      "ref": "Collection.html#insertOne",
+                      "tf": 12.5
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "o": {
+            "docs": {},
+            "m": {
+              "docs": {},
+              "e": {
+                "docs": {},
+                "t": {
+                  "docs": {},
+                  "h": {
+                    "docs": {
+                      "Result.html#simpleSort": {
+                        "ref": "Result.html#simpleSort",
+                        "tf": 2.7777777777777777
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "r": {
+              "docs": {},
+              "t": {
+                "docs": {
+                  "Result.html#simpleSort": {
+                    "ref": "Result.html#simpleSort",
+                    "tf": 5.555555555555555
+                  },
+                  "Result.html#sort": {
+                    "ref": "Result.html#sort",
+                    "tf": 716.6666666666666
+                  }
+                },
+                "f": {
+                  "docs": {},
+                  "n": {
+                    "docs": {
+                      "Result.html#sort": {
+                        "ref": "Result.html#sort",
+                        "tf": 50
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "p": {
+            "docs": {},
+            "e": {
+              "docs": {},
+              "c": {
+                "docs": {},
+                "i": {
+                  "docs": {},
+                  "f": {
+                    "docs": {
+                      "Result.html#simpleSort": {
+                        "ref": "Result.html#simpleSort",
+                        "tf": 2.7777777777777777
+                      }
+                    },
+                    "i": {
+                      "docs": {
+                        "TrustDB.html#saveDatabase": {
+                          "ref": "TrustDB.html#saveDatabase",
+                          "tf": 7.142857142857142
+                        },
+                        "TrustDB.html#save": {
+                          "ref": "TrustDB.html#save",
+                          "tf": 7.142857142857142
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "t": {
+            "docs": {},
+            "r": {
+              "docs": {},
+              "i": {
+                "docs": {},
+                "n": {
+                  "docs": {},
+                  "g": {
+                    "docs": {
+                      "Result.html#simpleSort": {
+                        "ref": "Result.html#simpleSort",
+                        "tf": 2.7777777777777777
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "a": {
+              "docs": {},
+              "t": {
+                "docs": {},
+                "e": {
+                  "docs": {
+                    "TrustDB.html#autosave": {
+                      "ref": "TrustDB.html#autosave",
+                      "tf": 16.666666666666664
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "e": {
+            "docs": {},
+            "t": {
+              "docs": {
+                "TrustDB.html#autosaveInterval": {
+                  "ref": "TrustDB.html#autosaveInterval",
+                  "tf": 12.5
+                },
+                "TrustDB.html#connect": {
+                  "ref": "TrustDB.html#connect",
+                  "tf": 32.89473684210526
+                },
+                "TrustDB.html#saveDatabase": {
+                  "ref": "TrustDB.html#saveDatabase",
+                  "tf": 7.142857142857142
+                },
+                "TrustDB.html#save": {
+                  "ref": "TrustDB.html#save",
+                  "tf": 7.142857142857142
+                },
+                "TrustDB.html#configureSettings": {
+                  "ref": "TrustDB.html#configureSettings",
+                  "tf": 66.66666666666666
+                }
+              }
+            }
+          },
+          "a": {
+            "docs": {},
+            "m": {
+              "docs": {},
+              "e": {
+                "docs": {
+                  "TrustDB.html#createCollection": {
+                    "ref": "TrustDB.html#createCollection",
+                    "tf": 4.545454545454546
+                  },
+                  "TrustDB.html#addCollection": {
+                    "ref": "TrustDB.html#addCollection",
+                    "tf": 3.225806451612903
+                  }
+                }
+              }
+            },
+            "v": {
+              "docs": {},
+              "e": {
+                "docs": {
+                  "TrustDB.html#saveDatabase": {
+                    "ref": "TrustDB.html#saveDatabase",
+                    "tf": 7.142857142857142
+                  },
+                  "TrustDB.html#save": {
+                    "ref": "TrustDB.html#save",
+                    "tf": 707.1428571428571
+                  }
+                },
+                "d": {
+                  "docs": {},
+                  "a": {
+                    "docs": {},
+                    "t": {
+                      "docs": {},
+                      "a": {
+                        "docs": {},
+                        "b": {
+                          "docs": {},
+                          "a": {
+                            "docs": {},
+                            "s": {
+                              "docs": {
+                                "TrustDB.html#saveDatabase": {
+                                  "ref": "TrustDB.html#saveDatabase",
+                                  "tf": 700
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "v": {
           "docs": {},
           "a": {
@@ -4845,13 +4905,12 @@
           }
         }
       },
-      "length": 380
+      "length": 395
     },
     "corpusTokens": [
       "ad",
       "add",
       "addcollect",
-      "algorithm",
       "alreadi",
       "alter",
       "amount",
@@ -4868,6 +4927,7 @@
       "collection#clear",
       "collection#docu",
       "collection#find",
+      "collection#findbyid",
       "collection#findon",
       "collection#firstdocu",
       "collection#insert",
@@ -4875,10 +4935,12 @@
       "collection#lastdocu",
       "collection#nam",
       "collection#remov",
+      "collection#removebyid",
       "collection#removeexact",
       "collection#removeon",
       "collection#s",
       "collection#upd",
+      "collection#updatebyid",
       "configur",
       "configureset",
       "connect",
@@ -4888,8 +4950,6 @@
       "custom",
       "databas",
       "date",
-      "default",
-      "defaultsort",
       "delet",
       "deletecollect",
       "deletedatabas",
@@ -4907,6 +4967,7 @@
       "filesystem",
       "filter",
       "find",
+      "findbyid",
       "findon",
       "first",
       "firstdocu",
@@ -4918,13 +4979,13 @@
       "global",
       "handlebar",
       "i.",
+      "id",
       "import",
       "index",
       "insert",
       "inserton",
       "instanc",
       "interv",
-      "javascript'",
       "jsdoc3",
       "last",
       "lastdocu",
@@ -4961,10 +5022,10 @@
       "readm",
       "reliabl",
       "remov",
+      "removebyid",
       "removeexact",
       "removeon",
       "result",
-      "result#defaultsort",
       "result#docu",
       "result#limit",
       "result#originaldocu",
@@ -5011,6 +5072,7 @@
       "unalt",
       "unless",
       "updat",
+      "updatebyid",
       "us",
       "valu",
       "work"
@@ -5085,16 +5147,6 @@
       "tags": "Result#originalDocuments originalDocuments",
       "summary": "",
       "description": "Get the unaltered results, i.e. filtered documents."
-    },
-    "Result.html#defaultSort": {
-      "id": "Result.html#defaultSort",
-      "kind": "function",
-      "title": "defaultSort( [ desc ] ) → {this}",
-      "longname": "Result#defaultSort",
-      "name": "defaultSort",
-      "tags": "Result#defaultSort defaultSort",
-      "summary": "",
-      "description": "Sort the results JavaScript's default sorting algorithm."
     },
     "Result.html#simpleSort": {
       "id": "Result.html#simpleSort",
@@ -5227,6 +5279,16 @@
       "summary": "",
       "description": "Find the first document in the collection that matches the query or passes the filter function."
     },
+    "Collection.html#findById": {
+      "id": "Collection.html#findById",
+      "kind": "function",
+      "title": "findById( id ) → {Promise.&lt;(object|Error)&gt;}",
+      "longname": "Collection#findById",
+      "name": "findById",
+      "tags": "Collection#findById findById",
+      "summary": "",
+      "description": "Find the document with the matching ID."
+    },
     "Collection.html#removeExact": {
       "id": "Collection.html#removeExact",
       "kind": "function",
@@ -5257,6 +5319,16 @@
       "summary": "",
       "description": "Remove the first document in the collection that matches the query or passes the filter function."
     },
+    "Collection.html#removeById": {
+      "id": "Collection.html#removeById",
+      "kind": "function",
+      "title": "removeById( id ) → {Promise.&lt;(object|Error)&gt;}",
+      "longname": "Collection#removeById",
+      "name": "removeById",
+      "tags": "Collection#removeById removeById",
+      "summary": "",
+      "description": "Remove the document with the matching ID."
+    },
     "Collection.html#update": {
       "id": "Collection.html#update",
       "kind": "function",
@@ -5266,6 +5338,16 @@
       "tags": "Collection#update update",
       "summary": "",
       "description": "Update all documents in the collection that match the query or pass the custom filter function."
+    },
+    "Collection.html#updateById": {
+      "id": "Collection.html#updateById",
+      "kind": "function",
+      "title": "updateById( id, updater ) → {Promise.&lt;(object|Error)&gt;}",
+      "longname": "Collection#updateById",
+      "name": "updateById",
+      "tags": "Collection#updateById updateById",
+      "summary": "",
+      "description": "Update the document with the matching ID."
     },
     "Collection.html#clear": {
       "id": "Collection.html#clear",

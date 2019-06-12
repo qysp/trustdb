@@ -29,6 +29,10 @@ const repoCollection = await db.createCollection('repoCollection');
 ```
 
 Optional: add event listeners for events like `autosave`, `insert`, `find`, `remove` or `update`.
+
+The first parameter for collection events will always be an array of altered or returned documents, no matter which method was used.
+
+Both synchronous as well as asynchronous events are allowed.
 ```js
 // Parameter `err` will be undefined on success.
 db.on('autosave', err => {
@@ -37,23 +41,15 @@ db.on('autosave', err => {
   }
 });
 
-// Asynchronous events are allowed too!
 repoCollection.on('insert', async (insertedDocs, allDocs) => {
   console.log(`Number of documents in ${repoCollection.name} after insert: ${allDocs.length}`);
   await db.save();
 });
 
-// Parameter `filteredDocs` will always be an array, even if the `findOne()` method has been used.
-// Parameter `filter` could be a filter function or a query object.
-repoCollection.on('find', (filter, filteredDocs, allDocs) => {
-  // Assuming the variable `cache` has been defined as an array somewhere.
-  cache.push({
-    filter: filter,
-    results: results,
-  });
+repoCollection.on('find', (foundDocs, allDocs) => {
+  console.log(`Number of documents found from ${repoCollection.name}: ${foundDocs.length}`);
 });
 
-// Parameter `removedDocs` will always be an array, even if the `removeOne()` method has been used.
 repoCollection.on('remove', async (removedDocs, allDocs) => {
   console.log(`Number of documents removed from ${repoCollection.name}: ${removedDocs.length}`);
   await db.save();
@@ -95,12 +91,15 @@ await repoCollection.find(doc => /lightweight/.test(doc.description));
 
 await repoCollection.findOne({ title: { regExp: /js$/i } });
 await repoCollection.findOne(doc => /js$/i.test(doc.description));
+
+// Find a document using its ID.
+await repoCollection.findById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
 ```
 
 Sort your results.
 ```js
 // Note the second parameter is set to `true`.
-// It will return a `Results` instance you can do the orting on.
+// It will return a `Results` instance you can do the sorting on.
 await repoCollection.find({ title: { regExp: /js$/i } }, true)
   .then(result => {
     return result
@@ -120,13 +119,15 @@ await repoCollection.removeExact({
   description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
 });
 
-// Remove all documents that match the query or pass the custom filter function.
+// Use query objects or custom filter functions to find matching documents.
 await repoCollection.remove({ title: { re: /js$/i } });
 await repoCollection.remove(doc => doc.title.startsWith('trust'));
 
-// Remove the first document that matches the query or passes the custom filter function.
 await repoCollection.removeOne({ title: { re: /js$/i } });
 await repoCollection.removeOne(doc => doc.title.startsWith('trust'));
+
+// Remove a document using its ID.
+await repoCollection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
 ```
 
 Update documents.
@@ -148,6 +149,9 @@ await repoCollection.update(
   doc => /runtime/.test(doc.description),
   { tags: [ 'runtime' ] }
 );
+
+// Update a document using its ID.
+await repoCollection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
 ```
 
 ## Settings

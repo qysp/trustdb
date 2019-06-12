@@ -82,6 +82,16 @@ describe('Collection', function() {
     });
   });
 
+  describe('#findById()', function() {
+    it('should retrieve the document matching the ID', async function() {
+      const doc = await collection.findOne({ price: 20 });
+      const result = await collection.findById(doc.__id);
+
+      expect(collection.documents).to.have.length(4);
+      expect(result.price).to.equal(20);
+    });
+  });
+
   describe('#removeExact()', function() {
     it('should remove the first matching document', async function() {
       const removed = await collection.removeExact({ price: 40 }, true);
@@ -130,6 +140,16 @@ describe('Collection', function() {
     });
   });
 
+  describe('#removeById()', function() {
+    it('should remove the document matching the ID', async function() {
+      const doc = await collection.findOne({ price: 20 });
+      const removed = await collection.removeById(doc.__id);
+
+      expect(collection.documents).to.have.length(3);
+      expect(removed.price).to.equal(20);
+    });
+  });
+
   describe('#update()', function() {
     it('should update the all documents matching the query', async function() {  
       const updated = await collection.update(
@@ -151,6 +171,16 @@ describe('Collection', function() {
       expect(collection.documents).to.have.length(4);
       expect(updated).to.have.length(3);
       expect(updated.map(u => u.price)).to.only.contain(30);
+    });
+  });
+
+  describe('#updateById()', function() {
+    it('should update the document matching the ID', async function() {
+      const doc = await collection.findOne({ price: 20 });
+      const updated = await collection.updateById(doc.__id, { price: 25 });
+
+      expect(collection.documents).to.have.length(4);
+      expect(updated.price).to.equal(25);
     });
   });
 

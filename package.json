@@ -25,6 +25,9 @@
   ],
   "author": "qysp (qysp.yo@gmail.com)",
   "license": "MIT",
+  "dependencies": {
+    "uuid": "^3.3.2"
+  },
   "devDependencies": {
     "eslint": "^5.16.0",
     "expect.js": "^0.3.1",

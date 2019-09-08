@@ -109,33 +109,38 @@ class TrustDB extends EventEmitter {
    * @param {number} [settings.autosaveInterval] Interval for the autosave in milliseconds.
    * @param {boolean} [settings.restoreSettings] Whether it should restore settings from the loaded database, if it exists.
    * @param {boolean} [settings.overwriteExisting] Whether the existing database (same filepath) should be overwritten.
-   * @returns {Promise&lt;void | Error>} A Promise that resolves after everything is configured and set up.
+   * @returns {Promise&lt;void>} A Promise that resolves after everything is configured and set up.
    */
-  connect(filepath, settings = {}) {
-    return new Promise((resolve, reject) => {
-      if (typeof filepath !== 'string' || filepath.length === 0) {
-        return reject(new Error('Expected arameter `filepath` to be a string and at least one character long'));
-      }
-      if (!isPlainObject(settings)) {
-        return reject(new Error('Expected parameter `settings` to be a plain object'));
-      }
+  async connect(filepath, settings = {}) {
+    if (typeof filepath !== 'string' || filepath.length === 0) {
+      throw new Error('Expected arameter `filepath` to be a string and at least one character long');
+    }
+    if (!isPlainObject(settings)) {
+      throw new Error('Expected parameter `settings` to be a plain object');
+    }
 
-      this.filepath = filepath;
-      this.created = new Date().toISOString();
-      this._collections = [];
+    this._filepath = filepath;
+    this._created = new Date().toISOString();
+    this._collections = [];
 
-      this.settings = {};
-      this._autosave = false;
-      this._autosaveInterval = 4000;
-      this.autosaveHandler;
+    this._settings = {};
+    this._autosave = false;
+    this._autosaveInterval = 4000;
+    this._autosaveHandler;
 
-      if (settings.overwriteExisting !== true) {
-        this._restoreDatabase(settings).catch(reject);
-      }
+    let restoredSettings;
+    if (settings.overwriteExisting !== true) {
+      restoredSettings = await this._restoreDatabase();
+    }
 
-      this.configureSettings(this.settings);
-      resolve();
-    });
+    if (settings.restoreSettings &amp;&amp; isPlainObject(restoredSettings)) {
+      this._settings = {
+        ...restoredSettings,
+        ...settings,
+      };
+    }
+
+    this.configureSettings(this.settings);
   }
 
   /**
@@ -230,79 +235,57 @@ class TrustDB extends EventEmitter {
    * Save the database with its collections,
    * settings and metadata to the specified filepath.
    *
-   * @returns {Promise&lt;void | Error>} A Promise which resolves after saving the database.
+   * @returns {Promise&lt;void>} A Promise which resolves after saving the database.
    */
-  saveDatabase() {
+  async saveDatabase() {
     const exportedDb = this._exportDatabase();
-    return mkdirp(this.filepath).then(() => {
-      writeFile(this.filepath, exportedDb);
-    });
+    await mkdirp(this.filepath);
+    await writeFile(this.filepath, exportedDb);
   }
 
   /**
    * Delete the database from the filesystem, if it exists.
    *
-   * @returns {Promise&lt;void | Error>} A Promise which resolves after deleting the database.
+   * @returns {Promise&lt;void>} A Promise which resolves after deleting the database.
    */
-  deleteDatabase() {
-    return new Promise((resolve, reject) => {
-      stat(this.filepath)
-        .then((stats) => {
-          if (!stats.isFile()) {
-            reject(new Error('Database requested to delete is not a file'));
-          }
-        })
-        .then(() => unlink(this.filepath))
-        .then(resolve)
-        .catch((err) => {
-          if (err.code !== 'ENOENT') {
-            reject(err);
-          }
-          resolve();
-        });
-    });
+  async deleteDatabase() {
+    const stats = await stat(this.filepath);
+    if (!stats.isFile()) {
+      throw new Error('Database requested to delete is not a file');
+    }
+    await unlink(this.filepath);
   }
 
   /**
    * Move the database to the new path on the filesystem.
    *
    * @param {string} filepath New path for the database file.
-   * @returns {Promise&lt;void | Error>} A Promise which resolves after moving the database.
+   * @returns {Promise&lt;void>} A Promise which resolves after moving the database.
    */
-  moveDatabase(filepath) {
-    return new Promise((resolve, reject) => {
-      if (typeof filepath !== 'string' || filepath.length === 0) {
-        reject(new TypeError('Expected parameter `filepath` to be a string and at least one character long'));
-        return;
-      }
-      if (this.filepath === filepath) {
-        resolve();
-      }
+  async moveDatabase(filepath) {
+    if (typeof filepath !== 'string' || filepath.length === 0) {
+      throw new TypeError('Expected parameter `filepath` to be a string and at least one character long');
+    }
+    if (this.filepath === filepath) {
+      return;
+    }
 
-      stat(this.filepath)
-        .then((stats) => {
-          if (!stats.isFile()) {
-            reject(new Error('Database requested to move is not a file'));
-          }
-        })
-        .catch((err) => {
-          if (err.code !== 'ENOENT') {
-            reject(err);
-          }
-          // File does not exist so just change the filepath.
-          this.filepath = filepath;
-          resolve();
-        });
-
-      mkdirp(filepath)
-        .then(() => copyFile(this.filepath, filepath))
-        .then(() => unlink(this.filepath))
-        .then(() => {
-          this.filepath = filepath;
-          resolve();
-        })
-        .catch(reject);
+    const stats = await stat(this.filepath).catch((err) => {
+      if (err.code !== 'ENOENT') {
+        throw err;
+      }
+      // File does not exist so just change the filepath.
+      this._filepath = filepath;
     });
+
+    if (!stats.isFile()) {
+      throw new Error('Database requested to move is not a file');
+    }
+
+    await mkdirp(filepath);
+    await copyFile(this.filepath, filepath);
+    await unlink(this.filepath);
+    this._filepath = filepath;
   }
 
   /**
@@ -339,7 +322,7 @@ class TrustDB extends EventEmitter {
 
     if (this._autosave) {
       // In case the settings were reconfigured.
-      if (this.autosaveHandler !== undefined) {
+      if (this._autosaveHandler !== undefined) {
         this._disableAutosave();
       }
       this._enableAutosave();
@@ -347,6 +330,24 @@ class TrustDB extends EventEmitter {
   }
 
   // ---------------------------------- Getter and Setter ----------------------------------
+
+  /**
+   * Get the filepath of the database.
+   *
+   * @returns {string} Filepath of the database.
+   */
+  get filepath() {
+    return this._filepath;
+  }
+
+  /**
+   * Get the date and time of creation of the database.
+   *
+   * @returns {string} Date and time of creation.
+   */
+  get created() {
+    return this._created;
+  }
 
   /**
    * Get all collections of the database.
@@ -424,10 +425,10 @@ class TrustDB extends EventEmitter {
   _exportDatabase() {
     return JSON.stringify({
       filepath: this.filepath,
-      collections: this._collections.map((c) => c._export()),
+      collections: this.collections.map((c) => c._export()),
       settings: {
-        autosave: this._autosave,
-        autosaveInterval: this._autosaveInterval,
+        autosave: this.autosave,
+        autosaveInterval: this.autosaveInterval,
       },
       metadata: {
         created: this.created,
@@ -440,20 +441,15 @@ class TrustDB extends EventEmitter {
    * Load a database from a file and parse its content.
    *
    * @private
-   * @returns {Promise&lt;object | Error>} A Promise which resolves with the parsed database.
+   * @returns {Promise&lt;object>} A Promise which resolves with the parsed database.
    */
-  _loadDatabase() {
-    return new Promise((resolve, reject) => {
-      stat(this.filepath)
-        .then((stats) => {
-          if (!stats.isFile()) {
-            reject(new Error('Database requested to load is not a file'));
-          }
-        })
-        .then(() => readFile(this.filepath, { encoding: 'utf-8' }))
-        .then((content) => resolve(JSON.parse(content)))
-        .catch(reject);
-    });
+  async _loadDatabase() {
+    const stats = await stat(this.filepath);
+    if (!stats.isFile()) {
+      throw new Error('Database requested to load is not a file');
+    }
+    const content = await readFile(this.filepath, { encoding: 'utf-8' });
+    return JSON.parse(content);
   }
 
   /**
@@ -461,24 +457,21 @@ class TrustDB extends EventEmitter {
    *
    * @private
    * @param {object} db Database object.
-   * @param {boolean} restoreSettings Whether to restore the 'old' settings.
    */
-  _applyDatabase(db, restoreSettings) {
+  _applyDatabase(db) {
     if (hasOwnProperty(db, 'metadata') &amp;&amp; hasOwnProperty(db.metadata, 'created')) {
       this.created = db.metadata.created;
     }
 
-    // TODO: type checks
     if (Array.isArray(db.collections)) {
       this._collections = db.collections.map((c) => {
         const collection = new Collection(c.name);
-        collection._documents = c.documents;
+        if (c.documents.every(isPlainObject)) {
+          collection._documents = c.documents;
+        }
+        collection.created = c.created;
         return collection;
       });
-    }
-
-    if (restoreSettings === true) {
-      Object.assign(this.settings, db.settings);
     }
   }
 
@@ -486,26 +479,12 @@ class TrustDB extends EventEmitter {
    * Try to restore a database if it exists.
    *
    * @private
-   * @param {object} settings Settings related to the database.
+   * @returns {object} Settings of the restored database.
    */
-  _restoreDatabase(settings) {
-    return new Promise((resolve, reject) => {
-      this._loadDatabase()
-        .then((db) => {
-          this._applyDatabase(db, settings.restoreSettings);
-          resolve();
-        })
-        .catch((err) => {
-          // File exists but an error occured.
-          if (err.code !== 'ENOENT') {
-            reject(err);
-          }
-          resolve();
-        })
-        .finally(() => {
-          Object.assign(this.settings, settings);
-        });
-    });
+  async _restoreDatabase() {
+    const db = await this._loadDatabase();
+    this._applyDatabase(db);
+    return db.settings;
   }
 
   /**
@@ -515,11 +494,11 @@ class TrustDB extends EventEmitter {
    * @fires TrustDB#autosave After autosaving.
    */
   _enableAutosave() {
-    if (this.autosaveHandler !== undefined) {
+    if (this._autosaveHandler !== undefined) {
       return;
     }
 
-    this.autosaveHandler = setInterval(async () => {
+    this._autosaveHandler = setInterval(async () => {
       const result = await this.saveDatabase().catch((err) => err);
       this.emit('autosave', result);
     }, this._autosaveInterval);
@@ -531,9 +510,9 @@ class TrustDB extends EventEmitter {
    * @private
    */
   _disableAutosave() {
-    if (this.autosaveHandler !== undefined) {
-      clearInterval(this.autosaveHandler);
-      this.autosaveHandler = undefined;
+    if (this._autosaveHandler !== undefined) {
+      clearInterval(this._autosaveHandler);
+      this._autosaveHandler = undefined;
     }
   }
 }

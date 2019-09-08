@@ -8,6 +8,7 @@ describe('EventEmitter', function() {
   describe('#on() -> emit()', function() {
     it('should add a listener and emit it', function(done) {
       listener = emitter.on('test', done);
+      expect(emitter.events['test']).to.not.be.empty();
       emitter.emit('test');
     });
   });

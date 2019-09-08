@@ -95,6 +95,7 @@ class Collection extends EventEmitter {
 
     this._name = name;
     this._documents = [];
+    this._created = new Date().toISOString();
   }
 
   /**
@@ -500,6 +501,15 @@ class Collection extends EventEmitter {
   }
 
   /**
+   * Get the date and time of creation for this collection.
+   *
+   * @returns {string} Date and time of creation.
+   */
+  get created() {
+    return this._created;
+  }
+
+  /**
    * Get the first document of the collection.
    *
    * @returns {object} First document of the collection.
@@ -533,8 +543,9 @@ class Collection extends EventEmitter {
    */
   _export() {
     return {
-      name: this._name,
-      documents: this._documents,
+      name: this.name,
+      documents: this.documents,
+      created: this.created,
     };
   }
 }

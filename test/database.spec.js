@@ -62,9 +62,16 @@ describe('Database', function() {
 
       expect(db.autosave).to.be(true);
       expect(db.autosaveInterval).to.equal(999999);
-      expect(db.autosaveHandler).to.not.be(undefined);
+      expect(db._autosaveHandler).to.not.be(undefined);
       // Disable autosave again.
       db.configureSettings({ autosave: false });
     });
   });
+
+  describe('#saveDatabase()', function() {
+    it('should save the database', function(done) {
+      db.saveDatabase().then(done).catch(done);
+    });
+  });
+
 });

@@ -1,6 +1,6 @@
 {
   "name": "trustdb",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Promise-based, lightweight in-memory and persistent JavaScript/JSON database.",
   "main": "index.js",
   "scripts": {
@@ -20,8 +20,7 @@
     "json",
     "nosql",
     "javascript",
-    "lightweight",
-    "promise-based"
+    "lightweight"
   ],
   "author": "qysp (qysp.yo@gmail.com)",
   "license": "MIT",

@@ -74,7 +74,7 @@ const { promisify } = require('util');
 
 const Collection = require('./collection');
 const EventEmitter = require('./events');
-const { isPlainObject, mkdirp } = require('./helpers');
+const { isPlainObject, mkdirp, hasOwnProperty } = require('./helpers');
 
 // Promisify asynchronous functions
 const writeFile = promisify(fs.writeFile);
@@ -84,37 +84,40 @@ const unlink = promisify(fs.unlink);
 const stat = promisify(fs.stat);
 
 /**
- * Creates an TrustDB instance.
- * 
  * @extends EventEmitter
  * @borrows TrustDB#saveDatabase as TrustDB#save
  */
 class TrustDB extends EventEmitter {
+  /**
+   * Creates a TrustDB instance.
+   */
   constructor() {
     super();
     this._events = {
-      'autosave': [],
+      autosave: [],
     };
   }
 
   /**
-   * Create a connection to a new database. If the file in the `filepath` already exists,
-   * it will be loaded and the collections (and optionally the settings, too)
-   * will be applied to this instance, unless the setting `overwriteExisting` is set to true.
-   * 
-   * @param {string} filepath database filepath
-   * @param {object} [settings={}] database related optional settings
-   * @param {boolean} [settings.autosave] whether the database should be automatically saved
-   * @param {number} [settings.autosaveInterval] interval for the autosave in milliseconds
-   * @param {boolean} [settings.restoreSettings] whether TrustDB should restore settings from the loaded database (if it exists)
-   * @param {boolean} [settings.overwriteExisting] whether the existing database with the same filepath (if it exists) should be overwritten
-   * @returns {Promise&lt;void | Error>} a Promise that resolves after everything is configured and set up
+   * Create a connection to a new database. If the file already exists, it will
+   * be loaded and the collections (and optionally the settings, too) will be
+   * applied to this instance, unless the setting `overwriteExisting` is set to true.
+   *
+   * @param {string} filepath Filepath for the database.
+   * @param {object} [settings={}] Optional settings related to the database.
+   * @param {boolean} [settings.autosave] Whether the database should be automatically saved.
+   * @param {number} [settings.autosaveInterval] Interval for the autosave in milliseconds.
+   * @param {boolean} [settings.restoreSettings] Whether it should restore settings from the loaded database, if it exists.
+   * @param {boolean} [settings.overwriteExisting] Whether the existing database (same filepath) should be overwritten.
+   * @returns {Promise&lt;void | Error>} A Promise that resolves after everything is configured and set up.
    */
   connect(filepath, settings = {}) {
-    return new Promise(async (resolve, reject) => {
-      if (typeof filepath !== 'string' || filepath === '') {
-        reject(new Error('Parameter `filepath` must be a string and at least one character long'));
-        return;
+    return new Promise((resolve, reject) => {
+      if (typeof filepath !== 'string' || filepath.length === 0) {
+        return reject(new Error('Expected arameter `filepath` to be a string and at least one character long'));
+      }
+      if (!isPlainObject(settings)) {
+        return reject(new Error('Expected parameter `settings` to be a plain object'));
       }
 
       this.filepath = filepath;
@@ -127,7 +130,7 @@ class TrustDB extends EventEmitter {
       this.autosaveHandler;
 
       if (settings.overwriteExisting !== true) {
-        await this._restoreDatabase(settings).catch(reject);
+        this._restoreDatabase(settings).catch(reject);
       }
 
       this.configureSettings(this.settings);
@@ -138,144 +141,120 @@ class TrustDB extends EventEmitter {
   /**
    * Create a collection with the given name. Returns an existing collection
    * in case a collection with the same name already eixists in this database.
-   * 
+   *
    * Use {@link TrustDB#deleteCollection} before creating or adding a collection with the same name.
-   * 
-   * @param {string} name name of the collection
-   * @returns {Promise&lt;Collection | Error>} a Promise with the created collection or exisiting collection with the same name
+   *
+   * @param {string} name Name of the collection.
+   * @returns {Collection} Newly created collection or exisiting collection with the same name.
    */
   createCollection(name) {
-    return new Promise((resolve, reject) => {
-      if (typeof name !== 'string' || name === '') {
-        reject(new TypeError('Parameter `name` must be a string and at least one character long'));
-        return;
-      }
+    if (typeof name !== 'string' || name.length === 0) {
+      throw new TypeError('Expected parameter `name` to be a string and at least one character long');
+    }
 
-      let collection = this._collections.find(c => c.name === name);
-      if (collection === undefined) {
-        collection = new Collection(name);
-        this._collections.push(collection);
-      }
+    let collection = this._collections.find((c) => c.name === name);
+    if (collection === undefined) {
+      collection = new Collection(name);
+      this._collections.push(collection);
+    }
 
-      resolve(collection);
-    });
+    return collection;
   }
 
   /**
-   * IMPORTANT: This function does **not** create a new collection. Use {@link TrustDB#createCollection} to create a new collection.
-   * 
+   * IMPORTANT: This function does **not** create a new collection.
+   * Use {@link TrustDB#createCollection} to create a new collection.
+   *
    * Add a collection to the database. Returns an existing collection
    * in case a collection with the same name already eixists in this database.
-   * 
+   *
    * Use {@link TrustDB#deleteCollection} before creating or adding a collection with the same name.
-   * 
-   * @param {Collection} collection collection instance to add
-   * @returns {Promise&lt;Collection | Error>} a Promise with the added collection or exisiting collection with the same name
+   *
+   * @param {Collection} collection Collection instance to add.
+   * @returns {Collection} Added collection or exisiting collection with the same name.
    */
   addCollection(collection) {
-    return new Promise((resolve, reject) => {
-      if (!(collection instanceof Collection)) {
-        reject(new TypeError('Parameter `collection` must be an instance of Collection'));
-      }
+    if (!(collection instanceof Collection)) {
+      throw new TypeError('Expected parameter `collection` to be an instance of Collection');
+    }
 
-      let foundCollection = this._collections.find(c => c.name === collection.name);
+    let foundCollection = this._collections.find((c) => c.name === collection.name);
 
-      if (foundCollection === undefined) {
-        this._collections.push(collection);
-      } else {
-        collection = foundCollection;
-      }
+    if (foundCollection === undefined) {
+      this._collections.push(collection);
+    } else {
+      collection = foundCollection;
+    }
 
-      resolve(collection);
-    });
+    return collection;
   }
 
   /**
-   * Delete a collection with the given name or a Collection instance.
-   * 
-   * @param {Collection | string} collection name of the collection or a Collection instance
-   * @returns {Promise&lt;Collection | Error>} a Promise with the deleted collection
+   * Delete a collection with the given name or using a Collection instance.
+   *
+   * @param {Collection | string} collection Name of the collection or a Collection instance.
+   * @returns {Collection} Deleted collection.
    */
   deleteCollection(collection) {
-    return new Promise((resolve, reject) => {
-      const name = collection instanceof Collection
-        ? collection.name
-        : collection;
+    const name = collection instanceof Collection ? collection.name : collection;
 
-      if (typeof name !== 'string' || name === '') {
-        reject(new TypeError('Parameter `name` must be a string and at least one character long'));
-        return;
-      }
+    if (typeof name !== 'string' || name.length === 0) {
+      throw new TypeError('Expected parameter `name` to be a string and at least one character long');
+    }
 
-      const idx = this._collections.findIndex(c => c.name === name);
+    const idx = this._collections.findIndex((c) => c.name === name);
 
-      if (idx === -1) {
-        reject(new Error('No collection with that name was found'));
-        return;
-      }
+    let removed;
+    if (idx !== -1) {
+      removed = this._collections.splice(idx, 1)[0];
+    }
 
-      const removed = this._collections.splice(idx, 1);
-      resolve(...removed);
-    });
+    return removed;
   }
 
   /**
    * Retrieve a collection by name.
-   * 
-   * @param {string} name name of the collection
-   * @returns {Promise&lt;Collection | Error>} a Promise with the matching collection
+   *
+   * @param {string} name Name of the collection.
+   * @returns {Collection} Matching collection.
    */
   getCollection(name) {
-    return new Promise((resolve, reject) => {
-      if (typeof name !== 'string' || name === '') {
-        reject(new TypeError('Parameter `name` must be a string and at least one character long'));
-        return;
-      }
+    if (typeof name !== 'string' || name.length === 0) {
+      throw new TypeError('Expected parameter `name` to be a string and at least one character long');
+    }
 
-      const collection = this._collections.find(c => c.name === name);
-
-      if (collection === undefined) {
-        reject(new Error('No collection with that name was found'));
-        return;
-      }
-
-      resolve(collection);
-    });
+    return this._collections.find((c) => c.name === name);
   }
 
   /**
    * Save the database with its collections,
-   * settings and metadata to the specified file.
-   * 
-   * @returns {Promise&lt;void | Error>} a Promise which resolves after saving the database
+   * settings and metadata to the specified filepath.
+   *
+   * @returns {Promise&lt;void | Error>} A Promise which resolves after saving the database.
    */
   saveDatabase() {
-    return new Promise((resolve, reject) => {
-      const exportedDb = this._exportDatabase();
-
-      mkdirp(this.filepath)
-        .then(() => writeFile(this.filepath, exportedDb))
-        .then(resolve)
-        .catch(reject);
+    const exportedDb = this._exportDatabase();
+    return mkdirp(this.filepath).then(() => {
+      writeFile(this.filepath, exportedDb);
     });
   }
 
   /**
-   * Delete the database from the filesystem if it exists.
-   * 
-   * @returns {Promise&lt;void | Error>} a Promise which resolves after the deletion
+   * Delete the database from the filesystem, if it exists.
+   *
+   * @returns {Promise&lt;void | Error>} A Promise which resolves after deleting the database.
    */
   deleteDatabase() {
     return new Promise((resolve, reject) => {
       stat(this.filepath)
-        .then(stats => {
+        .then((stats) => {
           if (!stats.isFile()) {
             reject(new Error('Database requested to delete is not a file'));
           }
         })
         .then(() => unlink(this.filepath))
         .then(resolve)
-        .catch(err => {
+        .catch((err) => {
           if (err.code !== 'ENOENT') {
             reject(err);
           }
@@ -286,14 +265,14 @@ class TrustDB extends EventEmitter {
 
   /**
    * Move the database to the new path on the filesystem.
-   * 
-   * @param {string} filepath new path for the database
-   * @returns {Promise&lt;void | Error>} a Promise which resolves after moving the database
+   *
+   * @param {string} filepath New path for the database file.
+   * @returns {Promise&lt;void | Error>} A Promise which resolves after moving the database.
    */
   moveDatabase(filepath) {
     return new Promise((resolve, reject) => {
-      if (typeof filepath !== 'string' || filepath === '') {
-        reject(new TypeError('Parameter `filepath` must be a string and at least one character long'));
+      if (typeof filepath !== 'string' || filepath.length === 0) {
+        reject(new TypeError('Expected parameter `filepath` to be a string and at least one character long'));
         return;
       }
       if (this.filepath === filepath) {
@@ -301,12 +280,12 @@ class TrustDB extends EventEmitter {
       }
 
       stat(this.filepath)
-        .then(stats => {
+        .then((stats) => {
           if (!stats.isFile()) {
             reject(new Error('Database requested to move is not a file'));
           }
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.code !== 'ENOENT') {
             reject(err);
           }
@@ -335,10 +314,10 @@ class TrustDB extends EventEmitter {
 
   /**
    * (Re-)Configure the settings.
-   * 
-   * @param {object} [settings={}] database settings
-   * @param {boolean} [settings.autosave] whether the database should be automatically saved
-   * @param {number} [settings.autosaveInterval] interval for the autosave in milliseconds
+   *
+   * @param {object} [settings={}] Optional settings related to the database.
+   * @param {boolean} [settings.autosave] Whether the database should be automatically saved.
+   * @param {number} [settings.autosaveInterval] Interval for the autosave in milliseconds.
    */
   configureSettings(settings = {}) {
     if (!isPlainObject(settings)) {
@@ -346,7 +325,7 @@ class TrustDB extends EventEmitter {
       return;
     }
 
-    if (settings.hasOwnProperty('autosave') &amp;&amp; typeof settings.autosave === 'boolean') {
+    if (hasOwnProperty(settings, 'autosave') &amp;&amp; typeof settings.autosave === 'boolean') {
       // Actually turn off autosave.
       if (this._autosave &amp;&amp; !settings.autosave) {
         this._disableAutosave();
@@ -354,7 +333,7 @@ class TrustDB extends EventEmitter {
       this._autosave = settings.autosave;
     }
 
-    if (settings.hasOwnProperty('autosaveInterval') &amp;&amp; typeof settings.autosaveInterval === 'number') {
+    if (hasOwnProperty(settings, 'autosaveInterval') &amp;&amp; typeof settings.autosaveInterval === 'number') {
       this._autosaveInterval = settings.autosaveInterval;
     }
 
@@ -371,8 +350,8 @@ class TrustDB extends EventEmitter {
 
   /**
    * Get all collections of the database.
-   * 
-   * @returns {object[]} all collections of the database
+   *
+   * @returns {object[]} All collections of the database.
    */
   get collections() {
     return this._collections;
@@ -380,8 +359,8 @@ class TrustDB extends EventEmitter {
 
   /**
    * Get the amount of collections of the database.
-   * 
-   * @returns {number} amount of collections of the database
+   *
+   * @returns {number} Amount of collections of the database.
    */
   get size() {
     return this._collections.length;
@@ -389,19 +368,19 @@ class TrustDB extends EventEmitter {
 
   /**
    * Get the amount of documents of all collections.
-   * 
-   * @returns {number} amount of documents of all collections
+   *
+   * @returns {number} Amount of documents of all collections.
    */
   get totalSize() {
     return this._collections
-      .map(c => c.size)
+      .map((c) => c.size)
       .reduce((acc, curr) => acc + curr);
   }
 
   /**
    * Get the current state of autosave.
-   * 
-   * @returns {boolean} whether autosave is enabled or disabled
+   *
+   * @returns {boolean} Whether autosave is enabled.
    */
   get autosave() {
     return this._autosave;
@@ -409,8 +388,8 @@ class TrustDB extends EventEmitter {
 
   /**
    * Get the current autosave interval.
-   * 
-   * @returns {number} autosave interval in milliseconds
+   *
+   * @returns {number} Autosave interval in milliseconds.
    */
   get autosaveInterval() {
     return this._autosaveInterval;
@@ -418,8 +397,8 @@ class TrustDB extends EventEmitter {
 
   /**
    * Enable or disable autosave.
-   * 
-   * @param {boolean} value whether to enable or disable autosave
+   *
+   * @param {boolean} value Whether to enable or disable autosave.
    */
   set autosave(value) {
     this.configureSettings({ autosave: value});
@@ -427,8 +406,8 @@ class TrustDB extends EventEmitter {
 
   /**
    * Set a new autosave interval.
-   * 
-   * @param {number} value the new interval in milliseconds
+   *
+   * @param {number} value New interval in milliseconds.
    */
   set autosaveInterval(value) {
     this.configureSettings({ autosaveInterval: value});
@@ -437,16 +416,15 @@ class TrustDB extends EventEmitter {
   // ---------------------------------- Internal functions ----------------------------------
 
   /**
-   * Internal function.
-   * 
    * Turn the database into a JSON string.
-   * 
-   * @returns {string} database as JSON string
+   *
+   * @private
+   * @returns {string} Stringified version of the database.
    */
   _exportDatabase() {
     return JSON.stringify({
       filepath: this.filepath,
-      collections: this._collections.map(c => c._export()),
+      collections: this._collections.map((c) => c._export()),
       settings: {
         autosave: this._autosave,
         autosaveInterval: this._autosaveInterval,
@@ -459,43 +437,40 @@ class TrustDB extends EventEmitter {
   }
 
   /**
-   * Internal function.
-   * 
    * Load a database from a file and parse its content.
-   * 
-   * @returns {Promise&lt;object | Error>} a Promise with the parsed database
+   *
+   * @private
+   * @returns {Promise&lt;object | Error>} A Promise which resolves with the parsed database.
    */
   _loadDatabase() {
     return new Promise((resolve, reject) => {
       stat(this.filepath)
-        .then(stats => {
+        .then((stats) => {
           if (!stats.isFile()) {
-            reject(new Error('Database requested to delete is not a file'));
+            reject(new Error('Database requested to load is not a file'));
           }
         })
         .then(() => readFile(this.filepath, { encoding: 'utf-8' }))
-        .then(content => resolve(JSON.parse(content)))
+        .then((content) => resolve(JSON.parse(content)))
         .catch(reject);
     });
   }
 
   /**
-   * Internal function.
-   * 
    * Apply the collections and other data of a database object.
-   * 
-   * @param {object} db parsed JSON database
-   * @param {boolean} restoreSettings whether to restore the 'old' settings
+   *
+   * @private
+   * @param {object} db Database object.
+   * @param {boolean} restoreSettings Whether to restore the 'old' settings.
    */
   _applyDatabase(db, restoreSettings) {
-    if (db.hasOwnProperty('metadata') &amp;&amp;
-        db.metadata.hasOwnProperty('created')) {
+    if (hasOwnProperty(db, 'metadata') &amp;&amp; hasOwnProperty(db.metadata, 'created')) {
       this.created = db.metadata.created;
     }
 
     // TODO: type checks
     if (Array.isArray(db.collections)) {
-      this._collections = db.collections.map(c => {
+      this._collections = db.collections.map((c) => {
         const collection = new Collection(c.name);
         collection._documents = c.documents;
         return collection;
@@ -508,20 +483,19 @@ class TrustDB extends EventEmitter {
   }
 
   /**
-   * Internal function.
-   * 
    * Try to restore a database if it exists.
-   * 
-   * @param {object} settings user settings
+   *
+   * @private
+   * @param {object} settings Settings related to the database.
    */
   _restoreDatabase(settings) {
     return new Promise((resolve, reject) => {
       this._loadDatabase()
-        .then(db => {
+        .then((db) => {
           this._applyDatabase(db, settings.restoreSettings);
           resolve();
         })
-        .catch(err => {
+        .catch((err) => {
           // File exists but an error occured.
           if (err.code !== 'ENOENT') {
             reject(err);
@@ -535,11 +509,10 @@ class TrustDB extends EventEmitter {
   }
 
   /**
-   * Internal function.
-   * 
    * Enables the autosave handler.
-   * 
-   * @fires TrustDB#autosave after autosaving (might not be successful)
+   *
+   * @private
+   * @fires TrustDB#autosave After autosaving.
    */
   _enableAutosave() {
     if (this.autosaveHandler !== undefined) {
@@ -547,15 +520,15 @@ class TrustDB extends EventEmitter {
     }
 
     this.autosaveHandler = setInterval(async () => {
-      const result = await this.saveDatabase().catch(err => err);
-      await this.emit('autosave', result);
+      const result = await this.saveDatabase().catch((err) => err);
+      this.emit('autosave', result);
     }, this._autosaveInterval);
   }
 
   /**
-   * Internal function.
-   * 
    * Disables the autosave handler.
+   *
+   * @private
    */
   _disableAutosave() {
     if (this.autosaveHandler !== undefined) {
@@ -575,7 +548,7 @@ module.exports = TrustDB;</code></pre>
 	</div>
 	<footer>
 				<div class="copyright">FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.</div>
-			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on 12th Jun 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
+			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 8th Sep 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
 	</footer>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

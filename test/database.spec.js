@@ -8,7 +8,7 @@ describe('Database', function() {
       await db.connect('/tmp/test_db.json', {
         overwriteExisting: true,
       });
-  
+
       expect(db.filepath).to.equal('/tmp/test_db.json');
       expect(db.collections).to.have.length(0);
       expect(db.autosave).to.be(false);
@@ -18,7 +18,7 @@ describe('Database', function() {
   describe('#createCollection()', function() {
     it('should create a collection', function() {
       const collection = db.createCollection('test_collection1');
-  
+
       expect(db.collections).to.have.length(1);
       expect(collection.name).to.equal('test_collection1');
     });
@@ -27,7 +27,7 @@ describe('Database', function() {
   describe('#deleteCollectio()', function() {
     it('should delete the correct collection', function() {
       const collection = db.deleteCollection('test_collection1');
-      
+
       expect(db.collections).to.have.length(0);
       expect(collection.name).to.equal('test_collection1');
     });
@@ -36,9 +36,9 @@ describe('Database', function() {
   describe('#addCollection()', function() {
     it('should add a previously created collection', function() {
       let collection = new Collection('test_collection2');
-  
+
       collection = db.addCollection(collection);
-      
+
       expect(db.collections).to.have.length(1);
       expect(collection.name).to.equal('test_collection2');
     });
@@ -47,7 +47,7 @@ describe('Database', function() {
   describe('#getCollection()', function() {
     it('should retrieve the requested collection', function() {
       const collection = db.getCollection('test_collection2');
-  
+
       expect(db.collections).to.have.length(1);
       expect(collection.name).to.equal('test_collection2');
     });
@@ -59,7 +59,7 @@ describe('Database', function() {
         autosave: true,
         autosaveInterval: 999999
       });
-  
+
       expect(db.autosave).to.be(true);
       expect(db.autosaveInterval).to.equal(999999);
       expect(db.autosaveHandler).to.not.be(undefined);

@@ -10,18 +10,6 @@ describe('EventEmitter', function() {
       listener = emitter.on('test', done);
       emitter.emit('test');
     });
-
-    it('should add an async listener and emit it (wait 100ms)', async function() {
-      let val = false;
-  
-      emitter.on('async', async () => {
-        await new Promise(resolve => setTimeout(resolve, 100))
-          .then(() => val = true);
-      });
-
-      await emitter.emit('async');
-      expect(val).to.be(true);
-    });
   });
 
   describe('#removeListener()', function() {

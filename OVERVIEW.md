@@ -12,8 +12,6 @@ Import the package into your app.
 const db = require('trustdb');
 ```
 
-[*For all of the upcoming examples I'm gonna assume it happens in an asynchronous block, i.e. function.*]
-
 Connect to the database, given a filepath and desired settings.
 
 ```js
@@ -25,14 +23,13 @@ await db.connect('/path/to/file.json', {
 
 Create a collection.
 ```js
-const repoCollection = await db.createCollection('repoCollection');
+const repoCollection = db.createCollection('repoCollection');
 ```
 
 Optional: add event listeners for events like `autosave`, `insert`, `find`, `remove` or `update`.
 
 The first parameter for collection events will always be an array of altered or returned documents, no matter which method was used.
 
-Both synchronous as well as asynchronous events are allowed.
 ```js
 // Parameter `err` will be undefined on success.
 db.on('autosave', err => {
@@ -41,23 +38,20 @@ db.on('autosave', err => {
   }
 });
 
-repoCollection.on('insert', async (insertedDocs, allDocs) => {
+repoCollection.on('insert', (insertedDocs, allDocs) => {
   console.log(`Number of documents in ${repoCollection.name} after insert: ${allDocs.length}`);
-  await db.save();
 });
 
 repoCollection.on('find', (foundDocs, allDocs) => {
-  console.log(`Number of documents found from ${repoCollection.name}: ${foundDocs.length}`);
+  console.log(`Number of matching documents found in ${repoCollection.name}: ${foundDocs.length}`);
 });
 
-repoCollection.on('remove', async (removedDocs, allDocs) => {
-  console.log(`Number of documents removed from ${repoCollection.name}: ${removedDocs.length}`);
-  await db.save();
+repoCollection.on('remove', (removedDocs, allDocs) => {
+  console.log(`Number of removed documents in ${repoCollection.name}: ${removedDocs.length}`);
 });
 
-repoCollection.on('update', async (updatedDocs, allDocs) => {
+repoCollection.on('update', (updatedDocs, allDocs) => {
   console.log(`Number of updated documents in ${repoCollection.name}: ${updatedDocs.length}`);
-  await db.save();
 });
 ```
 
@@ -75,8 +69,8 @@ const repositories = [{
 }];
 
 // Insert them as an array or each document as an individual parameter.
-await repoCollection.insert(repositories);
-await repoCollection.insert({
+repoCollection.insert(repositories);
+repoCollection.insert({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
   description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
@@ -86,21 +80,21 @@ await repoCollection.insert({
 Search for documents.
 ```js
 // Use query objects or custom filter functions to find matching documents.
-await repoCollection.find({ description: { regExp: /lightweight/ } });
-await repoCollection.find(doc => /lightweight/.test(doc.description));
+repoCollection.find({ description: { regExp: /lightweight/ } });
+repoCollection.find(doc => /lightweight/.test(doc.description));
 
-await repoCollection.findOne({ title: { regExp: /js$/i } });
-await repoCollection.findOne(doc => /js$/i.test(doc.description));
+repoCollection.findOne({ title: { regExp: /js$/i } });
+repoCollection.findOne(doc => /js$/i.test(doc.description));
 
 // Find a document using its ID.
-await repoCollection.findById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
+repoCollection.findById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
 ```
 
 Sort your results.
 ```js
 // Note the second parameter is set to `true`.
 // It will return a `Results` instance you can do the sorting on.
-await repoCollection.find({ title: { regExp: /js$/i } }, true)
+repoCollection.find({ title: { regExp: /js$/i } }, true)
   .then(result => {
     return result
       .limit(10) // limit the amount of documents to sort to 10
@@ -113,45 +107,45 @@ Remove documents.
 ```js
 // Remove all documents that match the given object.
 // Pass in `true` as the second parameter to only remove the first matching document.
-await repoCollection.removeExact({
+repoCollection.removeExact({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
   description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
 });
 
 // Use query objects or custom filter functions to find matching documents.
-await repoCollection.remove({ title: { re: /js$/i } });
-await repoCollection.remove(doc => doc.title.startsWith('trust'));
+repoCollection.remove({ title: { re: /js$/i } });
+repoCollection.remove(doc => doc.title.startsWith('trust'));
 
-await repoCollection.removeOne({ title: { re: /js$/i } });
-await repoCollection.removeOne(doc => doc.title.startsWith('trust'));
+repoCollection.removeOne({ title: { re: /js$/i } });
+repoCollection.removeOne(doc => doc.title.startsWith('trust'));
 
 // Remove a document using its ID.
-await repoCollection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
+repoCollection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
 ```
 
 Update documents.
 ```js
 // Update all documents that match the query with another object.
-await repoCollection.update(
+repoCollection.update(
   { description: { regExp: /database/ } },
   { tags: [ 'database' ] }
 );
 
 // Update all documents with your own custom filter and update functions.
-await repoCollection.update(
+repoCollection.update(
   doc => /runtime/.test(doc.description),
   doc => doc.tags = [ 'runtime' ]
 );
 
 // But you can obviously also combine the two features.
-await repoCollection.update(
+repoCollection.update(
   doc => /runtime/.test(doc.description),
   { tags: [ 'runtime' ] }
 );
 
 // Update a document using its ID.
-await repoCollection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
+repoCollection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
 ```
 
 ## Settings

@@ -4,9 +4,9 @@ const Collection = require('../lib/collection');
 describe('Collection', function() {
   const collection = new Collection('test_collection');
 
-  beforeEach('reset collection', async function() {
+  beforeEach('reset collection', function() {
     collection.clear();
-    await collection.insert(
+    collection.insert(
       { price: 50 },
       { price: 20 },
       { price: 40 },
@@ -15,10 +15,10 @@ describe('Collection', function() {
   });
 
   describe('#insert()', function() {
-    it('should insert documents, each given as an individual paramater', async function() {
+    it('should insert documents, each given as an individual paramater', function() {
       // TODO: find a better solution for the insert test cases
-      await collection.clear();
-      await collection.insert(
+      collection.clear();
+      collection.insert(
         { doc: 1 },
         { doc: 2 },
         { doc: 3 }
@@ -27,9 +27,9 @@ describe('Collection', function() {
       expect(collection.documents).to.have.length(3);
     });
   
-    it('should insert documents, given as an array of documents', async function() {
-      await collection.clear();
-      await collection.insert([
+    it('should insert documents, given as an array of documents', function() {
+      collection.clear();
+      collection.insert([
         { doc: 1 },
         { doc: 2 },
         { doc: 3 },
@@ -40,9 +40,9 @@ describe('Collection', function() {
   });
   
   describe('#insertOne()', function() {
-    it('should insert a single document', async function() {
-      await collection.clear();
-      await collection.insertOne(
+    it('should insert a single document', function() {
+      collection.clear();
+      collection.insertOne(
         { doc: 1 }
       );
   
@@ -51,15 +51,15 @@ describe('Collection', function() {
   });
 
   describe('#find()', function() {
-    it('should retrieve all documents matching the query', async function() {
-      const results = await collection.find({ price: { lessThanOrEqual: 40 } });
+    it('should retrieve all documents matching the query', function() {
+      const results = collection.find({ price: { lessThanOrEqual: 40 } });
   
       expect(collection.documents).to.have.length(4);
       expect(results).to.have.length(3);
     });
 
-    it('should retrieve all documents passing the filter function', async function() {
-      const results = await collection.find(doc => doc.price <= 40);
+    it('should retrieve all documents passing the filter function', function() {
+      const results = collection.find(doc => doc.price <= 40);
   
       expect(collection.documents).to.have.length(4);
       expect(results).to.have.length(3);
@@ -67,15 +67,15 @@ describe('Collection', function() {
   });
 
   describe('#findOne()', function() {
-    it('should retrieve the first document matching the query', async function() {
-      const result = await collection.findOne({ price: { lessThanOrEqual: 40 } });
+    it('should retrieve the first document matching the query', function() {
+      const result = collection.findOne({ price: { lessThanOrEqual: 40 } });
 
       expect(collection.documents).to.have.length(4);
       expect(result.price).to.equal(20);
     });
 
-    it('should retrieve the first document passing the filter function', async function() {
-      const result = await collection.findOne(doc => doc.price <= 40);
+    it('should retrieve the first document passing the filter function', function() {
+      const result = collection.findOne(doc => doc.price <= 40);
 
       expect(collection.documents).to.have.length(4);
       expect(result.price).to.equal(20);
@@ -83,9 +83,9 @@ describe('Collection', function() {
   });
 
   describe('#findById()', function() {
-    it('should retrieve the document matching the ID', async function() {
-      const doc = await collection.findOne({ price: 20 });
-      const result = await collection.findById(doc.__id);
+    it('should retrieve the document matching the ID', function() {
+      const doc = collection.findOne({ price: 20 });
+      const result = collection.findById(doc.__id);
 
       expect(collection.documents).to.have.length(4);
       expect(result.price).to.equal(20);
@@ -93,15 +93,15 @@ describe('Collection', function() {
   });
 
   describe('#removeExact()', function() {
-    it('should remove the first matching document', async function() {
-      const removed = await collection.removeExact({ price: 40 }, true);
+    it('should remove the first matching document', function() {
+      const removed = collection.removeExact({ price: 40 }, true);
   
       expect(collection.documents).to.have.length(3);
       expect(removed.price).to.equal(40);
     });
   
-    it('should remove all matching documents', async function() {
-      const removed = await collection.removeExact({ price: 40 });
+    it('should remove all matching documents', function() {
+      const removed = collection.removeExact({ price: 40 });
   
       expect(collection.documents).to.have.length(2);
       expect(removed).to.have.length(2);
@@ -109,15 +109,15 @@ describe('Collection', function() {
   });
 
   describe('#remove()', function() {
-    it('should remove the all documents matching the query', async function() {
-      const removed = await collection.remove({ price: { lessThanOrEqual: 40 } });
+    it('should remove the all documents matching the query', function() {
+      const removed = collection.remove({ price: { lessThanOrEqual: 40 } });
   
       expect(collection.documents).to.have.length(1);
       expect(removed).to.have.length(3);
     });
   
-    it('should remove the all documents passing the filter function', async function() {
-      const removed = await collection.remove(doc => doc.price <= 40);
+    it('should remove the all documents passing the filter function', function() {
+      const removed = collection.remove(doc => doc.price <= 40);
   
       expect(collection.documents).to.have.length(1);
       expect(removed).to.have.length(3);
@@ -125,15 +125,15 @@ describe('Collection', function() {
   });
 
   describe('#removeOne()', function() {
-    it('should remove the first document that passes the filter function', async function() {
-      const removed = await collection.removeOne({ price: { lessThanOrEqual: 40 } });
+    it('should remove the first document that passes the filter function', function() {
+      const removed = collection.removeOne({ price: { lessThanOrEqual: 40 } });
   
       expect(collection.documents).to.have.length(3);
       expect(removed.price).to.equal(20);
     });
   
-    it('should remove the first document that passes the filter function', async function() {
-      const removed = await collection.removeOne(doc => doc.price <= 40);
+    it('should remove the first document that passes the filter function', function() {
+      const removed = collection.removeOne(doc => doc.price <= 40);
   
       expect(collection.documents).to.have.length(3);
       expect(removed.price).to.equal(20);
@@ -141,9 +141,9 @@ describe('Collection', function() {
   });
 
   describe('#removeById()', function() {
-    it('should remove the document matching the ID', async function() {
-      const doc = await collection.findOne({ price: 20 });
-      const removed = await collection.removeById(doc.__id);
+    it('should remove the document matching the ID', function() {
+      const doc = collection.findOne({ price: 20 });
+      const removed = collection.removeById(doc.__id);
 
       expect(collection.documents).to.have.length(3);
       expect(removed.price).to.equal(20);
@@ -151,8 +151,8 @@ describe('Collection', function() {
   });
 
   describe('#update()', function() {
-    it('should update the all documents matching the query', async function() {  
-      const updated = await collection.update(
+    it('should update the all documents matching the query', function() {  
+      const updated = collection.update(
         { price: { lessThanOrEqual: 40 } },
         { price: 30 }
       );
@@ -162,8 +162,8 @@ describe('Collection', function() {
       expect(updated.map(u => u.price)).to.only.contain(30);
     });
   
-    it('should update the all documents passing the filter function', async function() {
-      const updated = await collection.update(
+    it('should update the all documents passing the filter function', function() {
+      const updated = collection.update(
         doc => doc.price <= 40,
         doc => doc.price = 30,
       );
@@ -175,9 +175,9 @@ describe('Collection', function() {
   });
 
   describe('#updateById()', function() {
-    it('should update the document matching the ID', async function() {
-      const doc = await collection.findOne({ price: 20 });
-      const updated = await collection.updateById(doc.__id, { price: 25 });
+    it('should update the document matching the ID', function() {
+      const doc = collection.findOne({ price: 20 });
+      const updated = collection.updateById(doc.__id, { price: 25 });
 
       expect(collection.documents).to.have.length(4);
       expect(updated.price).to.equal(25);

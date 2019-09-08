@@ -16,8 +16,8 @@ describe('Database', function() {
   });
 
   describe('#createCollection()', function() {
-    it('should create a collection', async function() {
-      const collection = await db.createCollection('test_collection1');
+    it('should create a collection', function() {
+      const collection = db.createCollection('test_collection1');
   
       expect(db.collections).to.have.length(1);
       expect(collection.name).to.equal('test_collection1');
@@ -25,8 +25,8 @@ describe('Database', function() {
   });
 
   describe('#deleteCollectio()', function() {
-    it('should delete the correct collection', async function() {
-      const collection = await db.deleteCollection('test_collection1');
+    it('should delete the correct collection', function() {
+      const collection = db.deleteCollection('test_collection1');
       
       expect(db.collections).to.have.length(0);
       expect(collection.name).to.equal('test_collection1');
@@ -34,10 +34,10 @@ describe('Database', function() {
   });
 
   describe('#addCollection()', function() {
-    it('should add a previously created collection', async function() {
+    it('should add a previously created collection', function() {
       let collection = new Collection('test_collection2');
   
-      collection = await db.addCollection(collection);
+      collection = db.addCollection(collection);
       
       expect(db.collections).to.have.length(1);
       expect(collection.name).to.equal('test_collection2');
@@ -45,8 +45,8 @@ describe('Database', function() {
   });
 
   describe('#getCollection()', function() {
-    it('should retrieve the requested collection', async function() {
-      const collection = await db.getCollection('test_collection2');
+    it('should retrieve the requested collection', function() {
+      const collection = db.getCollection('test_collection2');
   
       expect(db.collections).to.have.length(1);
       expect(collection.name).to.equal('test_collection2');
@@ -54,7 +54,7 @@ describe('Database', function() {
   });
 
   describe('#configureSettings()', function() {
-    it('should enable the autosave setting', async function() {
+    it('should enable the autosave setting', function() {
       db.configureSettings({
         autosave: true,
         autosaveInterval: 999999

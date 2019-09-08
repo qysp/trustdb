@@ -74,4 +74,15 @@ describe('Database', function() {
     });
   });
 
+  describe('#moveDatabase()', function() {
+    it('should move the database', function(done) {
+      db.moveDatabase('/tmp/test_db_moved.db').then(done).catch(done);
+    });
+  });
+
+  describe('#deleteDatabase()', function() {
+    it('should delete the database', function(done) {
+      db.deleteDatabase().then(done).catch(done);
+    });
+  });
 });

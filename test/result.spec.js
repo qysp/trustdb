@@ -37,4 +37,22 @@ describe('Result', function() {
       expect(resultNumbers.documents[0].price).to.equal(20);
     });
   });
+
+  describe('#map()', function() {
+    it('should map documents with a new property', function() {
+      resultStrings.map((document => ({ ...document, map: 'works' })));
+      resultStrings.documents.forEach((document) => {
+        expect(document).to.have.key('name');
+        expect(document).to.have.key('map');
+      })
+    });
+  });
+
+  describe('#limit()', function() {
+    it('should limit the number of documents', function() {
+      resultNumbers.limit(2);
+      expect(resultNumbers.documents).to.have.length(2);
+      expect(resultNumbers.originalDocuments).to.have.length(4);
+    });
+  });
 });

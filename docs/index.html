@@ -77,37 +77,40 @@
 <pre class="prettyprint source lang-js"><code>const db = require('trustdb');
 </code></pre>
 <p>Connect to the database, given a filepath and desired settings.</p>
-<pre class="prettyprint source lang-js"><code>await db.connect('/path/to/file.json', {
-  autosave: true, // default: false
-  autosaveInterval: 10000, // in ms; default: 4000
+<pre class="prettyprint source lang-js"><code>await db.connect({
+  filepath: '/path/to/file.json',
+  autosave: true,
+  autosaveInterval: 10000,
+  restoreSettings: false,
+  overwriteExisting: false,
 });
 </code></pre>
 <p>Create a collection.</p>
-<pre class="prettyprint source lang-js"><code>const repoCollection = db.createCollection('repoCollection');
+<pre class="prettyprint source lang-js"><code>const collection = db.createCollection('repository_collection');
 </code></pre>
 <p>Optional: add event listeners for events like <code>autosave</code>, <code>insert</code>, <code>find</code>, <code>remove</code> or <code>update</code>.</p>
 <p>The first parameter for collection events will always be an array of altered or returned documents, no matter which method was used.</p>
 <pre class="prettyprint source lang-js"><code>// Parameter `err` will be undefined on success.
-db.on('autosave', err => {
+db.on('autosave', (err) => {
   if (err instanceof Error) {
     console.error(err);
   }
 });
 
-repoCollection.on('insert', (insertedDocs, allDocs) => {
-  console.log(`Number of documents in ${repoCollection.name} after insert: ${allDocs.length}`);
+collection.on('insert', (insertedDocs, allDocs) => {
+  console.log(`Number of documents in ${collection.name} after insert: ${allDocs.length}`);
 });
 
-repoCollection.on('find', (foundDocs, allDocs) => {
-  console.log(`Number of matching documents found in ${repoCollection.name}: ${foundDocs.length}`);
+collection.on('find', (foundDocs, allDocs) => {
+  console.log(`Number of matching documents found in ${collection.name}: ${foundDocs.length}`);
 });
 
-repoCollection.on('remove', (removedDocs, allDocs) => {
-  console.log(`Number of removed documents in ${repoCollection.name}: ${removedDocs.length}`);
+collection.on('remove', (removedDocs, allDocs) => {
+  console.log(`Number of removed documents in ${collection.name}: ${removedDocs.length}`);
 });
 
-repoCollection.on('update', (updatedDocs, allDocs) => {
-  console.log(`Number of updated documents in ${repoCollection.name}: ${updatedDocs.length}`);
+collection.on('update', (updatedDocs, allDocs) => {
+  console.log(`Number of updated documents in ${collection.name}: ${updatedDocs.length}`);
 });
 </code></pre>
 <p>Insert documents.</p>
@@ -115,90 +118,94 @@ repoCollection.on('update', (updatedDocs, allDocs) => {
 const repositories = [{
     url: 'https://github.com/qysp/trustdb',
     title: 'trustdb',
-    description: 'Promise-based, lightweight in-memory and persistent JavaScript/JSON database.'
+    description: 'Lightweight in-memory and persistent JavaScript/JSON database.',
   }, {
     url: 'https://github.com/techfort/LokiJS',
     title: 'LokiJS',
-    description: 'Fast document oriented javascript in-memory database'
+    description: 'Fast document oriented javascript in-memory database',
 }];
 
 // Insert them as an array or each document as an individual parameter.
-repoCollection.insert(repositories);
-repoCollection.insert({
+collection.insert(repositories);
+collection.insert({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
-  description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
+  description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.',
 });
 </code></pre>
 <p>Search for documents.</p>
 <pre class="prettyprint source lang-js"><code>// Use query objects or custom filter functions to find matching documents.
-repoCollection.find({ description: { regExp: /lightweight/ } });
-repoCollection.find(doc => /lightweight/.test(doc.description));
+collection.find({ description: { regExp: /lightweight/ } });
+collection.find((doc) => /lightweight/.test(doc.description));
 
-repoCollection.findOne({ title: { regExp: /js$/i } });
-repoCollection.findOne(doc => /js$/i.test(doc.description));
+collection.findOne({ title: { regExp: /js$/i } });
+collection.findOne((doc) => /js$/i.test(doc.description));
 
 // Find a document using its ID.
-repoCollection.findById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
+collection.findById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
 </code></pre>
 <p>Sort your results.</p>
 <pre class="prettyprint source lang-js"><code>// Note the second parameter is set to `true`.
-// It will return a `Results` instance you can do the sorting on.
-repoCollection.find({ title: { regExp: /js$/i } }, true)
-  .then(result => {
-    return result
-      .limit(10) // limit the amount of documents to sort to 10
-      .simpleSort('title') // Sort by property `title`
-      .documents // get the sorted documents
-  });
+// It will return a `Results` instance you can sort, limit, map and so on.
+collection.find({ title: { regExp: /javascript/i } }, true)
+  .limit(10)
+  .simpleSort('title')
+  .map((doc) => {
+    return {
+      ...doc,
+      tags: [ 'javascript' ],
+    };
+  })
+  .documents;
 </code></pre>
 <p>Remove documents.</p>
 <pre class="prettyprint source lang-js"><code>// Remove all documents that match the given object.
 // Pass in `true` as the second parameter to only remove the first matching document.
-repoCollection.removeExact({
+collection.removeExact({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
   description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
 });
 
 // Use query objects or custom filter functions to find matching documents.
-repoCollection.remove({ title: { re: /js$/i } });
-repoCollection.remove(doc => doc.title.startsWith('trust'));
+collection.remove({ title: { re: /js$/i } });
+collection.remove((doc) => doc.title.startsWith('trust'));
 
-repoCollection.removeOne({ title: { re: /js$/i } });
-repoCollection.removeOne(doc => doc.title.startsWith('trust'));
+collection.removeOne({ title: { re: /js$/i } });
+collection.removeOne((doc) => doc.title.startsWith('trust'));
 
 // Remove a document using its ID.
-repoCollection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
+collection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
 </code></pre>
 <p>Update documents.</p>
 <pre class="prettyprint source lang-js"><code>// Update all documents that match the query with another object.
-repoCollection.update(
+collection.update(
   { description: { regExp: /database/ } },
   { tags: [ 'database' ] }
 );
 
 // Update all documents with your own custom filter and update functions.
-repoCollection.update(
-  doc => /runtime/.test(doc.description),
-  doc => doc.tags = [ 'runtime' ]
+collection.update(
+  (doc) => /runtime/i.test(doc.description),
+  (doc) => doc.tags = [ 'runtime' ]
 );
 
 // But you can obviously also combine the two features.
-repoCollection.update(
-  doc => /runtime/.test(doc.description),
+collection.update(
+  (doc) => /runtime/i.test(doc.description),
   { tags: [ 'runtime' ] }
 );
 
 // Update a document using its ID.
-repoCollection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
+collection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
 </code></pre>
 <h2>Settings</h2>
 <ul>
-<li><strong>autosave</strong>: whether the database should be automatically saved.</li>
-<li><strong>autosaveInterval</strong>: interval for the autosave (in milliseconds).</li>
-<li><strong>restoreSettings</strong>: whether TrustDB should restore settings from the loaded database (if it exists). Any additional settings will overwrite the loaded settings.</li>
-<li><strong>overwriteExisting</strong>: whether the existing database with the same filepath (if it exists) should be overwritten.</li>
+<li><strong>filepath</strong>: Filepath for the database. Database cannot be saved if omitted. Can be added at any point in time after connecting successfully.</li>
+<li><strong>autosave</strong>: Whether the database should be automatically saved.</li>
+<li><strong>autosaveInterval</strong>: Interval for the autosave (in milliseconds).</li>
+<li><strong>restoreSettings</strong>: Whether it should restore settings from the loaded database, if it exists. Any additional settings will overwrite the loaded settings.</li>
+<li><strong>overwriteExisting</strong>: Whether the existing database (same filepath) should be overwritten.</li>
 </ul>
 <h2>Query functions</h2>
 <ul>

@@ -15,15 +15,18 @@ const db = require('trustdb');
 Connect to the database, given a filepath and desired settings.
 
 ```js
-await db.connect('/path/to/file.json', {
-  autosave: true, // default: false
-  autosaveInterval: 10000, // in ms; default: 4000
+await db.connect({
+  filepath: '/path/to/file.json',
+  autosave: true,
+  autosaveInterval: 10000,
+  restoreSettings: false,
+  overwriteExisting: false,
 });
 ```
 
 Create a collection.
 ```js
-const repoCollection = db.createCollection('repoCollection');
+const collection = db.createCollection('repository_collection');
 ```
 
 Optional: add event listeners for events like `autosave`, `insert`, `find`, `remove` or `update`.
@@ -32,26 +35,26 @@ The first parameter for collection events will always be an array of altered or 
 
 ```js
 // Parameter `err` will be undefined on success.
-db.on('autosave', err => {
+db.on('autosave', (err) => {
   if (err instanceof Error) {
     console.error(err);
   }
 });
 
-repoCollection.on('insert', (insertedDocs, allDocs) => {
-  console.log(`Number of documents in ${repoCollection.name} after insert: ${allDocs.length}`);
+collection.on('insert', (insertedDocs, allDocs) => {
+  console.log(`Number of documents in ${collection.name} after insert: ${allDocs.length}`);
 });
 
-repoCollection.on('find', (foundDocs, allDocs) => {
-  console.log(`Number of matching documents found in ${repoCollection.name}: ${foundDocs.length}`);
+collection.on('find', (foundDocs, allDocs) => {
+  console.log(`Number of matching documents found in ${collection.name}: ${foundDocs.length}`);
 });
 
-repoCollection.on('remove', (removedDocs, allDocs) => {
-  console.log(`Number of removed documents in ${repoCollection.name}: ${removedDocs.length}`);
+collection.on('remove', (removedDocs, allDocs) => {
+  console.log(`Number of removed documents in ${collection.name}: ${removedDocs.length}`);
 });
 
-repoCollection.on('update', (updatedDocs, allDocs) => {
-  console.log(`Number of updated documents in ${repoCollection.name}: ${updatedDocs.length}`);
+collection.on('update', (updatedDocs, allDocs) => {
+  console.log(`Number of updated documents in ${collection.name}: ${updatedDocs.length}`);
 });
 ```
 
@@ -61,98 +64,102 @@ Insert documents.
 const repositories = [{
     url: 'https://github.com/qysp/trustdb',
     title: 'trustdb',
-    description: 'Promise-based, lightweight in-memory and persistent JavaScript/JSON database.'
+    description: 'Lightweight in-memory and persistent JavaScript/JSON database.',
   }, {
     url: 'https://github.com/techfort/LokiJS',
     title: 'LokiJS',
-    description: 'Fast document oriented javascript in-memory database'
+    description: 'Fast document oriented javascript in-memory database',
 }];
 
 // Insert them as an array or each document as an individual parameter.
-repoCollection.insert(repositories);
-repoCollection.insert({
+collection.insert(repositories);
+collection.insert({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
-  description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
+  description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.',
 });
 ```
 
 Search for documents.
 ```js
 // Use query objects or custom filter functions to find matching documents.
-repoCollection.find({ description: { regExp: /lightweight/ } });
-repoCollection.find(doc => /lightweight/.test(doc.description));
+collection.find({ description: { regExp: /lightweight/ } });
+collection.find((doc) => /lightweight/.test(doc.description));
 
-repoCollection.findOne({ title: { regExp: /js$/i } });
-repoCollection.findOne(doc => /js$/i.test(doc.description));
+collection.findOne({ title: { regExp: /js$/i } });
+collection.findOne((doc) => /js$/i.test(doc.description));
 
 // Find a document using its ID.
-repoCollection.findById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
+collection.findById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
 ```
 
 Sort your results.
 ```js
 // Note the second parameter is set to `true`.
-// It will return a `Results` instance you can do the sorting on.
-repoCollection.find({ title: { regExp: /js$/i } }, true)
-  .then(result => {
-    return result
-      .limit(10) // limit the amount of documents to sort to 10
-      .simpleSort('title') // Sort by property `title`
-      .documents // get the sorted documents
-  });
+// It will return a `Results` instance you can sort, limit, map and so on.
+collection.find({ title: { regExp: /javascript/i } }, true)
+  .limit(10)
+  .simpleSort('title')
+  .map((doc) => {
+    return {
+      ...doc,
+      tags: [ 'javascript' ],
+    };
+  })
+  .documents;
 ```
 
 Remove documents.
 ```js
 // Remove all documents that match the given object.
 // Pass in `true` as the second parameter to only remove the first matching document.
-repoCollection.removeExact({
+collection.removeExact({
   url: 'https://github.com/nodejs/node',
   title: 'Node.js',
   description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
 });
 
 // Use query objects or custom filter functions to find matching documents.
-repoCollection.remove({ title: { re: /js$/i } });
-repoCollection.remove(doc => doc.title.startsWith('trust'));
+collection.remove({ title: { re: /js$/i } });
+collection.remove((doc) => doc.title.startsWith('trust'));
 
-repoCollection.removeOne({ title: { re: /js$/i } });
-repoCollection.removeOne(doc => doc.title.startsWith('trust'));
+collection.removeOne({ title: { re: /js$/i } });
+collection.removeOne((doc) => doc.title.startsWith('trust'));
 
 // Remove a document using its ID.
-repoCollection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
+collection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
 ```
 
 Update documents.
 ```js
 // Update all documents that match the query with another object.
-repoCollection.update(
+collection.update(
   { description: { regExp: /database/ } },
   { tags: [ 'database' ] }
 );
 
 // Update all documents with your own custom filter and update functions.
-repoCollection.update(
-  doc => /runtime/.test(doc.description),
-  doc => doc.tags = [ 'runtime' ]
+collection.update(
+  (doc) => /runtime/i.test(doc.description),
+  (doc) => doc.tags = [ 'runtime' ]
 );
 
 // But you can obviously also combine the two features.
-repoCollection.update(
-  doc => /runtime/.test(doc.description),
+collection.update(
+  (doc) => /runtime/i.test(doc.description),
   { tags: [ 'runtime' ] }
 );
 
 // Update a document using its ID.
-repoCollection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
+collection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
 ```
 
 ## Settings
-  * **autosave**: whether the database should be automatically saved.
-  * **autosaveInterval**: interval for the autosave (in milliseconds).
-  * **restoreSettings**: whether TrustDB should restore settings from the loaded database (if it exists). Any additional settings will overwrite the loaded settings.
-  * **overwriteExisting**: whether the existing database with the same filepath (if it exists) should be overwritten.
+  * **filepath**: Filepath for the database. Database cannot be saved if omitted. Can be added at any point in time after connecting successfully.
+  * **autosave**: Whether the database should be automatically saved.
+  * **autosaveInterval**: Interval for the autosave (in milliseconds).
+  * **restoreSettings**: Whether it should restore settings from the loaded database, if it exists. Any additional settings will overwrite the loaded settings.
+  * **overwriteExisting**: Whether the existing database (same filepath) should be overwritten.
 
 ## Query functions
   * equal

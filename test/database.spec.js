@@ -5,13 +5,14 @@ const Collection = require('../lib/collection');
 describe('Database', function() {
   describe('#connect()', function() {
     it('should create a new database', async function() {
-      await db.connect('/tmp/test_db.json', {
+      await db.connect({
+        filepath: '/tmp/test_db.json',
         overwriteExisting: true,
       });
 
       expect(db.filepath).to.equal('/tmp/test_db.json');
-      expect(db.collections).to.have.length(0);
-      expect(db.autosave).to.be(false);
+      expect(db.collections).to.be.empty();
+      expect(db.connected).to.be(true);
     });
   });
 
@@ -28,7 +29,7 @@ describe('Database', function() {
     it('should delete the correct collection', function() {
       const collection = db.deleteCollection('test_collection1');
 
-      expect(db.collections).to.have.length(0);
+      expect(db.collections).to.be.empty();
       expect(collection.name).to.equal('test_collection1');
     });
   });
@@ -83,6 +84,16 @@ describe('Database', function() {
   describe('#deleteDatabase()', function() {
     it('should delete the database', function(done) {
       db.deleteDatabase().then(done).catch(done);
+    });
+  });
+
+  describe('#disconnect()', function() {
+    it('should close the database connection', function(done) {
+      db.disconnect().then(() => {
+        expect(db.connected).to.be(false);
+        expect(db.collections).to.be.empty();
+        done();
+      }).catch(done);
     });
   });
 });

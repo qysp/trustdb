@@ -1,7 +1,7 @@
 {
   "name": "trustdb",
-  "version": "2.0.1",
-  "description": "Promise-based, lightweight in-memory and persistent JavaScript/JSON database.",
+  "version": "2.1.0",
+  "description": "Lightweight in-memory and persistent JavaScript/JSON database.",
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",

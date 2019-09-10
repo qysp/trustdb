@@ -65,6 +65,13 @@
           "instanc",
           "trustdb"
         ],
+        "TrustDB.html#connected": [
+          "connect",
+          "databas",
+          "member",
+          "state",
+          "trustdb#connect"
+        ],
         "TrustDB.html#filepath": [
           "databas",
           "filepath",
@@ -117,6 +124,24 @@
           "new",
           "set",
           "trustdb#autosaveinterv"
+        ],
+        "TrustDB.html#disconnect": [
+          "autosav",
+          "clear",
+          "close",
+          "collect",
+          "connect",
+          "databas",
+          "disabl",
+          "disconnect",
+          "document",
+          "event",
+          "function",
+          "listen",
+          "lt;async&gt",
+          "remov",
+          "save",
+          "trustdb#disconnect"
         ],
         "TrustDB.html#createCollection": [
           "ad",
@@ -243,7 +268,6 @@
           "databas",
           "exist",
           "file",
-          "filepath",
           "function",
           "instanc",
           "load",
@@ -417,15 +441,18 @@
           "remov",
           "removeon"
         ],
-        "Collection.html#removeById": [
-          "collection#removebyid",
+        "Collection.html#update": [
+          "array.&lt;object&gt",
+          "collect",
+          "collection#upd",
+          "custom",
           "document",
+          "filter",
           "function",
-          "id",
           "match",
-          "object",
-          "remov",
-          "removebyid"
+          "pass",
+          "queri",
+          "updat"
         ],
         "Collection.html#updateById": [
           "collection#updatebyid",
@@ -445,18 +472,15 @@
           "document",
           "function"
         ],
-        "Collection.html#update": [
-          "array.&lt;object&gt",
-          "collect",
-          "collection#upd",
-          "custom",
+        "Collection.html#removeById": [
+          "collection#removebyid",
           "document",
-          "filter",
           "function",
+          "id",
           "match",
-          "pass",
-          "queri",
-          "updat"
+          "object",
+          "remov",
+          "removebyid"
         ],
         "Result.html": [
           "class",
@@ -509,6 +533,15 @@
           "sortfn",
           "us"
         ],
+        "Result.html#map": [
+          "custom",
+          "function",
+          "map",
+          "mapfn",
+          "result",
+          "result#map",
+          "us"
+        ],
         "Result.html#limit": [
           "function",
           "limit",
@@ -518,7 +551,7 @@
           "valu"
         ]
       },
-      "length": 47
+      "length": 50
     },
     "tokenStore": {
       "root": {
@@ -659,10 +692,6 @@
                           "TrustDB.html#moveDatabase": {
                             "ref": "TrustDB.html#moveDatabase",
                             "tf": 25
-                          },
-                          "TrustDB.html#connect": {
-                            "ref": "TrustDB.html#connect",
-                            "tf": 20
                           },
                           "TrustDB.html#save": {
                             "ref": "TrustDB.html#save",
@@ -845,6 +874,10 @@
                       "docs": {},
                       "n": {
                         "docs": {
+                          "TrustDB.html#disconnect": {
+                            "ref": "TrustDB.html#disconnect",
+                            "tf": 110
+                          },
                           "TrustDB.html#createCollection": {
                             "ref": "TrustDB.html#createCollection",
                             "tf": 110
@@ -921,9 +954,9 @@
                             "ref": "Collection.html#removeOne",
                             "tf": 115.55555555555556
                           },
-                          "Collection.html#removeById": {
-                            "ref": "Collection.html#removeById",
-                            "tf": 110
+                          "Collection.html#update": {
+                            "ref": "Collection.html#update",
+                            "tf": 115.55555555555556
                           },
                           "Collection.html#updateById": {
                             "ref": "Collection.html#updateById",
@@ -933,9 +966,9 @@
                             "ref": "Collection.html#clear",
                             "tf": 110
                           },
-                          "Collection.html#update": {
-                            "ref": "Collection.html#update",
-                            "tf": 115.55555555555556
+                          "Collection.html#removeById": {
+                            "ref": "Collection.html#removeById",
+                            "tf": 110
                           },
                           "Result.html#simpleSort": {
                             "ref": "Result.html#simpleSort",
@@ -943,6 +976,10 @@
                           },
                           "Result.html#sort": {
                             "ref": "Result.html#sort",
+                            "tf": 118.33333333333333
+                          },
+                          "Result.html#map": {
+                            "ref": "Result.html#map",
                             "tf": 118.33333333333333
                           },
                           "Result.html#limit": {
@@ -1117,13 +1154,13 @@
                 "ref": "Collection.html#findById",
                 "tf": 45.83333333333333
               },
-              "Collection.html#removeById": {
-                "ref": "Collection.html#removeById",
-                "tf": 45.83333333333333
-              },
               "Collection.html#updateById": {
                 "ref": "Collection.html#updateById",
                 "tf": 37.5
+              },
+              "Collection.html#removeById": {
+                "ref": "Collection.html#removeById",
+                "tf": 45.83333333333333
               }
             }
           }
@@ -1169,6 +1206,87 @@
                     "index.html": {
                       "ref": "index.html",
                       "tf": 110
+                    }
+                  }
+                }
+              }
+            },
+            "m": {
+              "docs": {},
+              "o": {
+                "docs": {},
+                "v": {
+                  "docs": {
+                    "TrustDB.html#disconnect": {
+                      "ref": "TrustDB.html#disconnect",
+                      "tf": 3.8461538461538463
+                    },
+                    "Collection.html#removeExact": {
+                      "ref": "Collection.html#removeExact",
+                      "tf": 8.333333333333332
+                    },
+                    "Collection.html#remove": {
+                      "ref": "Collection.html#remove",
+                      "tf": 689.5833333333334
+                    },
+                    "Collection.html#removeOne": {
+                      "ref": "Collection.html#removeOne",
+                      "tf": 5.555555555555555
+                    },
+                    "Collection.html#removeById": {
+                      "ref": "Collection.html#removeById",
+                      "tf": 12.5
+                    }
+                  },
+                  "e": {
+                    "docs": {},
+                    "e": {
+                      "docs": {},
+                      "x": {
+                        "docs": {},
+                        "a": {
+                          "docs": {},
+                          "c": {
+                            "docs": {},
+                            "t": {
+                              "docs": {
+                                "Collection.html#removeExact": {
+                                  "ref": "Collection.html#removeExact",
+                                  "tf": 675
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "o": {
+                      "docs": {},
+                      "n": {
+                        "docs": {
+                          "Collection.html#removeOne": {
+                            "ref": "Collection.html#removeOne",
+                            "tf": 683.3333333333334
+                          }
+                        }
+                      }
+                    },
+                    "b": {
+                      "docs": {},
+                      "y": {
+                        "docs": {},
+                        "i": {
+                          "docs": {},
+                          "d": {
+                            "docs": {
+                              "Collection.html#removeById": {
+                                "ref": "Collection.html#removeById",
+                                "tf": 683.3333333333334
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -1234,6 +1352,10 @@
                       },
                       "Result.html#sort": {
                         "ref": "Result.html#sort",
+                        "tf": 8.333333333333332
+                      },
+                      "Result.html#map": {
+                        "ref": "Result.html#map",
                         "tf": 8.333333333333332
                       },
                       "Result.html#limit": {
@@ -1367,6 +1489,20 @@
                           }
                         }
                       },
+                      "m": {
+                        "docs": {},
+                        "a": {
+                          "docs": {},
+                          "p": {
+                            "docs": {
+                              "Result.html#map": {
+                                "ref": "Result.html#map",
+                                "tf": 1150
+                              }
+                            }
+                          }
+                        }
+                      },
                       "l": {
                         "docs": {},
                         "i": {
@@ -1382,83 +1518,6 @@
                                     "tf": 1150
                                   }
                                 }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "m": {
-              "docs": {},
-              "o": {
-                "docs": {},
-                "v": {
-                  "docs": {
-                    "Collection.html#removeExact": {
-                      "ref": "Collection.html#removeExact",
-                      "tf": 8.333333333333332
-                    },
-                    "Collection.html#remove": {
-                      "ref": "Collection.html#remove",
-                      "tf": 689.5833333333334
-                    },
-                    "Collection.html#removeOne": {
-                      "ref": "Collection.html#removeOne",
-                      "tf": 5.555555555555555
-                    },
-                    "Collection.html#removeById": {
-                      "ref": "Collection.html#removeById",
-                      "tf": 12.5
-                    }
-                  },
-                  "e": {
-                    "docs": {},
-                    "e": {
-                      "docs": {},
-                      "x": {
-                        "docs": {},
-                        "a": {
-                          "docs": {},
-                          "c": {
-                            "docs": {},
-                            "t": {
-                              "docs": {
-                                "Collection.html#removeExact": {
-                                  "ref": "Collection.html#removeExact",
-                                  "tf": 675
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "o": {
-                      "docs": {},
-                      "n": {
-                        "docs": {
-                          "Collection.html#removeOne": {
-                            "ref": "Collection.html#removeOne",
-                            "tf": 683.3333333333334
-                          }
-                        }
-                      }
-                    },
-                    "b": {
-                      "docs": {},
-                      "y": {
-                        "docs": {},
-                        "i": {
-                          "docs": {},
-                          "d": {
-                            "docs": {
-                              "Collection.html#removeById": {
-                                "ref": "Collection.html#removeById",
-                                "tf": 683.3333333333334
                               }
                             }
                           }
@@ -1515,25 +1574,58 @@
                       },
                       "#": {
                         "docs": {},
-                        "f": {
+                        "c": {
                           "docs": {},
-                          "i": {
+                          "o": {
                             "docs": {},
-                            "l": {
+                            "n": {
                               "docs": {},
-                              "e": {
+                              "n": {
                                 "docs": {},
-                                "p": {
+                                "e": {
                                   "docs": {},
-                                  "a": {
+                                  "c": {
                                     "docs": {},
                                     "t": {
+                                      "docs": {
+                                        "TrustDB.html#connected": {
+                                          "ref": "TrustDB.html#connected",
+                                          "tf": 1150
+                                        },
+                                        "TrustDB.html#connect": {
+                                          "ref": "TrustDB.html#connect",
+                                          "tf": 1150
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "f": {
+                                "docs": {},
+                                "i": {
+                                  "docs": {},
+                                  "g": {
+                                    "docs": {},
+                                    "u": {
                                       "docs": {},
-                                      "h": {
-                                        "docs": {
-                                          "TrustDB.html#filepath": {
-                                            "ref": "TrustDB.html#filepath",
-                                            "tf": 1150
+                                      "r": {
+                                        "docs": {},
+                                        "e": {
+                                          "docs": {},
+                                          "s": {
+                                            "docs": {},
+                                            "e": {
+                                              "docs": {},
+                                              "t": {
+                                                "docs": {
+                                                  "TrustDB.html#configureSettings": {
+                                                    "ref": "TrustDB.html#configureSettings",
+                                                    "tf": 1150
+                                                  }
+                                                }
+                                              }
+                                            }
                                           }
                                         }
                                       }
@@ -1541,11 +1633,28 @@
                                   }
                                 }
                               }
+                            },
+                            "l": {
+                              "docs": {},
+                              "l": {
+                                "docs": {},
+                                "e": {
+                                  "docs": {},
+                                  "c": {
+                                    "docs": {},
+                                    "t": {
+                                      "docs": {
+                                        "TrustDB.html#collections": {
+                                          "ref": "TrustDB.html#collections",
+                                          "tf": 1150
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
                             }
-                          }
-                        },
-                        "c": {
-                          "docs": {},
+                          },
                           "r": {
                             "docs": {},
                             "e": {
@@ -1596,81 +1705,6 @@
                               }
                             }
                           },
-                          "o": {
-                            "docs": {},
-                            "l": {
-                              "docs": {},
-                              "l": {
-                                "docs": {},
-                                "e": {
-                                  "docs": {},
-                                  "c": {
-                                    "docs": {},
-                                    "t": {
-                                      "docs": {
-                                        "TrustDB.html#collections": {
-                                          "ref": "TrustDB.html#collections",
-                                          "tf": 1150
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            },
-                            "n": {
-                              "docs": {},
-                              "f": {
-                                "docs": {},
-                                "i": {
-                                  "docs": {},
-                                  "g": {
-                                    "docs": {},
-                                    "u": {
-                                      "docs": {},
-                                      "r": {
-                                        "docs": {},
-                                        "e": {
-                                          "docs": {},
-                                          "s": {
-                                            "docs": {},
-                                            "e": {
-                                              "docs": {},
-                                              "t": {
-                                                "docs": {
-                                                  "TrustDB.html#configureSettings": {
-                                                    "ref": "TrustDB.html#configureSettings",
-                                                    "tf": 1150
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "n": {
-                                "docs": {},
-                                "e": {
-                                  "docs": {},
-                                  "c": {
-                                    "docs": {},
-                                    "t": {
-                                      "docs": {
-                                        "TrustDB.html#connect": {
-                                          "ref": "TrustDB.html#connect",
-                                          "tf": 1150
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
                           "l": {
                             "docs": {},
                             "e": {
@@ -1682,6 +1716,35 @@
                                     "TrustDB.html#clear": {
                                       "ref": "TrustDB.html#clear",
                                       "tf": 1150
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "f": {
+                          "docs": {},
+                          "i": {
+                            "docs": {},
+                            "l": {
+                              "docs": {},
+                              "e": {
+                                "docs": {},
+                                "p": {
+                                  "docs": {},
+                                  "a": {
+                                    "docs": {},
+                                    "t": {
+                                      "docs": {},
+                                      "h": {
+                                        "docs": {
+                                          "TrustDB.html#filepath": {
+                                            "ref": "TrustDB.html#filepath",
+                                            "tf": 1150
+                                          }
+                                        }
+                                      }
                                     }
                                   }
                                 }
@@ -1852,6 +1915,38 @@
                         },
                         "d": {
                           "docs": {},
+                          "i": {
+                            "docs": {},
+                            "s": {
+                              "docs": {},
+                              "c": {
+                                "docs": {},
+                                "o": {
+                                  "docs": {},
+                                  "n": {
+                                    "docs": {},
+                                    "n": {
+                                      "docs": {},
+                                      "e": {
+                                        "docs": {},
+                                        "c": {
+                                          "docs": {},
+                                          "t": {
+                                            "docs": {
+                                              "TrustDB.html#disconnect": {
+                                                "ref": "TrustDB.html#disconnect",
+                                                "tf": 1150
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
                           "e": {
                             "docs": {},
                             "l": {
@@ -2110,6 +2205,10 @@
                             "ref": "TrustDB.html#totalSize",
                             "tf": 16.666666666666664
                           },
+                          "TrustDB.html#disconnect": {
+                            "ref": "TrustDB.html#disconnect",
+                            "tf": 3.8461538461538463
+                          },
                           "Collection.html#documents": {
                             "ref": "Collection.html#documents",
                             "tf": 775
@@ -2158,9 +2257,9 @@
                             "ref": "Collection.html#removeOne",
                             "tf": 5.555555555555555
                           },
-                          "Collection.html#removeById": {
-                            "ref": "Collection.html#removeById",
-                            "tf": 12.5
+                          "Collection.html#update": {
+                            "ref": "Collection.html#update",
+                            "tf": 5.555555555555555
                           },
                           "Collection.html#updateById": {
                             "ref": "Collection.html#updateById",
@@ -2170,9 +2269,9 @@
                             "ref": "Collection.html#clear",
                             "tf": 12.5
                           },
-                          "Collection.html#update": {
-                            "ref": "Collection.html#update",
-                            "tf": 5.555555555555555
+                          "Collection.html#removeById": {
+                            "ref": "Collection.html#removeById",
+                            "tf": 12.5
                           },
                           "Result.html#documents": {
                             "ref": "Result.html#documents",
@@ -2202,6 +2301,10 @@
                     "docs": {},
                     "s": {
                       "docs": {
+                        "TrustDB.html#connected": {
+                          "ref": "TrustDB.html#connected",
+                          "tf": 16.666666666666664
+                        },
                         "TrustDB.html#filepath": {
                           "ref": "TrustDB.html#filepath",
                           "tf": 25
@@ -2217,6 +2320,10 @@
                         "TrustDB.html#size": {
                           "ref": "TrustDB.html#size",
                           "tf": 16.666666666666664
+                        },
+                        "TrustDB.html#disconnect": {
+                          "ref": "TrustDB.html#disconnect",
+                          "tf": 7.6923076923076925
                         },
                         "TrustDB.html#createCollection": {
                           "ref": "TrustDB.html#createCollection",
@@ -2286,6 +2393,36 @@
                       "TrustDB.html#autosave": {
                         "ref": "TrustDB.html#autosave",
                         "tf": 16.666666666666664
+                      },
+                      "TrustDB.html#disconnect": {
+                        "ref": "TrustDB.html#disconnect",
+                        "tf": 3.8461538461538463
+                      }
+                    }
+                  }
+                }
+              },
+              "c": {
+                "docs": {},
+                "o": {
+                  "docs": {},
+                  "n": {
+                    "docs": {},
+                    "n": {
+                      "docs": {},
+                      "e": {
+                        "docs": {},
+                        "c": {
+                          "docs": {},
+                          "t": {
+                            "docs": {
+                              "TrustDB.html#disconnect": {
+                                "ref": "TrustDB.html#disconnect",
+                                "tf": 683.3333333333334
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -2509,6 +2646,10 @@
                 "docs": {},
                 "r": {
                   "docs": {
+                    "TrustDB.html#disconnect": {
+                      "ref": "TrustDB.html#disconnect",
+                      "tf": 3.8461538461538463
+                    },
                     "TrustDB.html#clear": {
                       "ref": "TrustDB.html#clear",
                       "tf": 762.5
@@ -2516,6 +2657,20 @@
                     "Collection.html#clear": {
                       "ref": "Collection.html#clear",
                       "tf": 762.5
+                    }
+                  }
+                }
+              }
+            },
+            "o": {
+              "docs": {},
+              "s": {
+                "docs": {},
+                "e": {
+                  "docs": {
+                    "TrustDB.html#disconnect": {
+                      "ref": "TrustDB.html#disconnect",
+                      "tf": 3.8461538461538463
                     }
                   }
                 }
@@ -2616,6 +2771,71 @@
           },
           "o": {
             "docs": {},
+            "n": {
+              "docs": {},
+              "n": {
+                "docs": {},
+                "e": {
+                  "docs": {},
+                  "c": {
+                    "docs": {},
+                    "t": {
+                      "docs": {
+                        "TrustDB.html#connected": {
+                          "ref": "TrustDB.html#connected",
+                          "tf": 766.6666666666666
+                        },
+                        "TrustDB.html#disconnect": {
+                          "ref": "TrustDB.html#disconnect",
+                          "tf": 3.8461538461538463
+                        },
+                        "TrustDB.html#connect": {
+                          "ref": "TrustDB.html#connect",
+                          "tf": 677.7777777777778
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "f": {
+                "docs": {},
+                "i": {
+                  "docs": {},
+                  "g": {
+                    "docs": {},
+                    "u": {
+                      "docs": {},
+                      "r": {
+                        "docs": {
+                          "TrustDB.html#configureSettings": {
+                            "ref": "TrustDB.html#configureSettings",
+                            "tf": 16.666666666666664
+                          }
+                        },
+                        "e": {
+                          "docs": {},
+                          "s": {
+                            "docs": {},
+                            "e": {
+                              "docs": {},
+                              "t": {
+                                "docs": {
+                                  "TrustDB.html#configureSettings": {
+                                    "ref": "TrustDB.html#configureSettings",
+                                    "tf": 700
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
             "l": {
               "docs": {},
               "l": {
@@ -2637,6 +2857,10 @@
                         "TrustDB.html#totalSize": {
                           "ref": "TrustDB.html#totalSize",
                           "tf": 16.666666666666664
+                        },
+                        "TrustDB.html#disconnect": {
+                          "ref": "TrustDB.html#disconnect",
+                          "tf": 7.6923076923076925
                         },
                         "TrustDB.html#createCollection": {
                           "ref": "TrustDB.html#createCollection",
@@ -2726,13 +2950,13 @@
                           "ref": "Collection.html#removeOne",
                           "tf": 5.555555555555555
                         },
-                        "Collection.html#clear": {
-                          "ref": "Collection.html#clear",
-                          "tf": 12.5
-                        },
                         "Collection.html#update": {
                           "ref": "Collection.html#update",
                           "tf": 5.555555555555555
+                        },
+                        "Collection.html#clear": {
+                          "ref": "Collection.html#clear",
+                          "tf": 12.5
                         }
                       },
                       "i": {
@@ -3063,63 +3287,6 @@
                   }
                 }
               }
-            },
-            "n": {
-              "docs": {},
-              "f": {
-                "docs": {},
-                "i": {
-                  "docs": {},
-                  "g": {
-                    "docs": {},
-                    "u": {
-                      "docs": {},
-                      "r": {
-                        "docs": {
-                          "TrustDB.html#configureSettings": {
-                            "ref": "TrustDB.html#configureSettings",
-                            "tf": 16.666666666666664
-                          }
-                        },
-                        "e": {
-                          "docs": {},
-                          "s": {
-                            "docs": {},
-                            "e": {
-                              "docs": {},
-                              "t": {
-                                "docs": {
-                                  "TrustDB.html#configureSettings": {
-                                    "ref": "TrustDB.html#configureSettings",
-                                    "tf": 700
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "n": {
-                "docs": {},
-                "e": {
-                  "docs": {},
-                  "c": {
-                    "docs": {},
-                    "t": {
-                      "docs": {
-                        "TrustDB.html#connect": {
-                          "ref": "TrustDB.html#connect",
-                          "tf": 672.7777777777778
-                        }
-                      }
-                    }
-                  }
-                }
-              }
             }
           },
           "u": {
@@ -3162,6 +3329,10 @@
                       },
                       "Result.html#sort": {
                         "ref": "Result.html#sort",
+                        "tf": 8.333333333333332
+                      },
+                      "Result.html#map": {
+                        "ref": "Result.html#map",
                         "tf": 8.333333333333332
                       }
                     }
@@ -3224,6 +3395,17 @@
                       }
                     }
                   }
+                },
+                "e": {
+                  "docs": {},
+                  "n": {
+                    "docs": {
+                      "TrustDB.html#disconnect": {
+                        "ref": "TrustDB.html#disconnect",
+                        "tf": 3.8461538461538463
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -3262,6 +3444,10 @@
                             "docs": {},
                             "t": {
                               "docs": {
+                                "TrustDB.html#disconnect": {
+                                  "ref": "TrustDB.html#disconnect",
+                                  "tf": 33.33333333333333
+                                },
                                 "TrustDB.html#saveDatabase": {
                                   "ref": "TrustDB.html#saveDatabase",
                                   "tf": 33.33333333333333
@@ -3276,7 +3462,7 @@
                                 },
                                 "TrustDB.html#connect": {
                                   "ref": "TrustDB.html#connect",
-                                  "tf": 20
+                                  "tf": 25
                                 },
                                 "TrustDB.html#save": {
                                   "ref": "TrustDB.html#save",
@@ -3351,6 +3537,10 @@
                   "docs": {},
                   "r": {
                     "docs": {
+                      "TrustDB.html#connected": {
+                        "ref": "TrustDB.html#connected",
+                        "tf": 110
+                      },
                       "TrustDB.html#filepath": {
                         "ref": "TrustDB.html#filepath",
                         "tf": 110
@@ -3516,17 +3706,312 @@
                       "ref": "Collection.html#removeOne",
                       "tf": 5.555555555555555
                     },
-                    "Collection.html#removeById": {
-                      "ref": "Collection.html#removeById",
-                      "tf": 12.5
+                    "Collection.html#update": {
+                      "ref": "Collection.html#update",
+                      "tf": 5.555555555555555
                     },
                     "Collection.html#updateById": {
                       "ref": "Collection.html#updateById",
                       "tf": 12.5
                     },
-                    "Collection.html#update": {
-                      "ref": "Collection.html#update",
-                      "tf": 5.555555555555555
+                    "Collection.html#removeById": {
+                      "ref": "Collection.html#removeById",
+                      "tf": 12.5
+                    }
+                  }
+                }
+              }
+            },
+            "p": {
+              "docs": {
+                "Result.html#map": {
+                  "ref": "Result.html#map",
+                  "tf": 716.6666666666666
+                }
+              },
+              "f": {
+                "docs": {},
+                "n": {
+                  "docs": {
+                    "Result.html#map": {
+                      "ref": "Result.html#map",
+                      "tf": 50
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "s": {
+          "docs": {},
+          "t": {
+            "docs": {},
+            "a": {
+              "docs": {},
+              "t": {
+                "docs": {},
+                "e": {
+                  "docs": {
+                    "TrustDB.html#connected": {
+                      "ref": "TrustDB.html#connected",
+                      "tf": 16.666666666666664
+                    },
+                    "TrustDB.html#autosave": {
+                      "ref": "TrustDB.html#autosave",
+                      "tf": 16.666666666666664
+                    }
+                  }
+                }
+              }
+            },
+            "r": {
+              "docs": {},
+              "i": {
+                "docs": {},
+                "n": {
+                  "docs": {},
+                  "g": {
+                    "docs": {
+                      "Result.html#simpleSort": {
+                        "ref": "Result.html#simpleSort",
+                        "tf": 3.8461538461538463
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "i": {
+            "docs": {},
+            "z": {
+              "docs": {},
+              "e": {
+                "docs": {
+                  "TrustDB.html#size": {
+                    "ref": "TrustDB.html#size",
+                    "tf": 750
+                  },
+                  "Collection.html#size": {
+                    "ref": "Collection.html#size",
+                    "tf": 750
+                  }
+                }
+              }
+            },
+            "n": {
+              "docs": {},
+              "g": {
+                "docs": {},
+                "l": {
+                  "docs": {
+                    "Collection.html#insertOne": {
+                      "ref": "Collection.html#insertOne",
+                      "tf": 12.5
+                    }
+                  }
+                }
+              }
+            },
+            "m": {
+              "docs": {},
+              "p": {
+                "docs": {},
+                "l": {
+                  "docs": {},
+                  "e": {
+                    "docs": {},
+                    "s": {
+                      "docs": {},
+                      "o": {
+                        "docs": {},
+                        "r": {
+                          "docs": {},
+                          "t": {
+                            "docs": {
+                              "Result.html#simpleSort": {
+                                "ref": "Result.html#simpleSort",
+                                "tf": 683.3333333333334
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "e": {
+            "docs": {},
+            "t": {
+              "docs": {
+                "TrustDB.html#autosaveInterval": {
+                  "ref": "TrustDB.html#autosaveInterval",
+                  "tf": 12.5
+                },
+                "TrustDB.html#saveDatabase": {
+                  "ref": "TrustDB.html#saveDatabase",
+                  "tf": 7.142857142857142
+                },
+                "TrustDB.html#configureSettings": {
+                  "ref": "TrustDB.html#configureSettings",
+                  "tf": 66.66666666666666
+                },
+                "TrustDB.html#connect": {
+                  "ref": "TrustDB.html#connect",
+                  "tf": 33.33333333333333
+                },
+                "TrustDB.html#save": {
+                  "ref": "TrustDB.html#save",
+                  "tf": 7.142857142857142
+                }
+              }
+            }
+          },
+          "a": {
+            "docs": {},
+            "v": {
+              "docs": {},
+              "e": {
+                "docs": {
+                  "TrustDB.html#disconnect": {
+                    "ref": "TrustDB.html#disconnect",
+                    "tf": 33.33333333333333
+                  },
+                  "TrustDB.html#saveDatabase": {
+                    "ref": "TrustDB.html#saveDatabase",
+                    "tf": 7.142857142857142
+                  },
+                  "TrustDB.html#save": {
+                    "ref": "TrustDB.html#save",
+                    "tf": 690.4761904761905
+                  }
+                },
+                "d": {
+                  "docs": {},
+                  "a": {
+                    "docs": {},
+                    "t": {
+                      "docs": {},
+                      "a": {
+                        "docs": {},
+                        "b": {
+                          "docs": {},
+                          "a": {
+                            "docs": {},
+                            "s": {
+                              "docs": {
+                                "TrustDB.html#saveDatabase": {
+                                  "ref": "TrustDB.html#saveDatabase",
+                                  "tf": 683.3333333333334
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "m": {
+              "docs": {},
+              "e": {
+                "docs": {
+                  "TrustDB.html#createCollection": {
+                    "ref": "TrustDB.html#createCollection",
+                    "tf": 4.545454545454546
+                  },
+                  "TrustDB.html#addCollection": {
+                    "ref": "TrustDB.html#addCollection",
+                    "tf": 3.225806451612903
+                  }
+                }
+              }
+            }
+          },
+          "p": {
+            "docs": {},
+            "e": {
+              "docs": {},
+              "c": {
+                "docs": {},
+                "i": {
+                  "docs": {},
+                  "f": {
+                    "docs": {
+                      "Result.html#simpleSort": {
+                        "ref": "Result.html#simpleSort",
+                        "tf": 3.8461538461538463
+                      }
+                    },
+                    "i": {
+                      "docs": {
+                        "TrustDB.html#saveDatabase": {
+                          "ref": "TrustDB.html#saveDatabase",
+                          "tf": 7.142857142857142
+                        },
+                        "TrustDB.html#save": {
+                          "ref": "TrustDB.html#save",
+                          "tf": 7.142857142857142
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "o": {
+            "docs": {},
+            "r": {
+              "docs": {},
+              "t": {
+                "docs": {
+                  "Result.html#simpleSort": {
+                    "ref": "Result.html#simpleSort",
+                    "tf": 3.8461538461538463
+                  },
+                  "Result.html#sort": {
+                    "ref": "Result.html#sort",
+                    "tf": 716.6666666666666
+                  }
+                },
+                "f": {
+                  "docs": {},
+                  "n": {
+                    "docs": {
+                      "Result.html#sort": {
+                        "ref": "Result.html#sort",
+                        "tf": 50
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "u": {
+            "docs": {},
+            "p": {
+              "docs": {},
+              "p": {
+                "docs": {},
+                "o": {
+                  "docs": {},
+                  "r": {
+                    "docs": {},
+                    "t": {
+                      "docs": {
+                        "Result.html#simpleSort": {
+                          "ref": "Result.html#simpleSort",
+                          "tf": 3.8461538461538463
+                        }
+                      }
                     }
                   }
                 }
@@ -3583,6 +4068,10 @@
                         "TrustDB.html#autosaveInterval": {
                           "ref": "TrustDB.html#autosaveInterval",
                           "tf": 12.5
+                        },
+                        "TrustDB.html#disconnect": {
+                          "ref": "TrustDB.html#disconnect",
+                          "tf": 3.8461538461538463
                         }
                       },
                       "e": {
@@ -3797,274 +4286,6 @@
             }
           }
         },
-        "s": {
-          "docs": {},
-          "i": {
-            "docs": {},
-            "z": {
-              "docs": {},
-              "e": {
-                "docs": {
-                  "TrustDB.html#size": {
-                    "ref": "TrustDB.html#size",
-                    "tf": 750
-                  },
-                  "Collection.html#size": {
-                    "ref": "Collection.html#size",
-                    "tf": 750
-                  }
-                }
-              }
-            },
-            "n": {
-              "docs": {},
-              "g": {
-                "docs": {},
-                "l": {
-                  "docs": {
-                    "Collection.html#insertOne": {
-                      "ref": "Collection.html#insertOne",
-                      "tf": 12.5
-                    }
-                  }
-                }
-              }
-            },
-            "m": {
-              "docs": {},
-              "p": {
-                "docs": {},
-                "l": {
-                  "docs": {},
-                  "e": {
-                    "docs": {},
-                    "s": {
-                      "docs": {},
-                      "o": {
-                        "docs": {},
-                        "r": {
-                          "docs": {},
-                          "t": {
-                            "docs": {
-                              "Result.html#simpleSort": {
-                                "ref": "Result.html#simpleSort",
-                                "tf": 683.3333333333334
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "t": {
-            "docs": {},
-            "a": {
-              "docs": {},
-              "t": {
-                "docs": {},
-                "e": {
-                  "docs": {
-                    "TrustDB.html#autosave": {
-                      "ref": "TrustDB.html#autosave",
-                      "tf": 16.666666666666664
-                    }
-                  }
-                }
-              }
-            },
-            "r": {
-              "docs": {},
-              "i": {
-                "docs": {},
-                "n": {
-                  "docs": {},
-                  "g": {
-                    "docs": {
-                      "Result.html#simpleSort": {
-                        "ref": "Result.html#simpleSort",
-                        "tf": 3.8461538461538463
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "e": {
-            "docs": {},
-            "t": {
-              "docs": {
-                "TrustDB.html#autosaveInterval": {
-                  "ref": "TrustDB.html#autosaveInterval",
-                  "tf": 12.5
-                },
-                "TrustDB.html#saveDatabase": {
-                  "ref": "TrustDB.html#saveDatabase",
-                  "tf": 7.142857142857142
-                },
-                "TrustDB.html#configureSettings": {
-                  "ref": "TrustDB.html#configureSettings",
-                  "tf": 66.66666666666666
-                },
-                "TrustDB.html#connect": {
-                  "ref": "TrustDB.html#connect",
-                  "tf": 28.333333333333332
-                },
-                "TrustDB.html#save": {
-                  "ref": "TrustDB.html#save",
-                  "tf": 7.142857142857142
-                }
-              }
-            }
-          },
-          "a": {
-            "docs": {},
-            "m": {
-              "docs": {},
-              "e": {
-                "docs": {
-                  "TrustDB.html#createCollection": {
-                    "ref": "TrustDB.html#createCollection",
-                    "tf": 4.545454545454546
-                  },
-                  "TrustDB.html#addCollection": {
-                    "ref": "TrustDB.html#addCollection",
-                    "tf": 3.225806451612903
-                  }
-                }
-              }
-            },
-            "v": {
-              "docs": {},
-              "e": {
-                "docs": {
-                  "TrustDB.html#saveDatabase": {
-                    "ref": "TrustDB.html#saveDatabase",
-                    "tf": 7.142857142857142
-                  },
-                  "TrustDB.html#save": {
-                    "ref": "TrustDB.html#save",
-                    "tf": 690.4761904761905
-                  }
-                },
-                "d": {
-                  "docs": {},
-                  "a": {
-                    "docs": {},
-                    "t": {
-                      "docs": {},
-                      "a": {
-                        "docs": {},
-                        "b": {
-                          "docs": {},
-                          "a": {
-                            "docs": {},
-                            "s": {
-                              "docs": {
-                                "TrustDB.html#saveDatabase": {
-                                  "ref": "TrustDB.html#saveDatabase",
-                                  "tf": 683.3333333333334
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "p": {
-            "docs": {},
-            "e": {
-              "docs": {},
-              "c": {
-                "docs": {},
-                "i": {
-                  "docs": {},
-                  "f": {
-                    "docs": {
-                      "Result.html#simpleSort": {
-                        "ref": "Result.html#simpleSort",
-                        "tf": 3.8461538461538463
-                      }
-                    },
-                    "i": {
-                      "docs": {
-                        "TrustDB.html#saveDatabase": {
-                          "ref": "TrustDB.html#saveDatabase",
-                          "tf": 7.142857142857142
-                        },
-                        "TrustDB.html#save": {
-                          "ref": "TrustDB.html#save",
-                          "tf": 7.142857142857142
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "o": {
-            "docs": {},
-            "r": {
-              "docs": {},
-              "t": {
-                "docs": {
-                  "Result.html#simpleSort": {
-                    "ref": "Result.html#simpleSort",
-                    "tf": 3.8461538461538463
-                  },
-                  "Result.html#sort": {
-                    "ref": "Result.html#sort",
-                    "tf": 716.6666666666666
-                  }
-                },
-                "f": {
-                  "docs": {},
-                  "n": {
-                    "docs": {
-                      "Result.html#sort": {
-                        "ref": "Result.html#sort",
-                        "tf": 50
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "u": {
-            "docs": {},
-            "p": {
-              "docs": {},
-              "p": {
-                "docs": {},
-                "o": {
-                  "docs": {},
-                  "r": {
-                    "docs": {},
-                    "t": {
-                      "docs": {
-                        "Result.html#simpleSort": {
-                          "ref": "Result.html#simpleSort",
-                          "tf": 3.8461538461538463
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
         "e": {
           "docs": {},
           "n": {
@@ -4078,6 +4299,23 @@
                     "TrustDB.html#autosave": {
                       "ref": "TrustDB.html#autosave",
                       "tf": 16.666666666666664
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "v": {
+            "docs": {},
+            "e": {
+              "docs": {},
+              "n": {
+                "docs": {},
+                "t": {
+                  "docs": {
+                    "TrustDB.html#disconnect": {
+                      "ref": "TrustDB.html#disconnect",
+                      "tf": 3.8461538461538463
                     }
                   }
                 }
@@ -4261,6 +4499,10 @@
               "Result.html#sort": {
                 "ref": "Result.html#sort",
                 "tf": 8.333333333333332
+              },
+              "Result.html#map": {
+                "ref": "Result.html#map",
+                "tf": 8.333333333333332
               }
             }
           },
@@ -4306,13 +4548,13 @@
                 "docs": {},
                 "t": {
                   "docs": {
-                    "Collection.html#updateById": {
-                      "ref": "Collection.html#updateById",
-                      "tf": 37.5
-                    },
                     "Collection.html#update": {
                       "ref": "Collection.html#update",
                       "tf": 705.5555555555555
+                    },
+                    "Collection.html#updateById": {
+                      "ref": "Collection.html#updateById",
+                      "tf": 37.5
                     }
                   },
                   "e": {
@@ -4392,7 +4634,7 @@
                                                 },
                                                 "TrustDB.html#connect": {
                                                   "ref": "TrustDB.html#connect",
-                                                  "tf": 20
+                                                  "tf": 25
                                                 },
                                                 "TrustDB.html#save": {
                                                   "ref": "TrustDB.html#save",
@@ -4583,13 +4825,13 @@
                   "docs": {},
                   "t": {
                     "docs": {
-                      "Collection.html#removeById": {
-                        "ref": "Collection.html#removeById",
-                        "tf": 33.33333333333333
-                      },
                       "Collection.html#updateById": {
                         "ref": "Collection.html#updateById",
                         "tf": 25
+                      },
+                      "Collection.html#removeById": {
+                        "ref": "Collection.html#removeById",
+                        "tf": 33.33333333333333
                       }
                     },
                     "|": {
@@ -4789,7 +5031,7 @@
           }
         }
       },
-      "length": 406
+      "length": 433
     },
     "corpusTokens": [
       "ad",
@@ -4809,6 +5051,7 @@
       "case",
       "class",
       "clear",
+      "close",
       "collect",
       "collection#clear",
       "collection#cr",
@@ -4843,11 +5086,13 @@
       "deletedatabas",
       "desc",
       "disabl",
+      "disconnect",
       "doc",
       "document",
       "eixist",
       "emitev",
       "enabl",
+      "event",
       "exist",
       "file",
       "filepath",
@@ -4877,8 +5122,11 @@
       "limit",
       "list",
       "list:class",
+      "listen",
       "load",
       "lt;async&gt",
+      "map",
+      "mapfn",
       "match",
       "member",
       "metadata",
@@ -4909,6 +5157,7 @@
       "result",
       "result#docu",
       "result#limit",
+      "result#map",
       "result#originaldocu",
       "result#simplesort",
       "result#sort",
@@ -4945,6 +5194,7 @@
       "trustdb#createcollect",
       "trustdb#deletecollect",
       "trustdb#deletedatabas",
+      "trustdb#disconnect",
       "trustdb#filepath",
       "trustdb#getcollect",
       "trustdb#movedatabas",
@@ -5010,6 +5260,16 @@
       "summary": "",
       "description": "Creates a TrustDB instance.",
       "body": ""
+    },
+    "TrustDB.html#connected": {
+      "id": "TrustDB.html#connected",
+      "kind": "member",
+      "title": "connected",
+      "longname": "TrustDB#connected",
+      "name": "connected",
+      "tags": "TrustDB#connected connected",
+      "summary": "",
+      "description": "Get the database connection state."
     },
     "TrustDB.html#filepath": {
       "id": "TrustDB.html#filepath",
@@ -5080,6 +5340,16 @@
       "tags": "TrustDB#autosaveInterval autosaveInterval",
       "summary": "",
       "description": "Set a new autosave interval."
+    },
+    "TrustDB.html#disconnect": {
+      "id": "TrustDB.html#disconnect",
+      "kind": "function",
+      "title": "&lt;async&gt; disconnect( [ save ] )",
+      "longname": "TrustDB#disconnect",
+      "name": "disconnect",
+      "tags": "TrustDB#disconnect disconnect",
+      "summary": "",
+      "description": "Close the database connection. Disables autosave, removes the event listeners for the database and its collections, clears all documents and collections."
     },
     "TrustDB.html#createCollection": {
       "id": "TrustDB.html#createCollection",
@@ -5169,12 +5439,12 @@
       "name": "configureSettings",
       "tags": "TrustDB#configureSettings configureSettings",
       "summary": "",
-      "description": "(Re-)Configure the settings."
+      "description": "(Re-)configure the settings."
     },
     "TrustDB.html#connect": {
       "id": "TrustDB.html#connect",
       "kind": "function",
-      "title": "&lt;async&gt; connect( filepath [, settings ] ) → {Promise.&lt;void&gt;}",
+      "title": "&lt;async&gt; connect( [ settings ] ) → {Promise.&lt;void&gt;}",
       "longname": "TrustDB#connect",
       "name": "connect",
       "tags": "TrustDB#connect connect",
@@ -5342,15 +5612,15 @@
       "summary": "",
       "description": "Remove the first document in the collection that matches the query or passes the filter function."
     },
-    "Collection.html#removeById": {
-      "id": "Collection.html#removeById",
+    "Collection.html#update": {
+      "id": "Collection.html#update",
       "kind": "function",
-      "title": "removeById( id ) → {object}",
-      "longname": "Collection#removeById",
-      "name": "removeById",
-      "tags": "Collection#removeById removeById",
+      "title": "update( filter, updater ) → {Array.&lt;object&gt;}",
+      "longname": "Collection#update",
+      "name": "update",
+      "tags": "Collection#update update",
       "summary": "",
-      "description": "Remove the document with the matching ID."
+      "description": "Update all documents in the collection that match the query or pass the custom filter function."
     },
     "Collection.html#updateById": {
       "id": "Collection.html#updateById",
@@ -5372,15 +5642,15 @@
       "summary": "",
       "description": "Clear the collection by deleting all of its documents."
     },
-    "Collection.html#update": {
-      "id": "Collection.html#update",
+    "Collection.html#removeById": {
+      "id": "Collection.html#removeById",
       "kind": "function",
-      "title": "update( filter, updater ) → {Array.&lt;object&gt;}",
-      "longname": "Collection#update",
-      "name": "update",
-      "tags": "Collection#update update",
+      "title": "removeById( id ) → {object}",
+      "longname": "Collection#removeById",
+      "name": "removeById",
+      "tags": "Collection#removeById removeById",
       "summary": "",
-      "description": "Update all documents in the collection that match the query or pass the custom filter function."
+      "description": "Remove the document with the matching ID."
     },
     "Result.html": {
       "id": "Result.html",
@@ -5432,6 +5702,16 @@
       "tags": "Result#sort sort",
       "summary": "",
       "description": "Sort the results using your own custom sort function."
+    },
+    "Result.html#map": {
+      "id": "Result.html#map",
+      "kind": "function",
+      "title": "map( mapFn ) → {this}",
+      "longname": "Result#map",
+      "name": "map",
+      "tags": "Result#map map",
+      "summary": "",
+      "description": "Map the results using your own custom map function."
     },
     "Result.html#limit": {
       "id": "Result.html#limit",

@@ -93,6 +93,7 @@ class TrustDB extends EventEmitter {
    */
   constructor() {
     super();
+    this._connected = false;
     this._events = {
       autosave: [],
     };
@@ -103,23 +104,23 @@ class TrustDB extends EventEmitter {
    * be loaded and the collections (and optionally the settings, too) will be
    * applied to this instance, unless the setting `overwriteExisting` is set to true.
    *
-   * @param {string} filepath Filepath for the database.
    * @param {object} [settings={}] Optional settings related to the database.
+   * @param {string} [settings.filepath] Filepath for the database.
    * @param {boolean} [settings.autosave] Whether the database should be automatically saved.
    * @param {number} [settings.autosaveInterval] Interval for the autosave in milliseconds.
    * @param {boolean} [settings.restoreSettings] Whether it should restore settings from the loaded database, if it exists.
    * @param {boolean} [settings.overwriteExisting] Whether the existing database (same filepath) should be overwritten.
    * @returns {Promise&lt;void>} A Promise that resolves after everything is configured and set up.
    */
-  async connect(filepath, settings = {}) {
-    if (typeof filepath !== 'string' || filepath.length === 0) {
-      throw new Error('Expected arameter `filepath` to be a string and at least one character long');
-    }
+  async connect(settings = {}) {
     if (!isPlainObject(settings)) {
       throw new Error('Expected parameter `settings` to be a plain object');
     }
 
-    this._filepath = filepath;
+    this._filepath;
+    if (typeof settings.filepath === 'string' &amp;&amp; settings.filepath.length !== 0) {
+      this._filepath = settings.filepath;
+    }
     this._created = new Date().toISOString();
     this._collections = [];
 
@@ -128,19 +129,54 @@ class TrustDB extends EventEmitter {
     this._autosaveInterval = 4000;
     this._autosaveHandler;
 
-    let restoredSettings;
-    if (settings.overwriteExisting !== true) {
-      restoredSettings = await this._restoreDatabase();
+    if (settings.overwriteExisting !== true &amp;&amp; this.filepath !== undefined) {
+      const restoredSettings = await this._restoreDatabase();
+      if (settings.restoreSettings &amp;&amp; isPlainObject(restoredSettings)) {
+        this._settings = restoredSettings;
+      }
     }
 
-    if (settings.restoreSettings &amp;&amp; isPlainObject(restoredSettings)) {
-      this._settings = {
-        ...restoredSettings,
-        ...settings,
-      };
-    }
+    this._settings = {
+      ...this._settings,
+      ...settings,
+    };
 
     this.configureSettings(this.settings);
+    this._connected = true;
+  }
+
+  /**
+   * Close the database connection.
+   *
+   * Disables autosave, removes the event listeners for the database
+   * and its collections, clears all documents and collections.
+   *
+   * @param {boolean} [save=true] Whether to save the database before disconnecting.
+   */
+  async disconnect(save = true) {
+    if (this.connected === false) {
+      throw new Error('Database connection is not established');
+    }
+    if (save === true) {
+      await this.saveDatabase();
+    }
+
+    this._disableAutosave();
+
+    this.collections.forEach((collection) => {
+      Object.entries(collection._events).forEach(([name, listeners]) => {
+        listeners.forEach((listener) => collection.removeListener(name, listener));
+      });
+      collection.documents.length = 0;
+    });
+
+    this.clear();
+
+    Object.entries(this._events).forEach(([name, listeners]) => {
+      listeners.forEach((listener) => this.removeListener(name, listener));
+    });
+
+    this._connected = false;
   }
 
   /**
@@ -238,6 +274,9 @@ class TrustDB extends EventEmitter {
    * @returns {Promise&lt;void>} A Promise which resolves after saving the database.
    */
   async saveDatabase() {
+    if (this.filepath === undefined) {
+      throw new Error('Cannot save database without filepath');
+    }
     const exportedDb = this._exportDatabase();
     await mkdirp(this.filepath);
     await writeFile(this.filepath, exportedDb);
@@ -249,6 +288,9 @@ class TrustDB extends EventEmitter {
    * @returns {Promise&lt;void>} A Promise which resolves after deleting the database.
    */
   async deleteDatabase() {
+    if (this.filepath === undefined) {
+      throw new Error('Cannot delete database without filepath');
+    }
     const stats = await stat(this.filepath);
     if (!stats.isFile()) {
       throw new Error('Database requested to delete is not a file');
@@ -270,13 +312,22 @@ class TrustDB extends EventEmitter {
       return;
     }
 
+    if (this.filepath === undefined) {
+      this._filepath = filepath;
+      return;
+    }
+
     const stats = await stat(this.filepath).catch((err) => {
       if (err.code !== 'ENOENT') {
         throw err;
       }
+    });
+
+    if (stats === undefined) {
       // File does not exist so just change the filepath.
       this._filepath = filepath;
-    });
+      return;
+    }
 
     if (!stats.isFile()) {
       throw new Error('Database requested to move is not a file');
@@ -296,9 +347,10 @@ class TrustDB extends EventEmitter {
   }
 
   /**
-   * (Re-)Configure the settings.
+   * (Re-)configure the settings.
    *
    * @param {object} [settings={}] Optional settings related to the database.
+   * @param {string} [settings.filepath] Filepath for the database. Only applies if there is no filepath set.
    * @param {boolean} [settings.autosave] Whether the database should be automatically saved.
    * @param {number} [settings.autosaveInterval] Interval for the autosave in milliseconds.
    */
@@ -308,15 +360,22 @@ class TrustDB extends EventEmitter {
       return;
     }
 
-    if (hasOwnProperty(settings, 'autosave') &amp;&amp; typeof settings.autosave === 'boolean') {
-      // Actually turn off autosave.
+    if (hasOwnProperty(settings, 'filepath') &amp;&amp;
+        typeof settings.autosave === 'string' &amp;&amp;
+        this._filepath === undefined) {
+      this._filepath = settings.filepath;
+    }
+
+    if (hasOwnProperty(settings, 'autosave') &amp;&amp;
+        typeof settings.autosave === 'boolean') {
       if (this._autosave &amp;&amp; !settings.autosave) {
         this._disableAutosave();
       }
       this._autosave = settings.autosave;
     }
 
-    if (hasOwnProperty(settings, 'autosaveInterval') &amp;&amp; typeof settings.autosaveInterval === 'number') {
+    if (hasOwnProperty(settings, 'autosaveInterval') &amp;&amp;
+        typeof settings.autosaveInterval === 'number') {
       this._autosaveInterval = settings.autosaveInterval;
     }
 
@@ -330,6 +389,15 @@ class TrustDB extends EventEmitter {
   }
 
   // ---------------------------------- Getter and Setter ----------------------------------
+
+  /**
+   * Get the database connection state.
+   *
+   * @returns {boolean} Wether the database connection is established.
+   */
+  get connected() {
+    return this._connected;
+  }
 
   /**
    * Get the filepath of the database.
@@ -352,7 +420,7 @@ class TrustDB extends EventEmitter {
   /**
    * Get all collections of the database.
    *
-   * @returns {object[]} All collections of the database.
+   * @returns {Collection[]} All collections of the database.
    */
   get collections() {
     return this._collections;
@@ -424,9 +492,9 @@ class TrustDB extends EventEmitter {
    */
   _exportDatabase() {
     return JSON.stringify({
-      filepath: this.filepath,
       collections: this.collections.map((c) => c._export()),
       settings: {
+        filepath: this.filepath,
         autosave: this.autosave,
         autosaveInterval: this.autosaveInterval,
       },
@@ -444,6 +512,9 @@ class TrustDB extends EventEmitter {
    * @returns {Promise&lt;object>} A Promise which resolves with the parsed database.
    */
   async _loadDatabase() {
+    if (this.filepath === undefined) {
+      throw new Error('Cannot load database without filepath');
+    }
     const stats = await stat(this.filepath);
     if (!stats.isFile()) {
       throw new Error('Database requested to load is not a file');
@@ -460,7 +531,7 @@ class TrustDB extends EventEmitter {
    */
   _applyDatabase(db) {
     if (hasOwnProperty(db, 'metadata') &amp;&amp; hasOwnProperty(db.metadata, 'created')) {
-      this.created = db.metadata.created;
+      this._created = db.metadata.created;
     }
 
     if (Array.isArray(db.collections)) {
@@ -469,7 +540,7 @@ class TrustDB extends EventEmitter {
         if (c.documents.every(isPlainObject)) {
           collection._documents = c.documents;
         }
-        collection.created = c.created;
+        collection._created = c.created;
         return collection;
       });
     }
@@ -527,7 +598,7 @@ module.exports = TrustDB;</code></pre>
 	</div>
 	<footer>
 				<div class="copyright">FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.</div>
-			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 8th Sep 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
+			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 10th Sep 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
 	</footer>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

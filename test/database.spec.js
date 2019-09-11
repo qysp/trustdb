@@ -58,14 +58,13 @@ describe('Database', function() {
     it('should enable the autosave setting', function() {
       db.configureSettings({
         autosave: true,
-        autosaveInterval: 999999
+        autosaveInterval: 5000
       });
 
       expect(db.autosave).to.be(true);
-      expect(db.autosaveInterval).to.equal(999999);
-      expect(db._autosaveHandler).to.not.be(undefined);
+      expect(db.autosaveInterval).to.equal(5000);
       // Disable autosave again.
-      db.configureSettings({ autosave: false });
+      db.autosave = false;
     });
   });
 

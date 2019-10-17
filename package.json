@@ -1,6 +1,6 @@
 {
   "name": "trustdb",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Lightweight in-memory and persistent JavaScript/JSON database.",
   "main": "index.js",
   "scripts": {

@@ -109,6 +109,13 @@ window.lunrData = {
           "totals",
           "trustdb#totals"
         ],
+        "TrustDB.html#settings": [
+          "databas",
+          "member",
+          "relat",
+          "set",
+          "trustdb#set"
+        ],
         "TrustDB.html#autosave": [
           "autosav",
           "disabl",
@@ -243,14 +250,6 @@ window.lunrData = {
           "promise.&lt;void&gt",
           "trustdb#movedatabas"
         ],
-        "TrustDB.html#clear": [
-          "clear",
-          "collect",
-          "databas",
-          "delet",
-          "function",
-          "trustdb#clear"
-        ],
         "TrustDB.html#configureSettings": [
           "configur",
           "configureset",
@@ -258,6 +257,15 @@ window.lunrData = {
           "re",
           "set",
           "trustdb#configureset"
+        ],
+        "TrustDB.html#clear": [
+          "array.&lt;collection&gt",
+          "clear",
+          "collect",
+          "databas",
+          "delet",
+          "function",
+          "trustdb#clear"
         ],
         "TrustDB.html#connect": [
           "alreadi",
@@ -388,7 +396,7 @@ window.lunrData = {
           "first",
           "function",
           "match",
-          "object|undefin",
+          "object",
           "pass",
           "queri"
         ],
@@ -400,7 +408,7 @@ window.lunrData = {
           "function",
           "id",
           "match",
-          "object|undefin"
+          "object"
         ],
         "Collection.html#removeExact": [
           "collect",
@@ -465,6 +473,7 @@ window.lunrData = {
           "updatebyid"
         ],
         "Collection.html#clear": [
+          "array.&lt;object&gt",
           "clear",
           "collect",
           "collection#clear",
@@ -551,7 +560,7 @@ window.lunrData = {
           "valu"
         ]
       },
-      "length": 50
+      "length": 51
     },
     "tokenStore": {
       "root": {
@@ -906,12 +915,12 @@ window.lunrData = {
                             "ref": "TrustDB.html#moveDatabase",
                             "tf": 110
                           },
-                          "TrustDB.html#clear": {
-                            "ref": "TrustDB.html#clear",
-                            "tf": 110
-                          },
                           "TrustDB.html#configureSettings": {
                             "ref": "TrustDB.html#configureSettings",
+                            "tf": 110
+                          },
+                          "TrustDB.html#clear": {
+                            "ref": "TrustDB.html#clear",
                             "tf": 110
                           },
                           "TrustDB.html#connect": {
@@ -1206,6 +1215,20 @@ window.lunrData = {
                     "index.html": {
                       "ref": "index.html",
                       "tf": 110
+                    }
+                  }
+                }
+              }
+            },
+            "l": {
+              "docs": {},
+              "a": {
+                "docs": {},
+                "t": {
+                  "docs": {
+                    "TrustDB.html#settings": {
+                      "ref": "TrustDB.html#settings",
+                      "tf": 16.666666666666664
                     }
                   }
                 }
@@ -1760,6 +1783,17 @@ window.lunrData = {
                               "docs": {
                                 "TrustDB.html#size": {
                                   "ref": "TrustDB.html#size",
+                                  "tf": 1150
+                                }
+                              }
+                            }
+                          },
+                          "e": {
+                            "docs": {},
+                            "t": {
+                              "docs": {
+                                "TrustDB.html#settings": {
+                                  "ref": "TrustDB.html#settings",
                                   "tf": 1150
                                 }
                               }
@@ -2321,6 +2355,10 @@ window.lunrData = {
                           "ref": "TrustDB.html#size",
                           "tf": 16.666666666666664
                         },
+                        "TrustDB.html#settings": {
+                          "ref": "TrustDB.html#settings",
+                          "tf": 16.666666666666664
+                        },
                         "TrustDB.html#disconnect": {
                           "ref": "TrustDB.html#disconnect",
                           "tf": 7.6923076923076925
@@ -2652,11 +2690,11 @@ window.lunrData = {
                     },
                     "TrustDB.html#clear": {
                       "ref": "TrustDB.html#clear",
-                      "tf": 762.5
+                      "tf": 712.5
                     },
                     "Collection.html#clear": {
                       "ref": "Collection.html#clear",
-                      "tf": 762.5
+                      "tf": 712.5
                     }
                   }
                 }
@@ -3561,6 +3599,10 @@ window.lunrData = {
                         "ref": "TrustDB.html#totalSize",
                         "tf": 110
                       },
+                      "TrustDB.html#settings": {
+                        "ref": "TrustDB.html#settings",
+                        "tf": 110
+                      },
                       "TrustDB.html#autosave": {
                         "ref": "TrustDB.html#autosave",
                         "tf": 110
@@ -3848,6 +3890,10 @@ window.lunrData = {
             "docs": {},
             "t": {
               "docs": {
+                "TrustDB.html#settings": {
+                  "ref": "TrustDB.html#settings",
+                  "tf": 766.6666666666666
+                },
                 "TrustDB.html#autosaveInterval": {
                   "ref": "TrustDB.html#autosaveInterval",
                   "tf": 12.5
@@ -4197,23 +4243,6 @@ window.lunrData = {
               }
             }
           },
-          "p": {
-            "docs": {},
-            "p": {
-              "docs": {},
-              "l": {
-                "docs": {},
-                "i": {
-                  "docs": {
-                    "TrustDB.html#connect": {
-                      "ref": "TrustDB.html#connect",
-                      "tf": 2.7777777777777777
-                    }
-                  }
-                }
-              }
-            }
-          },
           "r": {
             "docs": {},
             "r": {
@@ -4232,6 +4261,50 @@ window.lunrData = {
                           "docs": {},
                           ";": {
                             "docs": {},
+                            "c": {
+                              "docs": {},
+                              "o": {
+                                "docs": {},
+                                "l": {
+                                  "docs": {},
+                                  "l": {
+                                    "docs": {},
+                                    "e": {
+                                      "docs": {},
+                                      "c": {
+                                        "docs": {},
+                                        "t": {
+                                          "docs": {},
+                                          "i": {
+                                            "docs": {},
+                                            "o": {
+                                              "docs": {},
+                                              "n": {
+                                                "docs": {},
+                                                "&": {
+                                                  "docs": {},
+                                                  "g": {
+                                                    "docs": {},
+                                                    "t": {
+                                                      "docs": {
+                                                        "TrustDB.html#clear": {
+                                                          "ref": "TrustDB.html#clear",
+                                                          "tf": 50
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
                             "o": {
                               "docs": {},
                               "b": {
@@ -4265,6 +4338,10 @@ window.lunrData = {
                                                 "Collection.html#update": {
                                                   "ref": "Collection.html#update",
                                                   "tf": 25
+                                                },
+                                                "Collection.html#clear": {
+                                                  "ref": "Collection.html#clear",
+                                                  "tf": 50
                                                 }
                                               }
                                             }
@@ -4279,6 +4356,23 @@ window.lunrData = {
                           }
                         }
                       }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "p": {
+            "docs": {},
+            "p": {
+              "docs": {},
+              "l": {
+                "docs": {},
+                "i": {
+                  "docs": {
+                    "TrustDB.html#connect": {
+                      "ref": "TrustDB.html#connect",
+                      "tf": 2.7777777777777777
                     }
                   }
                 }
@@ -4825,6 +4919,14 @@ window.lunrData = {
                   "docs": {},
                   "t": {
                     "docs": {
+                      "Collection.html#findOne": {
+                        "ref": "Collection.html#findOne",
+                        "tf": 33.33333333333333
+                      },
+                      "Collection.html#findById": {
+                        "ref": "Collection.html#findById",
+                        "tf": 33.33333333333333
+                      },
                       "Collection.html#updateById": {
                         "ref": "Collection.html#updateById",
                         "tf": 25
@@ -4836,36 +4938,6 @@ window.lunrData = {
                     },
                     "|": {
                       "docs": {},
-                      "u": {
-                        "docs": {},
-                        "n": {
-                          "docs": {},
-                          "d": {
-                            "docs": {},
-                            "e": {
-                              "docs": {},
-                              "f": {
-                                "docs": {},
-                                "i": {
-                                  "docs": {},
-                                  "n": {
-                                    "docs": {
-                                      "Collection.html#findOne": {
-                                        "ref": "Collection.html#findOne",
-                                        "tf": 33.33333333333333
-                                      },
-                                      "Collection.html#findById": {
-                                        "ref": "Collection.html#findById",
-                                        "tf": 33.33333333333333
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
                       "a": {
                         "docs": {},
                         "r": {
@@ -5031,7 +5103,7 @@ window.lunrData = {
           }
         }
       },
-      "length": 433
+      "length": 440
     },
     "corpusTokens": [
       "ad",
@@ -5041,6 +5113,7 @@ window.lunrData = {
       "alter",
       "amount",
       "appli",
+      "array.&lt;collection&gt",
       "array.&lt;object&gt",
       "autosav",
       "autosaveinterv",
@@ -5137,7 +5210,6 @@ window.lunrData = {
       "number",
       "object",
       "object|array.&lt;object&gt",
-      "object|undefin",
       "option",
       "originaldocu",
       "overwriteexist",
@@ -5150,6 +5222,7 @@ window.lunrData = {
       "queri",
       "re",
       "readm",
+      "relat",
       "remov",
       "removebyid",
       "removeexact",
@@ -5200,6 +5273,7 @@ window.lunrData = {
       "trustdb#movedatabas",
       "trustdb#sav",
       "trustdb#savedatabas",
+      "trustdb#set",
       "trustdb#siz",
       "trustdb#totals",
       "type",
@@ -5321,6 +5395,16 @@ window.lunrData = {
       "summary": "",
       "description": "Get the amount of documents of all collections."
     },
+    "TrustDB.html#settings": {
+      "id": "TrustDB.html#settings",
+      "kind": "member",
+      "title": "settings",
+      "longname": "TrustDB#settings",
+      "name": "settings",
+      "tags": "TrustDB#settings settings",
+      "summary": "",
+      "description": "Get all database related settings."
+    },
     "TrustDB.html#autosave": {
       "id": "TrustDB.html#autosave",
       "kind": "member",
@@ -5421,16 +5505,6 @@ window.lunrData = {
       "summary": "",
       "description": "Move the database to the new path on the filesystem."
     },
-    "TrustDB.html#clear": {
-      "id": "TrustDB.html#clear",
-      "kind": "function",
-      "title": "clear()",
-      "longname": "TrustDB#clear",
-      "name": "clear",
-      "tags": "TrustDB#clear clear",
-      "summary": "",
-      "description": "Clear the database by deleting all of its collections."
-    },
     "TrustDB.html#configureSettings": {
       "id": "TrustDB.html#configureSettings",
       "kind": "function",
@@ -5440,6 +5514,16 @@ window.lunrData = {
       "tags": "TrustDB#configureSettings configureSettings",
       "summary": "",
       "description": "(Re-)configure the settings."
+    },
+    "TrustDB.html#clear": {
+      "id": "TrustDB.html#clear",
+      "kind": "function",
+      "title": "clear() → {Array.&lt;Collection&gt;}",
+      "longname": "TrustDB#clear",
+      "name": "clear",
+      "tags": "TrustDB#clear clear",
+      "summary": "",
+      "description": "Clear the database by deleting all of its collections."
     },
     "TrustDB.html#connect": {
       "id": "TrustDB.html#connect",
@@ -5565,7 +5649,7 @@ window.lunrData = {
     "Collection.html#findOne": {
       "id": "Collection.html#findOne",
       "kind": "function",
-      "title": "findOne( filter ) → {object|undefined}",
+      "title": "findOne( filter ) → {object}",
       "longname": "Collection#findOne",
       "name": "findOne",
       "tags": "Collection#findOne findOne",
@@ -5575,7 +5659,7 @@ window.lunrData = {
     "Collection.html#findById": {
       "id": "Collection.html#findById",
       "kind": "function",
-      "title": "findById( id ) → {object|undefined}",
+      "title": "findById( id ) → {object}",
       "longname": "Collection#findById",
       "name": "findById",
       "tags": "Collection#findById findById",
@@ -5635,7 +5719,7 @@ window.lunrData = {
     "Collection.html#clear": {
       "id": "Collection.html#clear",
       "kind": "function",
-      "title": "clear()",
+      "title": "clear() → {Array.&lt;object&gt;}",
       "longname": "Collection#clear",
       "name": "clear",
       "tags": "Collection#clear clear",

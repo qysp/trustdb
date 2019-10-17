@@ -63,7 +63,7 @@ Insert documents.
 // Some example documents.
 const repositories = [{
     url: 'https://github.com/qysp/trustdb',
-    title: 'trustdb',
+    title: 'TrustDB',
     description: 'Lightweight in-memory and persistent JavaScript/JSON database.',
   }, {
     url: 'https://github.com/techfort/LokiJS',
@@ -87,7 +87,7 @@ collection.find({ description: { regExp: /lightweight/ } });
 collection.find((doc) => /lightweight/.test(doc.description));
 
 collection.findOne({ title: { regExp: /js$/i } });
-collection.findOne((doc) => /js$/i.test(doc.description));
+collection.findOne((doc) => /js$/i.test(doc.title));
 
 // Find a document using its ID.
 collection.findById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
@@ -120,11 +120,11 @@ collection.removeExact({
 });
 
 // Use query objects or custom filter functions to find matching documents.
-collection.remove({ title: { re: /js$/i } });
-collection.remove((doc) => doc.title.startsWith('trust'));
+collection.remove({ title: { startsWith: 'Trust' } });
+collection.remove((doc) => doc.title.startsWith('Trust'));
 
-collection.removeOne({ title: { re: /js$/i } });
-collection.removeOne((doc) => doc.title.startsWith('trust'));
+collection.removeOne({ title: { startsWith: 'Trust' } });
+collection.removeOne((doc) => doc.title.startsWith('Trust'));
 
 // Remove a document using its ID.
 collection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
@@ -253,22 +253,26 @@ Usage of the logical operator `or` to concatenate each query result.
 ```js
 collection.find({
   propertyA: { startsWith: 'duck' },
-  propertyB: { endsWith: 'ing' },
-  $op: 'or'
+  propertyB: { startsWith: 'duck' },
+  $op: 'or',
 });
 ```
-Explanation: this will return all documents which have a property named `propertyA` with a value that starts with *duck* **or** `propertyB` with a value that ends with *ing*.
+Explanation: this will return all documents which have a property named `propertyA` with a value that **starts with** *duck* **or** `propertyB` with a value that **starts with** *duck*.
 
 Usage of the logical operator `not` to concatenate each query result as well as the operator `or` within the query for the property `propertyA`.
 ```js
 collection.find({
   propertyA: {
-    startsWith: 'duck',
-    endsWith: 'duck',
-    $op: 'or'
+    typeOf: 'array',
+    lengthOf: 5,
+    $op: 'and', // `and` can also be omitted
   },
-  propertyB: { endsWith: 'ing' },
-  $op: 'not'
+  propertyB: {
+    greaterThan: 100,
+    lessThan: 50,
+    $op: 'or',
+  },
+  $op: 'not',
 });
 ```
-Explanation: this will return all documents which do **not** have a property named `propertyA` with a value that starts **or** ends with *duck* and `propertyB` with a value that ends with *ing*.
+Explanation: this will return all documents which do **not** have a property named `propertyA` with a value that is an **array** **and** has the **length of** *5* and **not** a property named `propertyB` with a value that is either **greater than** *100* or **less than** *50*.

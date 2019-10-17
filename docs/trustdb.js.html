@@ -69,19 +69,12 @@
 			<div class="col-md-12 main-content">
 		<section class="source-section">
 			<article></article>
-			<pre class="prettyprint source language-javascript line-numbers"><code class="language-javascript">const fs = require('fs');
-const { promisify } = require('util');
+			<pre class="prettyprint source language-javascript line-numbers"><code class="language-javascript">const fs = require('fs').promises;
+const interval = require('interval-promise');
 
 const Collection = require('./collection');
 const EventEmitter = require('./events');
 const { isPlainObject, mkdirp, hasOwnProperty } = require('./helpers');
-
-// Promisify asynchronous functions
-const writeFile = promisify(fs.writeFile);
-const readFile = promisify(fs.readFile);
-const copyFile = promisify(fs.copyFile);
-const unlink = promisify(fs.unlink);
-const stat = promisify(fs.stat);
 
 /**
  * @extends EventEmitter
@@ -92,11 +85,16 @@ class TrustDB extends EventEmitter {
    * Creates a TrustDB instance.
    */
   constructor() {
-    super();
-    this._connected = false;
-    this._events = {
+    super({
       autosave: [],
-    };
+    });
+    this._connected = false;
+    this._filepath;
+    this._created;
+    this._collections = [];
+    this._settings = {};
+    this._autosave = false;
+    this._autosaveInterval = 4000;
   }
 
   /**
@@ -117,17 +115,10 @@ class TrustDB extends EventEmitter {
       throw new Error('Expected parameter `settings` to be a plain object');
     }
 
-    this._filepath;
     if (typeof settings.filepath === 'string' &amp;&amp; settings.filepath.length !== 0) {
       this._filepath = settings.filepath;
     }
     this._created = new Date().toISOString();
-    this._collections = [];
-
-    this._settings = {};
-    this._autosave = false;
-    this._autosaveInterval = 4000;
-    this._autosaveHandler;
 
     if (settings.overwriteExisting !== true &amp;&amp; this.filepath !== undefined) {
       const restoredSettings = await this._restoreDatabase();
@@ -161,7 +152,7 @@ class TrustDB extends EventEmitter {
       await this.saveDatabase();
     }
 
-    this._disableAutosave();
+    this.autosave = false;
 
     this.collections.forEach((collection) => {
       Object.entries(collection._events).forEach(([name, listeners]) => {
@@ -279,7 +270,7 @@ class TrustDB extends EventEmitter {
     }
     const exportedDb = this._exportDatabase();
     await mkdirp(this.filepath);
-    await writeFile(this.filepath, exportedDb);
+    await fs.writeFile(this.filepath, exportedDb);
   }
 
   /**
@@ -291,11 +282,11 @@ class TrustDB extends EventEmitter {
     if (this.filepath === undefined) {
       throw new Error('Cannot delete database without filepath');
     }
-    const stats = await stat(this.filepath);
+    const stats = await fs.stat(this.filepath);
     if (!stats.isFile()) {
       throw new Error('Database requested to delete is not a file');
     }
-    await unlink(this.filepath);
+    await fs.unlink(this.filepath);
   }
 
   /**
@@ -317,7 +308,7 @@ class TrustDB extends EventEmitter {
       return;
     }
 
-    const stats = await stat(this.filepath).catch((err) => {
+    const stats = await fs.stat(this.filepath).catch((err) => {
       if (err.code !== 'ENOENT') {
         throw err;
       }
@@ -334,16 +325,9 @@ class TrustDB extends EventEmitter {
     }
 
     await mkdirp(filepath);
-    await copyFile(this.filepath, filepath);
-    await unlink(this.filepath);
+    await fs.copyFile(this.filepath, filepath);
+    await fs.unlink(this.filepath);
     this._filepath = filepath;
-  }
-
-  /**
-   * Clear the database by deleting all of its collections.
-   */
-  clear() {
-    this._collections.length = 0;
   }
 
   /**
@@ -368,9 +352,6 @@ class TrustDB extends EventEmitter {
 
     if (hasOwnProperty(settings, 'autosave') &amp;&amp;
         typeof settings.autosave === 'boolean') {
-      if (this._autosave &amp;&amp; !settings.autosave) {
-        this._disableAutosave();
-      }
       this._autosave = settings.autosave;
     }
 
@@ -380,12 +361,17 @@ class TrustDB extends EventEmitter {
     }
 
     if (this._autosave) {
-      // In case the settings were reconfigured.
-      if (this._autosaveHandler !== undefined) {
-        this._disableAutosave();
-      }
       this._enableAutosave();
     }
+  }
+
+  /**
+   * Clear the database by deleting all of its collections.
+   *
+   * @returns {Collection[]} All of the removed collections.
+   */
+  clear() {
+    return this._collections.splice(0, this.size);
   }
 
   // ---------------------------------- Getter and Setter ----------------------------------
@@ -444,6 +430,15 @@ class TrustDB extends EventEmitter {
     return this._collections
       .map((c) => c.size)
       .reduce((acc, curr) => acc + curr);
+  }
+
+  /**
+   * Get all database related settings.
+   *
+   * @returns {object} Settings related to the database.
+   */
+  get settings() {
+    return this._settings;
   }
 
   /**
@@ -515,11 +510,11 @@ class TrustDB extends EventEmitter {
     if (this.filepath === undefined) {
       throw new Error('Cannot load database without filepath');
     }
-    const stats = await stat(this.filepath);
+    const stats = await fs.stat(this.filepath);
     if (!stats.isFile()) {
       throw new Error('Database requested to load is not a file');
     }
-    const content = await readFile(this.filepath, { encoding: 'utf-8' });
+    const content = await fs.readFile(this.filepath, { encoding: 'utf-8' });
     return JSON.parse(content);
   }
 
@@ -553,38 +548,36 @@ class TrustDB extends EventEmitter {
    * @returns {object} Settings of the restored database.
    */
   async _restoreDatabase() {
-    const db = await this._loadDatabase();
+    const db = await this._loadDatabase().catch((err) => {
+      // ENOENT => Database file does not exist yet.
+      if (err.code !== 'ENOENT') {
+        throw err;
+      }
+      return false;
+    });
+
+    if (db === false) {
+      return {};
+    }
+
     this._applyDatabase(db);
-    return db.settings;
+    return isPlainObject(db.settings) ? db.settings : {};
   }
 
   /**
-   * Enables the autosave handler.
+   * Enables autosaving for the database.
    *
    * @private
    * @fires TrustDB#autosave After autosaving.
    */
   _enableAutosave() {
-    if (this._autosaveHandler !== undefined) {
-      return;
-    }
-
-    this._autosaveHandler = setInterval(async () => {
+    interval(async (_, stop) => {
+      if (this._autosave === false) {
+        return stop();
+      }
       const result = await this.saveDatabase().catch((err) => err);
       this.emit('autosave', result);
     }, this._autosaveInterval);
-  }
-
-  /**
-   * Disables the autosave handler.
-   *
-   * @private
-   */
-  _disableAutosave() {
-    if (this._autosaveHandler !== undefined) {
-      clearInterval(this._autosaveHandler);
-      this._autosaveHandler = undefined;
-    }
   }
 }
 
@@ -598,7 +591,7 @@ module.exports = TrustDB;</code></pre>
 	</div>
 	<footer>
 				<div class="copyright">FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.</div>
-			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 10th Sep 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
+			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 17th Oct 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
 	</footer>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

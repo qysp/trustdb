@@ -5,9 +5,9 @@ describe('EventEmitter', function() {
   const emitter = new EventEmitter();
   let listener;
 
-  describe('#on() -> emit()', function() {
+  describe('#addListener() -> emit()', function() {
     it('should add a listener and emit it', function(done) {
-      listener = emitter.on('test', done);
+      listener = emitter.addListener('test', done);
       expect(emitter.events['test']).to.not.be.empty();
       emitter.emit('test');
     });

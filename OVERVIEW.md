@@ -249,6 +249,8 @@ To utilize one of these logical operators, assign it to the property `$op` (stan
 
 Furthermore, it is also possible to apply a logical operator to a specific property aka. it's queries.
 
+#### Example #1
+
 Usage of the logical operator `or` to concatenate each query result.
 ```js
 collection.find({
@@ -258,6 +260,8 @@ collection.find({
 });
 ```
 Explanation: this will return all documents which have a property named `propertyA` with a value that **starts with** *duck* **or** `propertyB` with a value that **starts with** *duck*.
+
+#### Example #2
 
 Usage of the logical operator `not` to concatenate each query result as well as the operator `or` within the query for the property `propertyA`.
 ```js

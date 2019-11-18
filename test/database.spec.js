@@ -1,5 +1,5 @@
 const expect = require('expect.js');
-const db = require('../index');
+const { db } = require('../index');
 const Collection = require('../lib/collection');
 
 describe('Database', function() {

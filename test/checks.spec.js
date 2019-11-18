@@ -39,7 +39,7 @@ describe('Checks', function() {
   });
 
   it('deep strict equal check', function() {
-    results.push(checks.deepStrictEqual({ a: 1 },  {a: 1 }));
+    results.push(checks.deepStrictEqual({ a: 1 }, {a: 1 }));
     results.push(!checks.deepStrictEqual({ a: [ undefined ] }, { a: [ null ] }));
 
     expect(results).to.not.contain(false);

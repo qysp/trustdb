@@ -58,6 +58,16 @@ collection.on('update', (updatedDocs, allDocs) => {
 });
 ```
 
+Use schemas.
+```js
+// Register a schema for this collection.
+collection.registerSchema({
+  url: 'string',
+  title: 'string',
+  description: 'string',
+});
+```
+
 Insert documents.
 ```js
 // Some example documents.
@@ -78,6 +88,10 @@ collection.insert({
   title: 'Node.js',
   description: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.',
 });
+
+// Inserting a document into this collection missing a property,
+// having a surplus of properties or mismatching types will throw an error.
+collection.insert({ invalid: 'document' }); // => Error: Failed to validate document
 ```
 
 Search for documents.
@@ -128,6 +142,9 @@ collection.removeOne((doc) => doc.title.startsWith('Trust'));
 
 // Remove a document using its ID.
 collection.removeById('1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed');
+
+// Clean the collection using the registered schema.
+collection.cleanWithSchema();
 ```
 
 Update documents.

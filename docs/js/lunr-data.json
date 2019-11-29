@@ -354,6 +354,7 @@
           "size"
         ],
         "Collection.html#insert": [
+          "array.&lt;string&gt",
           "collect",
           "collection#insert",
           "doc",
@@ -371,7 +372,8 @@
           "function",
           "insert",
           "inserton",
-          "singl"
+          "singl",
+          "string"
         ],
         "Collection.html#find": [
           "array.&lt;object&gt",
@@ -505,21 +507,10 @@
           "document",
           "function",
           "invalid",
+          "pass",
           "regist",
           "schema",
           "us"
-        ],
-        "Collection.html#testDocument": [
-          "boolean",
-          "collect",
-          "collection#testdocu",
-          "document",
-          "function",
-          "regist",
-          "schema",
-          "testdocu",
-          "us",
-          "valid"
         ],
         "Collection.html#clear": [
           "array.&lt;object&gt",
@@ -529,6 +520,19 @@
           "delet",
           "document",
           "function"
+        ],
+        "Collection.html#where": [
+          "array.&lt;object&gt",
+          "collect",
+          "collection#wher",
+          "document",
+          "filter",
+          "find",
+          "function",
+          "match",
+          "pass",
+          "queri",
+          "resultinst"
         ],
         "Collection.html#updateById": [
           "collection#updatebyid",
@@ -665,10 +669,6 @@
                     "docs": {},
                     "n": {
                       "docs": {
-                        "Collection.html#testDocument": {
-                          "ref": "Collection.html#testDocument",
-                          "tf": 33.33333333333333
-                        },
                         "Result.html#simpleSort": {
                           "ref": "Result.html#simpleSort",
                           "tf": 3.8461538461538463
@@ -818,6 +818,10 @@
                         "ref": "Collection.html#update",
                         "tf": 30.555555555555557
                       },
+                      "Collection.html#where": {
+                        "ref": "Collection.html#where",
+                        "tf": 39.58333333333333
+                      },
                       "Result.html#documents": {
                         "ref": "Result.html#documents",
                         "tf": 12.5
@@ -889,6 +893,10 @@
                   "Collection.html#findById": {
                     "ref": "Collection.html#findById",
                     "tf": 12.5
+                  },
+                  "Collection.html#where": {
+                    "ref": "Collection.html#where",
+                    "tf": 6.25
                   }
                 },
                 "o": {
@@ -1036,13 +1044,13 @@
                             "ref": "Collection.html#cleanWithSchema",
                             "tf": 110
                           },
-                          "Collection.html#testDocument": {
-                            "ref": "Collection.html#testDocument",
-                            "tf": 110
-                          },
                           "Collection.html#clear": {
                             "ref": "Collection.html#clear",
                             "tf": 110
+                          },
+                          "Collection.html#where": {
+                            "ref": "Collection.html#where",
+                            "tf": 116.25
                           },
                           "Collection.html#updateById": {
                             "ref": "Collection.html#updateById",
@@ -1186,7 +1194,7 @@
                     "docs": {
                       "Collection.html#insert": {
                         "ref": "Collection.html#insert",
-                        "tf": 712.5
+                        "tf": 695.8333333333334
                       },
                       "Collection.html#insertOne": {
                         "ref": "Collection.html#insertOne",
@@ -1203,7 +1211,7 @@
                         "docs": {
                           "Collection.html#insertOne": {
                             "ref": "Collection.html#insertOne",
-                            "tf": 683.3333333333334
+                            "tf": 675
                           }
                         }
                       }
@@ -1241,7 +1249,7 @@
                       "docs": {
                         "Collection.html#cleanWithSchema": {
                           "ref": "Collection.html#cleanWithSchema",
-                          "tf": 7.142857142857142
+                          "tf": 6.25
                         }
                       }
                     }
@@ -1510,6 +1518,10 @@
                               "Collection.html#find": {
                                 "ref": "Collection.html#find",
                                 "tf": 25
+                              },
+                              "Collection.html#where": {
+                                "ref": "Collection.html#where",
+                                "tf": 33.33333333333333
                               }
                             }
                           }
@@ -1678,11 +1690,7 @@
                       },
                       "Collection.html#cleanWithSchema": {
                         "ref": "Collection.html#cleanWithSchema",
-                        "tf": 7.142857142857142
-                      },
-                      "Collection.html#testDocument": {
-                        "ref": "Collection.html#testDocument",
-                        "tf": 8.333333333333332
+                        "tf": 6.25
                       }
                     },
                     "e": {
@@ -1737,29 +1745,6 @@
                         "index.html": {
                           "ref": "index.html",
                           "tf": 14
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "s": {
-              "docs": {},
-              "t": {
-                "docs": {},
-                "d": {
-                  "docs": {},
-                  "o": {
-                    "docs": {},
-                    "c": {
-                      "docs": {},
-                      "u": {
-                        "docs": {
-                          "Collection.html#testDocument": {
-                            "ref": "Collection.html#testDocument",
-                            "tf": 683.3333333333334
-                          }
                         }
                       }
                     }
@@ -2396,11 +2381,11 @@
               "docs": {
                 "Collection.html#insert": {
                   "ref": "Collection.html#insert",
-                  "tf": 50
+                  "tf": 33.33333333333333
                 },
                 "Collection.html#insertOne": {
                   "ref": "Collection.html#insertOne",
-                  "tf": 33.33333333333333
+                  "tf": 25
                 },
                 "Collection.html#removeExact": {
                   "ref": "Collection.html#removeExact",
@@ -2499,15 +2484,15 @@
                           },
                           "Collection.html#cleanWithSchema": {
                             "ref": "Collection.html#cleanWithSchema",
-                            "tf": 7.142857142857142
-                          },
-                          "Collection.html#testDocument": {
-                            "ref": "Collection.html#testDocument",
-                            "tf": 41.66666666666666
+                            "tf": 6.25
                           },
                           "Collection.html#clear": {
                             "ref": "Collection.html#clear",
                             "tf": 12.5
+                          },
+                          "Collection.html#where": {
+                            "ref": "Collection.html#where",
+                            "tf": 6.25
                           },
                           "Collection.html#updateById": {
                             "ref": "Collection.html#updateById",
@@ -2908,7 +2893,7 @@
                   "docs": {
                     "Collection.html#cleanWithSchema": {
                       "ref": "Collection.html#cleanWithSchema",
-                      "tf": 7.142857142857142
+                      "tf": 6.25
                     }
                   },
                   "w": {
@@ -2933,7 +2918,7 @@
                                       "docs": {
                                         "Collection.html#cleanWithSchema": {
                                           "ref": "Collection.html#cleanWithSchema",
-                                          "tf": 700
+                                          "tf": 683.3333333333334
                                         }
                                       }
                                     }
@@ -3251,15 +3236,15 @@
                         },
                         "Collection.html#cleanWithSchema": {
                           "ref": "Collection.html#cleanWithSchema",
-                          "tf": 7.142857142857142
-                        },
-                        "Collection.html#testDocument": {
-                          "ref": "Collection.html#testDocument",
-                          "tf": 8.333333333333332
+                          "tf": 6.25
                         },
                         "Collection.html#clear": {
                           "ref": "Collection.html#clear",
                           "tf": 12.5
+                        },
+                        "Collection.html#where": {
+                          "ref": "Collection.html#where",
+                          "tf": 6.25
                         }
                       },
                       "i": {
@@ -3711,29 +3696,17 @@
                                   }
                                 }
                               },
-                              "t": {
+                              "w": {
                                 "docs": {},
-                                "e": {
+                                "h": {
                                   "docs": {},
-                                  "s": {
+                                  "e": {
                                     "docs": {},
-                                    "t": {
-                                      "docs": {},
-                                      "d": {
-                                        "docs": {},
-                                        "o": {
-                                          "docs": {},
-                                          "c": {
-                                            "docs": {},
-                                            "u": {
-                                              "docs": {
-                                                "Collection.html#testDocument": {
-                                                  "ref": "Collection.html#testDocument",
-                                                  "tf": 1150
-                                                }
-                                              }
-                                            }
-                                          }
+                                    "r": {
+                                      "docs": {
+                                        "Collection.html#where": {
+                                          "ref": "Collection.html#where",
+                                          "tf": 1300
                                         }
                                       }
                                     }
@@ -4179,6 +4152,10 @@
                       "ref": "Collection.html#update",
                       "tf": 5.555555555555555
                     },
+                    "Collection.html#where": {
+                      "ref": "Collection.html#where",
+                      "tf": 6.25
+                    },
                     "Collection.html#updateById": {
                       "ref": "Collection.html#updateById",
                       "tf": 12.5
@@ -4230,17 +4207,6 @@
                 }
               }
             },
-            "o": {
-              "docs": {},
-              "p": {
-                "docs": {
-                  "Collection.html#unregisterSchema": {
-                    "ref": "Collection.html#unregisterSchema",
-                    "tf": 6.25
-                  }
-                }
-              }
-            },
             "r": {
               "docs": {},
               "i": {
@@ -4249,11 +4215,26 @@
                   "docs": {},
                   "g": {
                     "docs": {
+                      "Collection.html#insertOne": {
+                        "ref": "Collection.html#insertOne",
+                        "tf": 25
+                      },
                       "Result.html#simpleSort": {
                         "ref": "Result.html#simpleSort",
                         "tf": 3.8461538461538463
                       }
                     }
+                  }
+                }
+              }
+            },
+            "o": {
+              "docs": {},
+              "p": {
+                "docs": {
+                  "Collection.html#unregisterSchema": {
+                    "ref": "Collection.html#unregisterSchema",
+                    "tf": 6.25
                   }
                 }
               }
@@ -4466,11 +4447,7 @@
                       },
                       "Collection.html#cleanWithSchema": {
                         "ref": "Collection.html#cleanWithSchema",
-                        "tf": 7.142857142857142
-                      },
-                      "Collection.html#testDocument": {
-                        "ref": "Collection.html#testDocument",
-                        "tf": 8.333333333333332
+                        "tf": 39.58333333333333
                       }
                     }
                   }
@@ -4771,6 +4748,38 @@
                                 }
                               }
                             },
+                            "s": {
+                              "docs": {},
+                              "t": {
+                                "docs": {},
+                                "r": {
+                                  "docs": {},
+                                  "i": {
+                                    "docs": {},
+                                    "n": {
+                                      "docs": {},
+                                      "g": {
+                                        "docs": {},
+                                        "&": {
+                                          "docs": {},
+                                          "g": {
+                                            "docs": {},
+                                            "t": {
+                                              "docs": {
+                                                "Collection.html#insert": {
+                                                  "ref": "Collection.html#insert",
+                                                  "tf": 33.33333333333333
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
                             "o": {
                               "docs": {},
                               "b": {
@@ -4807,11 +4816,15 @@
                                                 },
                                                 "Collection.html#cleanWithSchema": {
                                                   "ref": "Collection.html#cleanWithSchema",
-                                                  "tf": 50
+                                                  "tf": 33.33333333333333
                                                 },
                                                 "Collection.html#clear": {
                                                   "ref": "Collection.html#clear",
                                                   "tf": 50
+                                                },
+                                                "Collection.html#where": {
+                                                  "ref": "Collection.html#where",
+                                                  "tf": 33.33333333333333
                                                 }
                                               }
                                             }
@@ -4951,7 +4964,7 @@
                     "docs": {
                       "Collection.html#insertOne": {
                         "ref": "Collection.html#insertOne",
-                        "tf": 33.33333333333333
+                        "tf": 25
                       }
                     }
                   }
@@ -5062,11 +5075,7 @@
               },
               "Collection.html#cleanWithSchema": {
                 "ref": "Collection.html#cleanWithSchema",
-                "tf": 7.142857142857142
-              },
-              "Collection.html#testDocument": {
-                "ref": "Collection.html#testDocument",
-                "tf": 8.333333333333332
+                "tf": 6.25
               },
               "Result.html#sort": {
                 "ref": "Result.html#sort",
@@ -5361,6 +5370,14 @@
                   "Collection.html#update": {
                     "ref": "Collection.html#update",
                     "tf": 5.555555555555555
+                  },
+                  "Collection.html#cleanWithSchema": {
+                    "ref": "Collection.html#cleanWithSchema",
+                    "tf": 6.25
+                  },
+                  "Collection.html#where": {
+                    "ref": "Collection.html#where",
+                    "tf": 6.25
                   }
                 }
               }
@@ -5621,6 +5638,10 @@
                     "Collection.html#update": {
                       "ref": "Collection.html#update",
                       "tf": 5.555555555555555
+                    },
+                    "Collection.html#where": {
+                      "ref": "Collection.html#where",
+                      "tf": 6.25
                     }
                   }
                 }
@@ -5645,10 +5666,6 @@
                     "Collection.html#unregisterSchema": {
                       "ref": "Collection.html#unregisterSchema",
                       "tf": 6.25
-                    },
-                    "Collection.html#testDocument": {
-                      "ref": "Collection.html#testDocument",
-                      "tf": 8.333333333333332
                     }
                   }
                 }
@@ -5669,7 +5686,7 @@
           }
         }
       },
-      "length": 481
+      "length": 496
     },
     "corpusTokens": [
       "ad",
@@ -5681,6 +5698,7 @@
       "appli",
       "array.&lt;collection&gt",
       "array.&lt;object&gt",
+      "array.&lt;string&gt",
       "autosav",
       "autosaveinterv",
       "base",
@@ -5712,10 +5730,10 @@
       "collection#removeexact",
       "collection#removeon",
       "collection#s",
-      "collection#testdocu",
       "collection#unregisterschema",
       "collection#upd",
       "collection#updatebyid",
+      "collection#wher",
       "configur",
       "configureset",
       "connect",
@@ -5830,7 +5848,6 @@
       "string",
       "support",
       "templat",
-      "testdocu",
       "time",
       "totals",
       "true",
@@ -6202,7 +6219,7 @@
     "Collection.html#insert": {
       "id": "Collection.html#insert",
       "kind": "function",
-      "title": "insert( ...docs )",
+      "title": "insert( ...docs ) → {Array.&lt;string&gt;}",
       "longname": "Collection#insert",
       "name": "insert",
       "tags": "Collection#insert insert",
@@ -6212,7 +6229,7 @@
     "Collection.html#insertOne": {
       "id": "Collection.html#insertOne",
       "kind": "function",
-      "title": "insertOne( doc [, emitEvent ] )",
+      "title": "insertOne( doc [, emitEvent ] ) → {string}",
       "longname": "Collection#insertOne",
       "name": "insertOne",
       "tags": "Collection#insertOne insertOne",
@@ -6322,22 +6339,12 @@
     "Collection.html#cleanWithSchema": {
       "id": "Collection.html#cleanWithSchema",
       "kind": "function",
-      "title": "cleanWithSchema() → {Array.&lt;object&gt;}",
+      "title": "cleanWithSchema( [ schema ] ) → {Array.&lt;object&gt;}",
       "longname": "Collection#cleanWithSchema",
       "name": "cleanWithSchema",
       "tags": "Collection#cleanWithSchema cleanWithSchema",
       "summary": "",
-      "description": "Clean the collection from invalid documents using the registered schema."
-    },
-    "Collection.html#testDocument": {
-      "id": "Collection.html#testDocument",
-      "kind": "function",
-      "title": "testDocument( document ) → {boolean}",
-      "longname": "Collection#testDocument",
-      "name": "testDocument",
-      "tags": "Collection#testDocument testDocument",
-      "summary": "",
-      "description": "Validate a document for the collection using the registered schema."
+      "description": "Clean the collection from invalid documents using the passed in or registered schema."
     },
     "Collection.html#clear": {
       "id": "Collection.html#clear",
@@ -6348,6 +6355,16 @@
       "tags": "Collection#clear clear",
       "summary": "",
       "description": "Clear the collection by deleting all of its documents."
+    },
+    "Collection.html#where": {
+      "id": "Collection.html#where",
+      "kind": "function",
+      "title": "where( filter, resultInstance ) → {Array.&lt;object&gt;}",
+      "longname": "Collection#where",
+      "name": "where",
+      "tags": "Collection#where where",
+      "summary": "",
+      "description": "Find all documents in the collection that match the query or pass the filter function."
     },
     "Collection.html#updateById": {
       "id": "Collection.html#updateById",

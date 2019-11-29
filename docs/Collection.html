@@ -39,6 +39,7 @@
 									<ul class="dropdown-menu">
 											<li><a href="Collection.html">Collection</a></li>
 											<li><a href="Result.html">Result</a></li>
+											<li><a href="Schema.html">Schema</a></li>
 											<li><a href="TrustDB.html">TrustDB</a></li>
 									</ul>
 								</li>
@@ -1246,7 +1247,94 @@
 </dd>
 											<hr/>
 											<dt class="symbol-title function public collapsible-symbol">
-			<h4 id="registerSchema" class="function public"><span class="name">registerSchema</span><span class="signature-params">( <span class="signature-param">schema</span>&nbsp;)</span><span class="signature-type"> &rarr;&nbsp;{Schema}</span></h4>
+			<h4 id="updateById" class="function public"><span class="name">updateById</span><span class="signature-params">( <span class="signature-param">id</span>, <span class="signature-param">updater</span>&nbsp;)</span><span class="signature-type"> &rarr;&nbsp;{object}</span></h4>
+		</dt>
+<dd class="symbol-details function public  collapsible-symbol">
+	<div class="symbol-details-inner">
+			<div class="callout callout-primary"><h5>Description</h5>		<div class="description"><p>Update the document with the matching ID.</p></div>
+			</div>			<div class="callout callout-info">
+				<h5>Parameters</h5>
+				<table class="params table table-striped">
+					<thead>
+					<tr>
+							<th>Name</th>
+						<th>Type</th>
+						<th class="last">Description</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr>
+								<td><code>id</code></td>
+							<td><span class="param-type">string</span></td>
+							<td class="last">
+									<p>ID of the document to update.</p>
+							</td>
+						</tr>
+						<tr>
+								<td><code>updater</code></td>
+							<td><span class="param-type">object</span> | <span class="param-type">function</span></td>
+							<td class="last">
+									<p>Object or update function which will be applied on each filtered document.</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="callout callout-success"><h5>Returns</h5>		<form class="form-horizontal returns">
+							<div class="form-group">
+								<label class="col-sm-3 control-label returns-type"><span class="param-type">object</span></label>
+								<div class="col-sm-9">
+									<div class="form-control-static returns-description"><p>Updated document.</p></div>
+								</div>
+							</div>
+					</form>
+			</div>			<div class="callout callout-example"><h5>Examples</h5>		<div class="example-code">
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">collection.updateById(
+			 &#x27;1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed&#x27;,
+			 { price: 49.99 }
+			);</code></pre>
+					</div>
+			</div>			<div class="callout callout-warning"><h5>Fires</h5>		<form class="form-horizontal fires">
+							<div class="form-group">
+								<label class="col-sm-3 control-label fires-event">Collection#event:update After successfully updating the document.</label>
+								<div class="col-sm-9">
+									<div class="form-control-static fires-summary"></div>
+								</div>
+							</div>
+					</form>
+			</div>			<div class="callout callout-default"><h5>Details</h5>		<form class="form-horizontal details">
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+							<!-- source -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label">Source</label>
+								<div class="col-sm-9">
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-400">line 400</a></p>
+								</div>
+							</div>
+			
+			
+			
+			
+					</form>
+			</div>	</div>
+</dd>
+											<hr/>
+											<dt class="symbol-title function public collapsible-symbol">
+			<h4 id="registerSchema" class="function public"><span class="name">registerSchema</span><span class="signature-params">( <span class="signature-param">schema</span>&nbsp;)</span><span class="signature-type"> &rarr;&nbsp;{<a href="Schema.html">Schema</a>}</span></h4>
 		</dt>
 <dd class="symbol-details function public  collapsible-symbol">
 	<div class="symbol-details-inner">
@@ -1264,7 +1352,7 @@
 					<tbody>
 						<tr>
 								<td><code>schema</code></td>
-							<td><span class="param-type">Schema</span> | <span class="param-type">object</span></td>
+							<td><span class="param-type"><a href="Schema.html">Schema</a></span> | <span class="param-type">object</span></td>
 							<td class="last">
 									<p>Schema to validate documents with.</p>
 							</td>
@@ -1274,7 +1362,7 @@
 			</div>
 			<div class="callout callout-success"><h5>Returns</h5>		<form class="form-horizontal returns">
 							<div class="form-group">
-								<label class="col-sm-3 control-label returns-type"><span class="param-type">Schema</span></label>
+								<label class="col-sm-3 control-label returns-type"><span class="param-type"><a href="Schema.html">Schema</a></span></label>
 								<div class="col-sm-9">
 									<div class="form-control-static returns-description"><p>Registered schema.</p></div>
 								</div>
@@ -1312,52 +1400,6 @@
 </dd>
 											<hr/>
 											<dt class="symbol-title function public collapsible-symbol">
-			<h4 id="unregisterSchema" class="function public"><span class="name">unregisterSchema</span><span class="signature-params">()</span><span class="signature-type"> &rarr;&nbsp;{Schema}</span></h4>
-		</dt>
-<dd class="symbol-details function public  collapsible-symbol">
-	<div class="symbol-details-inner">
-			<div class="callout callout-primary"><h5>Description</h5>		<div class="description"><p>Unregister the schema which ultimately stops the
-			collection from validating any further documents.</p></div>
-			</div>			<div class="callout callout-success"><h5>Returns</h5>		<form class="form-horizontal returns">
-							<div class="form-group">
-								<label class="col-sm-3 control-label returns-type"><span class="param-type">Schema</span></label>
-								<div class="col-sm-9">
-									<div class="form-control-static returns-description"><p>Unregistered schema if there was a registered schema beforehand.</p></div>
-								</div>
-							</div>
-					</form>
-			</div>			<div class="callout callout-default"><h5>Details</h5>		<form class="form-horizontal details">
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-							<!-- source -->
-							<div class="form-group">
-								<label class="col-sm-3 control-label">Source</label>
-								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-447">line 447</a></p>
-								</div>
-							</div>
-			
-			
-			
-			
-					</form>
-			</div>	</div>
-</dd>
-											<hr/>
-											<dt class="symbol-title function public collapsible-symbol">
 			<h4 id="cleanWithSchema" class="function public"><span class="name">cleanWithSchema</span><span class="signature-params">( [&nbsp;<span class="signature-param">schema</span>&nbsp;]&nbsp;)</span><span class="signature-type"> &rarr;&nbsp;{Array.&lt;object>}</span></h4>
 		</dt>
 <dd class="symbol-details function public  collapsible-symbol">
@@ -1378,7 +1420,7 @@
 					<tbody>
 						<tr>
 								<td><code>schema</code></td>
-							<td><span class="param-type">Schema</span></td>
+							<td><span class="param-type"><a href="Schema.html">Schema</a></span></td>
 								<td class="attributes">&lt;optional&gt;<br/></td>
 							<td class="last">
 									<p>Schema instance to clean collection with.</p>
@@ -1656,58 +1698,17 @@
 </dd>
 											<hr/>
 											<dt class="symbol-title function public collapsible-symbol">
-			<h4 id="updateById" class="function public"><span class="name">updateById</span><span class="signature-params">( <span class="signature-param">id</span>, <span class="signature-param">updater</span>&nbsp;)</span><span class="signature-type"> &rarr;&nbsp;{object}</span></h4>
+			<h4 id="unregisterSchema" class="function public"><span class="name">unregisterSchema</span><span class="signature-params">()</span><span class="signature-type"> &rarr;&nbsp;{<a href="Schema.html">Schema</a>}</span></h4>
 		</dt>
 <dd class="symbol-details function public  collapsible-symbol">
 	<div class="symbol-details-inner">
-			<div class="callout callout-primary"><h5>Description</h5>		<div class="description"><p>Update the document with the matching ID.</p></div>
-			</div>			<div class="callout callout-info">
-				<h5>Parameters</h5>
-				<table class="params table table-striped">
-					<thead>
-					<tr>
-							<th>Name</th>
-						<th>Type</th>
-						<th class="last">Description</th>
-					</tr>
-					</thead>
-					<tbody>
-						<tr>
-								<td><code>id</code></td>
-							<td><span class="param-type">string</span></td>
-							<td class="last">
-									<p>ID of the document to update.</p>
-							</td>
-						</tr>
-						<tr>
-								<td><code>updater</code></td>
-							<td><span class="param-type">object</span> | <span class="param-type">function</span></td>
-							<td class="last">
-									<p>Object or update function which will be applied on each filtered document.</p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="callout callout-success"><h5>Returns</h5>		<form class="form-horizontal returns">
+			<div class="callout callout-primary"><h5>Description</h5>		<div class="description"><p>Unregister the schema which ultimately stops the
+			collection from validating any further documents.</p></div>
+			</div>			<div class="callout callout-success"><h5>Returns</h5>		<form class="form-horizontal returns">
 							<div class="form-group">
-								<label class="col-sm-3 control-label returns-type"><span class="param-type">object</span></label>
+								<label class="col-sm-3 control-label returns-type"><span class="param-type"><a href="Schema.html">Schema</a></span></label>
 								<div class="col-sm-9">
-									<div class="form-control-static returns-description"><p>Updated document.</p></div>
-								</div>
-							</div>
-					</form>
-			</div>			<div class="callout callout-example"><h5>Examples</h5>		<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">collection.updateById(
-			 &#x27;1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed&#x27;,
-			 { price: 49.99 }
-			);</code></pre>
-					</div>
-			</div>			<div class="callout callout-warning"><h5>Fires</h5>		<form class="form-horizontal fires">
-							<div class="form-group">
-								<label class="col-sm-3 control-label fires-event">Collection#event:update After successfully updating the document.</label>
-								<div class="col-sm-9">
-									<div class="form-control-static fires-summary"></div>
+									<div class="form-control-static returns-description"><p>Unregistered schema if there was a registered schema beforehand.</p></div>
 								</div>
 							</div>
 					</form>
@@ -1731,7 +1732,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-400">line 400</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-447">line 447</a></p>
 								</div>
 							</div>
 			

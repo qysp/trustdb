@@ -1,0 +1,301 @@
+<!-- start:source.tmpl.hbs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+		<title>schema.js</title>
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet">
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+		<link type="text/css" rel="stylesheet" href="css/prism.min.css">
+		<link type="text/css" rel="stylesheet" href="css/template.min.css">
+		<script type="text/javascript">
+			window.TEMPLATE_OPTIONS = {"includeDate":true,"dateFormat":"Do MMM YYYY","systemName":"FooDoc","systemSummary":"A Bootstrap and Handlebars based template for JSDoc3.","systemLogo":"","systemColor":"","navMembers":[{"kind":"class","title":"Classes","summary":"All documented classes."},{"kind":"external","title":"Externals","summary":"All documented external members."},{"kind":"global","title":"Globals","summary":"All documented globals."},{"kind":"mixin","title":"Mixins","summary":"All documented mixins."},{"kind":"interface","title":"Interfaces","summary":"All documented interfaces."},{"kind":"module","title":"Modules","summary":"All documented modules."},{"kind":"namespace","title":"Namespaces","summary":"All documented namespaces."},{"kind":"tutorial","title":"Tutorials","summary":"All available tutorials."}],"footer":"","copyright":"FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.","linenums":true,"collapseSymbols":true,"inverseNav":true,"inlineNav":false,"outputSourceFiles":true,"sourceRootPath":null,"disablePackagePath":true,"outputSourcePath":false,"showTableOfContents":true,"showAccessFilter":true,"analytics":null,"methodHeadingReturns":true,"sort":"linenum, longname, version, since","search":true,"favicon":null,"stylesheets":[],"scripts":[],"monospaceLinks":false,"cleverLinks":false};
+			window.DOCLET_TOC_ENABLED = false;
+			window.DOCLET_AFILTER_ENABLED = false;
+		</script>
+</head>
+<body>
+	<!-- start:navbar.hbs -->
+	<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html">
+					FooDoc
+				</a>
+				<!-- displayed on small devices -->
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse" id="topNavigation">
+				<ul class="nav navbar-nav">
+								<li class="dropdown">
+									<a href="list_class.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+									<ul class="dropdown-menu">
+											<li><a href="Collection.html">Collection</a></li>
+											<li><a href="Result.html">Result</a></li>
+											<li><a href="Schema.html">Schema</a></li>
+											<li><a href="TrustDB.html">TrustDB</a></li>
+									</ul>
+								</li>
+				</ul>
+					<!-- start:lunr-search-navbar.hbs -->
+					<form class="navbar-form navbar-right" role="search">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" id="lunr-search-input">
+							<div class="input-group-btn">
+								<button class="btn btn-default" id="lunr-search-submit">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+					<!-- start:lunr-search-navbar.hbs -->		</div>
+		</div>
+	</header>
+	<!-- end:navbar.hbs -->		<div class="page-header">
+			<div class="container">
+				<span class="kind">source</span>
+				<h1><span class="name">schema.js</span></h1>
+			</div>
+		</div>
+	<div class="container content">
+		<div class="row">
+			<div class="col-md-12 main-content">
+		<section class="source-section">
+			<article></article>
+			<pre class="prettyprint source language-javascript line-numbers"><code class="language-javascript">const { isPlainObject, hasOwnProperty } = require('./helpers');
+
+const typeValidator = (type) => (value) => typeof value === type;
+const instanceValidator = (instance) => (value) => value instanceof instance;
+const customValidator = (predicate) => (value) => predicate(value);
+const arrayValidator = (validator) => (value) => value.every((element) => validator(element));
+
+class Schema {
+  /**
+   * Creates a Schema instance.
+   *
+   * @param {object} schema Plain object to parse as a schema.
+   */
+  constructor(schema) {
+    this._reservedProperties = [
+      '__value',
+      '__optional',
+      '__validate',
+      '__skip',
+    ];
+    this._schema = this._parseSchema(schema);
+    this._template = schema;
+    // TODO: Add validation errors to this log.
+    this._validationErrors = [];
+  }
+
+  /**
+   * Validate a document.
+   *
+   * @param {object} document Document to validate.
+   * @return {boolean} Whether the document is valid.
+   */
+  validate(document) {
+    if (!isPlainObject(document)) {
+      throw new TypeError('Expected parameter `document` to be a plain object');
+    }
+    this._validationErrors.length = 0;
+    return this._applySchema(this._schema, document);
+  }
+
+  /**
+   * Parse an object into a validation schema.
+   *
+   * @private
+   * @param {object} schema Plain object to parse as a schema.
+   * @return {object} Parsed validation schema.
+   */
+  _parseSchema(schema) {
+    if (!isPlainObject(schema)) {
+      throw new TypeError('Expected parameter `schema` to be a plain object');
+    }
+
+    return Object.entries(schema).reduce((acc, [key, value]) => {
+      let isArray = false;
+      let _schema = {};
+
+      if (Array.isArray(value)) {
+        isArray = true;
+        value = value.length > 0 ? value[0] : 'any';
+      }
+
+      if (isPlainObject(value)) {
+        const hasReservedProperty = Object.keys(value)
+          .some((key) => this._reservedProperties.includes(key));
+        if (hasReservedProperty) {
+          if (hasOwnProperty(value, '__optional')) {
+            _schema.__optional = value.__optional;
+          }
+          value = hasOwnProperty(value, '__value') ? value.__value : 'any';
+          if (Array.isArray(value)) {
+            isArray = true;
+            value = value.length > 0 ? value[0] : 'any';
+          }
+        } else {
+          _schema = this._parseSchema(value);
+        }
+      }
+
+      if (value === 'any') {
+        _schema.__skip = true;
+      } else {
+        _schema.__validate = this._chooseValidator(value, isArray);
+      }
+      return {
+        ...acc,
+        [key]: _schema,
+      };
+    }, {});
+  }
+
+  /**
+   * Internal validation wrapper for recursive calls.
+   *
+   * @private
+   * @param {object} schema Schema used for validation.
+   * @param {object} obj Plain object to validate.
+   * @return {boolean} Whether the plain object is valid.
+   */
+  _applySchema(schema, obj) {
+    const isValid = Object.entries(obj).every(([key, value]) => {
+      if (key === '__id') {
+        return true;
+      }
+      if (!hasOwnProperty(schema, key)) {
+        return false;
+      }
+      if (hasOwnProperty(schema[key], '__skip')) {
+        return true;
+      }
+      if (!schema[key].__validate(value)) {
+        return false;
+      }
+      if (isPlainObject(value)) {
+        return this._applySchema(schema[key], value);
+      }
+      if (Array.isArray(value)) {
+        // TODO: Find better way to check if some but not all elements are plain objects.
+        const allPlainObjects = value.every(isPlainObject);
+        const somePlainObjects = value.some(isPlainObject);
+        if (somePlainObjects &amp;&amp; !allPlainObjects) {
+          return false;
+        }
+        if (allPlainObjects) {
+          return value.every((element) => this._applySchema(schema[key], element));
+        }
+      }
+      return true;
+    });
+
+    return isValid &amp;&amp; !this._checkDeviations(schema, obj);
+  }
+
+  /**
+   * Choose a fitting validator based on the value and other parameters.
+   *
+   * @private
+   * @param {string|object} value Value to build the validator for.
+   * @param {boolean} [isArray=false] Whether `value` is inside an array.
+   * @return {function} Validation function matched to the parameters.
+   */
+  _chooseValidator(value, isArray = false) {
+    let validator = () => true;
+    if (value === 'date') {
+      validator = instanceValidator(Date);
+    } else if (isPlainObject(value)) {
+      validator = customValidator(isPlainObject);
+    } else {
+      validator = typeValidator(value);
+    }
+    return isArray
+      ? arrayValidator(validator)
+      : validator;
+  }
+
+  /**
+   * Check if the schema and an object differ from each other.
+   *
+   * @private
+   * @param {object} schema Schema used for validation.
+   * @param {object} obj Plain object to validate.
+   * @returns {boolean} Whether `schema` and `obj` differ from each other.
+   */
+  _checkDeviations(schema, obj) {
+    return Object.entries(schema).some(([key, value]) => {
+      if (this._reservedProperties.includes(key)) {
+        return false;
+      }
+      if (hasOwnProperty(value, '__optional') &amp;&amp; value.__optional === true) {
+        return false;
+      }
+      if (Array.isArray(obj)) {
+        return obj.some((element) => !hasOwnProperty(element, key));
+      }
+      if (!hasOwnProperty(obj, key)) {
+        return true;
+      }
+      if (isPlainObject(value)) {
+        return this._checkDeviations(value, obj[key]);
+      }
+      return false;
+    });
+  }
+
+  /**
+   * Return the necessary properties for the export.
+   *
+   * @private
+   * @return {object} Necessary schema properties.
+   */
+  _export() {
+    return this._template;
+  }
+}
+
+module.exports = Schema;</code></pre>
+		</section>
+			</div>
+		</div>
+	</div>
+	<footer>
+				<div class="copyright">FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.</div>
+			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 29th Nov 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
+	</footer>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/clipboard.min.js"></script>
+	<script src="js/prism.min.js"></script>
+	<script src="js/template.min.js"></script>
+		<!-- start:lunr-search-modal.hbs -->
+		<div class="modal fade" id="lunr-search-modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Search results</h4>
+					</div>
+					<div class="modal-body" id="lunr-search-body">
+					</div>
+					<div class="modal-footer" id="lunr-search-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+		<!-- end:lunr-search-modal.hbs -->		<script src="js/lunr.min.js"></script>
+	
+</body>
+</html>
+<!-- end:source.tmpl.hbs -->

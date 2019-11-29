@@ -9,7 +9,8 @@ npm install trustdb
 
 Import the package into your app.
 ```js
-const db = require('trustdb');
+const { db } = require('trustdb');
+import db from 'trustdb';
 ```
 
 Connect to the database, given a filepath and desired settings.
@@ -64,7 +65,10 @@ Use schemas.
 collection.registerSchema({
   url: 'string',
   title: 'string',
-  description: 'string',
+  description: {
+    __value: 'string',
+    __optional: true,
+  },
 });
 ```
 

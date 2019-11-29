@@ -474,6 +474,16 @@
           "queri",
           "updat"
         ],
+        "Collection.html#updateById": [
+          "collection#updatebyid",
+          "document",
+          "function",
+          "id",
+          "match",
+          "object",
+          "updat",
+          "updatebyid"
+        ],
         "Collection.html#registerSchema": [
           "collect",
           "collection#registerschema",
@@ -483,19 +493,6 @@
           "regist",
           "registerschema",
           "schema",
-          "valid"
-        ],
-        "Collection.html#unregisterSchema": [
-          "collect",
-          "collection#unregisterschema",
-          "document",
-          "function",
-          "further",
-          "schema",
-          "stop",
-          "ultim",
-          "unregist",
-          "unregisterschema",
           "valid"
         ],
         "Collection.html#cleanWithSchema": [
@@ -534,15 +531,18 @@
           "queri",
           "resultinst"
         ],
-        "Collection.html#updateById": [
-          "collection#updatebyid",
+        "Collection.html#unregisterSchema": [
+          "collect",
+          "collection#unregisterschema",
           "document",
           "function",
-          "id",
-          "match",
-          "object",
-          "updat",
-          "updatebyid"
+          "further",
+          "schema",
+          "stop",
+          "ultim",
+          "unregist",
+          "unregisterschema",
+          "valid"
         ],
         "Result.html": [
           "class",
@@ -611,9 +611,22 @@
           "result",
           "result#limit",
           "valu"
+        ],
+        "Schema.html": [
+          "class",
+          "creat",
+          "instanc",
+          "schema"
+        ],
+        "Schema.html#validate": [
+          "boolean",
+          "document",
+          "function",
+          "schema#valid",
+          "valid"
         ]
       },
-      "length": 55
+      "length": 57
     },
     "tokenStore": {
       "root": {
@@ -672,6 +685,10 @@
                         "Result.html#simpleSort": {
                           "ref": "Result.html#simpleSort",
                           "tf": 3.8461538461538463
+                        },
+                        "Schema.html#validate": {
+                          "ref": "Schema.html#validate",
+                          "tf": 33.33333333333333
                         }
                       }
                     }
@@ -1032,12 +1049,12 @@
                             "ref": "Collection.html#update",
                             "tf": 115.55555555555556
                           },
-                          "Collection.html#registerSchema": {
-                            "ref": "Collection.html#registerSchema",
+                          "Collection.html#updateById": {
+                            "ref": "Collection.html#updateById",
                             "tf": 110
                           },
-                          "Collection.html#unregisterSchema": {
-                            "ref": "Collection.html#unregisterSchema",
+                          "Collection.html#registerSchema": {
+                            "ref": "Collection.html#registerSchema",
                             "tf": 110
                           },
                           "Collection.html#cleanWithSchema": {
@@ -1052,8 +1069,8 @@
                             "ref": "Collection.html#where",
                             "tf": 116.25
                           },
-                          "Collection.html#updateById": {
-                            "ref": "Collection.html#updateById",
+                          "Collection.html#unregisterSchema": {
+                            "ref": "Collection.html#unregisterSchema",
                             "tf": 110
                           },
                           "Result.html#simpleSort": {
@@ -1070,6 +1087,10 @@
                           },
                           "Result.html#limit": {
                             "ref": "Result.html#limit",
+                            "tf": 110
+                          },
+                          "Schema.html#validate": {
+                            "ref": "Schema.html#validate",
                             "tf": 110
                           }
                         }
@@ -1179,6 +1200,10 @@
                         },
                         "Result.html": {
                           "ref": "Result.html",
+                          "tf": 16.666666666666664
+                        },
+                        "Schema.html": {
+                          "ref": "Schema.html",
                           "tf": 16.666666666666664
                         }
                       }
@@ -2474,13 +2499,13 @@
                             "ref": "Collection.html#update",
                             "tf": 5.555555555555555
                           },
+                          "Collection.html#updateById": {
+                            "ref": "Collection.html#updateById",
+                            "tf": 12.5
+                          },
                           "Collection.html#registerSchema": {
                             "ref": "Collection.html#registerSchema",
                             "tf": 8.333333333333332
-                          },
-                          "Collection.html#unregisterSchema": {
-                            "ref": "Collection.html#unregisterSchema",
-                            "tf": 6.25
                           },
                           "Collection.html#cleanWithSchema": {
                             "ref": "Collection.html#cleanWithSchema",
@@ -2494,9 +2519,9 @@
                             "ref": "Collection.html#where",
                             "tf": 6.25
                           },
-                          "Collection.html#updateById": {
-                            "ref": "Collection.html#updateById",
-                            "tf": 12.5
+                          "Collection.html#unregisterSchema": {
+                            "ref": "Collection.html#unregisterSchema",
+                            "tf": 6.25
                           },
                           "Result.html#documents": {
                             "ref": "Result.html#documents",
@@ -2505,6 +2530,10 @@
                           "Result.html#originalDocuments": {
                             "ref": "Result.html#originalDocuments",
                             "tf": 12.5
+                          },
+                          "Schema.html#validate": {
+                            "ref": "Schema.html#validate",
+                            "tf": 58.33333333333333
                           }
                         }
                       }
@@ -2864,6 +2893,10 @@
                     "Result.html": {
                       "ref": "Result.html",
                       "tf": 110
+                    },
+                    "Schema.html": {
+                      "ref": "Schema.html",
+                      "tf": 110
                     }
                   }
                 }
@@ -2987,6 +3020,10 @@
                     },
                     "Result.html": {
                       "ref": "Result.html",
+                      "tf": 16.666666666666664
+                    },
+                    "Schema.html": {
+                      "ref": "Schema.html",
                       "tf": 16.666666666666664
                     }
                   },
@@ -3230,10 +3267,6 @@
                           "ref": "Collection.html#registerSchema",
                           "tf": 8.333333333333332
                         },
-                        "Collection.html#unregisterSchema": {
-                          "ref": "Collection.html#unregisterSchema",
-                          "tf": 6.25
-                        },
                         "Collection.html#cleanWithSchema": {
                           "ref": "Collection.html#cleanWithSchema",
                           "tf": 6.25
@@ -3244,6 +3277,10 @@
                         },
                         "Collection.html#where": {
                           "ref": "Collection.html#where",
+                          "tf": 6.25
+                        },
+                        "Collection.html#unregisterSchema": {
+                          "ref": "Collection.html#unregisterSchema",
                           "tf": 6.25
                         }
                       },
@@ -4152,13 +4189,13 @@
                       "ref": "Collection.html#update",
                       "tf": 5.555555555555555
                     },
-                    "Collection.html#where": {
-                      "ref": "Collection.html#where",
-                      "tf": 6.25
-                    },
                     "Collection.html#updateById": {
                       "ref": "Collection.html#updateById",
                       "tf": 12.5
+                    },
+                    "Collection.html#where": {
+                      "ref": "Collection.html#where",
+                      "tf": 6.25
                     }
                   }
                 }
@@ -4441,13 +4478,40 @@
                         "ref": "Collection.html#registerSchema",
                         "tf": 74.99999999999999
                       },
+                      "Collection.html#cleanWithSchema": {
+                        "ref": "Collection.html#cleanWithSchema",
+                        "tf": 39.58333333333333
+                      },
                       "Collection.html#unregisterSchema": {
                         "ref": "Collection.html#unregisterSchema",
                         "tf": 56.25
                       },
-                      "Collection.html#cleanWithSchema": {
-                        "ref": "Collection.html#cleanWithSchema",
-                        "tf": 39.58333333333333
+                      "Schema.html": {
+                        "ref": "Schema.html",
+                        "tf": 1916.6666666666667
+                      }
+                    },
+                    "#": {
+                      "docs": {},
+                      "v": {
+                        "docs": {},
+                        "a": {
+                          "docs": {},
+                          "l": {
+                            "docs": {},
+                            "i": {
+                              "docs": {},
+                              "d": {
+                                "docs": {
+                                  "Schema.html#validate": {
+                                    "ref": "Schema.html#validate",
+                                    "tf": 1150
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -5666,6 +5730,10 @@
                     "Collection.html#unregisterSchema": {
                       "ref": "Collection.html#unregisterSchema",
                       "tf": 6.25
+                    },
+                    "Schema.html#validate": {
+                      "ref": "Schema.html#validate",
+                      "tf": 708.3333333333334
                     }
                   }
                 }
@@ -5686,7 +5754,7 @@
           }
         }
       },
-      "length": 496
+      "length": 505
     },
     "corpusTokens": [
       "ad",
@@ -5835,6 +5903,7 @@
       "save",
       "savedatabas",
       "schema",
+      "schema#valid",
       "set",
       "simplesort",
       "singl",
@@ -6316,6 +6385,16 @@
       "summary": "",
       "description": "Update all documents in the collection that match the query or pass the custom filter function."
     },
+    "Collection.html#updateById": {
+      "id": "Collection.html#updateById",
+      "kind": "function",
+      "title": "updateById( id, updater ) → {object}",
+      "longname": "Collection#updateById",
+      "name": "updateById",
+      "tags": "Collection#updateById updateById",
+      "summary": "",
+      "description": "Update the document with the matching ID."
+    },
     "Collection.html#registerSchema": {
       "id": "Collection.html#registerSchema",
       "kind": "function",
@@ -6325,16 +6404,6 @@
       "tags": "Collection#registerSchema registerSchema",
       "summary": "",
       "description": "Register a schema to validate documents inserted into the collection."
-    },
-    "Collection.html#unregisterSchema": {
-      "id": "Collection.html#unregisterSchema",
-      "kind": "function",
-      "title": "unregisterSchema() → {Schema}",
-      "longname": "Collection#unregisterSchema",
-      "name": "unregisterSchema",
-      "tags": "Collection#unregisterSchema unregisterSchema",
-      "summary": "",
-      "description": "Unregister the schema which ultimately stops the collection from validating any further documents."
     },
     "Collection.html#cleanWithSchema": {
       "id": "Collection.html#cleanWithSchema",
@@ -6366,15 +6435,15 @@
       "summary": "",
       "description": "Find all documents in the collection that match the query or pass the filter function."
     },
-    "Collection.html#updateById": {
-      "id": "Collection.html#updateById",
+    "Collection.html#unregisterSchema": {
+      "id": "Collection.html#unregisterSchema",
       "kind": "function",
-      "title": "updateById( id, updater ) → {object}",
-      "longname": "Collection#updateById",
-      "name": "updateById",
-      "tags": "Collection#updateById updateById",
+      "title": "unregisterSchema() → {Schema}",
+      "longname": "Collection#unregisterSchema",
+      "name": "unregisterSchema",
+      "tags": "Collection#unregisterSchema unregisterSchema",
       "summary": "",
-      "description": "Update the document with the matching ID."
+      "description": "Unregister the schema which ultimately stops the collection from validating any further documents."
     },
     "Result.html": {
       "id": "Result.html",
@@ -6446,6 +6515,27 @@
       "tags": "Result#limit limit",
       "summary": "",
       "description": "Limit the number of results."
+    },
+    "Schema.html": {
+      "id": "Schema.html",
+      "kind": "class",
+      "title": "Schema",
+      "longname": "Schema",
+      "name": "Schema",
+      "tags": "Schema",
+      "summary": "",
+      "description": "Creates a Schema instance.",
+      "body": ""
+    },
+    "Schema.html#validate": {
+      "id": "Schema.html#validate",
+      "kind": "function",
+      "title": "validate( document ) → {boolean}",
+      "longname": "Schema#validate",
+      "name": "validate",
+      "tags": "Schema#validate validate",
+      "summary": "",
+      "description": "Validate a document."
     }
   }
 }

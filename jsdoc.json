@@ -7,7 +7,7 @@
 		"dictionaries": ["jsdoc", "closure"]
 	},
 	"source": {
-		"include": ["./lib/trustdb.js", "./lib/collection.js", "./lib/result.js"]
+		"include": ["./lib/trustdb.js", "./lib/collection.js", "./lib/result.js", "./lib/schema.js"]
 	},
   "plugins": ["plugins/markdown", "plugins/underscore"],
   "templates": {

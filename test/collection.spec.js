@@ -210,12 +210,6 @@ describe('Collection', function() {
     });
   });
 
-  describe('#testDocument()', function() {
-    it('should successfully test/validate a document', function() {
-      expect(collection.testDocument({ price: 0 })).to.be.ok();
-    });
-  });
-
   describe('#unregisterSchema()', function() {
     it('should unregister the validation schema', function() {
       collection.unregisterSchema();

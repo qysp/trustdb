@@ -40,6 +40,7 @@
 									<ul class="dropdown-menu">
 											<li><a href="Collection.html">Collection</a></li>
 											<li><a href="Result.html">Result</a></li>
+											<li><a href="Schema.html">Schema</a></li>
 											<li><a href="TrustDB.html">TrustDB</a></li>
 									</ul>
 								</li>
@@ -74,7 +75,8 @@
 <pre class="prettyprint source"><code>npm install trustdb
 </code></pre>
 <p>Import the package into your app.</p>
-<pre class="prettyprint source lang-js"><code>const db = require('trustdb');
+<pre class="prettyprint source lang-js"><code>const { db } = require('trustdb');
+import db from 'trustdb';
 </code></pre>
 <p>Connect to the database, given a filepath and desired settings.</p>
 <pre class="prettyprint source lang-js"><code>await db.connect({
@@ -118,7 +120,10 @@ collection.on('update', (updatedDocs, allDocs) => {
 collection.registerSchema({
   url: 'string',
   title: 'string',
-  description: 'string',
+  description: {
+    __value: 'string',
+    __optional: true,
+  },
 });
 </code></pre>
 <p>Insert documents.</p>

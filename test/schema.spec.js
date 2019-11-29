@@ -24,9 +24,24 @@ describe('Schema', function() {
     });
   });
 
-  const schema = createSchema();
-
   describe('#validate()', function() {
+    it('should successfully validate the object (any + optional)', function() {
+      const anySchema = new Schema({
+        prop: {
+          __value: 'any',
+          __optional: true,
+        },
+      });
+      const results = [];
+      results.push(anySchema.validate({}));
+      results.push(anySchema.validate({ prop: 'string' }));
+      results.push(anySchema.validate({ prop: 42 }));
+      results.push(anySchema.validate({ prop: [{ prop: 42 }] }));
+      expect(results).to.not.contain(false);
+    });
+
+    const schema = createSchema();
+
     it('should successfully validate the object', function() {
       const result = schema.validate({
         price: {

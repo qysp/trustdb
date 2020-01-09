@@ -3,21 +3,21 @@ const Schema = require('../lib/schema');
 
 describe('Schema', function() {
   const createSchema = () => new Schema({
-    any: 'any',
-    string: 'string',
-    number: 'number',
-    boolean: 'boolean',
-    date: 'date',
-    array: ['number'],
-    object: { prop: 'number' },
-    array_of_objects: [ { prop: 'number' } ],
-    nested: { object: { prop: 'number' } },
+    any: Schema.Types.Any,
+    string: Schema.Types.String,
+    number: Schema.Types.Number,
+    boolean: Schema.Types.Boolean,
+    date: Schema.Types.Date,
+    array: [Schema.Types.Number],
+    object: { prop: Schema.Types.Number },
+    array_of_objects: [ { prop: Schema.Types.Number } ],
+    nested: { object: { prop: Schema.Types.Number } },
     optional: {
-      __value: 'number',
+      __value: Schema.Types.Number,
       __optional: true,
     },
     any_optional: {
-      __value: 'any',
+      __value: Schema.Types.Mixed,
       __optional: true,
     }
   });

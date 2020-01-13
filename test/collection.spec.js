@@ -4,6 +4,9 @@ const Schema = require('../lib/schema');
 
 describe('Collection', function() {
   const collection = new Collection('test_collection');
+  // collection.registerSchema({
+  //   price: 'number',
+  // });
 
   beforeEach('reset collection', function() {
     collection.clear();
@@ -17,37 +20,31 @@ describe('Collection', function() {
 
   describe('#insert()', function() {
     it('should insert documents, each given as an individual paramater', function() {
-      // TODO: find a better solution for the insert test cases
-      collection.clear();
       collection.insert(
-        { doc: 1 },
-        { doc: 2 },
-        { doc: 3 }
+        { price: 1 },
+        { price: 2 },
+        { price: 3 }
       );
 
-      expect(collection.documents).to.have.length(3);
+      expect(collection.documents).to.have.length(7);
     });
 
     it('should insert documents, given as an array of documents', function() {
-      collection.clear();
       collection.insert([
-        { doc: 1 },
-        { doc: 2 },
-        { doc: 3 },
+        { price: 1 },
+        { price: 2 },
+        { price: 3 },
       ]);
 
-      expect(collection.documents).to.have.length(3);
+      expect(collection.documents).to.have.length(7);
     });
   });
 
   describe('#insertOne()', function() {
     it('should insert a single document', function() {
-      collection.clear();
-      collection.insertOne(
-        { doc: 1 }
-      );
+      collection.insertOne({ price: 1 });
 
-      expect(collection.documents).to.have.length(1);
+      expect(collection.documents).to.have.length(5);
     });
   });
 

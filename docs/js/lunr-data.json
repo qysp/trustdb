@@ -127,27 +127,6 @@
           "result#limit",
           "valu"
         ],
-        "Schema.html": [
-          "class",
-          "creat",
-          "instanc",
-          "schema"
-        ],
-        "Schema.html#.Types": [
-          "constant",
-          "lt;static&gt",
-          "member",
-          "schema",
-          "schema.typ",
-          "type"
-        ],
-        "Schema.html#validate": [
-          "boolean",
-          "document",
-          "function",
-          "schema#valid",
-          "valid"
-        ],
         "TrustDB.html": [
           "class",
           "creat",
@@ -648,6 +627,27 @@
           "delet",
           "document",
           "function"
+        ],
+        "Schema.html": [
+          "class",
+          "creat",
+          "instanc",
+          "schema"
+        ],
+        "Schema.html#.Types": [
+          "avail",
+          "lt;static&gt",
+          "member",
+          "schema",
+          "schema.typ",
+          "type"
+        ],
+        "Schema.html#validate": [
+          "boolean",
+          "document",
+          "function",
+          "schema#valid",
+          "valid"
         ]
       },
       "length": 60
@@ -1001,10 +1001,6 @@
                             "ref": "Result.html#limit",
                             "tf": 110
                           },
-                          "Schema.html#validate": {
-                            "ref": "Schema.html#validate",
-                            "tf": 110
-                          },
                           "TrustDB.html#connect": {
                             "ref": "TrustDB.html#connect",
                             "tf": 110
@@ -1115,6 +1111,10 @@
                           },
                           "Collection.html#clear": {
                             "ref": "Collection.html#clear",
+                            "tf": 110
+                          },
+                          "Schema.html#validate": {
+                            "ref": "Schema.html#validate",
                             "tf": 110
                           }
                         }
@@ -1236,10 +1236,6 @@
                           "ref": "Result.html",
                           "tf": 16.666666666666664
                         },
-                        "Schema.html": {
-                          "ref": "Schema.html",
-                          "tf": 16.666666666666664
-                        },
                         "TrustDB.html": {
                           "ref": "TrustDB.html",
                           "tf": 16.666666666666664
@@ -1254,6 +1250,10 @@
                         },
                         "Collection.html": {
                           "ref": "Collection.html",
+                          "tf": 16.666666666666664
+                        },
+                        "Schema.html": {
+                          "ref": "Schema.html",
                           "tf": 16.666666666666664
                         }
                       }
@@ -2505,10 +2505,6 @@
                             "ref": "Result.html#originalDocuments",
                             "tf": 12.5
                           },
-                          "Schema.html#validate": {
-                            "ref": "Schema.html#validate",
-                            "tf": 58.33333333333333
-                          },
                           "TrustDB.html#totalSize": {
                             "ref": "TrustDB.html#totalSize",
                             "tf": 16.666666666666664
@@ -2596,6 +2592,10 @@
                           "Collection.html#clear": {
                             "ref": "Collection.html#clear",
                             "tf": 12.5
+                          },
+                          "Schema.html#validate": {
+                            "ref": "Schema.html#validate",
+                            "tf": 58.33333333333333
                           }
                         }
                       }
@@ -2948,16 +2948,16 @@
                       "ref": "Result.html",
                       "tf": 110
                     },
-                    "Schema.html": {
-                      "ref": "Schema.html",
-                      "tf": 110
-                    },
                     "TrustDB.html": {
                       "ref": "TrustDB.html",
                       "tf": 110
                     },
                     "Collection.html": {
                       "ref": "Collection.html",
+                      "tf": 110
+                    },
+                    "Schema.html": {
+                      "ref": "Schema.html",
                       "tf": 110
                     }
                   }
@@ -3056,10 +3056,6 @@
                       "ref": "Result.html",
                       "tf": 16.666666666666664
                     },
-                    "Schema.html": {
-                      "ref": "Schema.html",
-                      "tf": 16.666666666666664
-                    },
                     "TrustDB.html": {
                       "ref": "TrustDB.html",
                       "tf": 16.666666666666664
@@ -3087,6 +3083,10 @@
                     "Collection.html#created": {
                       "ref": "Collection.html#created",
                       "tf": 750
+                    },
+                    "Schema.html": {
+                      "ref": "Schema.html",
+                      "tf": 16.666666666666664
                     }
                   },
                   "i": {
@@ -3196,26 +3196,6 @@
             "docs": {},
             "n": {
               "docs": {},
-              "s": {
-                "docs": {},
-                "t": {
-                  "docs": {},
-                  "a": {
-                    "docs": {},
-                    "n": {
-                      "docs": {},
-                      "t": {
-                        "docs": {
-                          "Schema.html#.Types": {
-                            "ref": "Schema.html#.Types",
-                            "tf": 16.666666666666664
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
               "n": {
                 "docs": {},
                 "e": {
@@ -4037,42 +4017,24 @@
               }
             }
           },
+          "o": {
+            "docs": {},
+            "a": {
+              "docs": {},
+              "d": {
+                "docs": {
+                  "TrustDB.html#connect": {
+                    "ref": "TrustDB.html#connect",
+                    "tf": 2.7777777777777777
+                  }
+                }
+              }
+            }
+          },
           "t": {
             "docs": {},
             ";": {
               "docs": {},
-              "s": {
-                "docs": {},
-                "t": {
-                  "docs": {},
-                  "a": {
-                    "docs": {},
-                    "t": {
-                      "docs": {},
-                      "i": {
-                        "docs": {},
-                        "c": {
-                          "docs": {},
-                          "&": {
-                            "docs": {},
-                            "g": {
-                              "docs": {},
-                              "t": {
-                                "docs": {
-                                  "Schema.html#.Types": {
-                                    "ref": "Schema.html#.Types",
-                                    "tf": 50
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
               "a": {
                 "docs": {},
                 "s": {
@@ -4121,18 +4083,36 @@
                     }
                   }
                 }
-              }
-            }
-          },
-          "o": {
-            "docs": {},
-            "a": {
-              "docs": {},
-              "d": {
-                "docs": {
-                  "TrustDB.html#connect": {
-                    "ref": "TrustDB.html#connect",
-                    "tf": 2.7777777777777777
+              },
+              "s": {
+                "docs": {},
+                "t": {
+                  "docs": {},
+                  "a": {
+                    "docs": {},
+                    "t": {
+                      "docs": {},
+                      "i": {
+                        "docs": {},
+                        "c": {
+                          "docs": {},
+                          "&": {
+                            "docs": {},
+                            "g": {
+                              "docs": {},
+                              "t": {
+                                "docs": {
+                                  "Schema.html#.Types": {
+                                    "ref": "Schema.html#.Types",
+                                    "tf": 50
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -4523,6 +4503,23 @@
                 }
               }
             }
+          },
+          "v": {
+            "docs": {},
+            "a": {
+              "docs": {},
+              "i": {
+                "docs": {},
+                "l": {
+                  "docs": {
+                    "Schema.html#.Types": {
+                      "ref": "Schema.html#.Types",
+                      "tf": 16.666666666666664
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "m": {
@@ -4543,10 +4540,6 @@
                       },
                       "Result.html#originalDocuments": {
                         "ref": "Result.html#originalDocuments",
-                        "tf": 110
-                      },
-                      "Schema.html#.Types": {
-                        "ref": "Schema.html#.Types",
                         "tf": 110
                       },
                       "TrustDB.html#connected": {
@@ -4615,6 +4608,10 @@
                       },
                       "Collection.html#size": {
                         "ref": "Collection.html#size",
+                        "tf": 110
+                      },
+                      "Schema.html#.Types": {
+                        "ref": "Schema.html#.Types",
                         "tf": 110
                       }
                     }
@@ -5599,90 +5596,6 @@
               }
             }
           },
-          "c": {
-            "docs": {},
-            "h": {
-              "docs": {},
-              "e": {
-                "docs": {},
-                "m": {
-                  "docs": {},
-                  "a": {
-                    "docs": {
-                      "Schema.html": {
-                        "ref": "Schema.html",
-                        "tf": 1916.6666666666667
-                      },
-                      "Schema.html#.Types": {
-                        "ref": "Schema.html#.Types",
-                        "tf": 16.666666666666664
-                      },
-                      "Collection.html#schema": {
-                        "ref": "Collection.html#schema",
-                        "tf": 766.6666666666666
-                      },
-                      "Collection.html#hasSchema": {
-                        "ref": "Collection.html#hasSchema",
-                        "tf": 12.5
-                      },
-                      "Collection.html#registerSchema": {
-                        "ref": "Collection.html#registerSchema",
-                        "tf": 74.99999999999999
-                      },
-                      "Collection.html#unregisterSchema": {
-                        "ref": "Collection.html#unregisterSchema",
-                        "tf": 56.25
-                      },
-                      "Collection.html#cleanWithSchema": {
-                        "ref": "Collection.html#cleanWithSchema",
-                        "tf": 39.58333333333333
-                      }
-                    },
-                    ".": {
-                      "docs": {},
-                      "t": {
-                        "docs": {},
-                        "y": {
-                          "docs": {},
-                          "p": {
-                            "docs": {
-                              "Schema.html#.Types": {
-                                "ref": "Schema.html#.Types",
-                                "tf": 1150
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "#": {
-                      "docs": {},
-                      "v": {
-                        "docs": {},
-                        "a": {
-                          "docs": {},
-                          "l": {
-                            "docs": {},
-                            "i": {
-                              "docs": {},
-                              "d": {
-                                "docs": {
-                                  "Schema.html#validate": {
-                                    "ref": "Schema.html#validate",
-                                    "tf": 1150
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
           "e": {
             "docs": {},
             "t": {
@@ -5776,6 +5689,90 @@
                 }
               }
             }
+          },
+          "c": {
+            "docs": {},
+            "h": {
+              "docs": {},
+              "e": {
+                "docs": {},
+                "m": {
+                  "docs": {},
+                  "a": {
+                    "docs": {
+                      "Collection.html#schema": {
+                        "ref": "Collection.html#schema",
+                        "tf": 766.6666666666666
+                      },
+                      "Collection.html#hasSchema": {
+                        "ref": "Collection.html#hasSchema",
+                        "tf": 12.5
+                      },
+                      "Collection.html#registerSchema": {
+                        "ref": "Collection.html#registerSchema",
+                        "tf": 74.99999999999999
+                      },
+                      "Collection.html#unregisterSchema": {
+                        "ref": "Collection.html#unregisterSchema",
+                        "tf": 56.25
+                      },
+                      "Collection.html#cleanWithSchema": {
+                        "ref": "Collection.html#cleanWithSchema",
+                        "tf": 39.58333333333333
+                      },
+                      "Schema.html": {
+                        "ref": "Schema.html",
+                        "tf": 1916.6666666666667
+                      },
+                      "Schema.html#.Types": {
+                        "ref": "Schema.html#.Types",
+                        "tf": 16.666666666666664
+                      }
+                    },
+                    ".": {
+                      "docs": {},
+                      "t": {
+                        "docs": {},
+                        "y": {
+                          "docs": {},
+                          "p": {
+                            "docs": {
+                              "Schema.html#.Types": {
+                                "ref": "Schema.html#.Types",
+                                "tf": 1150
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "#": {
+                      "docs": {},
+                      "v": {
+                        "docs": {},
+                        "a": {
+                          "docs": {},
+                          "l": {
+                            "docs": {},
+                            "i": {
+                              "docs": {},
+                              "d": {
+                                "docs": {
+                                  "Schema.html#validate": {
+                                    "ref": "Schema.html#validate",
+                                    "tf": 1150
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "v": {
@@ -5800,10 +5797,6 @@
                 "docs": {},
                 "d": {
                   "docs": {
-                    "Schema.html#validate": {
-                      "ref": "Schema.html#validate",
-                      "tf": 708.3333333333334
-                    },
                     "Collection.html#registerSchema": {
                       "ref": "Collection.html#registerSchema",
                       "tf": 8.333333333333332
@@ -5811,6 +5804,10 @@
                     "Collection.html#unregisterSchema": {
                       "ref": "Collection.html#unregisterSchema",
                       "tf": 6.25
+                    },
+                    "Schema.html#validate": {
+                      "ref": "Schema.html#validate",
+                      "tf": 708.3333333333334
                     }
                   }
                 }
@@ -6010,6 +6007,7 @@
       "array.&lt;string&gt",
       "autosav",
       "autosaveinterv",
+      "avail",
       "base",
       "befor",
       "boolean",
@@ -6048,7 +6046,6 @@
       "configur",
       "configureset",
       "connect",
-      "constant",
       "creat",
       "createcollect",
       "creation",
@@ -6311,37 +6308,6 @@
       "tags": "Result#limit limit",
       "summary": "",
       "description": "Limit the number of results."
-    },
-    "Schema.html": {
-      "id": "Schema.html",
-      "kind": "class",
-      "title": "Schema",
-      "longname": "Schema",
-      "name": "Schema",
-      "tags": "Schema",
-      "summary": "",
-      "description": "Creates a Schema instance.",
-      "body": ""
-    },
-    "Schema.html#.Types": {
-      "id": "Schema.html#.Types",
-      "kind": "member",
-      "title": "&lt;static&gt; Types",
-      "longname": "Schema.Types",
-      "name": "Types",
-      "tags": "Schema.Types Types",
-      "summary": "",
-      "description": "Get the constant schema types."
-    },
-    "Schema.html#validate": {
-      "id": "Schema.html#validate",
-      "kind": "function",
-      "title": "validate( document ) → {boolean}",
-      "longname": "Schema#validate",
-      "name": "validate",
-      "tags": "Schema#validate validate",
-      "summary": "",
-      "description": "Validate a document."
     },
     "TrustDB.html": {
       "id": "TrustDB.html",
@@ -6814,6 +6780,37 @@
       "tags": "Collection#clear clear",
       "summary": "",
       "description": "Clear the collection by deleting all of its documents."
+    },
+    "Schema.html": {
+      "id": "Schema.html",
+      "kind": "class",
+      "title": "Schema",
+      "longname": "Schema",
+      "name": "Schema",
+      "tags": "Schema",
+      "summary": "",
+      "description": "Creates a Schema instance.",
+      "body": ""
+    },
+    "Schema.html#.Types": {
+      "id": "Schema.html#.Types",
+      "kind": "member",
+      "title": "&lt;static&gt; Types",
+      "longname": "Schema.Types",
+      "name": "Types",
+      "tags": "Schema.Types Types",
+      "summary": "",
+      "description": "Get the available schema types."
+    },
+    "Schema.html#validate": {
+      "id": "Schema.html#validate",
+      "kind": "function",
+      "title": "validate( document ) → {boolean}",
+      "longname": "Schema#validate",
+      "name": "validate",
+      "tags": "Schema#validate validate",
+      "summary": "",
+      "description": "Validate a document."
     }
   }
 }

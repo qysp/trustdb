@@ -35,6 +35,12 @@
 			<div class="navbar-collapse collapse" id="topNavigation">
 				<ul class="nav navbar-nav">
 								<li class="dropdown">
+									<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Globals<b class="caret"></b></a>
+									<ul class="dropdown-menu">
+											<li><a href="global.html#SchemaTypes">SchemaTypes</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
 									<a href="list_class.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 									<ul class="dropdown-menu">
 											<li><a href="Collection.html">Collection</a></li>
@@ -177,7 +183,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-484">line 484</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-496">line 496</a></p>
 								</div>
 							</div>
 			
@@ -222,7 +228,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-493">line 493</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-505">line 505</a></p>
 								</div>
 							</div>
 			
@@ -267,7 +273,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-502">line 502</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-514">line 514</a></p>
 								</div>
 							</div>
 			
@@ -312,7 +318,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-511">line 511</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-523">line 523</a></p>
 								</div>
 							</div>
 			
@@ -357,7 +363,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-521">line 521</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-533">line 533</a></p>
 								</div>
 							</div>
 			
@@ -402,7 +408,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-530">line 530</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-542">line 542</a></p>
 								</div>
 							</div>
 			
@@ -447,7 +453,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-539">line 539</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-551">line 551</a></p>
 								</div>
 							</div>
 			
@@ -492,7 +498,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-548">line 548</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-560">line 560</a></p>
 								</div>
 							</div>
 			
@@ -715,10 +721,12 @@
 							</div>
 					</form>
 			</div>			<div class="callout callout-example"><h5>Examples</h5>		<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Find all documents where the value of the property price is greater than or equal to 50.collection.find({ price: { greaterThanOrEqual: 50 } });</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Find all documents where the value of the property price is greater than or equal to 50.
+			collection.find({ price: { greaterThanOrEqual: 50 } });</code></pre>
 					</div>
 					<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Same result but using a function.collection.find((doc) &#x3D;&gt; doc.price &gt;&#x3D; 50);</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Same result but using a function.
+			collection.find((doc) &#x3D;&gt; doc.price &gt;&#x3D; 50);</code></pre>
 					</div>
 			</div>			<div class="callout callout-warning"><h5>Fires</h5>		<form class="form-horizontal fires">
 							<div class="form-group">
@@ -805,10 +813,12 @@
 							</div>
 					</form>
 			</div>			<div class="callout callout-example"><h5>Examples</h5>		<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Find all documents where the value of the property price is greater than or equal to 50.collection.find({ price: { greaterThanOrEqual: 50 } });</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Find all documents where the value of the property price is greater than or equal to 50.
+			collection.find({ price: { greaterThanOrEqual: 50 } });</code></pre>
 					</div>
 					<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Same result but using a function.collection.find((doc) &#x3D;&gt; doc.price &gt;&#x3D; 50);</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Same result but using a function.
+			collection.find((doc) &#x3D;&gt; doc.price &gt;&#x3D; 50);</code></pre>
 					</div>
 			</div>			<div class="callout callout-warning"><h5>Fires</h5>		<form class="form-horizontal fires">
 							<div class="form-group">
@@ -895,10 +905,12 @@
 							</div>
 					</form>
 			</div>			<div class="callout callout-example"><h5>Examples</h5>		<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Find all documents where the value of the property price is greater than or equal to 50.collection.find({ price: { greaterThanOrEqual: 50 } });</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Find all documents where the value of the property price is greater than or equal to 50.
+			collection.find({ price: { greaterThanOrEqual: 50 } });</code></pre>
 					</div>
 					<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Same result but using a function.collection.find((doc) &#x3D;&gt; doc.price &gt;&#x3D; 50);</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Same result but using a function.
+			collection.find((doc) &#x3D;&gt; doc.price &gt;&#x3D; 50);</code></pre>
 					</div>
 			</div>			<div class="callout callout-warning"><h5>Fires</h5>		<form class="form-horizontal fires">
 							<div class="form-group">
@@ -975,10 +987,12 @@
 							</div>
 					</form>
 			</div>			<div class="callout callout-example"><h5>Examples</h5>		<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Find the first document where the value of the roperty price is greater than or equal to 50.collection.findOne({ price: { greaterThanOrEqual: 50 } });</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Find the first document where the value of the roperty price is greater than or equal to 50.
+			collection.findOne({ price: { greaterThanOrEqual: 50 } });</code></pre>
 					</div>
 					<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Same result but using a function.collection.findOne((doc) &#x3D;&gt; doc.price &gt;&#x3D; 50);</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Same result but using a function.
+			collection.findOne((doc) &#x3D;&gt; doc.price &gt;&#x3D; 50);</code></pre>
 					</div>
 			</div>			<div class="callout callout-warning"><h5>Fires</h5>		<form class="form-horizontal fires">
 							<div class="form-group">
@@ -1137,10 +1151,12 @@
 							</div>
 					</form>
 			</div>			<div class="callout callout-example"><h5>Examples</h5>		<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Remove the first matching document.collection.removeExact({ price: 50 }, true);</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Remove the first matching document.
+			collection.removeExact({ price: 50 }, true);</code></pre>
 					</div>
 					<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Remove all matching documents.collection.removeExact({ price: 50 });</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Remove all matching documents.
+			collection.removeExact({ price: 50 });</code></pre>
 					</div>
 			</div>			<div class="callout callout-warning"><h5>Fires</h5>		<form class="form-horizontal fires">
 							<div class="form-group">
@@ -1217,10 +1233,13 @@
 							</div>
 					</form>
 			</div>			<div class="callout callout-example"><h5>Examples</h5>		<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Remove all documents where the value of the// property price is greater than or equal to 50.collection.remove({ price: { greaterThanOrEqual: 50 } });</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Remove all documents where the value of the
+			// property price is greater than or equal to 50.
+			collection.remove({ price: { greaterThanOrEqual: 50 } });</code></pre>
 					</div>
 					<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Same result but using a function.collection.remove((doc) &#x3D;&gt; doc.price &gt;&#x3D; 50);</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Same result but using a function.
+			collection.remove((doc) &#x3D;&gt; doc.price &gt;&#x3D; 50);</code></pre>
 					</div>
 			</div>			<div class="callout callout-warning"><h5>Fires</h5>		<form class="form-horizontal fires">
 							<div class="form-group">
@@ -1297,7 +1316,11 @@
 							</div>
 					</form>
 			</div>			<div class="callout callout-example"><h5>Examples</h5>		<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Remove the first document where the value of the// property price is greater than or equal to 50.collection.removeOne({ price: { greaterThanOrEqual: 50 } });// orcollection.removeOne((doc) &#x3D;&gt; doc.price &gt;&#x3D; 50);</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Remove the first document where the value of the
+			// property price is greater than or equal to 50.
+			collection.removeOne({ price: { greaterThanOrEqual: 50 } });
+			// or
+			collection.removeOne((doc) &#x3D;&gt; doc.price &gt;&#x3D; 50);</code></pre>
 					</div>
 			</div>			<div class="callout callout-warning"><h5>Fires</h5>		<form class="form-horizontal fires">
 							<div class="form-group">
@@ -1458,7 +1481,11 @@
 							</div>
 					</form>
 			</div>			<div class="callout callout-example"><h5>Examples</h5>		<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Update all documents where the value of the property price is greater than or equal to 50 and set it to 49.99.collection.update(  (doc) &#x3D;&gt; doc.price &gt;&#x3D; 50,  { price: 49.99 });</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">// Update all documents where the value of the property price is greater than or equal to 50 and set it to 49.99.
+			collection.update(
+			  (doc) &#x3D;&gt; doc.price &gt;&#x3D; 50,
+			  { price: 49.99 }
+			);</code></pre>
 					</div>
 			</div>			<div class="callout callout-warning"><h5>Fires</h5>		<form class="form-horizontal fires">
 							<div class="form-group">
@@ -1542,7 +1569,10 @@
 							</div>
 					</form>
 			</div>			<div class="callout callout-example"><h5>Examples</h5>		<div class="example-code">
-						<pre class="prettyprint source language-javascript"><code class="language-javascript">collection.updateById( &#x27;1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed&#x27;, { price: 49.99 });</code></pre>
+						<pre class="prettyprint source language-javascript"><code class="language-javascript">collection.updateById(
+			 &#x27;1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed&#x27;,
+			 { price: 49.99 }
+			);</code></pre>
 					</div>
 			</div>			<div class="callout callout-warning"><h5>Fires</h5>		<form class="form-horizontal fires">
 							<div class="form-group">
@@ -1572,7 +1602,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-400">line 400</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-406">line 406</a></p>
 								</div>
 							</div>
 			
@@ -1638,7 +1668,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-430">line 430</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-442">line 442</a></p>
 								</div>
 							</div>
 			
@@ -1684,7 +1714,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-447">line 447</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-459">line 459</a></p>
 								</div>
 							</div>
 			
@@ -1753,7 +1783,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-460">line 460</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-472">line 472</a></p>
 								</div>
 							</div>
 			
@@ -1798,7 +1828,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Source</label>
 								<div class="col-sm-9">
-									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-475">line 475</a></p>
+									<p class="form-control-static"><a href="collection.js.html">collection.js</a>, <a href="collection.js.html#line-487">line 487</a></p>
 								</div>
 							</div>
 			
@@ -1819,7 +1849,7 @@
 	</div>
 	<footer>
 				<div class="copyright">FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.</div>
-			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 6th Jan 2020 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
+			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 13th Jan 2020 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
 	</footer>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

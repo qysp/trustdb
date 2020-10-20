@@ -127,6 +127,264 @@
           "result#limit",
           "valu"
         ],
+        "Collection.html": [
+          "class",
+          "collect",
+          "creat",
+          "instanc"
+        ],
+        "Collection.html#documents": [
+          "collect",
+          "collection#docu",
+          "document",
+          "member"
+        ],
+        "Collection.html#name": [
+          "collect",
+          "collection#nam",
+          "member",
+          "name"
+        ],
+        "Collection.html#schema": [
+          "collect",
+          "collection#schema",
+          "member",
+          "regist",
+          "schema"
+        ],
+        "Collection.html#hasSchema": [
+          "collect",
+          "collection#hasschema",
+          "hasschema",
+          "member",
+          "regist",
+          "schema",
+          "whether"
+        ],
+        "Collection.html#created": [
+          "collect",
+          "collection#cr",
+          "creat",
+          "creation",
+          "date",
+          "member",
+          "time"
+        ],
+        "Collection.html#firstDocument": [
+          "collect",
+          "collection#firstdocu",
+          "document",
+          "first",
+          "firstdocu",
+          "member"
+        ],
+        "Collection.html#lastDocument": [
+          "collect",
+          "collection#lastdocu",
+          "document",
+          "last",
+          "lastdocu",
+          "member"
+        ],
+        "Collection.html#size": [
+          "amount",
+          "collect",
+          "collection#s",
+          "document",
+          "member",
+          "size"
+        ],
+        "Collection.html#insert": [
+          "array.&lt;string&gt",
+          "collect",
+          "collection#insert",
+          "doc",
+          "document",
+          "function",
+          "insert",
+          "new"
+        ],
+        "Collection.html#insertOne": [
+          "collect",
+          "collection#inserton",
+          "doc",
+          "document",
+          "emitev",
+          "function",
+          "insert",
+          "inserton",
+          "singl",
+          "string"
+        ],
+        "Collection.html#find": [
+          "array.&lt;object&gt;|result",
+          "collect",
+          "collection#find",
+          "document",
+          "filter",
+          "find",
+          "function",
+          "match",
+          "pass",
+          "queri",
+          "resultinst"
+        ],
+        "Collection.html#where": [
+          "array.&lt;object&gt;|result",
+          "collect",
+          "collection#wher",
+          "document",
+          "filter",
+          "find",
+          "function",
+          "match",
+          "pass",
+          "queri",
+          "resultinst"
+        ],
+        "Collection.html#findOne": [
+          "collect",
+          "collection#findon",
+          "document",
+          "filter",
+          "find",
+          "findon",
+          "first",
+          "function",
+          "match",
+          "object",
+          "pass",
+          "queri"
+        ],
+        "Collection.html#findById": [
+          "collection#findbyid",
+          "document",
+          "find",
+          "findbyid",
+          "function",
+          "id",
+          "match",
+          "object"
+        ],
+        "Collection.html#removeExact": [
+          "collect",
+          "collection#removeexact",
+          "doc",
+          "document",
+          "first",
+          "function",
+          "given",
+          "match",
+          "object|array.&lt;object&gt",
+          "remov",
+          "removeexact"
+        ],
+        "Collection.html#remove": [
+          "array.&lt;object&gt",
+          "collect",
+          "collection#remov",
+          "document",
+          "filter",
+          "function",
+          "match",
+          "pass",
+          "queri",
+          "remov"
+        ],
+        "Collection.html#removeOne": [
+          "array.&lt;object&gt",
+          "collect",
+          "collection#removeon",
+          "document",
+          "filter",
+          "first",
+          "function",
+          "match",
+          "pass",
+          "queri",
+          "remov",
+          "removeon"
+        ],
+        "Collection.html#removeById": [
+          "collection#removebyid",
+          "document",
+          "function",
+          "id",
+          "match",
+          "object",
+          "remov",
+          "removebyid"
+        ],
+        "Collection.html#update": [
+          "array.&lt;object&gt",
+          "collect",
+          "collection#upd",
+          "custom",
+          "document",
+          "filter",
+          "function",
+          "match",
+          "pass",
+          "queri",
+          "updat"
+        ],
+        "Collection.html#updateById": [
+          "collection#updatebyid",
+          "document",
+          "function",
+          "id",
+          "match",
+          "object",
+          "updat",
+          "updatebyid"
+        ],
+        "Collection.html#registerSchema": [
+          "collect",
+          "collection#registerschema",
+          "document",
+          "function",
+          "insert",
+          "regist",
+          "registerschema",
+          "schema",
+          "valid"
+        ],
+        "Collection.html#unregisterSchema": [
+          "collect",
+          "collection#unregisterschema",
+          "document",
+          "function",
+          "further",
+          "schema",
+          "stop",
+          "ultim",
+          "unregist",
+          "unregisterschema",
+          "valid"
+        ],
+        "Collection.html#cleanWithSchema": [
+          "array.&lt;object&gt",
+          "clean",
+          "cleanwithschema",
+          "collect",
+          "collection#cleanwithschema",
+          "document",
+          "function",
+          "invalid",
+          "pass",
+          "regist",
+          "schema",
+          "us"
+        ],
+        "Collection.html#clear": [
+          "array.&lt;object&gt",
+          "clear",
+          "collect",
+          "collection#clear",
+          "delet",
+          "document",
+          "function"
+        ],
         "TrustDB.html": [
           "class",
           "creat",
@@ -370,264 +628,6 @@
           "function",
           "trustdb#clear"
         ],
-        "Collection.html": [
-          "class",
-          "collect",
-          "creat",
-          "instanc"
-        ],
-        "Collection.html#documents": [
-          "collect",
-          "collection#docu",
-          "document",
-          "member"
-        ],
-        "Collection.html#name": [
-          "collect",
-          "collection#nam",
-          "member",
-          "name"
-        ],
-        "Collection.html#schema": [
-          "collect",
-          "collection#schema",
-          "member",
-          "regist",
-          "schema"
-        ],
-        "Collection.html#hasSchema": [
-          "collect",
-          "collection#hasschema",
-          "hasschema",
-          "member",
-          "regist",
-          "schema",
-          "whether"
-        ],
-        "Collection.html#created": [
-          "collect",
-          "collection#cr",
-          "creat",
-          "creation",
-          "date",
-          "member",
-          "time"
-        ],
-        "Collection.html#firstDocument": [
-          "collect",
-          "collection#firstdocu",
-          "document",
-          "first",
-          "firstdocu",
-          "member"
-        ],
-        "Collection.html#lastDocument": [
-          "collect",
-          "collection#lastdocu",
-          "document",
-          "last",
-          "lastdocu",
-          "member"
-        ],
-        "Collection.html#size": [
-          "amount",
-          "collect",
-          "collection#s",
-          "document",
-          "member",
-          "size"
-        ],
-        "Collection.html#insert": [
-          "array.&lt;string&gt",
-          "collect",
-          "collection#insert",
-          "doc",
-          "document",
-          "function",
-          "insert",
-          "new"
-        ],
-        "Collection.html#insertOne": [
-          "collect",
-          "collection#inserton",
-          "doc",
-          "document",
-          "emitev",
-          "function",
-          "insert",
-          "inserton",
-          "singl",
-          "string"
-        ],
-        "Collection.html#find": [
-          "array.&lt;object&gt",
-          "collect",
-          "collection#find",
-          "document",
-          "filter",
-          "find",
-          "function",
-          "match",
-          "pass",
-          "queri",
-          "resultinst"
-        ],
-        "Collection.html#where": [
-          "array.&lt;object&gt",
-          "collect",
-          "collection#wher",
-          "document",
-          "filter",
-          "find",
-          "function",
-          "match",
-          "pass",
-          "queri",
-          "resultinst"
-        ],
-        "Collection.html#findOne": [
-          "collect",
-          "collection#findon",
-          "document",
-          "filter",
-          "find",
-          "findon",
-          "first",
-          "function",
-          "match",
-          "object",
-          "pass",
-          "queri"
-        ],
-        "Collection.html#findById": [
-          "collection#findbyid",
-          "document",
-          "find",
-          "findbyid",
-          "function",
-          "id",
-          "match",
-          "object"
-        ],
-        "Collection.html#removeExact": [
-          "collect",
-          "collection#removeexact",
-          "doc",
-          "document",
-          "first",
-          "function",
-          "given",
-          "match",
-          "object|array.&lt;object&gt",
-          "remov",
-          "removeexact"
-        ],
-        "Collection.html#remove": [
-          "array.&lt;object&gt",
-          "collect",
-          "collection#remov",
-          "document",
-          "filter",
-          "function",
-          "match",
-          "pass",
-          "queri",
-          "remov"
-        ],
-        "Collection.html#removeOne": [
-          "array.&lt;object&gt",
-          "collect",
-          "collection#removeon",
-          "document",
-          "filter",
-          "first",
-          "function",
-          "match",
-          "pass",
-          "queri",
-          "remov",
-          "removeon"
-        ],
-        "Collection.html#removeById": [
-          "collection#removebyid",
-          "document",
-          "function",
-          "id",
-          "match",
-          "object",
-          "remov",
-          "removebyid"
-        ],
-        "Collection.html#update": [
-          "array.&lt;object&gt",
-          "collect",
-          "collection#upd",
-          "custom",
-          "document",
-          "filter",
-          "function",
-          "match",
-          "pass",
-          "queri",
-          "updat"
-        ],
-        "Collection.html#updateById": [
-          "collection#updatebyid",
-          "document",
-          "function",
-          "id",
-          "match",
-          "object",
-          "updat",
-          "updatebyid"
-        ],
-        "Collection.html#registerSchema": [
-          "collect",
-          "collection#registerschema",
-          "document",
-          "function",
-          "insert",
-          "regist",
-          "registerschema",
-          "schema",
-          "valid"
-        ],
-        "Collection.html#unregisterSchema": [
-          "collect",
-          "collection#unregisterschema",
-          "document",
-          "function",
-          "further",
-          "schema",
-          "stop",
-          "ultim",
-          "unregist",
-          "unregisterschema",
-          "valid"
-        ],
-        "Collection.html#cleanWithSchema": [
-          "array.&lt;object&gt",
-          "clean",
-          "cleanwithschema",
-          "collect",
-          "collection#cleanwithschema",
-          "document",
-          "function",
-          "invalid",
-          "pass",
-          "regist",
-          "schema",
-          "us"
-        ],
-        "Collection.html#clear": [
-          "array.&lt;object&gt",
-          "clear",
-          "collect",
-          "collection#clear",
-          "delet",
-          "document",
-          "function"
-        ],
         "Schema.html": [
           "class",
           "creat",
@@ -642,6 +642,14 @@
           "schema.typ",
           "type"
         ],
+        "Schema.html#validationErrors": [
+          "error",
+          "member",
+          "present",
+          "schema#validationerror",
+          "valid",
+          "validationerror"
+        ],
         "Schema.html#validate": [
           "boolean",
           "document",
@@ -650,7 +658,7 @@
           "valid"
         ]
       },
-      "length": 60
+      "length": 61
     },
     "tokenStore": {
       "root": {
@@ -1001,54 +1009,6 @@
                             "ref": "Result.html#limit",
                             "tf": 110
                           },
-                          "TrustDB.html#connect": {
-                            "ref": "TrustDB.html#connect",
-                            "tf": 110
-                          },
-                          "TrustDB.html#disconnect": {
-                            "ref": "TrustDB.html#disconnect",
-                            "tf": 110
-                          },
-                          "TrustDB.html#createCollection": {
-                            "ref": "TrustDB.html#createCollection",
-                            "tf": 110
-                          },
-                          "TrustDB.html#addCollection": {
-                            "ref": "TrustDB.html#addCollection",
-                            "tf": 111.61290322580645
-                          },
-                          "TrustDB.html#deleteCollection": {
-                            "ref": "TrustDB.html#deleteCollection",
-                            "tf": 110
-                          },
-                          "TrustDB.html#getCollection": {
-                            "ref": "TrustDB.html#getCollection",
-                            "tf": 110
-                          },
-                          "TrustDB.html#saveDatabase": {
-                            "ref": "TrustDB.html#saveDatabase",
-                            "tf": 110
-                          },
-                          "TrustDB.html#save": {
-                            "ref": "TrustDB.html#save",
-                            "tf": 110
-                          },
-                          "TrustDB.html#deleteDatabase": {
-                            "ref": "TrustDB.html#deleteDatabase",
-                            "tf": 110
-                          },
-                          "TrustDB.html#moveDatabase": {
-                            "ref": "TrustDB.html#moveDatabase",
-                            "tf": 110
-                          },
-                          "TrustDB.html#configureSettings": {
-                            "ref": "TrustDB.html#configureSettings",
-                            "tf": 110
-                          },
-                          "TrustDB.html#clear": {
-                            "ref": "TrustDB.html#clear",
-                            "tf": 110
-                          },
                           "Collection.html#insert": {
                             "ref": "Collection.html#insert",
                             "tf": 110
@@ -1111,6 +1071,54 @@
                           },
                           "Collection.html#clear": {
                             "ref": "Collection.html#clear",
+                            "tf": 110
+                          },
+                          "TrustDB.html#connect": {
+                            "ref": "TrustDB.html#connect",
+                            "tf": 110
+                          },
+                          "TrustDB.html#disconnect": {
+                            "ref": "TrustDB.html#disconnect",
+                            "tf": 110
+                          },
+                          "TrustDB.html#createCollection": {
+                            "ref": "TrustDB.html#createCollection",
+                            "tf": 110
+                          },
+                          "TrustDB.html#addCollection": {
+                            "ref": "TrustDB.html#addCollection",
+                            "tf": 111.61290322580645
+                          },
+                          "TrustDB.html#deleteCollection": {
+                            "ref": "TrustDB.html#deleteCollection",
+                            "tf": 110
+                          },
+                          "TrustDB.html#getCollection": {
+                            "ref": "TrustDB.html#getCollection",
+                            "tf": 110
+                          },
+                          "TrustDB.html#saveDatabase": {
+                            "ref": "TrustDB.html#saveDatabase",
+                            "tf": 110
+                          },
+                          "TrustDB.html#save": {
+                            "ref": "TrustDB.html#save",
+                            "tf": 110
+                          },
+                          "TrustDB.html#deleteDatabase": {
+                            "ref": "TrustDB.html#deleteDatabase",
+                            "tf": 110
+                          },
+                          "TrustDB.html#moveDatabase": {
+                            "ref": "TrustDB.html#moveDatabase",
+                            "tf": 110
+                          },
+                          "TrustDB.html#configureSettings": {
+                            "ref": "TrustDB.html#configureSettings",
+                            "tf": 110
+                          },
+                          "TrustDB.html#clear": {
+                            "ref": "TrustDB.html#clear",
                             "tf": 110
                           },
                           "Schema.html#validate": {
@@ -1236,6 +1244,10 @@
                           "ref": "Result.html",
                           "tf": 16.666666666666664
                         },
+                        "Collection.html": {
+                          "ref": "Collection.html",
+                          "tf": 16.666666666666664
+                        },
                         "TrustDB.html": {
                           "ref": "TrustDB.html",
                           "tf": 16.666666666666664
@@ -1247,10 +1259,6 @@
                         "TrustDB.html#deleteCollection": {
                           "ref": "TrustDB.html#deleteCollection",
                           "tf": 7.142857142857142
-                        },
-                        "Collection.html": {
-                          "ref": "Collection.html",
-                          "tf": 16.666666666666664
                         },
                         "Schema.html": {
                           "ref": "Schema.html",
@@ -1295,23 +1303,6 @@
                 }
               }
             },
-            "t": {
-              "docs": {},
-              "e": {
-                "docs": {},
-                "r": {
-                  "docs": {},
-                  "v": {
-                    "docs": {
-                      "TrustDB.html#autosaveInterval": {
-                        "ref": "TrustDB.html#autosaveInterval",
-                        "tf": 12.5
-                      }
-                    }
-                  }
-                }
-              }
-            },
             "v": {
               "docs": {},
               "a": {
@@ -1331,21 +1322,18 @@
                   }
                 }
               }
-            }
-          },
-          "m": {
-            "docs": {},
-            "p": {
+            },
+            "t": {
               "docs": {},
-              "o": {
+              "e": {
                 "docs": {},
                 "r": {
                   "docs": {},
-                  "t": {
+                  "v": {
                     "docs": {
-                      "TrustDB.html#addCollection": {
-                        "ref": "TrustDB.html#addCollection",
-                        "tf": 1.6129032258064515
+                      "TrustDB.html#autosaveInterval": {
+                        "ref": "TrustDB.html#autosaveInterval",
+                        "tf": 12.5
                       }
                     }
                   }
@@ -1366,6 +1354,26 @@
               "Collection.html#updateById": {
                 "ref": "Collection.html#updateById",
                 "tf": 37.5
+              }
+            }
+          },
+          "m": {
+            "docs": {},
+            "p": {
+              "docs": {},
+              "o": {
+                "docs": {},
+                "r": {
+                  "docs": {},
+                  "t": {
+                    "docs": {
+                      "TrustDB.html#addCollection": {
+                        "ref": "TrustDB.html#addCollection",
+                        "tf": 1.6129032258064515
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -1618,139 +1626,6 @@
                 }
               }
             },
-            "l": {
-              "docs": {},
-              "a": {
-                "docs": {},
-                "t": {
-                  "docs": {
-                    "TrustDB.html#settings": {
-                      "ref": "TrustDB.html#settings",
-                      "tf": 16.666666666666664
-                    }
-                  }
-                }
-              }
-            },
-            "m": {
-              "docs": {},
-              "o": {
-                "docs": {},
-                "v": {
-                  "docs": {
-                    "TrustDB.html#disconnect": {
-                      "ref": "TrustDB.html#disconnect",
-                      "tf": 3.8461538461538463
-                    },
-                    "Collection.html#removeExact": {
-                      "ref": "Collection.html#removeExact",
-                      "tf": 8.333333333333332
-                    },
-                    "Collection.html#remove": {
-                      "ref": "Collection.html#remove",
-                      "tf": 689.5833333333334
-                    },
-                    "Collection.html#removeOne": {
-                      "ref": "Collection.html#removeOne",
-                      "tf": 5.555555555555555
-                    },
-                    "Collection.html#removeById": {
-                      "ref": "Collection.html#removeById",
-                      "tf": 12.5
-                    }
-                  },
-                  "e": {
-                    "docs": {},
-                    "e": {
-                      "docs": {},
-                      "x": {
-                        "docs": {},
-                        "a": {
-                          "docs": {},
-                          "c": {
-                            "docs": {},
-                            "t": {
-                              "docs": {
-                                "Collection.html#removeExact": {
-                                  "ref": "Collection.html#removeExact",
-                                  "tf": 675
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "o": {
-                      "docs": {},
-                      "n": {
-                        "docs": {
-                          "Collection.html#removeOne": {
-                            "ref": "Collection.html#removeOne",
-                            "tf": 683.3333333333334
-                          }
-                        }
-                      }
-                    },
-                    "b": {
-                      "docs": {},
-                      "y": {
-                        "docs": {},
-                        "i": {
-                          "docs": {},
-                          "d": {
-                            "docs": {
-                              "Collection.html#removeById": {
-                                "ref": "Collection.html#removeById",
-                                "tf": 683.3333333333334
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "t": {
-              "docs": {},
-              "u": {
-                "docs": {},
-                "r": {
-                  "docs": {},
-                  "n": {
-                    "docs": {
-                      "TrustDB.html#createCollection": {
-                        "ref": "TrustDB.html#createCollection",
-                        "tf": 2.272727272727273
-                      },
-                      "TrustDB.html#addCollection": {
-                        "ref": "TrustDB.html#addCollection",
-                        "tf": 1.6129032258064515
-                      }
-                    }
-                  }
-                }
-              },
-              "r": {
-                "docs": {},
-                "i": {
-                  "docs": {},
-                  "e": {
-                    "docs": {},
-                    "v": {
-                      "docs": {
-                        "TrustDB.html#getCollection": {
-                          "ref": "TrustDB.html#getCollection",
-                          "tf": 16.666666666666664
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
             "g": {
               "docs": {},
               "i": {
@@ -1808,6 +1683,139 @@
                   }
                 }
               }
+            },
+            "m": {
+              "docs": {},
+              "o": {
+                "docs": {},
+                "v": {
+                  "docs": {
+                    "Collection.html#removeExact": {
+                      "ref": "Collection.html#removeExact",
+                      "tf": 8.333333333333332
+                    },
+                    "Collection.html#remove": {
+                      "ref": "Collection.html#remove",
+                      "tf": 689.5833333333334
+                    },
+                    "Collection.html#removeOne": {
+                      "ref": "Collection.html#removeOne",
+                      "tf": 5.555555555555555
+                    },
+                    "Collection.html#removeById": {
+                      "ref": "Collection.html#removeById",
+                      "tf": 12.5
+                    },
+                    "TrustDB.html#disconnect": {
+                      "ref": "TrustDB.html#disconnect",
+                      "tf": 3.8461538461538463
+                    }
+                  },
+                  "e": {
+                    "docs": {},
+                    "e": {
+                      "docs": {},
+                      "x": {
+                        "docs": {},
+                        "a": {
+                          "docs": {},
+                          "c": {
+                            "docs": {},
+                            "t": {
+                              "docs": {
+                                "Collection.html#removeExact": {
+                                  "ref": "Collection.html#removeExact",
+                                  "tf": 675
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "o": {
+                      "docs": {},
+                      "n": {
+                        "docs": {
+                          "Collection.html#removeOne": {
+                            "ref": "Collection.html#removeOne",
+                            "tf": 683.3333333333334
+                          }
+                        }
+                      }
+                    },
+                    "b": {
+                      "docs": {},
+                      "y": {
+                        "docs": {},
+                        "i": {
+                          "docs": {},
+                          "d": {
+                            "docs": {
+                              "Collection.html#removeById": {
+                                "ref": "Collection.html#removeById",
+                                "tf": 683.3333333333334
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "l": {
+              "docs": {},
+              "a": {
+                "docs": {},
+                "t": {
+                  "docs": {
+                    "TrustDB.html#settings": {
+                      "ref": "TrustDB.html#settings",
+                      "tf": 16.666666666666664
+                    }
+                  }
+                }
+              }
+            },
+            "t": {
+              "docs": {},
+              "u": {
+                "docs": {},
+                "r": {
+                  "docs": {},
+                  "n": {
+                    "docs": {
+                      "TrustDB.html#createCollection": {
+                        "ref": "TrustDB.html#createCollection",
+                        "tf": 2.272727272727273
+                      },
+                      "TrustDB.html#addCollection": {
+                        "ref": "TrustDB.html#addCollection",
+                        "tf": 1.6129032258064515
+                      }
+                    }
+                  }
+                }
+              },
+              "r": {
+                "docs": {},
+                "i": {
+                  "docs": {},
+                  "e": {
+                    "docs": {},
+                    "v": {
+                      "docs": {
+                        "TrustDB.html#getCollection": {
+                          "ref": "TrustDB.html#getCollection",
+                          "tf": 16.666666666666664
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },
@@ -1849,6 +1857,24 @@
                   "Schema.html#.Types": {
                     "ref": "Schema.html#.Types",
                     "tf": 716.6666666666666
+                  }
+                }
+              }
+            }
+          },
+          "i": {
+            "docs": {},
+            "m": {
+              "docs": {},
+              "e": {
+                "docs": {
+                  "Collection.html#created": {
+                    "ref": "Collection.html#created",
+                    "tf": 12.5
+                  },
+                  "TrustDB.html#created": {
+                    "ref": "TrustDB.html#created",
+                    "tf": 12.5
                   }
                 }
               }
@@ -2421,24 +2447,6 @@
               }
             }
           },
-          "i": {
-            "docs": {},
-            "m": {
-              "docs": {},
-              "e": {
-                "docs": {
-                  "TrustDB.html#created": {
-                    "ref": "TrustDB.html#created",
-                    "tf": 12.5
-                  },
-                  "Collection.html#created": {
-                    "ref": "Collection.html#created",
-                    "tf": 12.5
-                  }
-                }
-              }
-            }
-          },
           "o": {
             "docs": {},
             "t": {
@@ -2504,14 +2512,6 @@
                           "Result.html#originalDocuments": {
                             "ref": "Result.html#originalDocuments",
                             "tf": 12.5
-                          },
-                          "TrustDB.html#totalSize": {
-                            "ref": "TrustDB.html#totalSize",
-                            "tf": 16.666666666666664
-                          },
-                          "TrustDB.html#disconnect": {
-                            "ref": "TrustDB.html#disconnect",
-                            "tf": 3.8461538461538463
                           },
                           "Collection.html#documents": {
                             "ref": "Collection.html#documents",
@@ -2593,6 +2593,14 @@
                             "ref": "Collection.html#clear",
                             "tf": 12.5
                           },
+                          "TrustDB.html#totalSize": {
+                            "ref": "TrustDB.html#totalSize",
+                            "tf": 16.666666666666664
+                          },
+                          "TrustDB.html#disconnect": {
+                            "ref": "TrustDB.html#disconnect",
+                            "tf": 3.8461538461538463
+                          },
                           "Schema.html#validate": {
                             "ref": "Schema.html#validate",
                             "tf": 58.33333333333333
@@ -2615,12 +2623,12 @@
                     "ref": "Result.html#simpleSort",
                     "tf": 3.8461538461538463
                   },
-                  "TrustDB.html#created": {
-                    "ref": "TrustDB.html#created",
-                    "tf": 12.5
-                  },
                   "Collection.html#created": {
                     "ref": "Collection.html#created",
+                    "tf": 12.5
+                  },
+                  "TrustDB.html#created": {
+                    "ref": "TrustDB.html#created",
                     "tf": 12.5
                   }
                 }
@@ -2719,6 +2727,10 @@
                 "docs": {},
                 "t": {
                   "docs": {
+                    "Collection.html#clear": {
+                      "ref": "Collection.html#clear",
+                      "tf": 12.5
+                    },
                     "TrustDB.html#deleteCollection": {
                       "ref": "TrustDB.html#deleteCollection",
                       "tf": 7.142857142857142
@@ -2729,10 +2741,6 @@
                     },
                     "TrustDB.html#clear": {
                       "ref": "TrustDB.html#clear",
-                      "tf": 12.5
-                    },
-                    "Collection.html#clear": {
-                      "ref": "Collection.html#clear",
                       "tf": 12.5
                     }
                   },
@@ -2880,6 +2888,10 @@
                       "ref": "Result.html#simpleSort",
                       "tf": 3.8461538461538463
                     },
+                    "Collection.html#removeExact": {
+                      "ref": "Collection.html#removeExact",
+                      "tf": 8.333333333333332
+                    },
                     "TrustDB.html#createCollection": {
                       "ref": "TrustDB.html#createCollection",
                       "tf": 2.272727272727273
@@ -2887,10 +2899,6 @@
                     "TrustDB.html#deleteCollection": {
                       "ref": "TrustDB.html#deleteCollection",
                       "tf": 7.142857142857142
-                    },
-                    "Collection.html#removeExact": {
-                      "ref": "Collection.html#removeExact",
-                      "tf": 8.333333333333332
                     }
                   }
                 }
@@ -2948,12 +2956,12 @@
                       "ref": "Result.html",
                       "tf": 110
                     },
-                    "TrustDB.html": {
-                      "ref": "TrustDB.html",
-                      "tf": 110
-                    },
                     "Collection.html": {
                       "ref": "Collection.html",
+                      "tf": 110
+                    },
+                    "TrustDB.html": {
+                      "ref": "TrustDB.html",
                       "tf": 110
                     },
                     "Schema.html": {
@@ -2968,22 +2976,6 @@
               "docs": {},
               "a": {
                 "docs": {},
-                "r": {
-                  "docs": {
-                    "TrustDB.html#disconnect": {
-                      "ref": "TrustDB.html#disconnect",
-                      "tf": 3.8461538461538463
-                    },
-                    "TrustDB.html#clear": {
-                      "ref": "TrustDB.html#clear",
-                      "tf": 712.5
-                    },
-                    "Collection.html#clear": {
-                      "ref": "Collection.html#clear",
-                      "tf": 712.5
-                    }
-                  }
-                },
                 "n": {
                   "docs": {
                     "Collection.html#cleanWithSchema": {
@@ -3026,6 +3018,22 @@
                       }
                     }
                   }
+                },
+                "r": {
+                  "docs": {
+                    "Collection.html#clear": {
+                      "ref": "Collection.html#clear",
+                      "tf": 712.5
+                    },
+                    "TrustDB.html#disconnect": {
+                      "ref": "TrustDB.html#disconnect",
+                      "tf": 3.8461538461538463
+                    },
+                    "TrustDB.html#clear": {
+                      "ref": "TrustDB.html#clear",
+                      "tf": 712.5
+                    }
+                  }
                 }
               }
             },
@@ -3056,6 +3064,14 @@
                       "ref": "Result.html",
                       "tf": 16.666666666666664
                     },
+                    "Collection.html": {
+                      "ref": "Collection.html",
+                      "tf": 16.666666666666664
+                    },
+                    "Collection.html#created": {
+                      "ref": "Collection.html#created",
+                      "tf": 750
+                    },
                     "TrustDB.html": {
                       "ref": "TrustDB.html",
                       "tf": 16.666666666666664
@@ -3076,14 +3092,6 @@
                       "ref": "TrustDB.html#addCollection",
                       "tf": 4.838709677419355
                     },
-                    "Collection.html": {
-                      "ref": "Collection.html",
-                      "tf": 16.666666666666664
-                    },
-                    "Collection.html#created": {
-                      "ref": "Collection.html#created",
-                      "tf": 750
-                    },
                     "Schema.html": {
                       "ref": "Schema.html",
                       "tf": 16.666666666666664
@@ -3095,12 +3103,12 @@
                       "docs": {},
                       "n": {
                         "docs": {
-                          "TrustDB.html#created": {
-                            "ref": "TrustDB.html#created",
-                            "tf": 12.5
-                          },
                           "Collection.html#created": {
                             "ref": "Collection.html#created",
+                            "tf": 12.5
+                          },
+                          "TrustDB.html#created": {
+                            "ref": "TrustDB.html#created",
                             "tf": 12.5
                           }
                         }
@@ -3194,71 +3202,6 @@
           },
           "o": {
             "docs": {},
-            "n": {
-              "docs": {},
-              "n": {
-                "docs": {},
-                "e": {
-                  "docs": {},
-                  "c": {
-                    "docs": {},
-                    "t": {
-                      "docs": {
-                        "TrustDB.html#connected": {
-                          "ref": "TrustDB.html#connected",
-                          "tf": 766.6666666666666
-                        },
-                        "TrustDB.html#connect": {
-                          "ref": "TrustDB.html#connect",
-                          "tf": 677.7777777777778
-                        },
-                        "TrustDB.html#disconnect": {
-                          "ref": "TrustDB.html#disconnect",
-                          "tf": 3.8461538461538463
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "f": {
-                "docs": {},
-                "i": {
-                  "docs": {},
-                  "g": {
-                    "docs": {},
-                    "u": {
-                      "docs": {},
-                      "r": {
-                        "docs": {
-                          "TrustDB.html#configureSettings": {
-                            "ref": "TrustDB.html#configureSettings",
-                            "tf": 16.666666666666664
-                          }
-                        },
-                        "e": {
-                          "docs": {},
-                          "s": {
-                            "docs": {},
-                            "e": {
-                              "docs": {},
-                              "t": {
-                                "docs": {
-                                  "TrustDB.html#configureSettings": {
-                                    "ref": "TrustDB.html#configureSettings",
-                                    "tf": 700
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
             "l": {
               "docs": {},
               "l": {
@@ -3269,54 +3212,6 @@
                     "docs": {},
                     "t": {
                       "docs": {
-                        "TrustDB.html#collections": {
-                          "ref": "TrustDB.html#collections",
-                          "tf": 775
-                        },
-                        "TrustDB.html#size": {
-                          "ref": "TrustDB.html#size",
-                          "tf": 16.666666666666664
-                        },
-                        "TrustDB.html#totalSize": {
-                          "ref": "TrustDB.html#totalSize",
-                          "tf": 16.666666666666664
-                        },
-                        "TrustDB.html#connect": {
-                          "ref": "TrustDB.html#connect",
-                          "tf": 2.7777777777777777
-                        },
-                        "TrustDB.html#disconnect": {
-                          "ref": "TrustDB.html#disconnect",
-                          "tf": 7.6923076923076925
-                        },
-                        "TrustDB.html#createCollection": {
-                          "ref": "TrustDB.html#createCollection",
-                          "tf": 42.42424242424242
-                        },
-                        "TrustDB.html#addCollection": {
-                          "ref": "TrustDB.html#addCollection",
-                          "tf": 76.34408602150536
-                        },
-                        "TrustDB.html#deleteCollection": {
-                          "ref": "TrustDB.html#deleteCollection",
-                          "tf": 80.95238095238093
-                        },
-                        "TrustDB.html#getCollection": {
-                          "ref": "TrustDB.html#getCollection",
-                          "tf": 49.99999999999999
-                        },
-                        "TrustDB.html#saveDatabase": {
-                          "ref": "TrustDB.html#saveDatabase",
-                          "tf": 7.142857142857142
-                        },
-                        "TrustDB.html#save": {
-                          "ref": "TrustDB.html#save",
-                          "tf": 7.142857142857142
-                        },
-                        "TrustDB.html#clear": {
-                          "ref": "TrustDB.html#clear",
-                          "tf": 12.5
-                        },
                         "Collection.html": {
                           "ref": "Collection.html",
                           "tf": 1916.6666666666667
@@ -3403,6 +3298,54 @@
                         },
                         "Collection.html#clear": {
                           "ref": "Collection.html#clear",
+                          "tf": 12.5
+                        },
+                        "TrustDB.html#collections": {
+                          "ref": "TrustDB.html#collections",
+                          "tf": 775
+                        },
+                        "TrustDB.html#size": {
+                          "ref": "TrustDB.html#size",
+                          "tf": 16.666666666666664
+                        },
+                        "TrustDB.html#totalSize": {
+                          "ref": "TrustDB.html#totalSize",
+                          "tf": 16.666666666666664
+                        },
+                        "TrustDB.html#connect": {
+                          "ref": "TrustDB.html#connect",
+                          "tf": 2.7777777777777777
+                        },
+                        "TrustDB.html#disconnect": {
+                          "ref": "TrustDB.html#disconnect",
+                          "tf": 7.6923076923076925
+                        },
+                        "TrustDB.html#createCollection": {
+                          "ref": "TrustDB.html#createCollection",
+                          "tf": 42.42424242424242
+                        },
+                        "TrustDB.html#addCollection": {
+                          "ref": "TrustDB.html#addCollection",
+                          "tf": 76.34408602150536
+                        },
+                        "TrustDB.html#deleteCollection": {
+                          "ref": "TrustDB.html#deleteCollection",
+                          "tf": 80.95238095238093
+                        },
+                        "TrustDB.html#getCollection": {
+                          "ref": "TrustDB.html#getCollection",
+                          "tf": 49.99999999999999
+                        },
+                        "TrustDB.html#saveDatabase": {
+                          "ref": "TrustDB.html#saveDatabase",
+                          "tf": 7.142857142857142
+                        },
+                        "TrustDB.html#save": {
+                          "ref": "TrustDB.html#save",
+                          "tf": 7.142857142857142
+                        },
+                        "TrustDB.html#clear": {
+                          "ref": "TrustDB.html#clear",
                           "tf": 12.5
                         }
                       },
@@ -3932,6 +3875,71 @@
                   }
                 }
               }
+            },
+            "n": {
+              "docs": {},
+              "n": {
+                "docs": {},
+                "e": {
+                  "docs": {},
+                  "c": {
+                    "docs": {},
+                    "t": {
+                      "docs": {
+                        "TrustDB.html#connected": {
+                          "ref": "TrustDB.html#connected",
+                          "tf": 766.6666666666666
+                        },
+                        "TrustDB.html#connect": {
+                          "ref": "TrustDB.html#connect",
+                          "tf": 677.7777777777778
+                        },
+                        "TrustDB.html#disconnect": {
+                          "ref": "TrustDB.html#disconnect",
+                          "tf": 3.8461538461538463
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "f": {
+                "docs": {},
+                "i": {
+                  "docs": {},
+                  "g": {
+                    "docs": {},
+                    "u": {
+                      "docs": {},
+                      "r": {
+                        "docs": {
+                          "TrustDB.html#configureSettings": {
+                            "ref": "TrustDB.html#configureSettings",
+                            "tf": 16.666666666666664
+                          }
+                        },
+                        "e": {
+                          "docs": {},
+                          "s": {
+                            "docs": {},
+                            "e": {
+                              "docs": {},
+                              "t": {
+                                "docs": {
+                                  "TrustDB.html#configureSettings": {
+                                    "ref": "TrustDB.html#configureSettings",
+                                    "tf": 700
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           },
           "a": {
@@ -4011,6 +4019,37 @@
                     "Result.html#limit": {
                       "ref": "Result.html#limit",
                       "tf": 716.6666666666666
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "a": {
+            "docs": {},
+            "s": {
+              "docs": {},
+              "t": {
+                "docs": {
+                  "Collection.html#lastDocument": {
+                    "ref": "Collection.html#lastDocument",
+                    "tf": 16.666666666666664
+                  }
+                },
+                "d": {
+                  "docs": {},
+                  "o": {
+                    "docs": {},
+                    "c": {
+                      "docs": {},
+                      "u": {
+                        "docs": {
+                          "Collection.html#lastDocument": {
+                            "ref": "Collection.html#lastDocument",
+                            "tf": 750
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -4117,37 +4156,6 @@
                 }
               }
             }
-          },
-          "a": {
-            "docs": {},
-            "s": {
-              "docs": {},
-              "t": {
-                "docs": {
-                  "Collection.html#lastDocument": {
-                    "ref": "Collection.html#lastDocument",
-                    "tf": 16.666666666666664
-                  }
-                },
-                "d": {
-                  "docs": {},
-                  "o": {
-                    "docs": {},
-                    "c": {
-                      "docs": {},
-                      "u": {
-                        "docs": {
-                          "Collection.html#lastDocument": {
-                            "ref": "Collection.html#lastDocument",
-                            "tf": 750
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
           }
         },
         "a": {
@@ -4207,6 +4215,10 @@
                   "docs": {},
                   "t": {
                     "docs": {
+                      "Collection.html#size": {
+                        "ref": "Collection.html#size",
+                        "tf": 16.666666666666664
+                      },
                       "TrustDB.html#size": {
                         "ref": "TrustDB.html#size",
                         "tf": 16.666666666666664
@@ -4214,10 +4226,190 @@
                       "TrustDB.html#totalSize": {
                         "ref": "TrustDB.html#totalSize",
                         "tf": 16.666666666666664
-                      },
-                      "Collection.html#size": {
-                        "ref": "Collection.html#size",
-                        "tf": 16.666666666666664
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "r": {
+            "docs": {},
+            "r": {
+              "docs": {},
+              "a": {
+                "docs": {},
+                "y": {
+                  "docs": {},
+                  ".": {
+                    "docs": {},
+                    "&": {
+                      "docs": {},
+                      "l": {
+                        "docs": {},
+                        "t": {
+                          "docs": {},
+                          ";": {
+                            "docs": {},
+                            "s": {
+                              "docs": {},
+                              "t": {
+                                "docs": {},
+                                "r": {
+                                  "docs": {},
+                                  "i": {
+                                    "docs": {},
+                                    "n": {
+                                      "docs": {},
+                                      "g": {
+                                        "docs": {},
+                                        "&": {
+                                          "docs": {},
+                                          "g": {
+                                            "docs": {},
+                                            "t": {
+                                              "docs": {
+                                                "Collection.html#insert": {
+                                                  "ref": "Collection.html#insert",
+                                                  "tf": 33.33333333333333
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "o": {
+                              "docs": {},
+                              "b": {
+                                "docs": {},
+                                "j": {
+                                  "docs": {},
+                                  "e": {
+                                    "docs": {},
+                                    "c": {
+                                      "docs": {},
+                                      "t": {
+                                        "docs": {},
+                                        "&": {
+                                          "docs": {},
+                                          "g": {
+                                            "docs": {},
+                                            "t": {
+                                              "docs": {
+                                                "Collection.html#remove": {
+                                                  "ref": "Collection.html#remove",
+                                                  "tf": 33.33333333333333
+                                                },
+                                                "Collection.html#removeOne": {
+                                                  "ref": "Collection.html#removeOne",
+                                                  "tf": 33.33333333333333
+                                                },
+                                                "Collection.html#update": {
+                                                  "ref": "Collection.html#update",
+                                                  "tf": 25
+                                                },
+                                                "Collection.html#cleanWithSchema": {
+                                                  "ref": "Collection.html#cleanWithSchema",
+                                                  "tf": 33.33333333333333
+                                                },
+                                                "Collection.html#clear": {
+                                                  "ref": "Collection.html#clear",
+                                                  "tf": 50
+                                                }
+                                              },
+                                              ";": {
+                                                "docs": {},
+                                                "|": {
+                                                  "docs": {},
+                                                  "r": {
+                                                    "docs": {},
+                                                    "e": {
+                                                      "docs": {},
+                                                      "s": {
+                                                        "docs": {},
+                                                        "u": {
+                                                          "docs": {},
+                                                          "l": {
+                                                            "docs": {},
+                                                            "t": {
+                                                              "docs": {
+                                                                "Collection.html#find": {
+                                                                  "ref": "Collection.html#find",
+                                                                  "tf": 25
+                                                                },
+                                                                "Collection.html#where": {
+                                                                  "ref": "Collection.html#where",
+                                                                  "tf": 33.33333333333333
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "c": {
+                              "docs": {},
+                              "o": {
+                                "docs": {},
+                                "l": {
+                                  "docs": {},
+                                  "l": {
+                                    "docs": {},
+                                    "e": {
+                                      "docs": {},
+                                      "c": {
+                                        "docs": {},
+                                        "t": {
+                                          "docs": {},
+                                          "i": {
+                                            "docs": {},
+                                            "o": {
+                                              "docs": {},
+                                              "n": {
+                                                "docs": {},
+                                                "&": {
+                                                  "docs": {},
+                                                  "g": {
+                                                    "docs": {},
+                                                    "t": {
+                                                      "docs": {
+                                                        "TrustDB.html#clear": {
+                                                          "ref": "TrustDB.html#clear",
+                                                          "tf": 50
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -4345,165 +4537,6 @@
               }
             }
           },
-          "r": {
-            "docs": {},
-            "r": {
-              "docs": {},
-              "a": {
-                "docs": {},
-                "y": {
-                  "docs": {},
-                  ".": {
-                    "docs": {},
-                    "&": {
-                      "docs": {},
-                      "l": {
-                        "docs": {},
-                        "t": {
-                          "docs": {},
-                          ";": {
-                            "docs": {},
-                            "c": {
-                              "docs": {},
-                              "o": {
-                                "docs": {},
-                                "l": {
-                                  "docs": {},
-                                  "l": {
-                                    "docs": {},
-                                    "e": {
-                                      "docs": {},
-                                      "c": {
-                                        "docs": {},
-                                        "t": {
-                                          "docs": {},
-                                          "i": {
-                                            "docs": {},
-                                            "o": {
-                                              "docs": {},
-                                              "n": {
-                                                "docs": {},
-                                                "&": {
-                                                  "docs": {},
-                                                  "g": {
-                                                    "docs": {},
-                                                    "t": {
-                                                      "docs": {
-                                                        "TrustDB.html#clear": {
-                                                          "ref": "TrustDB.html#clear",
-                                                          "tf": 50
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            },
-                            "s": {
-                              "docs": {},
-                              "t": {
-                                "docs": {},
-                                "r": {
-                                  "docs": {},
-                                  "i": {
-                                    "docs": {},
-                                    "n": {
-                                      "docs": {},
-                                      "g": {
-                                        "docs": {},
-                                        "&": {
-                                          "docs": {},
-                                          "g": {
-                                            "docs": {},
-                                            "t": {
-                                              "docs": {
-                                                "Collection.html#insert": {
-                                                  "ref": "Collection.html#insert",
-                                                  "tf": 33.33333333333333
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            },
-                            "o": {
-                              "docs": {},
-                              "b": {
-                                "docs": {},
-                                "j": {
-                                  "docs": {},
-                                  "e": {
-                                    "docs": {},
-                                    "c": {
-                                      "docs": {},
-                                      "t": {
-                                        "docs": {},
-                                        "&": {
-                                          "docs": {},
-                                          "g": {
-                                            "docs": {},
-                                            "t": {
-                                              "docs": {
-                                                "Collection.html#find": {
-                                                  "ref": "Collection.html#find",
-                                                  "tf": 25
-                                                },
-                                                "Collection.html#where": {
-                                                  "ref": "Collection.html#where",
-                                                  "tf": 33.33333333333333
-                                                },
-                                                "Collection.html#remove": {
-                                                  "ref": "Collection.html#remove",
-                                                  "tf": 33.33333333333333
-                                                },
-                                                "Collection.html#removeOne": {
-                                                  "ref": "Collection.html#removeOne",
-                                                  "tf": 33.33333333333333
-                                                },
-                                                "Collection.html#update": {
-                                                  "ref": "Collection.html#update",
-                                                  "tf": 25
-                                                },
-                                                "Collection.html#cleanWithSchema": {
-                                                  "ref": "Collection.html#cleanWithSchema",
-                                                  "tf": 33.33333333333333
-                                                },
-                                                "Collection.html#clear": {
-                                                  "ref": "Collection.html#clear",
-                                                  "tf": 50
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
           "v": {
             "docs": {},
             "a": {
@@ -4542,6 +4575,38 @@
                         "ref": "Result.html#originalDocuments",
                         "tf": 110
                       },
+                      "Collection.html#documents": {
+                        "ref": "Collection.html#documents",
+                        "tf": 110
+                      },
+                      "Collection.html#name": {
+                        "ref": "Collection.html#name",
+                        "tf": 110
+                      },
+                      "Collection.html#schema": {
+                        "ref": "Collection.html#schema",
+                        "tf": 110
+                      },
+                      "Collection.html#hasSchema": {
+                        "ref": "Collection.html#hasSchema",
+                        "tf": 110
+                      },
+                      "Collection.html#created": {
+                        "ref": "Collection.html#created",
+                        "tf": 110
+                      },
+                      "Collection.html#firstDocument": {
+                        "ref": "Collection.html#firstDocument",
+                        "tf": 110
+                      },
+                      "Collection.html#lastDocument": {
+                        "ref": "Collection.html#lastDocument",
+                        "tf": 110
+                      },
+                      "Collection.html#size": {
+                        "ref": "Collection.html#size",
+                        "tf": 110
+                      },
                       "TrustDB.html#connected": {
                         "ref": "TrustDB.html#connected",
                         "tf": 110
@@ -4578,40 +4643,12 @@
                         "ref": "TrustDB.html#autosaveInterval",
                         "tf": 110
                       },
-                      "Collection.html#documents": {
-                        "ref": "Collection.html#documents",
-                        "tf": 110
-                      },
-                      "Collection.html#name": {
-                        "ref": "Collection.html#name",
-                        "tf": 110
-                      },
-                      "Collection.html#schema": {
-                        "ref": "Collection.html#schema",
-                        "tf": 110
-                      },
-                      "Collection.html#hasSchema": {
-                        "ref": "Collection.html#hasSchema",
-                        "tf": 110
-                      },
-                      "Collection.html#created": {
-                        "ref": "Collection.html#created",
-                        "tf": 110
-                      },
-                      "Collection.html#firstDocument": {
-                        "ref": "Collection.html#firstDocument",
-                        "tf": 110
-                      },
-                      "Collection.html#lastDocument": {
-                        "ref": "Collection.html#lastDocument",
-                        "tf": 110
-                      },
-                      "Collection.html#size": {
-                        "ref": "Collection.html#size",
-                        "tf": 110
-                      },
                       "Schema.html#.Types": {
                         "ref": "Schema.html#.Types",
+                        "tf": 110
+                      },
+                      "Schema.html#validationErrors": {
+                        "ref": "Schema.html#validationErrors",
                         "tf": 110
                       }
                     }
@@ -4883,21 +4920,30 @@
                   }
                 }
               }
+            },
+            "e": {
+              "docs": {},
+              "s": {
+                "docs": {},
+                "e": {
+                  "docs": {},
+                  "n": {
+                    "docs": {},
+                    "t": {
+                      "docs": {
+                        "Schema.html#validationErrors": {
+                          "ref": "Schema.html#validationErrors",
+                          "tf": 16.666666666666664
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           },
           "a": {
             "docs": {},
-            "t": {
-              "docs": {},
-              "h": {
-                "docs": {
-                  "TrustDB.html#moveDatabase": {
-                    "ref": "TrustDB.html#moveDatabase",
-                    "tf": 10
-                  }
-                }
-              }
-            },
             "s": {
               "docs": {},
               "s": {
@@ -4932,6 +4978,17 @@
                   }
                 }
               }
+            },
+            "t": {
+              "docs": {},
+              "h": {
+                "docs": {
+                  "TrustDB.html#moveDatabase": {
+                    "ref": "TrustDB.html#moveDatabase",
+                    "tf": 10
+                  }
+                }
+              }
             }
           }
         },
@@ -4962,70 +5019,6 @@
                                   "Result.html#originalDocuments": {
                                     "ref": "Result.html#originalDocuments",
                                     "tf": 750
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "p": {
-            "docs": {},
-            "t": {
-              "docs": {},
-              "i": {
-                "docs": {},
-                "o": {
-                  "docs": {},
-                  "n": {
-                    "docs": {
-                      "TrustDB.html#connect": {
-                        "ref": "TrustDB.html#connect",
-                        "tf": 2.7777777777777777
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "v": {
-            "docs": {},
-            "e": {
-              "docs": {},
-              "r": {
-                "docs": {},
-                "w": {
-                  "docs": {},
-                  "r": {
-                    "docs": {},
-                    "i": {
-                      "docs": {},
-                      "t": {
-                        "docs": {},
-                        "e": {
-                          "docs": {},
-                          "e": {
-                            "docs": {},
-                            "x": {
-                              "docs": {},
-                              "i": {
-                                "docs": {},
-                                "s": {
-                                  "docs": {},
-                                  "t": {
-                                    "docs": {
-                                      "TrustDB.html#connect": {
-                                        "ref": "TrustDB.html#connect",
-                                        "tf": 2.7777777777777777
-                                      }
-                                    }
                                   }
                                 }
                               }
@@ -5135,6 +5128,70 @@
                 }
               }
             }
+          },
+          "p": {
+            "docs": {},
+            "t": {
+              "docs": {},
+              "i": {
+                "docs": {},
+                "o": {
+                  "docs": {},
+                  "n": {
+                    "docs": {
+                      "TrustDB.html#connect": {
+                        "ref": "TrustDB.html#connect",
+                        "tf": 2.7777777777777777
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "v": {
+            "docs": {},
+            "e": {
+              "docs": {},
+              "r": {
+                "docs": {},
+                "w": {
+                  "docs": {},
+                  "r": {
+                    "docs": {},
+                    "i": {
+                      "docs": {},
+                      "t": {
+                        "docs": {},
+                        "e": {
+                          "docs": {},
+                          "e": {
+                            "docs": {},
+                            "x": {
+                              "docs": {},
+                              "i": {
+                                "docs": {},
+                                "s": {
+                                  "docs": {},
+                                  "t": {
+                                    "docs": {
+                                      "TrustDB.html#connect": {
+                                        "ref": "TrustDB.html#connect",
+                                        "tf": 2.7777777777777777
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "u": {
@@ -5150,23 +5207,6 @@
                     "Result.html#originalDocuments": {
                       "ref": "Result.html#originalDocuments",
                       "tf": 12.5
-                    }
-                  }
-                }
-              }
-            },
-            "l": {
-              "docs": {},
-              "e": {
-                "docs": {},
-                "s": {
-                  "docs": {},
-                  "s": {
-                    "docs": {
-                      "TrustDB.html#connect": {
-                        "ref": "TrustDB.html#connect",
-                        "tf": 2.7777777777777777
-                      }
                     }
                   }
                 }
@@ -5223,6 +5263,23 @@
                   }
                 }
               }
+            },
+            "l": {
+              "docs": {},
+              "e": {
+                "docs": {},
+                "s": {
+                  "docs": {},
+                  "s": {
+                    "docs": {
+                      "TrustDB.html#connect": {
+                        "ref": "TrustDB.html#connect",
+                        "tf": 2.7777777777777777
+                      }
+                    }
+                  }
+                }
+              }
             }
           },
           "s": {
@@ -5235,6 +5292,10 @@
                 "ref": "Result.html#map",
                 "tf": 8.333333333333332
               },
+              "Collection.html#cleanWithSchema": {
+                "ref": "Collection.html#cleanWithSchema",
+                "tf": 6.25
+              },
               "TrustDB.html#createCollection": {
                 "ref": "TrustDB.html#createCollection",
                 "tf": 2.272727272727273
@@ -5246,10 +5307,6 @@
               "TrustDB.html#deleteCollection": {
                 "ref": "TrustDB.html#deleteCollection",
                 "tf": 7.142857142857142
-              },
-              "Collection.html#cleanWithSchema": {
-                "ref": "Collection.html#cleanWithSchema",
-                "tf": 6.25
               }
             }
           },
@@ -5338,39 +5395,16 @@
               }
             }
           },
-          "e": {
-            "docs": {},
-            "w": {
-              "docs": {
-                "TrustDB.html#autosaveInterval": {
-                  "ref": "TrustDB.html#autosaveInterval",
-                  "tf": 12.5
-                },
-                "TrustDB.html#connect": {
-                  "ref": "TrustDB.html#connect",
-                  "tf": 2.7777777777777777
-                },
-                "TrustDB.html#addCollection": {
-                  "ref": "TrustDB.html#addCollection",
-                  "tf": 3.225806451612903
-                },
-                "TrustDB.html#moveDatabase": {
-                  "ref": "TrustDB.html#moveDatabase",
-                  "tf": 10
-                },
-                "Collection.html#insert": {
-                  "ref": "Collection.html#insert",
-                  "tf": 12.5
-                }
-              }
-            }
-          },
           "a": {
             "docs": {},
             "m": {
               "docs": {},
               "e": {
                 "docs": {
+                  "Collection.html#name": {
+                    "ref": "Collection.html#name",
+                    "tf": 775
+                  },
                   "TrustDB.html#createCollection": {
                     "ref": "TrustDB.html#createCollection",
                     "tf": 40.15151515151515
@@ -5386,11 +5420,34 @@
                   "TrustDB.html#getCollection": {
                     "ref": "TrustDB.html#getCollection",
                     "tf": 49.99999999999999
-                  },
-                  "Collection.html#name": {
-                    "ref": "Collection.html#name",
-                    "tf": 775
                   }
+                }
+              }
+            }
+          },
+          "e": {
+            "docs": {},
+            "w": {
+              "docs": {
+                "Collection.html#insert": {
+                  "ref": "Collection.html#insert",
+                  "tf": 12.5
+                },
+                "TrustDB.html#autosaveInterval": {
+                  "ref": "TrustDB.html#autosaveInterval",
+                  "tf": 12.5
+                },
+                "TrustDB.html#connect": {
+                  "ref": "TrustDB.html#connect",
+                  "tf": 2.7777777777777777
+                },
+                "TrustDB.html#addCollection": {
+                  "ref": "TrustDB.html#addCollection",
+                  "tf": 3.225806451612903
+                },
+                "TrustDB.html#moveDatabase": {
+                  "ref": "TrustDB.html#moveDatabase",
+                  "tf": 10
                 }
               }
             }
@@ -5433,12 +5490,12 @@
               "docs": {},
               "e": {
                 "docs": {
-                  "TrustDB.html#size": {
-                    "ref": "TrustDB.html#size",
-                    "tf": 750
-                  },
                   "Collection.html#size": {
                     "ref": "Collection.html#size",
+                    "tf": 750
+                  },
+                  "TrustDB.html#size": {
+                    "ref": "TrustDB.html#size",
                     "tf": 750
                   }
                 }
@@ -5543,6 +5600,17 @@
                 }
               }
             },
+            "o": {
+              "docs": {},
+              "p": {
+                "docs": {
+                  "Collection.html#unregisterSchema": {
+                    "ref": "Collection.html#unregisterSchema",
+                    "tf": 6.25
+                  }
+                }
+              }
+            },
             "a": {
               "docs": {},
               "t": {
@@ -5557,17 +5625,6 @@
                       "ref": "TrustDB.html#autosave",
                       "tf": 16.666666666666664
                     }
-                  }
-                }
-              }
-            },
-            "o": {
-              "docs": {},
-              "p": {
-                "docs": {
-                  "Collection.html#unregisterSchema": {
-                    "ref": "Collection.html#unregisterSchema",
-                    "tf": 6.25
                   }
                 }
               }
@@ -5588,6 +5645,125 @@
                         "Result.html#simpleSort": {
                           "ref": "Result.html#simpleSort",
                           "tf": 3.8461538461538463
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "c": {
+            "docs": {},
+            "h": {
+              "docs": {},
+              "e": {
+                "docs": {},
+                "m": {
+                  "docs": {},
+                  "a": {
+                    "docs": {
+                      "Collection.html#schema": {
+                        "ref": "Collection.html#schema",
+                        "tf": 766.6666666666666
+                      },
+                      "Collection.html#hasSchema": {
+                        "ref": "Collection.html#hasSchema",
+                        "tf": 12.5
+                      },
+                      "Collection.html#registerSchema": {
+                        "ref": "Collection.html#registerSchema",
+                        "tf": 74.99999999999999
+                      },
+                      "Collection.html#unregisterSchema": {
+                        "ref": "Collection.html#unregisterSchema",
+                        "tf": 56.25
+                      },
+                      "Collection.html#cleanWithSchema": {
+                        "ref": "Collection.html#cleanWithSchema",
+                        "tf": 39.58333333333333
+                      },
+                      "Schema.html": {
+                        "ref": "Schema.html",
+                        "tf": 1916.6666666666667
+                      },
+                      "Schema.html#.Types": {
+                        "ref": "Schema.html#.Types",
+                        "tf": 16.666666666666664
+                      }
+                    },
+                    ".": {
+                      "docs": {},
+                      "t": {
+                        "docs": {},
+                        "y": {
+                          "docs": {},
+                          "p": {
+                            "docs": {
+                              "Schema.html#.Types": {
+                                "ref": "Schema.html#.Types",
+                                "tf": 1150
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "#": {
+                      "docs": {},
+                      "v": {
+                        "docs": {},
+                        "a": {
+                          "docs": {},
+                          "l": {
+                            "docs": {},
+                            "i": {
+                              "docs": {},
+                              "d": {
+                                "docs": {
+                                  "Schema.html#validate": {
+                                    "ref": "Schema.html#validate",
+                                    "tf": 1150
+                                  }
+                                },
+                                "a": {
+                                  "docs": {},
+                                  "t": {
+                                    "docs": {},
+                                    "i": {
+                                      "docs": {},
+                                      "o": {
+                                        "docs": {},
+                                        "n": {
+                                          "docs": {},
+                                          "e": {
+                                            "docs": {},
+                                            "r": {
+                                              "docs": {},
+                                              "r": {
+                                                "docs": {},
+                                                "o": {
+                                                  "docs": {},
+                                                  "r": {
+                                                    "docs": {
+                                                      "Schema.html#validationErrors": {
+                                                        "ref": "Schema.html#validationErrors",
+                                                        "tf": 1150
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     }
@@ -5689,90 +5865,6 @@
                 }
               }
             }
-          },
-          "c": {
-            "docs": {},
-            "h": {
-              "docs": {},
-              "e": {
-                "docs": {},
-                "m": {
-                  "docs": {},
-                  "a": {
-                    "docs": {
-                      "Collection.html#schema": {
-                        "ref": "Collection.html#schema",
-                        "tf": 766.6666666666666
-                      },
-                      "Collection.html#hasSchema": {
-                        "ref": "Collection.html#hasSchema",
-                        "tf": 12.5
-                      },
-                      "Collection.html#registerSchema": {
-                        "ref": "Collection.html#registerSchema",
-                        "tf": 74.99999999999999
-                      },
-                      "Collection.html#unregisterSchema": {
-                        "ref": "Collection.html#unregisterSchema",
-                        "tf": 56.25
-                      },
-                      "Collection.html#cleanWithSchema": {
-                        "ref": "Collection.html#cleanWithSchema",
-                        "tf": 39.58333333333333
-                      },
-                      "Schema.html": {
-                        "ref": "Schema.html",
-                        "tf": 1916.6666666666667
-                      },
-                      "Schema.html#.Types": {
-                        "ref": "Schema.html#.Types",
-                        "tf": 16.666666666666664
-                      }
-                    },
-                    ".": {
-                      "docs": {},
-                      "t": {
-                        "docs": {},
-                        "y": {
-                          "docs": {},
-                          "p": {
-                            "docs": {
-                              "Schema.html#.Types": {
-                                "ref": "Schema.html#.Types",
-                                "tf": 1150
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "#": {
-                      "docs": {},
-                      "v": {
-                        "docs": {},
-                        "a": {
-                          "docs": {},
-                          "l": {
-                            "docs": {},
-                            "i": {
-                              "docs": {},
-                              "d": {
-                                "docs": {
-                                  "Schema.html#validate": {
-                                    "ref": "Schema.html#validate",
-                                    "tf": 1150
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
           }
         },
         "v": {
@@ -5805,9 +5897,74 @@
                       "ref": "Collection.html#unregisterSchema",
                       "tf": 6.25
                     },
+                    "Schema.html#validationErrors": {
+                      "ref": "Schema.html#validationErrors",
+                      "tf": 16.666666666666664
+                    },
                     "Schema.html#validate": {
                       "ref": "Schema.html#validate",
                       "tf": 708.3333333333334
+                    }
+                  },
+                  "a": {
+                    "docs": {},
+                    "t": {
+                      "docs": {},
+                      "i": {
+                        "docs": {},
+                        "o": {
+                          "docs": {},
+                          "n": {
+                            "docs": {},
+                            "e": {
+                              "docs": {},
+                              "r": {
+                                "docs": {},
+                                "r": {
+                                  "docs": {},
+                                  "o": {
+                                    "docs": {},
+                                    "r": {
+                                      "docs": {
+                                        "Schema.html#validationErrors": {
+                                          "ref": "Schema.html#validationErrors",
+                                          "tf": 750
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "w": {
+          "docs": {},
+          "h": {
+            "docs": {},
+            "e": {
+              "docs": {},
+              "t": {
+                "docs": {},
+                "h": {
+                  "docs": {},
+                  "e": {
+                    "docs": {},
+                    "r": {
+                      "docs": {
+                        "Collection.html#hasSchema": {
+                          "ref": "Collection.html#hasSchema",
+                          "tf": 12.5
+                        }
+                      }
                     }
                   }
                 }
@@ -5817,6 +5974,26 @@
         },
         "e": {
           "docs": {},
+          "m": {
+            "docs": {},
+            "i": {
+              "docs": {},
+              "t": {
+                "docs": {},
+                "e": {
+                  "docs": {},
+                  "v": {
+                    "docs": {
+                      "Collection.html#insertOne": {
+                        "ref": "Collection.html#insertOne",
+                        "tf": 25
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "n": {
             "docs": {},
             "a": {
@@ -5904,46 +6081,17 @@
               }
             }
           },
-          "m": {
+          "r": {
             "docs": {},
-            "i": {
+            "r": {
               "docs": {},
-              "t": {
+              "o": {
                 "docs": {},
-                "e": {
-                  "docs": {},
-                  "v": {
-                    "docs": {
-                      "Collection.html#insertOne": {
-                        "ref": "Collection.html#insertOne",
-                        "tf": 25
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "w": {
-          "docs": {},
-          "h": {
-            "docs": {},
-            "e": {
-              "docs": {},
-              "t": {
-                "docs": {},
-                "h": {
-                  "docs": {},
-                  "e": {
-                    "docs": {},
-                    "r": {
-                      "docs": {
-                        "Collection.html#hasSchema": {
-                          "ref": "Collection.html#hasSchema",
-                          "tf": 12.5
-                        }
-                      }
+                "r": {
+                  "docs": {
+                    "Schema.html#validationErrors": {
+                      "ref": "Schema.html#validationErrors",
+                      "tf": 16.666666666666664
                     }
                   }
                 }
@@ -5992,7 +6140,7 @@
           }
         }
       },
-      "length": 523
+      "length": 529
     },
     "corpusTokens": [
       "ad",
@@ -6004,6 +6152,7 @@
       "appli",
       "array.&lt;collection&gt",
       "array.&lt;object&gt",
+      "array.&lt;object&gt;|result",
       "array.&lt;string&gt",
       "autosav",
       "autosaveinterv",
@@ -6064,6 +6213,7 @@
       "eixist",
       "emitev",
       "enabl",
+      "error",
       "event",
       "exist",
       "file",
@@ -6119,6 +6269,7 @@
       "pass",
       "path",
       "possibl",
+      "present",
       "promise.&lt;void&gt",
       "prop",
       "properti",
@@ -6147,6 +6298,7 @@
       "savedatabas",
       "schema",
       "schema#valid",
+      "schema#validationerror",
       "schema.typ",
       "set",
       "simplesort",
@@ -6195,6 +6347,7 @@
       "updatebyid",
       "us",
       "valid",
+      "validationerror",
       "valu",
       "whether"
     ],
@@ -6308,6 +6461,257 @@
       "tags": "Result#limit limit",
       "summary": "",
       "description": "Limit the number of results."
+    },
+    "Collection.html": {
+      "id": "Collection.html",
+      "kind": "class",
+      "title": "Collection",
+      "longname": "Collection",
+      "name": "Collection",
+      "tags": "Collection",
+      "summary": "",
+      "description": "Creates a Collection instance.",
+      "body": ""
+    },
+    "Collection.html#documents": {
+      "id": "Collection.html#documents",
+      "kind": "member",
+      "title": "documents",
+      "longname": "Collection#documents",
+      "name": "documents",
+      "tags": "Collection#documents documents",
+      "summary": "",
+      "description": "Get all documents of the collection."
+    },
+    "Collection.html#name": {
+      "id": "Collection.html#name",
+      "kind": "member",
+      "title": "name",
+      "longname": "Collection#name",
+      "name": "name",
+      "tags": "Collection#name name",
+      "summary": "",
+      "description": "Get the name of the collection."
+    },
+    "Collection.html#schema": {
+      "id": "Collection.html#schema",
+      "kind": "member",
+      "title": "schema",
+      "longname": "Collection#schema",
+      "name": "schema",
+      "tags": "Collection#schema schema",
+      "summary": "",
+      "description": "Get the registered schema of the collection."
+    },
+    "Collection.html#hasSchema": {
+      "id": "Collection.html#hasSchema",
+      "kind": "member",
+      "title": "hasSchema",
+      "longname": "Collection#hasSchema",
+      "name": "hasSchema",
+      "tags": "Collection#hasSchema hasSchema",
+      "summary": "",
+      "description": "Get whether the collection has a schema registered."
+    },
+    "Collection.html#created": {
+      "id": "Collection.html#created",
+      "kind": "member",
+      "title": "created",
+      "longname": "Collection#created",
+      "name": "created",
+      "tags": "Collection#created created",
+      "summary": "",
+      "description": "Get the date and time of creation for this collection."
+    },
+    "Collection.html#firstDocument": {
+      "id": "Collection.html#firstDocument",
+      "kind": "member",
+      "title": "firstDocument",
+      "longname": "Collection#firstDocument",
+      "name": "firstDocument",
+      "tags": "Collection#firstDocument firstDocument",
+      "summary": "",
+      "description": "Get the first document of the collection."
+    },
+    "Collection.html#lastDocument": {
+      "id": "Collection.html#lastDocument",
+      "kind": "member",
+      "title": "lastDocument",
+      "longname": "Collection#lastDocument",
+      "name": "lastDocument",
+      "tags": "Collection#lastDocument lastDocument",
+      "summary": "",
+      "description": "Get the last document of the collection."
+    },
+    "Collection.html#size": {
+      "id": "Collection.html#size",
+      "kind": "member",
+      "title": "size",
+      "longname": "Collection#size",
+      "name": "size",
+      "tags": "Collection#size size",
+      "summary": "",
+      "description": "Get the amount of documents of the collection."
+    },
+    "Collection.html#insert": {
+      "id": "Collection.html#insert",
+      "kind": "function",
+      "title": "insert( ...docs ) → {Array.&lt;string&gt;}",
+      "longname": "Collection#insert",
+      "name": "insert",
+      "tags": "Collection#insert insert",
+      "summary": "",
+      "description": "Insert new documents into the collection."
+    },
+    "Collection.html#insertOne": {
+      "id": "Collection.html#insertOne",
+      "kind": "function",
+      "title": "insertOne( doc [, emitEvent ] ) → {string}",
+      "longname": "Collection#insertOne",
+      "name": "insertOne",
+      "tags": "Collection#insertOne insertOne",
+      "summary": "",
+      "description": "Insert a single document into the collection."
+    },
+    "Collection.html#find": {
+      "id": "Collection.html#find",
+      "kind": "function",
+      "title": "find( filter, resultInstance ) → {Array.&lt;object&gt;|Result}",
+      "longname": "Collection#find",
+      "name": "find",
+      "tags": "Collection#find find",
+      "summary": "",
+      "description": "Find all documents in the collection that match the query or pass the filter function."
+    },
+    "Collection.html#where": {
+      "id": "Collection.html#where",
+      "kind": "function",
+      "title": "where( filter, resultInstance ) → {Array.&lt;object&gt;|Result}",
+      "longname": "Collection#where",
+      "name": "where",
+      "tags": "Collection#where where",
+      "summary": "",
+      "description": "Find all documents in the collection that match the query or pass the filter function."
+    },
+    "Collection.html#findOne": {
+      "id": "Collection.html#findOne",
+      "kind": "function",
+      "title": "findOne( filter ) → {object}",
+      "longname": "Collection#findOne",
+      "name": "findOne",
+      "tags": "Collection#findOne findOne",
+      "summary": "",
+      "description": "Find the first document in the collection that matches the query or passes the filter function."
+    },
+    "Collection.html#findById": {
+      "id": "Collection.html#findById",
+      "kind": "function",
+      "title": "findById( id ) → {object}",
+      "longname": "Collection#findById",
+      "name": "findById",
+      "tags": "Collection#findById findById",
+      "summary": "",
+      "description": "Find the document with the matching ID."
+    },
+    "Collection.html#removeExact": {
+      "id": "Collection.html#removeExact",
+      "kind": "function",
+      "title": "removeExact( doc [, first ] ) → {object|Array.&lt;object&gt;}",
+      "longname": "Collection#removeExact",
+      "name": "removeExact",
+      "tags": "Collection#removeExact removeExact",
+      "summary": "",
+      "description": "Remove all documents matching the given document from the collection."
+    },
+    "Collection.html#remove": {
+      "id": "Collection.html#remove",
+      "kind": "function",
+      "title": "remove( filter ) → {Array.&lt;object&gt;}",
+      "longname": "Collection#remove",
+      "name": "remove",
+      "tags": "Collection#remove remove",
+      "summary": "",
+      "description": "Remove all documents in the collection that match the query or passes the filter function."
+    },
+    "Collection.html#removeOne": {
+      "id": "Collection.html#removeOne",
+      "kind": "function",
+      "title": "removeOne( filter ) → {Array.&lt;object&gt;}",
+      "longname": "Collection#removeOne",
+      "name": "removeOne",
+      "tags": "Collection#removeOne removeOne",
+      "summary": "",
+      "description": "Remove the first document in the collection that matches the query or passes the filter function."
+    },
+    "Collection.html#removeById": {
+      "id": "Collection.html#removeById",
+      "kind": "function",
+      "title": "removeById( id ) → {object}",
+      "longname": "Collection#removeById",
+      "name": "removeById",
+      "tags": "Collection#removeById removeById",
+      "summary": "",
+      "description": "Remove the document with the matching ID."
+    },
+    "Collection.html#update": {
+      "id": "Collection.html#update",
+      "kind": "function",
+      "title": "update( filter, updater ) → {Array.&lt;object&gt;}",
+      "longname": "Collection#update",
+      "name": "update",
+      "tags": "Collection#update update",
+      "summary": "",
+      "description": "Update all documents in the collection that match the query or pass the custom filter function."
+    },
+    "Collection.html#updateById": {
+      "id": "Collection.html#updateById",
+      "kind": "function",
+      "title": "updateById( id, updater ) → {object}",
+      "longname": "Collection#updateById",
+      "name": "updateById",
+      "tags": "Collection#updateById updateById",
+      "summary": "",
+      "description": "Update the document with the matching ID."
+    },
+    "Collection.html#registerSchema": {
+      "id": "Collection.html#registerSchema",
+      "kind": "function",
+      "title": "registerSchema( schema ) → {Schema}",
+      "longname": "Collection#registerSchema",
+      "name": "registerSchema",
+      "tags": "Collection#registerSchema registerSchema",
+      "summary": "",
+      "description": "Register a schema to validate documents inserted into the collection."
+    },
+    "Collection.html#unregisterSchema": {
+      "id": "Collection.html#unregisterSchema",
+      "kind": "function",
+      "title": "unregisterSchema() → {Schema}",
+      "longname": "Collection#unregisterSchema",
+      "name": "unregisterSchema",
+      "tags": "Collection#unregisterSchema unregisterSchema",
+      "summary": "",
+      "description": "Unregister the schema which ultimately stops the collection from validating any further documents."
+    },
+    "Collection.html#cleanWithSchema": {
+      "id": "Collection.html#cleanWithSchema",
+      "kind": "function",
+      "title": "cleanWithSchema( [ schema ] ) → {Array.&lt;object&gt;}",
+      "longname": "Collection#cleanWithSchema",
+      "name": "cleanWithSchema",
+      "tags": "Collection#cleanWithSchema cleanWithSchema",
+      "summary": "",
+      "description": "Clean the collection from invalid documents using the passed in or registered schema."
+    },
+    "Collection.html#clear": {
+      "id": "Collection.html#clear",
+      "kind": "function",
+      "title": "clear() → {Array.&lt;object&gt;}",
+      "longname": "Collection#clear",
+      "name": "clear",
+      "tags": "Collection#clear clear",
+      "summary": "",
+      "description": "Clear the collection by deleting all of its documents."
     },
     "TrustDB.html": {
       "id": "TrustDB.html",
@@ -6530,257 +6934,6 @@
       "summary": "",
       "description": "Clear the database by deleting all of its collections."
     },
-    "Collection.html": {
-      "id": "Collection.html",
-      "kind": "class",
-      "title": "Collection",
-      "longname": "Collection",
-      "name": "Collection",
-      "tags": "Collection",
-      "summary": "",
-      "description": "Creates a Collection instance.",
-      "body": ""
-    },
-    "Collection.html#documents": {
-      "id": "Collection.html#documents",
-      "kind": "member",
-      "title": "documents",
-      "longname": "Collection#documents",
-      "name": "documents",
-      "tags": "Collection#documents documents",
-      "summary": "",
-      "description": "Get all documents of the collection."
-    },
-    "Collection.html#name": {
-      "id": "Collection.html#name",
-      "kind": "member",
-      "title": "name",
-      "longname": "Collection#name",
-      "name": "name",
-      "tags": "Collection#name name",
-      "summary": "",
-      "description": "Get the name of the collection."
-    },
-    "Collection.html#schema": {
-      "id": "Collection.html#schema",
-      "kind": "member",
-      "title": "schema",
-      "longname": "Collection#schema",
-      "name": "schema",
-      "tags": "Collection#schema schema",
-      "summary": "",
-      "description": "Get the registered schema of the collection."
-    },
-    "Collection.html#hasSchema": {
-      "id": "Collection.html#hasSchema",
-      "kind": "member",
-      "title": "hasSchema",
-      "longname": "Collection#hasSchema",
-      "name": "hasSchema",
-      "tags": "Collection#hasSchema hasSchema",
-      "summary": "",
-      "description": "Get whether the collection has a schema registered."
-    },
-    "Collection.html#created": {
-      "id": "Collection.html#created",
-      "kind": "member",
-      "title": "created",
-      "longname": "Collection#created",
-      "name": "created",
-      "tags": "Collection#created created",
-      "summary": "",
-      "description": "Get the date and time of creation for this collection."
-    },
-    "Collection.html#firstDocument": {
-      "id": "Collection.html#firstDocument",
-      "kind": "member",
-      "title": "firstDocument",
-      "longname": "Collection#firstDocument",
-      "name": "firstDocument",
-      "tags": "Collection#firstDocument firstDocument",
-      "summary": "",
-      "description": "Get the first document of the collection."
-    },
-    "Collection.html#lastDocument": {
-      "id": "Collection.html#lastDocument",
-      "kind": "member",
-      "title": "lastDocument",
-      "longname": "Collection#lastDocument",
-      "name": "lastDocument",
-      "tags": "Collection#lastDocument lastDocument",
-      "summary": "",
-      "description": "Get the last document of the collection."
-    },
-    "Collection.html#size": {
-      "id": "Collection.html#size",
-      "kind": "member",
-      "title": "size",
-      "longname": "Collection#size",
-      "name": "size",
-      "tags": "Collection#size size",
-      "summary": "",
-      "description": "Get the amount of documents of the collection."
-    },
-    "Collection.html#insert": {
-      "id": "Collection.html#insert",
-      "kind": "function",
-      "title": "insert( ...docs ) → {Array.&lt;string&gt;}",
-      "longname": "Collection#insert",
-      "name": "insert",
-      "tags": "Collection#insert insert",
-      "summary": "",
-      "description": "Insert new documents into the collection."
-    },
-    "Collection.html#insertOne": {
-      "id": "Collection.html#insertOne",
-      "kind": "function",
-      "title": "insertOne( doc [, emitEvent ] ) → {string}",
-      "longname": "Collection#insertOne",
-      "name": "insertOne",
-      "tags": "Collection#insertOne insertOne",
-      "summary": "",
-      "description": "Insert a single document into the collection."
-    },
-    "Collection.html#find": {
-      "id": "Collection.html#find",
-      "kind": "function",
-      "title": "find( filter, resultInstance ) → {Array.&lt;object&gt;}",
-      "longname": "Collection#find",
-      "name": "find",
-      "tags": "Collection#find find",
-      "summary": "",
-      "description": "Find all documents in the collection that match the query or pass the filter function."
-    },
-    "Collection.html#where": {
-      "id": "Collection.html#where",
-      "kind": "function",
-      "title": "where( filter, resultInstance ) → {Array.&lt;object&gt;}",
-      "longname": "Collection#where",
-      "name": "where",
-      "tags": "Collection#where where",
-      "summary": "",
-      "description": "Find all documents in the collection that match the query or pass the filter function."
-    },
-    "Collection.html#findOne": {
-      "id": "Collection.html#findOne",
-      "kind": "function",
-      "title": "findOne( filter ) → {object}",
-      "longname": "Collection#findOne",
-      "name": "findOne",
-      "tags": "Collection#findOne findOne",
-      "summary": "",
-      "description": "Find the first document in the collection that matches the query or passes the filter function."
-    },
-    "Collection.html#findById": {
-      "id": "Collection.html#findById",
-      "kind": "function",
-      "title": "findById( id ) → {object}",
-      "longname": "Collection#findById",
-      "name": "findById",
-      "tags": "Collection#findById findById",
-      "summary": "",
-      "description": "Find the document with the matching ID."
-    },
-    "Collection.html#removeExact": {
-      "id": "Collection.html#removeExact",
-      "kind": "function",
-      "title": "removeExact( doc [, first ] ) → {object|Array.&lt;object&gt;}",
-      "longname": "Collection#removeExact",
-      "name": "removeExact",
-      "tags": "Collection#removeExact removeExact",
-      "summary": "",
-      "description": "Remove all documents matching the given document from the collection."
-    },
-    "Collection.html#remove": {
-      "id": "Collection.html#remove",
-      "kind": "function",
-      "title": "remove( filter ) → {Array.&lt;object&gt;}",
-      "longname": "Collection#remove",
-      "name": "remove",
-      "tags": "Collection#remove remove",
-      "summary": "",
-      "description": "Remove all documents in the collection that match the query or passes the filter function."
-    },
-    "Collection.html#removeOne": {
-      "id": "Collection.html#removeOne",
-      "kind": "function",
-      "title": "removeOne( filter ) → {Array.&lt;object&gt;}",
-      "longname": "Collection#removeOne",
-      "name": "removeOne",
-      "tags": "Collection#removeOne removeOne",
-      "summary": "",
-      "description": "Remove the first document in the collection that matches the query or passes the filter function."
-    },
-    "Collection.html#removeById": {
-      "id": "Collection.html#removeById",
-      "kind": "function",
-      "title": "removeById( id ) → {object}",
-      "longname": "Collection#removeById",
-      "name": "removeById",
-      "tags": "Collection#removeById removeById",
-      "summary": "",
-      "description": "Remove the document with the matching ID."
-    },
-    "Collection.html#update": {
-      "id": "Collection.html#update",
-      "kind": "function",
-      "title": "update( filter, updater ) → {Array.&lt;object&gt;}",
-      "longname": "Collection#update",
-      "name": "update",
-      "tags": "Collection#update update",
-      "summary": "",
-      "description": "Update all documents in the collection that match the query or pass the custom filter function."
-    },
-    "Collection.html#updateById": {
-      "id": "Collection.html#updateById",
-      "kind": "function",
-      "title": "updateById( id, updater ) → {object}",
-      "longname": "Collection#updateById",
-      "name": "updateById",
-      "tags": "Collection#updateById updateById",
-      "summary": "",
-      "description": "Update the document with the matching ID."
-    },
-    "Collection.html#registerSchema": {
-      "id": "Collection.html#registerSchema",
-      "kind": "function",
-      "title": "registerSchema( schema ) → {Schema}",
-      "longname": "Collection#registerSchema",
-      "name": "registerSchema",
-      "tags": "Collection#registerSchema registerSchema",
-      "summary": "",
-      "description": "Register a schema to validate documents inserted into the collection."
-    },
-    "Collection.html#unregisterSchema": {
-      "id": "Collection.html#unregisterSchema",
-      "kind": "function",
-      "title": "unregisterSchema() → {Schema}",
-      "longname": "Collection#unregisterSchema",
-      "name": "unregisterSchema",
-      "tags": "Collection#unregisterSchema unregisterSchema",
-      "summary": "",
-      "description": "Unregister the schema which ultimately stops the collection from validating any further documents."
-    },
-    "Collection.html#cleanWithSchema": {
-      "id": "Collection.html#cleanWithSchema",
-      "kind": "function",
-      "title": "cleanWithSchema( [ schema ] ) → {Array.&lt;object&gt;}",
-      "longname": "Collection#cleanWithSchema",
-      "name": "cleanWithSchema",
-      "tags": "Collection#cleanWithSchema cleanWithSchema",
-      "summary": "",
-      "description": "Clean the collection from invalid documents using the passed in or registered schema."
-    },
-    "Collection.html#clear": {
-      "id": "Collection.html#clear",
-      "kind": "function",
-      "title": "clear() → {Array.&lt;object&gt;}",
-      "longname": "Collection#clear",
-      "name": "clear",
-      "tags": "Collection#clear clear",
-      "summary": "",
-      "description": "Clear the collection by deleting all of its documents."
-    },
     "Schema.html": {
       "id": "Schema.html",
       "kind": "class",
@@ -6801,6 +6954,16 @@
       "tags": "Schema.Types Types",
       "summary": "",
       "description": "Get the available schema types."
+    },
+    "Schema.html#validationErrors": {
+      "id": "Schema.html#validationErrors",
+      "kind": "member",
+      "title": "validationErrors",
+      "longname": "Schema#validationErrors",
+      "name": "validationErrors",
+      "tags": "Schema#validationErrors validationErrors",
+      "summary": "",
+      "description": "Get the validation errors (if present)."
     },
     "Schema.html#validate": {
       "id": "Schema.html#validate",

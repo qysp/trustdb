@@ -10,9 +10,9 @@ describe('Database', function() {
         overwriteExisting: true,
       });
 
-      expect(db.filepath).to.equal('/tmp/test_db.json');
+      expect(db.path).to.equal('/tmp/test_db.json');
       expect(db.collections).to.be.empty();
-      expect(db.connected).to.be(true);
+      expect(db.isConnected).to.be(true);
     });
   });
 
@@ -57,14 +57,12 @@ describe('Database', function() {
   describe('#configureSettings()', function() {
     it('should enable the autosave setting', function() {
       db.configureSettings({
-        autosave: true,
-        autosaveInterval: 5000
+        autosave: 5000,
       });
 
-      expect(db.autosave).to.be(true);
       expect(db.autosaveInterval).to.equal(5000);
       // Disable autosave again.
-      db.autosave = false;
+      db.autosaveInterval = 0;
     });
   });
 
@@ -89,7 +87,7 @@ describe('Database', function() {
   describe('#disconnect()', function() {
     it('should close the database connection', function(done) {
       db.disconnect().then(() => {
-        expect(db.connected).to.be(false);
+        expect(db.isConnected).to.be(false);
         expect(db.collections).to.be.empty();
         done();
       }).catch(done);

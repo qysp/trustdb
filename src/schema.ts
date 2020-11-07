@@ -37,6 +37,7 @@ export class Schema {
     '__validate',
     '__skip',
   ];
+
   /**
    * Creates a Schema instance.
    */
@@ -46,12 +47,16 @@ export class Schema {
   }
 
   /**
+   * Creates a Schema instance.
+   */
+  static from(schema: PlainObject): Schema {
+    return new Schema(schema);
+  }
+
+  /**
    * Validate a document.
    */
   validate(document: PlainObject): boolean {
-    if (!isObject(document)) {
-      throw new TypeError('Expected parameter `document` to be a plain object');
-    }
     this.errors.length = 0;
     return this.applySchema(this.schema, document);
   }

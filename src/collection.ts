@@ -21,8 +21,16 @@ export default class Collection extends EventEmitter {
 
   private schema: Schema | undefined;
 
+  /**
+   * Creates a Collection instance.
+   */
   constructor(name: string) {
-    super();
+    super({
+      insert: [],
+      find: [],
+      remove: [],
+      update: [],
+    });
     this.name = name;
     this.created = new Date().toISOString();
   }

@@ -34,7 +34,7 @@ export class EventEmitter {
    */
   emit<T extends any[]>(eventName: string, ...listenerArgs: T) {
     if (!has(this.evts, eventName)) {
-      throw new Error(`Event '${eventName}' is not registered`);
+      return;
     }
 
     for (const listener of this.evts[eventName]) {
@@ -47,7 +47,7 @@ export class EventEmitter {
    */
   removeListener(eventName: string, listener: Listener) {
     if (!has(this.evts, eventName)) {
-      throw new Error(`Event '${eventName}' is not registered`);
+      return;
     }
 
     const idx = this.evts[eventName].indexOf(listener);

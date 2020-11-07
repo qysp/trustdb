@@ -1,28 +1,28 @@
 const expect = require('expect.js');
-const { Schema } = require('../lib/schema');
+const { Schema, SchemaType } = require('../lib/schema');
 
 describe('Schema', function() {
-  const createSchema = () => new Schema({
-    any: Schema.Types.Any,
-    string: Schema.Types.String,
-    number: Schema.Types.Number,
-    boolean: Schema.Types.Boolean,
-    date: Schema.Types.Date,
-    array: [Schema.Types.Number],
-    object: { prop: Schema.Types.Number },
-    array_of_objects: [ { prop: Schema.Types.Number } ],
-    nested: { object: { prop: Schema.Types.Number } },
+  const createSchema = () => Schema.from({
+    any: SchemaType.Any,
+    string: SchemaType.String,
+    number: SchemaType.Number,
+    boolean: SchemaType.Boolean,
+    date: SchemaType.Date,
+    array: [SchemaType.Number],
+    object: { prop: SchemaType.Number },
+    array_of_objects: [ { prop: SchemaType.Number } ],
+    nested: { object: { prop: SchemaType.Number } },
     optional: {
-      __value: Schema.Types.Number,
+      __value: SchemaType.Number,
       __optional: true,
     },
     any_optional: {
-      __value: Schema.Types.Mixed,
+      __value: SchemaType.Mixed,
       __optional: true,
     }
   });
 
-  describe('#new Schema()', function() {
+  describe('Schema::from()', function() {
     it('should not throw an error', function() {
       expect(createSchema).to.not.throwError();
     });
@@ -31,7 +31,7 @@ describe('Schema', function() {
   describe('#validate()', function() {
     describe('successful validation', function() {
       it('any', function() {
-        const schema = new Schema({ any: 'any' });
+        const schema = Schema.from({ any: 'any' });
         const results = [];
         results.push(schema.validate({ any: 'string' }));
         results.push(schema.validate({ any: 42 }));
@@ -40,43 +40,43 @@ describe('Schema', function() {
       });
 
       it('string', function() {
-        const schema = new Schema({ string: 'string' });
+        const schema = Schema.from({ string: 'string' });
         const result = schema.validate({ string: 'string' });
         expect(result).to.be.ok();
       });
 
       it('number', function() {
-        const schema = new Schema({ number: 'number' });
+        const schema = Schema.from({ number: 'number' });
         const result = schema.validate({ number: 42 });
         expect(result).to.be.ok();
       });
 
       it('boolean', function() {
-        const schema = new Schema({ boolean: 'boolean' });
+        const schema = Schema.from({ boolean: 'boolean' });
         const result = schema.validate({ boolean: false });
         expect(result).to.be.ok();
       });
 
       it('date', function() {
-        const schema = new Schema({ date: 'date' });
+        const schema = Schema.from({ date: 'date' });
         const result = schema.validate({ date: new Date() });
         expect(result).to.be.ok();
       });
 
       it('array', function() {
-        const schema = new Schema({ array: ['number'] });
+        const schema = Schema.from({ array: ['number'] });
         const result = schema.validate({ array: [ 1, 2, 3 ] });
         expect(result).to.be.ok();
       });
 
       it('object', function() {
-        const schema = new Schema({ object: { prop: 'number' } });
+        const schema = Schema.from({ object: { prop: 'number' } });
         const result = schema.validate({ object: { prop: 42 } });
         expect(result).to.be.ok();
       });
 
       it('array of objects', function() {
-        const schema = new Schema({
+        const schema = Schema.from({
           array_of_objects: [{
             prop: 'number',
           }],
@@ -92,13 +92,13 @@ describe('Schema', function() {
       });
 
       it('nested object', function() {
-        const schema = new Schema({ nested: { object: { prop: 'number' } } });
+        const schema = Schema.from({ nested: { object: { prop: 'number' } } });
         const result = schema.validate({ nested: { object: { prop: 42 } } });
         expect(result).to.be.ok();
       });
 
       it('optional', function() {
-        const schema = new Schema({
+        const schema = Schema.from({
           optional: {
             __value: 'number',
             __optional: true,
@@ -111,7 +111,7 @@ describe('Schema', function() {
       });
 
       it('any & optional', function() {
-        const schema = new Schema({
+        const schema = Schema.from({
           any_optional: {
             __value: 'any',
             __optional: true,
@@ -128,9 +128,9 @@ describe('Schema', function() {
 
     describe('erroneous validation', function() {
       it('mismatched type', function() {
-        const schema1 = new Schema({ string: 'string' });
-        const schema2 = new Schema({ array: [] });
-        const schema3 = new Schema({ array_of_objects: [{ prop: 'number' }] });
+        const schema1 = Schema.from({ string: 'string' });
+        const schema2 = Schema.from({ array: [] });
+        const schema3 = Schema.from({ array_of_objects: [{ prop: 'number' }] });
         const results = [];
         results.push(schema1.validate({ string: 42 }));
         results.push(schema2.validate({ array: { prop: 42 } }));
@@ -139,13 +139,13 @@ describe('Schema', function() {
       });
   
       it('missing property', function() {
-        const schema = new Schema({ prop: 'any' });
+        const schema = Schema.from({ prop: 'any' });
         const result = schema.validate({});
         expect(result).to.not.be.ok();
       });
   
       it('surplus property', function() {
-        const schema = new Schema({ prop: 'any' });
+        const schema = Schema.from({ prop: 'any' });
         const result = schema.validate({
           prop: 42,
           surplusProp: 43,
@@ -154,7 +154,7 @@ describe('Schema', function() {
       });
   
       it('mismatched type on optional property', function() {
-        const schema = new Schema({
+        const schema = Schema.from({
           prop: {
             __value: 'number',
             __optional: true

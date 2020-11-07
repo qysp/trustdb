@@ -17,6 +17,10 @@ export declare class Schema {
      */
     constructor(schema: PlainObject);
     /**
+     * Creates a Schema instance.
+     */
+    static from(schema: PlainObject): Schema;
+    /**
      * Validate a document.
      */
     validate(document: PlainObject): boolean;

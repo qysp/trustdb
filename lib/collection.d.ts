@@ -13,6 +13,9 @@ export default class Collection extends EventEmitter {
     readonly documents: PlainObject[];
     created: string;
     private schema;
+    /**
+     * Creates a Collection instance.
+     */
     constructor(name: string);
     /**
      * Insert new documents into the collection.

@@ -2,7 +2,9 @@ const expect = require('expect.js');
 const Result = require('../lib/result').default;
 
 describe('Result', function() {
+  /** @type {Result} */
   let resultNumbers;
+  /** @type {Result} */
   let resultStrings;
 
   beforeEach(function() {
@@ -50,9 +52,9 @@ describe('Result', function() {
 
   describe('#limit()', function() {
     it('should limit the number of documents', function() {
+      expect(resultNumbers.documents).to.have.length(4);
       resultNumbers.limit(2);
       expect(resultNumbers.documents).to.have.length(2);
-      expect(resultNumbers.originalDocuments).to.have.length(4);
     });
   });
 });

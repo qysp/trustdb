@@ -1,15 +1,14 @@
 const expect = require('expect.js');
 const Collection = require('../lib/collection').default;
-const { Schema } = require('../lib/schema');
+const { Schema, SchemaType } = require('../lib/schema');
 
 describe('Collection', function() {
-  const collection = new Collection('test_collection');
-  // collection.registerSchema({
-  //   price: 'number',
-  // });
+  /** @type {Collection} */
+  let collection;
+  const priceSchema = Schema.from({ price: SchemaType.Number });
 
   beforeEach('reset collection', function() {
-    collection.clear();
+    collection = new Collection('test_collection');
     collection.insert(
       { price: 50 },
       { price: 20 },
@@ -184,13 +183,13 @@ describe('Collection', function() {
 
   describe('#registerSchema()', function() {
     it('should register a validation schema from an object', function() {
-      collection.registerSchema({ price: 'number' });
-      expect(collection._schema).to.be.a(Schema);
+      collection.registerSchema(priceSchema);
+      expect(collection.registeredSchema).to.be.a(Schema);
     });
 
     it('should register a validation schema from a Schema instance', function() {
-      collection.registerSchema(new Schema({ price: 'number' }));
-      expect(collection._schema).to.be.a(Schema);
+      collection.registerSchema(Schema.from({ price: SchemaType.Number }));
+      expect(collection.registeredSchema).to.be.a(Schema);
     });
 
     it('should throw an error inserting the document', function() {
@@ -201,8 +200,8 @@ describe('Collection', function() {
   describe('#cleanWithSchema()', function() {
     it('should clean the collection using the registered schema', function() {
       // TODO: Make up better test case.
-      collection._documents.push({ price: 'TEST' });
-      const removed = collection.cleanWithSchema();
+      collection.insertOne({ price: 'TEST' });
+      const removed = collection.cleanWithSchema(priceSchema);
       expect(removed).to.have.length(1);
     });
   });
@@ -210,7 +209,7 @@ describe('Collection', function() {
   describe('#unregisterSchema()', function() {
     it('should unregister the validation schema', function() {
       collection.unregisterSchema();
-      expect(collection._schema).to.not.be.a(Schema);
+      expect(collection.registeredSchema).to.not.be.a(Schema);
     });
   });
 

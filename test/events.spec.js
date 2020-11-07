@@ -1,5 +1,5 @@
 const expect = require('expect.js');
-const EventEmitter = require('../lib/events');
+const { EventEmitter } = require('../lib/events');
 
 describe('EventEmitter', function() {
   const emitter = new EventEmitter();

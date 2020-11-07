@@ -1,6 +1,6 @@
 const expect = require('expect.js');
-const Collection = require('../lib/collection');
-const Schema = require('../lib/schema');
+const Collection = require('../lib/collection').default;
+const { Schema } = require('../lib/schema');
 
 describe('Collection', function() {
   const collection = new Collection('test_collection');

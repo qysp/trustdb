@@ -1,5 +1,5 @@
 const expect = require('expect.js');
-const checks = require('../lib/checks');
+const { checks } = require('../lib/checks');
 
 describe('Checks', function() {
   const results = [];

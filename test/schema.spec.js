@@ -1,5 +1,5 @@
 const expect = require('expect.js');
-const Schema = require('../lib/schema');
+const { Schema } = require('../lib/schema');
 
 describe('Schema', function() {
   const createSchema = () => new Schema({

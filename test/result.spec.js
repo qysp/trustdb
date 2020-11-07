@@ -1,5 +1,5 @@
 const expect = require('expect.js');
-const Result = require('../lib/result');
+const Result = require('../lib/result').default;
 
 describe('Result', function() {
   let resultNumbers;
